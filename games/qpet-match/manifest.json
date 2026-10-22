@@ -15,14 +15,16 @@
   "gameplayCodeModified": false,
   "fontFallback": {
     "originalRequestedFace": "华康海报体W12(P)",
-    "suppliedFace": "Noto Sans CJK SC",
-    "servedPath": "fonts/NotoSansCJKsc-Regular.otf",
-    "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
-    "note": "Only unembedded device text falls back; original requested proprietary font unavailable.",
-    "source": "https://github.com/notofonts/noto-cjk",
-    "sourcePath": "Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
-    "license": "SIL Open Font License 1.1",
-    "bytes": 16437364
+    "suppliedFace": "站酷快乐体2016修订版",
+    "servedPath": "fonts/original-site-font.swf",
+    "sha256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c",
+    "bytes": 2055402,
+    "source": "https://github.com/QPetLover/qpet-adventure",
+    "sourceUrl": "https://qpetlover.cn/qpet-adventure/myfont.swf",
+    "sourcePath": "site/myfont.swf",
+    "copyright": "(c) Copyright LuiBingKe 2016",
+    "note": "与原站 Ruffle 使用同一字体 SWF 和 sans 后备设置；这是原站的后备字体，不代表历史 Flash 设备字体。",
+    "sourceCommit": "cbd3a75ee7787d62911c8ee58125931961741752"
   },
   "id": "qpet-match",
   "description": "连接管道，让原游戏中的爱心相遇。",
@@ -35,7 +37,8 @@
       "管道点击",
       "普通路径连通与加分",
       "超时",
-      "重玩"
+      "重玩",
+      "与原站共用字体后，再验菜单、中文说明和开局；浏览器无警告或错误"
     ],
     "notTested": [
       "完整有效配对",
@@ -43,7 +46,16 @@
       "历史 Adobe Flash Player 逐帧与音频对照"
     ],
     "knownDifferences": [
-      "未嵌入的中文使用 Noto Sans CJK SC 后备字体，字形与原请求字体不同。"
-    ]
-  }
+      "与原站共用同一字体 SWF 和 sans 后备设置；本集合 Ruffle 0.7.1、原站 0.5.0，尚未完成历史 Flash Player 的逐帧、字形与音频验收。"
+    ],
+    "status": "verified-flow",
+    "browserObservation": "已对照原站菜单；复用同一字体后再次验证菜单、说明与开局。首次交付验证普通路径加分/超时/重玩，完整有效配对及通关未验收。"
+  },
+  "sourceId": "classic-014",
+  "kind": "classic",
+  "kindLabel": "经典游戏",
+  "baseTitle": "Q宠速配",
+  "cover": "games/qpet-match/cover.jpg",
+  "originalUrl": "https://qpetlover.cn/QPetGames/#/play/classic-014",
+  "coverSha256": "ac760b38606f62833641b4d4a13eca2eedc2028b57bc38384982a770e694a2f2"
 }

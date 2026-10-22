@@ -1,0 +1,101 @@
+{
+  "id": "classic-015",
+  "sourceId": "classic-015",
+  "title": "Q 宠摘星星",
+  "baseTitle": "Q 宠摘星星",
+  "kind": "classic",
+  "kindLabel": "经典游戏",
+  "description": "Q 宠摘星星的原始 SWF，以 Ruffle 运行。",
+  "cover": "games/classic-015/cover.jpg",
+  "originalUrl": "https://qpetlover.cn/QPetGames/#/play/classic-015",
+  "mode": "unmodified-swf-on-ruffle",
+  "sourceRepository": "https://github.com/QPetLover/QPetGames",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourcePath": "classical_games/swf/Q宠摘星星.swf",
+  "servedPath": "games/classic-015/game.swf",
+  "swfSha256": "87e573aad836d4ea3ff168f55c9ba9128edf8b1a651382bc875f6be3550c2fac",
+  "swfBytes": 598472,
+  "rufflePackage": "@ruffle-rs/ruffle",
+  "ruffleVersion": "0.7.1",
+  "originalWidth": 650.0,
+  "originalHeight": 450.0,
+  "originalFrameRate": 12.0,
+  "gameplayCodeModified": false,
+  "fontFallback": {
+    "originalRequestedFace": null,
+    "suppliedFace": "站酷快乐体2016修订版",
+    "servedPath": "fonts/original-site-font.swf",
+    "sha256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c",
+    "bytes": 2055402,
+    "source": "https://github.com/QPetLover/qpet-adventure",
+    "sourceUrl": "https://qpetlover.cn/qpet-adventure/myfont.swf",
+    "sourcePath": "site/myfont.swf",
+    "copyright": "(c) Copyright LuiBingKe 2016",
+    "note": "与原站 Ruffle 使用同一字体 SWF 和 sans 后备设置；这是原站的后备字体，不代表历史 Flash 设备字体。",
+    "sourceCommit": "cbd3a75ee7787d62911c8ee58125931961741752"
+  },
+  "inspection": {
+    "sha256": "87e573aad836d4ea3ff168f55c9ba9128edf8b1a651382bc875f6be3550c2fac",
+    "bytes": 598472,
+    "signature": "CWS",
+    "swfVersion": 6,
+    "declaredUncompressedBytes": 745226,
+    "width": 650.0,
+    "height": 450.0,
+    "fps": 12.0,
+    "frames": 7,
+    "scriptVM": "AVM1 / AS1-2",
+    "tags": {
+      "0": 1,
+      "1": 7,
+      "2": 145,
+      "9": 1,
+      "11": 8,
+      "12": 6,
+      "14": 30,
+      "22": 45,
+      "26": 50,
+      "28": 47,
+      "32": 264,
+      "34": 3,
+      "37": 16,
+      "39": 80,
+      "43": 1,
+      "45": 1,
+      "46": 6,
+      "48": 3,
+      "56": 12,
+      "59": 1
+    },
+    "dependencyScan": {
+      "method": "CWS 解压后的明文字符串扫描（URL、资源扩展名与网络加载 API 名称），未执行 SWF。",
+      "urlCandidates": [],
+      "fileCandidates": [],
+      "loaderNameCandidates": [],
+      "excludedMetadataUrls": [],
+      "excludedNamespaceStrings": [],
+      "conclusion": "候选字符串不代表启动必需依赖；可能是广告、计分、跳转或未执行分支。动态拼接的依赖可能未检出，须另作浏览器验证。"
+    }
+  },
+  "verification": {
+    "date": "2026-10-22",
+    "status": "started",
+    "tested": [
+      "原文件、catalog SHA-256、固定 commit Git LFS oid 及交付 SWF 一致",
+      "SWF 头部、解压长度、舞台尺寸、帧率与顶层脚本标签静态核验",
+      "源封面与交付封面逐字节一致",
+      "原Help说明可读，点击后进入three倒计时和摘星星场景，发送右方向键；未验证过关。"
+    ],
+    "notTested": [
+      "全部操作与边界情况",
+      "计分与结算",
+      "完整通关",
+      "历史 Adobe Flash Player 逐帧与音频对照"
+    ],
+    "knownDifferences": [
+      "与原站共用同一字体 SWF 和 sans 后备设置；本集合 Ruffle 0.7.1、原站 0.5.0，尚未完成历史 Flash Player 的逐帧、字形与音频验收。"
+    ],
+    "browserObservation": "原Help说明可读，点击后进入three倒计时和摘星星场景，发送右方向键；未验证过关。"
+  },
+  "coverSha256": "321c932c3aef7a83d3e0e2815a6058c20a59853dad02cd96e6e1c7b0396b8f34"
+}

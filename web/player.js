@@ -1,6 +1,6 @@
 // Host integration only. Original SWFs provide all gameplay, artwork and sound.
 window.RufflePlayer = window.RufflePlayer || {};
-window.RufflePlayer.config = { autoplay: 'on', unmuteOverlay: 'visible', splashScreen: false };
+window.RufflePlayer.config = { autoplay: 'on', unmuteOverlay: 'visible', splashScreen: false, letterbox: 'on', scale: 'showAll', forceScale: true };
 
 window.addEventListener('DOMContentLoaded', async () => {
   const status = document.getElementById('player-status');
@@ -31,6 +31,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
     selector.value = game.id;
     const manifest = await getJSON(game.manifest);
+    const original = document.getElementById('original-link');
+    original.href = manifest.originalUrl;
+    original.textContent = '原版 Ruffle ↗';
     document.title = `${manifest.title} · Q宠游戏`;
     document.getElementById('game-title').textContent = manifest.title;
     document.getElementById('runtime-version').textContent = `${manifest.rufflePackage} ${manifest.ruffleVersion}（本地自托管）`;
@@ -47,12 +50,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     const font = manifest.fontFallback;
     if (font) Object.assign(window.RufflePlayer.config, {
       fontSources: [font.servedPath],
-      defaultFonts: { sans: [font.suppliedFace], serif: [font.suppliedFace], typewriter: [font.suppliedFace] }
+      defaultFonts: { sans: [font.suppliedFace] }
     });
     const player = window.RufflePlayer.newest().createPlayer();
     document.getElementById('player-container').append(player);
     await player.ruffle().load({ url: manifest.servedPath });
-    status.textContent = `原版 SWF 已加载 · Ruffle ${manifest.ruffleVersion}`;
+    status.textContent = `SWF 已加载 · Ruffle ${manifest.ruffleVersion}`;
   } catch (error) {
     status.textContent = `加载失败：${error.message}`;
     console.error(error);

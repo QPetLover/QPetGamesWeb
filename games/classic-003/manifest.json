@@ -1,0 +1,110 @@
+{
+  "id": "classic-003",
+  "sourceId": "classic-003",
+  "title": "QQ 飞车",
+  "baseTitle": "QQ 飞车",
+  "kind": "classic",
+  "kindLabel": "经典游戏",
+  "description": "QQ 飞车的原始 SWF，以 Ruffle 运行。",
+  "cover": "games/classic-003/cover.jpg",
+  "originalUrl": "https://qpetlover.cn/QPetGames/#/play/classic-003",
+  "mode": "unmodified-swf-on-ruffle",
+  "sourceRepository": "https://github.com/QPetLover/QPetGames",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourcePath": "classical_games/swf/QQ飞车.swf",
+  "servedPath": "games/classic-003/game.swf",
+  "swfSha256": "c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f",
+  "swfBytes": 849248,
+  "rufflePackage": "@ruffle-rs/ruffle",
+  "ruffleVersion": "0.7.1",
+  "originalWidth": 760.0,
+  "originalHeight": 420.0,
+  "originalFrameRate": 25.0,
+  "gameplayCodeModified": false,
+  "fontFallback": {
+    "originalRequestedFace": null,
+    "suppliedFace": "站酷快乐体2016修订版",
+    "servedPath": "fonts/original-site-font.swf",
+    "sha256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c",
+    "bytes": 2055402,
+    "source": "https://github.com/QPetLover/qpet-adventure",
+    "sourceUrl": "https://qpetlover.cn/qpet-adventure/myfont.swf",
+    "sourcePath": "site/myfont.swf",
+    "copyright": "(c) Copyright LuiBingKe 2016",
+    "note": "与原站 Ruffle 使用同一字体 SWF 和 sans 后备设置；这是原站的后备字体，不代表历史 Flash 设备字体。",
+    "sourceCommit": "cbd3a75ee7787d62911c8ee58125931961741752"
+  },
+  "inspection": {
+    "sha256": "c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f",
+    "bytes": 849248,
+    "signature": "CWS",
+    "swfVersion": 7,
+    "declaredUncompressedBytes": 1021391,
+    "width": 760.0,
+    "height": 420.0,
+    "fps": 25.0,
+    "frames": 137,
+    "scriptVM": "AVM1 / AS1-2",
+    "tags": {
+      "0": 1,
+      "1": 137,
+      "2": 115,
+      "9": 1,
+      "11": 8,
+      "12": 4,
+      "14": 12,
+      "15": 4,
+      "18": 1,
+      "19": 74,
+      "21": 3,
+      "22": 73,
+      "26": 199,
+      "28": 65,
+      "32": 199,
+      "33": 1,
+      "34": 11,
+      "35": 27,
+      "37": 10,
+      "39": 164,
+      "43": 8,
+      "46": 1,
+      "48": 9,
+      "56": 10,
+      "88": 7
+    },
+    "dependencyScan": {
+      "method": "CWS 解压后的明文字符串扫描（URL、资源扩展名与网络加载 API 名称），未执行 SWF。",
+      "urlCandidates": [
+        "http://client.pet.qq.com/m16.htm",
+        "http://speed.qq.com/",
+        "http://www.3366.com/static/article/99/36699.shtml"
+      ],
+      "fileCandidates": [],
+      "loaderNameCandidates": [],
+      "excludedMetadataUrls": [],
+      "excludedNamespaceStrings": [],
+      "conclusion": "候选字符串不代表启动必需依赖；可能是广告、计分、跳转或未执行分支。动态拼接的依赖可能未检出，须另作浏览器验证。"
+    }
+  },
+  "verification": {
+    "date": "2026-10-22",
+    "status": "started",
+    "tested": [
+      "原文件、catalog SHA-256、固定 commit Git LFS oid 及交付 SWF 一致",
+      "SWF 头部、解压长度、舞台尺寸、帧率与顶层脚本标签静态核验",
+      "源封面与交付封面逐字节一致",
+      "原菜单点击游戏开始进入赛车倒计时和赛道；发送方向上键。未验证整场比赛/结算。"
+    ],
+    "notTested": [
+      "全部操作与边界情况",
+      "计分与结算",
+      "完整通关",
+      "历史 Adobe Flash Player 逐帧与音频对照"
+    ],
+    "knownDifferences": [
+      "与原站共用同一字体 SWF 和 sans 后备设置；本集合 Ruffle 0.7.1、原站 0.5.0，尚未完成历史 Flash Player 的逐帧、字形与音频验收。"
+    ],
+    "browserObservation": "原菜单点击游戏开始进入赛车倒计时和赛道；发送方向上键。未验证整场比赛/结算。"
+  },
+  "coverSha256": "4f86b7dcccfa015c713d88c30fa214055b2c75db03f6f9880da2f135339e6a95"
+}

@@ -1,0 +1,111 @@
+{
+  "id": "classic-004",
+  "sourceId": "classic-004",
+  "title": "企鹅的挑战",
+  "baseTitle": "企鹅的挑战",
+  "kind": "classic",
+  "kindLabel": "经典游戏",
+  "description": "企鹅的挑战的原始 SWF，以 Ruffle 运行。",
+  "cover": "games/classic-004/cover.jpg",
+  "originalUrl": "https://qpetlover.cn/QPetGames/#/play/classic-004",
+  "mode": "unmodified-swf-on-ruffle",
+  "sourceRepository": "https://github.com/QPetLover/QPetGames",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourcePath": "classical_games/swf/企鹅的挑战.swf",
+  "servedPath": "games/classic-004/game.swf",
+  "swfSha256": "11380ec505e2edcc54e00646e487be91bea6fe627199923681b5cef96197aace",
+  "swfBytes": 1592613,
+  "rufflePackage": "@ruffle-rs/ruffle",
+  "ruffleVersion": "0.7.1",
+  "originalWidth": 800.0,
+  "originalHeight": 600.0,
+  "originalFrameRate": 24.0,
+  "gameplayCodeModified": false,
+  "fontFallback": {
+    "originalRequestedFace": null,
+    "suppliedFace": "站酷快乐体2016修订版",
+    "servedPath": "fonts/original-site-font.swf",
+    "sha256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c",
+    "bytes": 2055402,
+    "source": "https://github.com/QPetLover/qpet-adventure",
+    "sourceUrl": "https://qpetlover.cn/qpet-adventure/myfont.swf",
+    "sourcePath": "site/myfont.swf",
+    "copyright": "(c) Copyright LuiBingKe 2016",
+    "note": "与原站 Ruffle 使用同一字体 SWF 和 sans 后备设置；这是原站的后备字体，不代表历史 Flash 设备字体。",
+    "sourceCommit": "cbd3a75ee7787d62911c8ee58125931961741752"
+  },
+  "inspection": {
+    "sha256": "11380ec505e2edcc54e00646e487be91bea6fe627199923681b5cef96197aace",
+    "bytes": 1592613,
+    "signature": "CWS",
+    "swfVersion": 9,
+    "declaredUncompressedBytes": 1808321,
+    "width": 800.0,
+    "height": 600.0,
+    "fps": 24.0,
+    "frames": 1,
+    "scriptVM": "AVM2 / AS3",
+    "tags": {
+      "0": 1,
+      "1": 1,
+      "2": 40,
+      "6": 2,
+      "8": 1,
+      "9": 1,
+      "11": 1,
+      "14": 5,
+      "21": 1,
+      "22": 10,
+      "32": 17,
+      "34": 5,
+      "35": 22,
+      "36": 1,
+      "37": 5,
+      "39": 115,
+      "45": 1,
+      "46": 1,
+      "69": 1,
+      "73": 4,
+      "75": 4,
+      "76": 1,
+      "82": 1,
+      "83": 366,
+      "86": 1,
+      "88": 1
+    },
+    "dependencyScan": {
+      "method": "CWS 解压后的明文字符串扫描（URL、资源扩展名与网络加载 API 名称），未执行 SWF。",
+      "urlCandidates": [
+        "http://pet.qq.com/"
+      ],
+      "fileCandidates": [],
+      "loaderNameCandidates": [],
+      "excludedMetadataUrls": [
+        "http://adobe.com/AS3/2006/builtin"
+      ],
+      "excludedNamespaceStrings": [],
+      "conclusion": "候选字符串不代表启动必需依赖；可能是广告、计分、跳转或未执行分支。动态拼接的依赖可能未检出，须另作浏览器验证。"
+    }
+  },
+  "verification": {
+    "date": "2026-10-22",
+    "status": "started",
+    "tested": [
+      "原文件、catalog SHA-256、固定 commit Git LFS oid 及交付 SWF 一致",
+      "SWF 头部、解压长度、舞台尺寸、帧率与顶层脚本标签静态核验",
+      "源封面与交付封面逐字节一致",
+      "原说明显示空格跳跃和方向键；点击开始进入冰雪平台场景，并发送空格。未验证整局/积分结算。"
+    ],
+    "notTested": [
+      "全部操作与边界情况",
+      "计分与结算",
+      "完整通关",
+      "历史 Adobe Flash Player 逐帧与音频对照"
+    ],
+    "knownDifferences": [
+      "与原站共用同一字体 SWF 和 sans 后备设置；本集合 Ruffle 0.7.1、原站 0.5.0，尚未完成历史 Flash Player 的逐帧、字形与音频验收。"
+    ],
+    "browserObservation": "原说明显示空格跳跃和方向键；点击开始进入冰雪平台场景，并发送空格。未验证整局/积分结算。"
+  },
+  "coverSha256": "75032ba3280a42611c40bac2bbcf2c49defaf548942df4939f398b2f4ba85f83"
+}

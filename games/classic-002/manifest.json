@@ -1,0 +1,122 @@
+{
+  "id": "classic-002",
+  "sourceId": "classic-002",
+  "title": "搭鹊桥",
+  "baseTitle": "搭鹊桥",
+  "kind": "classic",
+  "kindLabel": "经典游戏",
+  "description": "搭鹊桥的原始 SWF，以 Ruffle 运行。",
+  "cover": "games/classic-002/cover.png",
+  "originalUrl": "https://qpetlover.cn/QPetGames/#/play/classic-002",
+  "mode": "unmodified-swf-on-ruffle",
+  "sourceRepository": "https://github.com/QPetLover/QPetGames",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourcePath": "classical_games/swf/QQ抓喜鹊.swf",
+  "servedPath": "games/classic-002/game.swf",
+  "swfSha256": "94007c475f91fed70b35b848b7288faf8d7415cd9f0f0b04533bcba03d8fd3c6",
+  "swfBytes": 797281,
+  "rufflePackage": "@ruffle-rs/ruffle",
+  "ruffleVersion": "0.7.1",
+  "originalWidth": 800.0,
+  "originalHeight": 600.0,
+  "originalFrameRate": 25.0,
+  "gameplayCodeModified": false,
+  "fontFallback": {
+    "originalRequestedFace": null,
+    "suppliedFace": "站酷快乐体2016修订版",
+    "servedPath": "fonts/original-site-font.swf",
+    "sha256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c",
+    "bytes": 2055402,
+    "source": "https://github.com/QPetLover/qpet-adventure",
+    "sourceUrl": "https://qpetlover.cn/qpet-adventure/myfont.swf",
+    "sourcePath": "site/myfont.swf",
+    "copyright": "(c) Copyright LuiBingKe 2016",
+    "note": "与原站 Ruffle 使用同一字体 SWF 和 sans 后备设置；这是原站的后备字体，不代表历史 Flash 设备字体。",
+    "sourceCommit": "cbd3a75ee7787d62911c8ee58125931961741752"
+  },
+  "inspection": {
+    "sha256": "94007c475f91fed70b35b848b7288faf8d7415cd9f0f0b04533bcba03d8fd3c6",
+    "bytes": 797281,
+    "signature": "CWS",
+    "swfVersion": 7,
+    "declaredUncompressedBytes": 849270,
+    "width": 800.0,
+    "height": 600.0,
+    "fps": 25.0,
+    "frames": 3,
+    "scriptVM": "AVM1 / AS1-2",
+    "tags": {
+      "0": 1,
+      "1": 3,
+      "2": 38,
+      "9": 1,
+      "11": 5,
+      "12": 2,
+      "14": 9,
+      "17": 6,
+      "21": 7,
+      "22": 17,
+      "26": 10,
+      "28": 8,
+      "32": 74,
+      "34": 16,
+      "35": 7,
+      "36": 1,
+      "37": 21,
+      "39": 46,
+      "45": 1,
+      "46": 1,
+      "48": 5,
+      "56": 13,
+      "59": 7,
+      "88": 2
+    },
+    "dependencyScan": {
+      "method": "CWS 解压后的明文字符串扫描（URL、资源扩展名与网络加载 API 名称），未执行 SWF。",
+      "urlCandidates": [
+        "http://client.pet.qq.com/cgi-bin/pie_game?cmd=1&gameID=10001&score=",
+        "http://pet.qq.com/"
+      ],
+      "fileCandidates": [],
+      "loaderNameCandidates": [],
+      "excludedMetadataUrls": [],
+      "excludedNamespaceStrings": [],
+      "conclusion": "候选字符串不代表启动必需依赖；可能是广告、计分、跳转或未执行分支。动态拼接的依赖可能未检出，须另作浏览器验证。",
+      "scriptReview": {
+        "tool": "JPEXS Free Flash Decompiler 26.4.0",
+        "findings": [
+          {
+            "source": "frame_3/DoAction.as:31-37",
+            "observation": "pie_game URL 位于结算面板 Panel.dh.onRelease 回调中，触发 go(rs.over_s, gamec)；同一面板有独立 replay 回调。此接口属于点击提交/兑换分数分支，静态代码未显示它是开局前置条件。"
+          },
+          {
+            "source": "DefineSprite_214/frame_3/DoAction.as:1 与 __Packages/Enemy.as:84",
+            "observation": "原字符串 loadMovie 命中来自 unloadMovie；导出脚本中未发现实际 loadMovie 加载调用。已改用标识符边界扫描排除这种子串误报。"
+          }
+        ],
+        "browserConclusion": "原菜单与说明可读，点击开始进入抓喜鹊场景，鼠标手套出现；未验收整局与旧积分兑换。"
+      }
+    }
+  },
+  "verification": {
+    "date": "2026-10-22",
+    "status": "started",
+    "tested": [
+      "原文件、catalog SHA-256、固定 commit Git LFS oid 及交付 SWF 一致",
+      "SWF 头部、解压长度、舞台尺寸、帧率与顶层脚本标签静态核验",
+      "源封面与交付封面逐字节一致",
+      "原菜单与说明可读，点击开始进入抓喜鹊场景，鼠标手套出现；未验收整局与旧积分兑换。"
+    ],
+    "notTested": [
+      "全部操作与边界情况",
+      "计分与结算",
+      "完整通关",
+      "历史 Adobe Flash Player 逐帧与音频对照"
+    ],
+    "knownDifferences": [
+      "与原站共用同一字体 SWF 和 sans 后备设置；本集合 Ruffle 0.7.1、原站 0.5.0，尚未完成历史 Flash Player 的逐帧、字形与音频验收。"
+    ],
+    "browserObservation": "原菜单与说明可读，点击开始进入抓喜鹊场景，鼠标手套出现；未验收整局与旧积分兑换。"
+  },
+  "coverSha256": "f355918cec3a67c7496df283bd4b28e11172f9c83d64cd053c039b5b7f34aa8f"
+}

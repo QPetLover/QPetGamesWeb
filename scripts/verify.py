@@ -15,18 +15,24 @@ dist = root / 'dist'
 read_json = lambda path: json.loads(path.read_text())
 sha = lambda data: hashlib.sha256(data).hexdigest()
 checks = []
+cache = {}
 
 def verify_file(relative):
+    if relative in cache:
+        return cache[relative]
     data = (dist / relative).read_bytes()
     if args.url:
         with urlopen(urljoin(args.url.rstrip('/') + '/', relative), timeout=15) as response:
             assert response.read() == data, f'HTTP content differs: {relative}'
             if relative.endswith('.wasm'):
                 assert response.headers.get_content_type() == 'application/wasm'
+    cache[relative] = data
     return data
 
 catalog = json.loads(verify_file('catalog.json'))
 assert catalog
+assert len({entry['id'] for entry in catalog}) == len(catalog)
+assert len({entry['sourceId'] for entry in catalog}) == len(catalog)
 assert {entry['id'] for entry in catalog} == {p.name for p in (root / 'games').iterdir() if p.is_dir()}
 lock = read_json(root / 'package-lock.json')['packages']['node_modules/@ruffle-rs/ruffle']
 version = read_json(root / 'node_modules/@ruffle-rs/ruffle/package.json')['version']
@@ -37,6 +43,11 @@ assert lock['integrity'].startswith('sha512-')
 for entry in catalog:
     source = root / 'games' / entry['id']
     manifest = read_json(source / 'manifest.json')
+    assert entry['originalUrl'] == manifest['originalUrl'] == 'https://qpetlover.cn/QPetGames/#/play/' + manifest['sourceId']
+    assert entry['kind'] == manifest['kind'] == 'classic'
+    assert manifest['verification']['status'] in ('started', 'verified-flow')
+    assert verify_file(manifest['cover']) == (root / manifest['cover']).read_bytes()
+    assert sha(verify_file(manifest['cover'])) == manifest['coverSha256']
     assert json.loads(verify_file(entry['manifest'])) == manifest
     swf = verify_file(manifest['servedPath'])
     assert swf == (source / 'game.swf').read_bytes()
@@ -55,7 +66,8 @@ for file in runtime.rglob('*'):
     if file.is_file():
         relative = 'vendor/ruffle/' + file.relative_to(runtime).as_posix()
         assert verify_file(relative) == file.read_bytes(), f'Runtime differs: {relative}'
-for relative in ['index.html', 'player.js', 'player.css']:
-    assert verify_file(relative) == (root / 'web' / relative).read_bytes()
-assert verify_file('fonts/OFL.txt') == (root / 'assets/fonts/OFL.txt').read_bytes()
+for file in (root / 'web').iterdir():
+    if file.is_file():
+        assert verify_file(file.name) == file.read_bytes()
+assert verify_file('fonts/README.md') == (root / 'assets/fonts/README.md').read_bytes()
 print(json.dumps({'result': 'passed', 'ruffleVersion': version, 'httpVerified': bool(args.url), 'checks': checks}, ensure_ascii=False, indent=2))

@@ -3,25 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="保留原始画面与玩法的 Q宠游戏收藏，在现代浏览器中使用 Ruffle 运行。">
-  <title>Q宠游戏</title>
+  <meta name="theme-color" content="#f6f3e9">
+  <title>Q宠游戏 · 再玩一局</title>
+  <meta name="description" content="收藏熟悉的 QQ 宠物经典小游戏，保留原来的画面与玩法。打开浏览器，再玩一局。">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="player.css">
-  <script src="player.js" defer></script>
-  <script src="vendor/ruffle/ruffle.js" defer></script>
+  <link rel="stylesheet" href="catalog.css">
+  <script src="catalog.js" defer></script>
 </head>
-<body><main>
-  <header><div><p class="eyebrow">Q宠游戏 · QQ 宠物小游戏收藏</p><h1 id="game-title">Q宠游戏</h1></div><span class="badge">原始 SWF · Ruffle</span></header>
-  <nav class="collection"><label for="game-select">选择游戏</label><select id="game-select"></select></nav>
-  <div class="toolbar"><p id="player-status" role="status">正在加载本地 Ruffle…</p><div><button id="size-button" type="button">显示原始尺寸</button><button id="reload-button" type="button">重新载入原版</button></div></div>
-  <section id="game-frame" aria-label="原始游戏画面"><div id="player-container"></div></section>
-  <p class="help">在游戏原画面中选择「游戏说明」或「开始游戏」。点击画面可启用原始音效。</p>
-  <details><summary>来源与原版一致性</summary>
-    <p>本页直接执行原始 SWF，游戏规则、动画、界面和声音均由原文件提供。</p>
-    <dl><dt>Ruffle</dt><dd id="runtime-version"></dd><dt>原始舞台</dt><dd id="stage-info"></dd><dt>已知差异</dt><dd id="differences"></dd><dt>SWF SHA-256</dt><dd id="swf-hash" class="hash"></dd></dl>
-    <p id="untested"></p>
-    <p><a id="manifest-link" target="_blank" rel="noreferrer">查看来源与校验记录</a> · <a id="source-link" target="_blank" rel="noreferrer">原始仓库 ↗</a></p>
-  </details>
-  <footer><span>本地运行 · 无需 Flash 插件</span><span>游戏设定由原始 SWF 执行</span></footer>
-</main></body>
+<body>
+<a class="skip-link" href="#collection">跳到游戏列表</a>
+<div class="page-shell">
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Q宠游戏首页">
+      <span class="brand-mark" aria-hidden="true">Q<span>✦</span></span>
+      <span class="brand-name">Q宠游戏<small>小小的游戏，长长的回忆</small></span>
+    </a>
+    <nav aria-label="站点导航">
+      <a href="https://qpetlover.cn/QPetGames/" target="_blank" rel="noopener noreferrer">原版游戏站 <span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/QPetLover/QPetGamesWeb" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="welcome" aria-labelledby="welcome-title">
+      <div class="welcome-copy">
+        <p class="eyebrow"><span aria-hidden="true"></span> QQ PET · 经典小游戏收藏</p>
+        <h1 id="welcome-title">好久不见，<br class="mobile-break">再玩一局。</h1>
+        <p class="intro">熟悉的小伙伴，熟悉的游戏画面。<br>把那些年的快乐，留在今天的浏览器里。</p>
+        <a class="browse-link" href="#collection">挑一款开始 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="collection-stamp" aria-label="当前收录数量">
+        <span class="stamp-top">小 小 游 戏 收 藏 册</span>
+        <div class="stamp-number"><strong id="collection-total">—</strong><span>款</span></div>
+        <span class="stamp-bottom">经典慢慢收，快乐慢慢玩</span>
+        <span class="stamp-star" aria-hidden="true">✦</span>
+      </div>
+    </section>
+
+    <section id="collection" class="collection" aria-labelledby="collection-title">
+      <div class="collection-toolbar">
+        <div class="collection-heading">
+          <h2 id="collection-title">游戏收藏</h2>
+          <p id="game-count" role="status" aria-live="polite">正在打开收藏册…</p>
+        </div>
+        <div class="search-box">
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg>
+          <label class="visually-hidden" for="search">搜索游戏名称</label>
+          <input id="search" type="search" placeholder="找找熟悉的游戏" autocomplete="off">
+        </div>
+      </div>
+      <div id="game-grid" class="game-grid" aria-label="经典游戏列表" aria-busy="true"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <span aria-hidden="true">⌕</span>
+        <h3>这款游戏还没找到</h3>
+        <p>试试换个名字，或看看已经收录的老朋友。</p>
+        <button id="clear-search" type="button">查看全部游戏</button>
+      </div>
+      <p class="collection-note"><span aria-hidden="true">✦</span> 收藏还在慢慢增加。每款游戏旁，都留着一个原版入口。</p>
+      <noscript><p class="noscript-note">请开启 JavaScript 查看游戏列表并运行游戏；也可以前往<a href="https://qpetlover.cn/QPetGames/">原版游戏站</a>。</p></noscript>
+    </section>
+
+    <details class="about-collection">
+      <summary><span>关于这本收藏册</span><span class="summary-icon" aria-hidden="true">＋</span></summary>
+      <div class="about-copy">
+        <p>这里只收藏 QQ 宠物原版经典小游戏。游戏使用原始 SWF 文件，通过 Ruffle 在现代浏览器中运行，保留原文件里的画面、动画与游戏规则。</p>
+        <p>「原版 Ruffle」会打开原版游戏站中同一款游戏，方便并排比较。两个站点使用同一份游戏文件和后备字体；播放器版本不同，部分显示细节仍可能有差异；每款游戏的来源和具体检查记录都在播放页中。</p>
+        <p>游戏素材来自 <a href="https://github.com/QPetLover/QPetGames" target="_blank" rel="noopener noreferrer">QPetGames 原始收藏 ↗</a>。本收藏会逐款检查、逐步增加，完整通关与历史 Flash 的逐帧对照并非每款都已完成。</p>
+      </div>
+    </details>
+  </main>
+
+  <footer class="site-footer">
+    <p><span class="footer-heart" aria-hidden="true">♥</span> 给小时候的自己，留一个游戏角落。</p>
+    <span>Q宠游戏 · 经典收藏</span>
+  </footer>
+</div>
+</body>
 </html>
