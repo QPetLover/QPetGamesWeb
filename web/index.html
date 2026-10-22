@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="保留原始画面与玩法的 Q宠游戏收藏，在现代浏览器中使用 Ruffle 运行。">
+  <title>Q宠游戏</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="player.css">
+  <script src="player.js" defer></script>
+  <script src="vendor/ruffle/ruffle.js" defer></script>
+</head>
+<body><main>
+  <header><div><p class="eyebrow">Q宠游戏 · QQ 宠物小游戏收藏</p><h1 id="game-title">Q宠游戏</h1></div><span class="badge">原始 SWF · Ruffle</span></header>
+  <nav class="collection"><label for="game-select">选择游戏</label><select id="game-select"></select></nav>
+  <div class="toolbar"><p id="player-status" role="status">正在加载本地 Ruffle…</p><div><button id="size-button" type="button">显示原始尺寸</button><button id="reload-button" type="button">重新载入原版</button></div></div>
+  <section id="game-frame" aria-label="原始游戏画面"><div id="player-container"></div></section>
+  <p class="help">在游戏原画面中选择「游戏说明」或「开始游戏」。点击画面可启用原始音效。</p>
+  <details><summary>来源与原版一致性</summary>
+    <p>本页直接执行原始 SWF，游戏规则、动画、界面和声音均由原文件提供。</p>
+    <dl><dt>Ruffle</dt><dd id="runtime-version"></dd><dt>原始舞台</dt><dd id="stage-info"></dd><dt>已知差异</dt><dd id="differences"></dd><dt>SWF SHA-256</dt><dd id="swf-hash" class="hash"></dd></dl>
+    <p id="untested"></p>
+    <p><a id="manifest-link" target="_blank" rel="noreferrer">查看来源与校验记录</a> · <a id="source-link" target="_blank" rel="noreferrer">原始仓库 ↗</a></p>
+  </details>
+  <footer><span>本地运行 · 无需 Flash 插件</span><span>游戏设定由原始 SWF 执行</span></footer>
+</main></body>
+</html>

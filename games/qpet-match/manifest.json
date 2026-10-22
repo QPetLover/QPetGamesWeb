@@ -1,0 +1,49 @@
+{
+  "title": "Q宠速配",
+  "mode": "unmodified-swf-on-ruffle",
+  "sourceRepository": "https://github.com/QPetLover/QPetGames",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourcePath": "classical_games/swf/Q宠速配.swf",
+  "servedPath": "games/qpet-match/game.swf",
+  "swfSha256": "654f01b4e6a48782ffe10be1750f321e7570d9a96133f1644094017d47b1ab94",
+  "swfBytes": 141720,
+  "rufflePackage": "@ruffle-rs/ruffle",
+  "ruffleVersion": "0.7.1",
+  "originalWidth": 500,
+  "originalHeight": 400,
+  "originalFrameRate": 30,
+  "gameplayCodeModified": false,
+  "fontFallback": {
+    "originalRequestedFace": "华康海报体W12(P)",
+    "suppliedFace": "Noto Sans CJK SC",
+    "servedPath": "fonts/NotoSansCJKsc-Regular.otf",
+    "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b",
+    "note": "Only unembedded device text falls back; original requested proprietary font unavailable.",
+    "source": "https://github.com/notofonts/noto-cjk",
+    "sourcePath": "Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+    "license": "SIL Open Font License 1.1",
+    "bytes": 16437364
+  },
+  "id": "qpet-match",
+  "description": "连接管道，让原游戏中的爱心相遇。",
+  "verification": {
+    "date": "2026-10-22",
+    "tested": [
+      "菜单",
+      "游戏说明",
+      "开始游戏",
+      "管道点击",
+      "普通路径连通与加分",
+      "超时",
+      "重玩"
+    ],
+    "notTested": [
+      "完整有效配对",
+      "全部关卡通关",
+      "历史 Adobe Flash Player 逐帧与音频对照"
+    ],
+    "knownDifferences": [
+      "未嵌入的中文使用 Noto Sans CJK SC 后备字体，字形与原请求字体不同。"
+    ]
+  }
+}

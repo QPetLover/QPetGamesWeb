@@ -1,0 +1,13 @@
+{
+  "name": "qpet-games-web",
+  "private": true,
+  "type": "module",
+  "description": "Q宠游戏：保留原始 SWF 的现代浏览器游戏收藏",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "verify": "python3 scripts/verify.py",
+    "start": "python3 scripts/serve.py"
+  },
+  "dependencies": { "@ruffle-rs/ruffle": "0.7.1" }
+}
