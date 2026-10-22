@@ -211,3 +211,26 @@ test('actual sound toggle resumes both original loops at elapsed phases and stop
   assert.equal(app.sound.audible.length,stoppedCount,'muting after stop-sounds cannot resurrect either loop');
   assert.ok(app.sound.stops>=3);
 });
+
+test('new catch and hit StartSound cues keep their full attacks after a delayed animation callback', async () => {
+  const app = await application();
+  await app.elements.sound.click();
+  // The original sound190 is only 2752/11025 seconds long. Previously a RAF
+  // later than this interval passed an elapsed phase that discarded it, even
+  // though this is the first time the StartSound event has reached the player.
+  app.emit({type:'sound',id:190,loops:1,noMultiple:true,at:45});
+  await app.frame(400);
+  assert.deepEqual(app.sound.audible.at(-1),{id:190,elapsed:0,loops:1,noMultiple:true});
+  app.emit({type:'sound',id:195,loops:1,noMultiple:true,at:405});
+  await app.frame(420);
+  assert.deepEqual(app.sound.audible.at(-1),{id:195,elapsed:0,loops:1,noMultiple:true});
+  // The distinct authored sound IDs can overlap; only duplicates of one ID
+  // are suppressed, for their actual playback interval rather than source time.
+  app.emit({type:'sound',id:190,loops:1,noMultiple:true,at:450});
+  await app.frame(500);
+  assert.equal(app.sound.audible.filter(cue=>cue.id===190).length,1);
+  app.emit({type:'sound',id:190,loops:1,noMultiple:true,at:600});
+  await app.frame(651);
+  assert.equal(app.sound.audible.filter(cue=>cue.id===190).length,2);
+  assert.equal(app.sound.audible.at(-1).elapsed,0);
+});

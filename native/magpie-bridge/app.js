@@ -19,8 +19,11 @@ let lastStaticKey=null;
 function queueSound(event) {
   const info=audioMetadata[event.id];
   if(!info)return;
-  const at=Number.isFinite(event.at)?event.at:performance.now();
   const now=performance.now();
+  // A newly dispatched StartSound begins at its authored in-point. A delayed
+  // RAF must not trim the attack (or discard a short catch sound entirely).
+  // Only the long-running timeline loops retain their logical elapsed phase.
+  const at=(event.loops||1)>1&&Number.isFinite(event.at)?event.at:now;
   const noMultiple=event.noMultiple===undefined?[105,123,190,195,241,242].includes(Number(event.id)):!!event.noMultiple;
   cues=cues.filter(cue=>cue.until>now);
   if(noMultiple&&cues.some(cue=>cue.id===event.id))return;
