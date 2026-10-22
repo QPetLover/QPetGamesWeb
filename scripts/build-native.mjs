@@ -5,14 +5,18 @@ import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const source = path.join(root, 'native/qpet-match');
+const game = process.argv.find(arg=>arg.startsWith('--game='))?.slice(7) || 'qpet-match';
+assert(['qpet-match','magpie-bridge'].includes(game),'Unknown native game');
+const source = path.join(root, 'native',game);
 // Public deployment copies this native build; the minitool candidate stays separate.
 const xhs = process.argv.includes('--xhs');
-const output = path.join(root, xhs ? 'minitool-candidate' : 'preview-native');
+const output = path.join(root, game==='qpet-match' ? (xhs?'minitool-candidate':'preview-native') : (xhs?'minitool-magpie-candidate':'preview-magpie'));
 await rm(output, {recursive: true, force: true});
 await mkdir(output, {recursive: true});
+const license=await readFile(path.join(root,'licenses/FFDEC-GPL-3.0.txt'),'utf8');
+const notice=`/* FFDec-derived Canvas helper: GPL-3.0. Modified, readable source and notices:\nhttps://github.com/QPetLover/QPetGamesWeb/tree/main/native/${game}\nOriginal game artwork/audio/font rights remain with their respective authors.\n\n${license}\n*/`;
 await build({entryPoints:[path.join(source,'app.js')],bundle:true,format:'iife',target:['chrome61'],
-  outfile:path.join(output,'app.js'),minify:false,legalComments:'inline',charset:'utf8'});
+  outfile:path.join(output,'app.js'),minify:false,legalComments:'inline',charset:'utf8',banner:{js:notice}});
 let html = await readFile(path.join(source,'index.html'),'utf8');
 html = html.replace('type="module" src="app.js"','defer src="app.js"');
 if (xhs) html = html.replace(/<!-- web-only:start -->[\s\S]*?<!-- web-only:end -->/g, '');

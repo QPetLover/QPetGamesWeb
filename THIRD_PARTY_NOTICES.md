@@ -10,6 +10,10 @@
 - `native/qpet-match/audio-provenance.json`：9段原始 MPEG 音频的编号、采样数、seek与SHA，无转码。
 - `native/qpet-match/tests/fixtures/`：测试用原 ActionScript 片段；只在 Node 测试中执行，不进入网页产物。
 
+## 搭鹊桥原素材与规则
+
+第二款《搭鹊桥》来自相同上游固定提交的 `classical_games/swf/QQ抓喜鹊.swf`，SHA-256 `94007c475f91fed70b35b848b7288faf8d7415cd9f0f0b04533bcba03d8fd3c6`，800×600、25FPS。`native/magpie-bridge/assets/provenance.json`记录242个静态符号、15张原位图的来源与修正；`audio-provenance.json`记录9段原音频的payload哈希、seek及采样数。设备文字使用与速配相同来源的原站后备字体字形子集。原署名和图形保留，原SWF不进入网页产物；此迁移不对原游戏素材或字体追加授权。FFDec导出helper沿用下述GPL-3.0说明。
+
 ## JPEXS FFDec
 
 [FFDec 26.4.0](https://github.com/jindrapetrik/jpexs-decompiler) 用于构建前导出。`assets/artwork.js` 包含其 Canvas 绘制辅助代码及修改后的静态符号派发、渐变与文字修正。FFDec 的 GPL-3.0 许可证完整副本见 [licenses/FFDEC-GPL-3.0.txt](licenses/FFDEC-GPL-3.0.txt)。本仓库保留可读修改源码，不将原始 ActionScript 字节码、解释器或 Flash 虚拟机打入网页。

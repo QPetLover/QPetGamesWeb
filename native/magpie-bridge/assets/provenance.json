@@ -1,0 +1,107 @@
+{
+  "sourceSWF": "QPetLover/QPetGames classical_games/swf/QQ抓喜鹊.swf",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourceSHA256": "94007c475f91fed70b35b848b7288faf8d7415cd9f0f0b04533bcba03d8fd3c6",
+  "tool": "JPEXS FFDec 26.4.0",
+  "stage": {
+    "width": 800,
+    "height": 600,
+    "fps": 25
+  },
+  "inputs": {
+    "frame-canvas/frames.html": "a0da6763d79bac7a5aef724a50d2ee95449f7a60ef18610f853a60ffe110b917",
+    "frame-canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "sprite-canvas-unpacked/DefineSprite_37_Enemy/frames.html": "0af6e534047567fb176de979ffa531284b170039993f78ff9a1219aa288e4bfe",
+    "magpie.xml": "e02ffbe91dc71a9c62be2982952c0f2a820a9f80d3195878f254260765306818"
+  },
+  "corrections": [
+    "Static explicit symbol dispatch replaces eval",
+    "Enemy export-only crop translation removed",
+    "CXFORM fixed-point identity 256 and additive composition corrected",
+    "All four original BUTTONRECORD states restored",
+    "Restore original XML device text and layout using separately sourced comparison-site font fallback",
+    "Recover shortened XML matrix decimals to original 16.16 terms",
+    "Remove 18 opaque radial-gradient pre-fills",
+    "Extend 18 PAD gradient clips"
+  ],
+  "symbols": 242,
+  "embeddedImages": 15,
+  "embeddedImageSHA256": {
+    "imageObj45": {
+      "mime": "image/JPEG",
+      "sha256": "7e800481dd182e23b2cde92ecb441c5e299e174b1c7880287b5868adff9f46b0",
+      "bytes": 44409
+    },
+    "imageObj58": {
+      "mime": "image/PNG",
+      "sha256": "a3df5f586fdff3b1603eb354505b56bc5d47027ac44e19d45d9c220fdb2a0648",
+      "bytes": 23372
+    },
+    "imageObj61": {
+      "mime": "image/PNG",
+      "sha256": "7fed48cc54cdf81f146f9817ec46165ee244d9792c8713328d9ce044c301d1ac",
+      "bytes": 94173
+    },
+    "imageObj63": {
+      "mime": "image/PNG",
+      "sha256": "b5377d949717e1c777e9a82d39ab6ad944acad1450d76708d182218c9cc549ba",
+      "bytes": 1119
+    },
+    "imageObj100": {
+      "mime": "image/PNG",
+      "sha256": "46b6e3ba0fc0a0fba43bc7c7c7f941ed9ab856e8343f29d12f6726940732ae3a",
+      "bytes": 10743
+    },
+    "imageObj103": {
+      "mime": "image/PNG",
+      "sha256": "d39368275c582889506858d9ccd607d40e92b601a40a4b991c156458ee8cd4c0",
+      "bytes": 11248
+    },
+    "imageObj111": {
+      "mime": "image/JPEG",
+      "sha256": "fce1058bccc66f1396444a696bfab6d9e2ba70363058901a9c2b0843dec69d9c",
+      "bytes": 84372
+    },
+    "imageObj135": {
+      "mime": "image/JPEG",
+      "sha256": "6fff4f5ac07ebe19da32050a29c995425e4763c3597b4c9bf7db4fab112116e8",
+      "bytes": 60989
+    },
+    "imageObj144": {
+      "mime": "image/PNG",
+      "sha256": "7fed48cc54cdf81f146f9817ec46165ee244d9792c8713328d9ce044c301d1ac",
+      "bytes": 94173
+    },
+    "imageObj145": {
+      "mime": "image/PNG",
+      "sha256": "71397cf86f5e3120faac6026fae92c87786146c77568d6493cdfcc124b84437f",
+      "bytes": 90094
+    },
+    "imageObj152": {
+      "mime": "image/PNG",
+      "sha256": "3664396d224c9423bb04eae32a1f69cc5d69299b975a7f58610cd97dd05d41a0",
+      "bytes": 3579
+    },
+    "imageObj228": {
+      "mime": "image/JPEG",
+      "sha256": "6960186479d02758764f1fdaf2bab3eca08789cb4bac0a46a8401726c9c6b0de",
+      "bytes": 59642
+    },
+    "imageObj229": {
+      "mime": "image/JPEG",
+      "sha256": "0f1007bd9a9e363be548e073e73f9867ae6a1a0dda0567b76e742cd7bc528c22",
+      "bytes": 88921
+    },
+    "imageObj236": {
+      "mime": "image/JPEG",
+      "sha256": "1f1e20c2e18acd5a83de33180bbe380942aa21710e3338b8336b9ece2b026caa",
+      "bytes": 71784
+    },
+    "imageObj237": {
+      "mime": "image/JPEG",
+      "sha256": "22a64e50478a45e81e338c35cec9836d25c089fb80f7cf315823b19ce15ad9d5",
+      "bytes": 117121
+    }
+  },
+  "artworkSHA256": "93b87c59203726154b04e4e83490864c2c56a1ba50d10d5a3862dcd5fc29f025"
+}
