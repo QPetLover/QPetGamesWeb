@@ -7,11 +7,11 @@
 ## 两站对照
 
 - [原收藏站 QPetGames](https://qpetlover.cn/QPetGames/)：已部署，使用 Ruffle **0.5.0**，保留原收藏目录和播放环境。
-- 新集合预计入口：**https://qpetlover.cn/QPetGamesWeb/**（尚待启用 Pages，当前不能视为已上线）。
+- [新集合 Q宠游戏](https://qpetlover.cn/QPetGamesWeb/)：首批 8 款原版小游戏，使用 Ruffle **0.7.1**。
 - 新集合首页每张游戏卡片并列提供「开始游戏」和「原版 Ruffle」，播放器中也保留同款对照链接。
 - 两站对应 SWF 的 SHA-256 相同；两站共用同一后备字体，运行时版本不同，因此不能仅凭文件一致宣称显示与行为完全相同。
 
-两个站点可共用已有 `qpetlover.cn` 域名，分别使用 `/QPetGames/` 和 `/QPetGamesWeb/` 仓库路径。截至 2026-10-22，新仓库仍为私有，当前 GitHub 方案不支持为它启用 Pages（配置接口返回 HTTP 422）。部署工作流已准备好，公开仓库需要另行获得用户确认；尚未改变仓库可见性。
+两个站点共用已有 `qpetlover.cn` 域名，分别使用 `/QPetGames/` 和 `/QPetGamesWeb/` 仓库路径。本仓库已按用户确认公开，通过 GitHub Actions 部署 Pages，并启用强制 HTTPS。
 
 ## 首批游戏
 
@@ -61,7 +61,7 @@ npm run verify -- --url http://127.0.0.1:4178/
 
 工作流见 [.github/workflows/pages.yml](.github/workflows/pages.yml)。对 `main` 的推送及手动运行依次执行依赖安装、构建、原文件校验、上传 `dist/`、Pages 部署；拉取请求仅运行构建和校验，不部署。当前 Free 组织下，仓库为私有时工作流同样只构建校验；公开并启用 Pages 后可手动触发部署。
 
-仓库具备 Pages 权限后，在 Settings → Pages 选择 **GitHub Actions**，再运行工作流。应核查 Actions 的部署结果，并实际读取线上首页、`catalog.json` 和各游戏 SWF 后，才能将部署标为完成。静态文件和工作流已准备好不代表站点已经上线。
+仓库 Settings → Pages 已选择 **GitHub Actions**。后续更新需核查 Actions 的部署结果，并实际读取线上首页、`catalog.json` 和各游戏 SWF；`npm run verify -- --url https://qpetlover.cn/QPetGamesWeb/` 可核对当前本地产物与线上文件。
 
 ## 目录、来源与一致性边界
 
