@@ -2,13 +2,18 @@
   "name": "qpet-games-web",
   "private": true,
   "type": "module",
-  "description": "Q宠游戏：原生网页游戏复刻，首款Q宠速配制作中",
+  "description": "Q宠游戏：原生 HTML / Canvas / JavaScript 版 Q宠速配",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
     "verify": "python3 scripts/verify.py",
-    "start": "python3 scripts/serve.py"
+    "start": "python3 scripts/serve.py",
+    "build:native": "node scripts/build-native.mjs",
+    "test": "node --test native/qpet-match/tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
   }
 }

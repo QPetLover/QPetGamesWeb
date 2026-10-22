@@ -1,31 +1,23 @@
-# 历史第三方内容与来源
+# 第三方内容与来源
 
-以下说明记录仓库内用于追溯和原版对照的历史资源。当前公开构建为暂停开放提示页，不包含下述游戏 SWF、字体 SWF 或 Ruffle 运行时；原生复刻尚未发布。
+## 原游戏素材与规则
 
-## 游戏、封面与截图
+首款《Q宠速配》的矢量图、字形、时间轴、音频及规则来自 [QPetLover/QPetGames](https://github.com/QPetLover/QPetGames) 的 `classical_games/swf/Q宠速配.swf`，固定源提交 `cac5e2d7636da081a178a2300865eb5090649969`。SWF SHA-256 为 `654f01b4e6a48782ffe10be1750f321e7570d9a96133f1644094017d47b1ab94`，舞台 500×400、30 FPS。
 
-首批 8 款经典游戏的 SWF 与封面来自 [QPetLover/QPetGames](https://github.com/QPetLover/QPetGames) 的固定 commit `cac5e2d7636da081a178a2300865eb5090649969`，均位于上游 `classical_games/`。后续仅逐款加入已经核验的 QQ 宠物经典原版游戏。
+游戏的署名、商标和素材保留原样。本次未找到上游根 LICENSE 对第三方游戏素材授予通用再授权，不对这些素材追加代码许可证。原件用于离线提取和对照；原生网页产物不包含或执行 SWF。
 
-每款原路径、字节数、SWF SHA-256、封面路径与封面 SHA-256 记录在 `games/<id>/manifest.json`；[首批游戏](README.md#首批游戏)链接到各款说明和原站 Ruffle 对照页。游戏中的署名、商标及素材保留原样。`evidence/` 中截图来自对应游戏的实际运行。
+- `native/qpet-match/assets/provenance.json`：原素材导出输入、修正及 SHA。
+- `native/qpet-match/audio-provenance.json`：9段原始 MPEG 音频的编号、采样数、seek与SHA，无转码。
+- `native/qpet-match/tests/fixtures/`：测试用原 ActionScript 片段；只在 Node 测试中执行，不进入网页产物。
 
-本次检查未在上游仓库找到授予这些游戏素材通用许可的根 LICENSE。此来源记录不将公开可下载视为再授权；本仓库没有给第三方 SWF、封面或游戏素材追加代码许可证。
+## JPEXS FFDec
 
-## Ruffle
+[FFDec 26.4.0](https://github.com/jindrapetrik/jpexs-decompiler) 用于构建前导出。`assets/artwork.js` 包含其 Canvas 绘制辅助代码及修改后的静态符号派发、渐变与文字修正。FFDec 的 GPL-3.0 许可证完整副本见 [licenses/FFDEC-GPL-3.0.txt](licenses/FFDEC-GPL-3.0.txt)。本仓库保留可读修改源码，不将原始 ActionScript 字节码、解释器或 Flash 虚拟机打入网页。
 
-本集合使用官方 npm 包 `@ruffle-rs/ruffle@0.7.1`；上游：[ruffle-rs/ruffle](https://github.com/ruffle-rs/ruffle)。
+## 对照字体
 
-依赖使用 MIT / Apache-2.0 双许可。构建从锁定的 npm 包原样复制运行时及 `LICENSE_MIT`、`LICENSE_APACHE` 到 `dist/vendor/ruffle/`，不将生成运行时提交到源码仓库。
+原游戏部分中文使用未嵌入的华康设备字体。为对齐当前原版网站，原生版将同一后备字体的所需字形转成包内 WOFF2 子集；来源是 [qpet-adventure 的 myfont.swf](https://github.com/QPetLover/qpet-adventure/blob/cbd3a75ee7787d62911c8ee58125931961741752/site/myfont.swf)，源 SHA-256 `3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c`。字体内部名「站酷快乐体2016修订版」，版权字段 `(c) Copyright LuiBingKe 2016`。此记录不推断新增字体授权，也不声称其等同历史设备上的华康字形。
 
-[原收藏站](https://qpetlover.cn/QPetGames/)保留其已有的 Ruffle 0.5.0 环境。本集合的逐款对照链接指向原站相同 SWF，不代表两个运行时在所有细节上等价。
+## 历史资源
 
-## 原站共用字体
-
-文件：`assets/fonts/original-site-font.swf`，从[原站字体资源](https://qpetlover.cn/qpet-adventure/myfont.swf)取得，未经修改。
-
-固定来源：[QPetLover/qpet-adventure](https://github.com/QPetLover/qpet-adventure/blob/cbd3a75ee7787d62911c8ee58125931961741752/site/myfont.swf)，commit `cbd3a75ee7787d62911c8ee58125931961741752`；路径 `site/myfont.swf`。
-
-SHA-256：`3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c`；大小 2,055,402 字节，与上游校验清单一致。内部字体名「站酷快乐体2016修订版」，7,746 字形，内嵌版权字段 `(c) Copyright LuiBingKe 2016`。
-
-本集合与原站采用同一 `fontSources` 资源及 `defaultFonts.sans` 设置。来源说明不追加或推断字体许可，也不将本文件套用之前 Noto 字体的 OFL 许可。此前版本中的 Noto 字体已移出当前分发；旧提交及当时许可记录仍保留在 Git 历史中。
-
-此字体对齐当前原站 Ruffle 后备字形，不能称为历史 Flash 请求的华康海报体；历史设备字体的完全一致性未验收。
+`games/`、`assets/fonts/` 和较早 `evidence/` 保留此前已撤下版本的追溯资料；当前原生构建从明确白名单取文件，不复制这些历史 SWF 或字体 SWF。原版网站的 Ruffle 播放器由另一个仓库维护，只作为外部比较基准。本项目已经移除 Ruffle 依赖，原生包没有 WASM、SWF或模拟器。

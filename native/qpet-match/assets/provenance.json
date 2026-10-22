@@ -1,0 +1,24 @@
+{
+  "sourceSWF": "QPetLover/QPetGames classical_games/swf/Q宠速配.swf",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourceSHA256": "654f01b4e6a48782ffe10be1750f321e7570d9a96133f1644094017d47b1ab94",
+  "tool": "JPEXS FFDec 26.4.0 build-time Canvas export",
+  "inputSHA256": {
+    "projects/10-22-qpet-games-collection/native-match/reference/canvas-export/frames.html": "8ad8ddf37a65720a99f4eb13433ef98353763ffad2133fd5acfed003445119b5",
+    "projects/10-22-qpet-games-collection/native-match/reference/canvas-export/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "projects/10-22-qpet-games-collection/native-match/reference/pipe-canvas/DefineSprite_54_pipe_mc/frames.html": "86ec31e6d6f04b083f8b6bc253e20097f3a076591e6b290a35a1d846eb3ea9a9",
+    "projects/10-22-qpet-swf-web/playground/match.xml": "d0076604b8f1118a29661c677326e08ad63aba3fce7a21527ebda735874b9c52"
+  },
+  "corrections": [
+    "Static explicit symbol dispatch replaces dynamic eval",
+    "Remove export-only pipe crop translation",
+    "Restore DefineEditText147–149 HTML sbr using existing glyph geometry",
+    "Remove opaque pre-fill from 19 radial-gradient paths",
+    "Extend 19 radial PAD fills to inverse-transformed clip bounds",
+    "Use SWF fixed-point CXFORM multiplier identity256 with correct additive composition",
+    "Restore all four authored BUTTONRECORD states",
+    "Render device-text151/165 using original-reference font fallback"
+  ],
+  "artworkSHA256": "d4b9de2652919de960200eb32749d39861a5960fe7e5ec0b1a8a63e026ea0d2a",
+  "symbols": 291
+}

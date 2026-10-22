@@ -1,29 +1,39 @@
 # Q宠游戏 · QPetGamesWeb
 
-本站准备将 QQ 宠物游戏制作成原生 HTML / Canvas / JavaScript 网页游戏。首款为 **Q宠速配**，完成原版对照后再开放。
+首款 **Q宠速配**：从原 SWF 提取矢量素材、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
 
-## 当前公开状态
+- 网页：<https://qpetlover.cn/QPetGamesWeb/>
+- 原版对照：<https://qpetlover.cn/QPetGames/#/play/classic-014>
+- 实现、来源及验证范围：[native/qpet-match/README.md](native/qpet-match/README.md)
 
-此前发布的 8 款 SWF / Ruffle 游戏已从本次发布产物中全部撤下。当前构建只包含「Q宠速配正在重新制作。完成原版对照后开放。」提示页；旧 `player.html?game=...` 地址显示「游戏已下架」，不能继续游玩。
+目前只开放这一款。此前的 8 款 SWF / Ruffle 集合已撤下，旧 `player.html?game=...` 地址显示下架通知。原版网站由独立仓库维护。
 
-- 新站：<https://qpetlover.cn/QPetGamesWeb/>
-- 原版对照站：<https://qpetlover.cn/QPetGames/>，由独立仓库维护，本次未修改。
-
-只有实际部署本次构建后，线上才会显示此状态；以 GitHub Pages 部署结果和线上核验为准。
-
-## 本地运行与发布边界
+## 本地运行
 
 需要 Node.js 20 或以上、Python 3.9 或以上。
 
 ```sh
 npm ci --ignore-scripts
+npm test
 npm run build
 npm run verify
 npm start
 ```
 
-构建使用明确的文件白名单，只输出 `index.html`、替代旧播放器的 `player.html`、`maintenance.css` 和 `.nojekyll`。不复制历史游戏、字体、目录清单、模拟器或原生开发中间产物，不输出任何 SWF / WASM。项目已移除 Ruffle npm 依赖。
+打开 <http://127.0.0.1:4178/>。点击管道改变方向，连接两侧有爱心的 Q 宠；支持鼠标和触摸，手机可横屏游玩。
 
-已有 SWF、来源记录、截图和早期实现仅用于追溯及原版对照，不能据此称原生复刻已经完成。`native/` 中后续开发的内容必须通过原版对照和单独发布检查后，才可加入发布白名单。
+GitHub Pages 工作流先执行测试、构建和校验，再部署 `dist/`。产物白名单为 `index.html`、`app.js`、`style.css`、旧链接通知 `player.html` / `maintenance.css` 和 `.nojekyll`，不会复制历史游戏或模拟器。校验会拒绝 SWF / WASM、动态执行和联网 API；部署后可核对线上字节及旧资源 404：
 
-GitHub Pages 工作流执行构建、校验和部署。当前校验要求发布产物严格只有上述 4 个文件；旧可玩资源或任何新游戏文件进入产物都会使校验失败。
+```sh
+python3 scripts/verify.py --url https://qpetlover.cn/QPetGamesWeb/
+```
+
+## HTML / ZIP 候选
+
+```sh
+node scripts/build-native.mjs --xhs
+```
+
+生成独立目录 `minitool-candidate/`，含一个 HTML 入口、JS 和 CSS，素材与音频均在包内，并移除网页版的外部原版对照链接。它是面向小红书 HTML 小工具的候选包，尚未实际上传或验证平台验收。当前仅验证桌面浏览器和 Chrome 手机模拟，不能视作手机真机测试。
+
+原素材、字体及导出辅助代码的来源与许可证说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

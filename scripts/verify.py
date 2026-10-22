@@ -1,33 +1,39 @@
 #!/usr/bin/env python3
-"""Verify the deliberately non-playable holding-page release and optional HTTP delivery."""
-import argparse
-import json
+"""Verify the first native game's independent static release and optional HTTP bytes."""
+import argparse, hashlib, json, re
 from pathlib import Path
 from urllib.request import urlopen
+from urllib.error import HTTPError
 from urllib.parse import urljoin
-
-parser = argparse.ArgumentParser()
-parser.add_argument('--url', help='Optional HTTP origin or repository subpath')
-args = parser.parse_args()
-root = Path(__file__).resolve().parents[1]
-dist = root / 'dist'
-expected = {'index.html', 'player.html', 'maintenance.css', '.nojekyll'}
-actual = {p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
-assert actual == expected, f'Unexpected release files: {actual ^ expected}'
-assert not any(p.is_dir() for p in dist.iterdir()), 'Game/runtime directories must not be published'
-assert not any(s in str(p).lower() for p in actual for s in ('.swf', '.wasm', 'ruffle', 'catalog'))
-checks = []
+parser=argparse.ArgumentParser()
+parser.add_argument('--url')
+args=parser.parse_args()
+root=Path(__file__).resolve().parents[1]; dist=root/'dist'
+expected={'index.html','app.js','style.css','player.html','maintenance.css','.nojekyll'}
+actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
+assert actual==expected, f'Unexpected release files: {actual ^ expected}'
+js=(dist/'app.js').read_text(); html=(dist/'index.html').read_text()
+for pattern in [r'\beval\s*\(',r'\bnew\s+Function\s*\(',r'\bWebAssembly\b',r'\bfetch\s*\(',r'\bXMLHttpRequest\b',r'\bWebSocket\b',r'\bimport\s*\(']:
+    assert not re.search(pattern,js),f'Forbidden runtime feature: {pattern}'
+assert not re.search(r'ruffle|["\'].*?\.swf["\']|node:vm|node:test',js,re.I)
+assert '<canvas' in html and 'app.js' in html
+assert not re.search(r'<(?:iframe|object|embed)\b|\bon\w+\s*=',html,re.I)
+assert '游戏已下架' in (dist/'player.html').read_text()
+checks=[]
 for name in sorted(expected):
-    data = (dist / name).read_bytes()
-    if name != '.nojekyll':
-        assert data == (root / 'web' / name).read_bytes(), f'Stale build: {name}'
-        assert b'<script' not in data.lower() and b'ruffle' not in data.lower()
-        if args.url:
-            with urlopen(urljoin(args.url.rstrip('/') + '/', name), timeout=15) as response:
-                assert response.read() == data, f'HTTP content differs: {name}'
-    checks.append(name)
-assert 'Q宠速配正在重新制作' in (dist / 'index.html').read_text()
-assert '游戏已下架' in (dist / 'player.html').read_text()
-print(json.dumps({'result': 'passed', 'releaseMode': 'holding-page', 'playableGames': 0,
-                  'noGameOrRuntimeAssets': True, 'httpVerified': bool(args.url),
-                  'files': checks}, ensure_ascii=False, indent=2))
+    data=(dist/name).read_bytes()
+    if args.url and name!='.nojekyll':
+        with urlopen(urljoin(args.url.rstrip('/')+'/',name),timeout=20) as response:
+            assert response.read()==data,f'HTTP mismatch: {name}'
+    checks.append({'file':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
+retired=[]
+if args.url:
+    for name in ['catalog.json','player.js','vendor/ruffle/ruffle.js','games/qpet-match/game.swf','games/classic-002/game.swf','fonts/original-site-font.swf']:
+        try:
+            with urlopen(urljoin(args.url.rstrip('/')+'/',name),timeout=20) as response:
+                raise AssertionError(f'Retired resource still published: {name}')
+        except HTTPError as error:
+            assert error.code==404,f'{name}: expected404, got{error.code}'
+        retired.append(name)
+print(json.dumps({'result':'passed','releaseMode':'native-javascript','games':['qpet-match'],
+                  'noSWFRuntime':True,'httpVerified':bool(args.url),'files':checks,'retired404':retired},ensure_ascii=False,indent=2))
