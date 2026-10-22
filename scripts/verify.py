@@ -1,73 +1,33 @@
 #!/usr/bin/env python3
-"""Check source/build equality; optionally verify the actual HTTP delivery."""
+"""Verify the deliberately non-playable holding-page release and optional HTTP delivery."""
 import argparse
-import hashlib
 import json
 from pathlib import Path
 from urllib.request import urlopen
 from urllib.parse import urljoin
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--url', help='Optional HTTP origin, e.g. http://127.0.0.1:4178/')
+parser.add_argument('--url', help='Optional HTTP origin or repository subpath')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 dist = root / 'dist'
-read_json = lambda path: json.loads(path.read_text())
-sha = lambda data: hashlib.sha256(data).hexdigest()
+expected = {'index.html', 'player.html', 'maintenance.css', '.nojekyll'}
+actual = {p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
+assert actual == expected, f'Unexpected release files: {actual ^ expected}'
+assert not any(p.is_dir() for p in dist.iterdir()), 'Game/runtime directories must not be published'
+assert not any(s in str(p).lower() for p in actual for s in ('.swf', '.wasm', 'ruffle', 'catalog'))
 checks = []
-cache = {}
-
-def verify_file(relative):
-    if relative in cache:
-        return cache[relative]
-    data = (dist / relative).read_bytes()
-    if args.url:
-        with urlopen(urljoin(args.url.rstrip('/') + '/', relative), timeout=15) as response:
-            assert response.read() == data, f'HTTP content differs: {relative}'
-            if relative.endswith('.wasm'):
-                assert response.headers.get_content_type() == 'application/wasm'
-    cache[relative] = data
-    return data
-
-catalog = json.loads(verify_file('catalog.json'))
-assert catalog
-assert len({entry['id'] for entry in catalog}) == len(catalog)
-assert len({entry['sourceId'] for entry in catalog}) == len(catalog)
-assert {entry['id'] for entry in catalog} == {p.name for p in (root / 'games').iterdir() if p.is_dir()}
-lock = read_json(root / 'package-lock.json')['packages']['node_modules/@ruffle-rs/ruffle']
-version = read_json(root / 'node_modules/@ruffle-rs/ruffle/package.json')['version']
-assert version == lock['version'] == read_json(root / 'package.json')['dependencies']['@ruffle-rs/ruffle']
-assert lock['resolved'] == f'https://registry.npmjs.org/@ruffle-rs/ruffle/-/ruffle-{version}.tgz'
-assert lock['integrity'].startswith('sha512-')
-
-for entry in catalog:
-    source = root / 'games' / entry['id']
-    manifest = read_json(source / 'manifest.json')
-    assert entry['originalUrl'] == manifest['originalUrl'] == 'https://qpetlover.cn/QPetGames/#/play/' + manifest['sourceId']
-    assert entry['kind'] == manifest['kind'] == 'classic'
-    assert manifest['verification']['status'] in ('started', 'verified-flow')
-    assert verify_file(manifest['cover']) == (root / manifest['cover']).read_bytes()
-    assert sha(verify_file(manifest['cover'])) == manifest['coverSha256']
-    assert json.loads(verify_file(entry['manifest'])) == manifest
-    swf = verify_file(manifest['servedPath'])
-    assert swf == (source / 'game.swf').read_bytes()
-    assert sha(swf) == manifest['swfSha256'] and len(swf) == manifest['swfBytes']
-    assert swf[:3] in (b'FWS', b'CWS', b'ZWS')
-    assert manifest['ruffleVersion'] == version and manifest['gameplayCodeModified'] is False
-    font = manifest.get('fontFallback')
-    if font:
-        data = verify_file(font['servedPath'])
-        assert data == (root / 'assets' / font['servedPath']).read_bytes()
-        assert sha(data) == font['sha256']
-    checks.append({'game': entry['id'], 'swfSha256': sha(swf), 'sourceBuildAndHttpEqual': bool(args.url)})
-
-runtime = root / 'node_modules/@ruffle-rs/ruffle'
-for file in runtime.rglob('*'):
-    if file.is_file():
-        relative = 'vendor/ruffle/' + file.relative_to(runtime).as_posix()
-        assert verify_file(relative) == file.read_bytes(), f'Runtime differs: {relative}'
-for file in (root / 'web').iterdir():
-    if file.is_file():
-        assert verify_file(file.name) == file.read_bytes()
-assert verify_file('fonts/README.md') == (root / 'assets/fonts/README.md').read_bytes()
-print(json.dumps({'result': 'passed', 'ruffleVersion': version, 'httpVerified': bool(args.url), 'checks': checks}, ensure_ascii=False, indent=2))
+for name in sorted(expected):
+    data = (dist / name).read_bytes()
+    if name != '.nojekyll':
+        assert data == (root / 'web' / name).read_bytes(), f'Stale build: {name}'
+        assert b'<script' not in data.lower() and b'ruffle' not in data.lower()
+        if args.url:
+            with urlopen(urljoin(args.url.rstrip('/') + '/', name), timeout=15) as response:
+                assert response.read() == data, f'HTTP content differs: {name}'
+    checks.append(name)
+assert 'Q宠速配正在重新制作' in (dist / 'index.html').read_text()
+assert '游戏已下架' in (dist / 'player.html').read_text()
+print(json.dumps({'result': 'passed', 'releaseMode': 'holding-page', 'playableGames': 0,
+                  'noGameOrRuntimeAssets': True, 'httpVerified': bool(args.url),
+                  'files': checks}, ensure_ascii=False, indent=2))
