@@ -36,7 +36,7 @@ async function application(){
   const context=vm.createContext({window:win,document,performance:{now:()=>now},requestAnimationFrame:callback=>frames.push(callback),createRacingGame:()=>game,createRenderer:async()=>renderer,OriginalAudio:Audio,audioMetadata,console:{error:err=>errors.push(err)}});
   vm.runInContext(source,context);
   await new Promise(resolve=>setImmediate(resolve));assert.deepEqual(errors,[]);assert.equal(elements.loading.hidden,true);
-  return {elements,keys,win,document,calls,state,audio,events,renders,at(t){now=t;},async frame(t){now=t;frames.shift()(t);},
+  return {elements,keys,win,document,calls,state,audio,events,renders,renderer,pendingFrames:()=>frames.length,at(t){now=t;},async frame(t){now=t;frames.shift()(t);},
     async pointer(type,x,y,extra={}){return (type==='pointerup'?win:elements.game).dispatch(type,{clientX:rect.left+x/2,clientY:rect.top+y/2,...extra});}};
 }
 const actions=app=>app.calls.filter(call=>call[0]==='action').map(call=>call[1]);
@@ -68,11 +68,20 @@ test('simultaneous touch keys retain acceleration while steering and Control rel
 });
 test('keyboard and a touch on the same key share ownership; focus loss releases held keys',async()=>{
   const app=await application();await app.elements.start.click();app.calls.length=0;
-  await app.win.dispatch('keydown',{key:'ArrowUp'});await app.keys.ArrowUp.dispatch('pointerdown',{pointerId:5});
-  await app.win.dispatch('keyup',{key:'ArrowUp'});assert.deepEqual(app.calls.at(-1),['input','ArrowUp',true]);
+  await app.win.dispatch('keydown',{key:'Unidentified',keyCode:38});await app.keys.ArrowUp.dispatch('pointerdown',{pointerId:5});
+  await app.win.dispatch('keyup',{key:'Unidentified',keyCode:38});assert.deepEqual(app.calls.at(-1),['input','ArrowUp',true]);
   await app.keys.ArrowUp.dispatch('pointerup',{pointerId:5});assert.deepEqual(app.calls.at(-1),['input','ArrowUp',false]);
   await app.win.dispatch('keydown',{key:'Control'});app.document.hidden=true;await app.document.dispatch('visibilitychange');
   assert.deepEqual(app.calls.at(-1),['input','Control',false]);
+});
+test('non-driving keys still reach the original any-key listener without blocking browser defaults',async()=>{
+  const app=await application();await app.elements.start.click();
+  await app.win.dispatch('keydown',{key:'Control'});app.calls.length=0;
+  const event=await app.win.dispatch('keydown',{key:'a',keyCode:65});
+  assert.equal(event.prevented,undefined);
+  assert.deepEqual(app.calls.filter(call=>call[0]==='input'),[['input',65,true]]);
+  await app.win.dispatch('keyup',{key:'a',keyCode:65});
+  assert.deepEqual(app.calls.at(-1),['input',65,false]);
 });
 test('fresh audio events keep their start; explicit stop clears cues before re-enabling',async()=>{
   const app=await application();await app.elements.sound.click();
@@ -88,4 +97,14 @@ test('ending and replay do not synthesize a key-up while the physical key is sti
   app.state.status='ended';await app.frame(1000);await app.elements.replay.click();
   assert.equal(app.calls.filter(call=>call[0]==='input').length,0);
   await app.win.dispatch('keyup',{key:'ArrowUp'});assert.deepEqual(app.calls.at(-1),['input','ArrowUp',false]);
+});
+
+test('a rendering exception remains visible without cancelling all later animation callbacks',async()=>{
+  const app=await application();const render=app.renderer.render;
+  app.renderer.render=()=>{throw new ReferenceError('missing authored bitmap');};
+  await assert.rejects(app.frame(1000),/missing authored bitmap/);
+  assert.equal(app.pendingFrames(),1);
+  app.renderer.render=render;await app.frame(1040);
+  assert.equal(app.state.frame,2);assert.equal(app.pendingFrames(),1);
+  assert.equal(app.renders.at(-1).frame,2);
 });

@@ -2,9 +2,9 @@
 Run with --reference path/to/native-qpet-racing/reference.
 """
 from pathlib import Path
-import argparse,base64,hashlib,json,re,math,subprocess,xml.etree.ElementTree as E
+import argparse,base64,hashlib,json,re,math,struct,zlib,subprocess,xml.etree.ElementTree as E
 from functools import cache
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('--reference',type=Path,required=True);p.add_argument('--output',type=Path,default=Path(__file__).resolve().parents[1]/'assets');p.add_argument('--source-swf',type=Path,default=Path(__file__).resolve().parents[4]/'QPetGames/classical_games/swf/QQ飞车.swf');a=p.parse_args();ref=a.reference;out=a.output;out.mkdir(parents=True,exist_ok=True)
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('--reference',type=Path,required=True);p.add_argument('--output',type=Path,default=Path(__file__).resolve().parents[1]/'assets');p.add_argument('--source-swf',type=Path,default=Path(__file__).resolve().parents[4]/'QPetGames/classical_games/swf/QQ飞车.swf');p.add_argument('--bitmap-encoding',choices=['png','jpeg-alpha'],default='jpeg-alpha');a=p.parse_args();ref=a.reference;out=a.output;out.mkdir(parents=True,exist_ok=True)
 root=E.parse(ref/'racing.xml').getroot();tags=list(root.find('tags'))
 def cid(t):
  for k in ['shapeId','spriteId','buttonId','characterID','characterId','fontID','fontId']:
@@ -37,6 +37,12 @@ html=(ref/'frame-canvas/frames.html').read_text();art=html[html.index('var scali
 linked=[]
 for path in sorted((ref/'linked-unpacked').glob('*/frames.html')):
  s=path.read_text();i=re.search(r'var frame\s*=\s*-1',s);s=s[s.index('var scalingGrids'):i.start()];rootid=re.search(r'DefineSprite_(\d+)',path.parent.name)[1]
+ # Bitmap declarations live outside symbol functions in FFDec linked exports.
+ # Merge them explicitly; copying only function bodies loses effect images.
+ image_declarations={m[1]for m in re.finditer(r'var\s+(imageObj\d+)\s*=',art)}
+ for image in re.finditer(r'var\s+(imageObj\d+)\s*=\s*document\.createElement\("img"\);\s*\1\.src="(data:[^"\n]+)";',s):
+  if image[1] not in image_declarations:
+   art+='\nvar '+image[1]+' = document.createElement("img");\n'+image[1]+'.src="'+image[2]+'";\n';image_declarations.add(image[1])
  for name,body in functions(s):
   if name in fs:continue
   if name=='sprite'+rootid:
@@ -113,14 +119,64 @@ texthelper='''function drawEditText(ctx,ctrans,id,data){
 '''
 counts={name:int(m[1]) if(m:=re.search(r'var frame_cnt\s*=\s*(\d+)',body))else 4 if name.startswith('button') else 1 for name,body in fs.items()}
 images=re.findall(r'var (imageObj\d+) = document.createElement\("img"\);',art)
+image_refs=set(re.findall(r'\bimageObj\d+\b',art))
+assert image_refs==set(images),('Unbound bitmap variables',sorted(image_refs-set(images)))
+assert len(images)==len(set(images)),'Duplicate bitmap declarations'
+legacy_images={m[1]:{'mime':m[2],'bytes':len(base64.b64decode(m[3])),'sha256':hashlib.sha256(base64.b64decode(m[3])).hexdigest()}for m in re.finditer(r'(imageObj\d+)\.src="data:([^;]+);base64,([^"\n]+)";',art)}
+def jpeg_size(data):
+ for i in range(len(data)-9):
+  if data[i]==255 and data[i+1]in [192,193,194,195,197,198,199,201,202,203,205,206,207]:return struct.unpack('>HH',data[i+5:i+9])[::-1]
+ raise ValueError('Missing JPEG size')
+def png_chunk(typ,data):return struct.pack('>I',len(data))+typ+data+struct.pack('>I',zlib.crc32(typ+data))
+def alpha_png(width,height,alpha):
+ assert len(alpha)==width*height
+ raw=b''.join(b'\0'+b''.join(bytes((255,v))for v in alpha[y*width:(y+1)*width])for y in range(height))
+ return b'\x89PNG\r\n\x1a\n'+png_chunk(b'IHDR',struct.pack('>IIBBBBB',width,height,8,4,0,0,0))+png_chunk(b'IDAT',zlib.compress(raw,9))+png_chunk(b'IEND',b'')
+embedded={}
+bitmap_tags={t.get('characterID'):t for t in tags if t.get('type','').startswith('DefineBitsJPEG')}
+def compact_bitmap(match):
+ name=match[1];t=bitmap_tags[name[8:]];source_jpeg=bytes.fromhex(t.get('imageData'));jpeg=source_jpeg[4:]if source_jpeg.startswith(bytes.fromhex('ffd9ffd8'))else source_jpeg
+ assert jpeg.startswith(bytes.fromhex('ffd8'))
+ width,height=jpeg_size(jpeg);alpha_zlib=bytes.fromhex(t.get('bitmapAlphaData',''));alpha=zlib.decompress(alpha_zlib)if alpha_zlib else None;mask=alpha_png(width,height,alpha)if alpha is not None else b''
+ jpeg_uri='data:image/jpeg;base64,'+base64.b64encode(jpeg).decode();mask_uri='data:image/png;base64,'+base64.b64encode(mask).decode()if mask else None
+ embedded[name]={'tag':t.get('type'),'width':width,'height':height,'mime':'image/jpeg+lossless-alpha-png'if mask else'image/jpeg','bytes':len(jpeg)+len(mask),'sha256':hashlib.sha256(jpeg+mask).hexdigest(),'originalJPEG':{'bytes':len(jpeg),'sha256':hashlib.sha256(jpeg).hexdigest(),'removedLegacyPrefixBytes':len(source_jpeg)-len(jpeg)},'alphaMaskPNG':{'bytes':len(mask),'sha256':hashlib.sha256(mask).hexdigest()}if mask else None,'sourceAlphaZlib':{'bytes':len(alpha_zlib),'sha256':hashlib.sha256(alpha_zlib).hexdigest(),'alphaMin':min(alpha),'alphaMax':max(alpha)}if alpha is not None else None,'previousFFDecExport':legacy_images[name]}
+ return 'var '+name+' = createOriginalBitmap('+json.dumps(name)+','+json.dumps(jpeg_uri)+','+json.dumps(mask_uri)+','+str(width)+','+str(height)+');'
+if a.bitmap_encoding=='jpeg-alpha':art,bitmap_count=re.subn(r'var\s+(imageObj\d+)\s*=\s*document\.createElement\("img"\);\s*\1\.src="data:[^"\n]+";',compact_bitmap,art)
+else:embedded=legacy_images;bitmap_count=len(images)
+assert bitmap_count==len(images)==len(embedded)
+bitmap_helper='''// Share decoded original bitmaps between renderer and collision artwork.
+const originalBitmapCache=new Map();
+function bitmapLoaded(image){if(image.decode)return image.decode();if(image.complete&&image.width)return Promise.resolve();return new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;});}
+function createOriginalBitmap(id,jpegSource,alphaSource,width,height){
+ if(originalBitmapCache.has(id))return originalBitmapCache.get(id);
+ const jpeg=document.createElement('img');jpeg.src=jpegSource;
+ if(!alphaSource){jpeg._bitmapReady=bitmapLoaded(jpeg);originalBitmapCache.set(id,jpeg);return jpeg;}
+ const result=document.createElement('img');
+ result._bitmapReady=(async()=>{
+  const mask=document.createElement('img');mask.src=alphaSource;await Promise.all([bitmapLoaded(jpeg),bitmapLoaded(mask)]);
+  const bitmap=document.createElement('canvas');bitmap.width=width;bitmap.height=height;
+  const ctx=bitmap.getContext('2d',{willReadFrequently:true});ctx.drawImage(jpeg,0,0);
+  const alphaCanvas=document.createElement('canvas');alphaCanvas.width=width;alphaCanvas.height=height;
+  const alphaContext=alphaCanvas.getContext('2d',{willReadFrequently:true});alphaContext.drawImage(mask,0,0);
+  const rgba=ctx.getImageData(0,0,width,height),values=rgba.data,alpha=alphaContext.getImageData(0,0,width,height).data;
+  // DefineBitsJPEG3 stores premultiplied JPEG RGB plus separate alpha.
+  // Restore the original straight RGBA exactly once; never re-encode the JPEG.
+  for(let i=0;i<values.length;i+=4){const a=alpha[i+3];values[i]=a?Math.min(255,Math.floor(values[i]*255/a)):0;values[i+1]=a?Math.min(255,Math.floor(values[i+1]*255/a)):0;values[i+2]=a?Math.min(255,Math.floor(values[i+2]*255/a)):0;values[i+3]=a;}
+  ctx.putImageData(rgba,0,0);
+  // Preserve the original Image source type as well as pixel values. Some
+  // Canvas engines filter Canvas patterns differently from decoded Images.
+  result.src=bitmap.toDataURL('image/png');bitmap.width=bitmap.height=alphaCanvas.width=alphaCanvas.height=1;await bitmapLoaded(result);return result;
+ })();originalBitmapCache.set(id,result);return result;
+}
+'''
 code='''/* Original 宠爱飞车 / QQ飞车 symbols. JPEXS FFDec 26.4.0 static Canvas extraction.
  * No SWF parser, ActionScript interpreter, generated player, or dynamic execution.
  * FFDec Canvas drawing helpers: GPL-3.0; repository licenses apply.
  */
-export function createArtwork(canvas,hooks={}){const symbolStack=[];let defaultFill,maskDepth=0;
+'''+bitmap_helper+'''export function createArtwork(canvas,hooks={}){const symbolStack=[];let defaultFill,maskDepth=0;
 '''+helper+'\n'+texthelper+'\n'+art+'\nconst symbols={'+','.join(sorted(known))+'''};
  const counts='''+json.dumps(counts)+''';const identity=new cxform(0,0,0,0,256,256,256,256);const images=['''+','.join(images)+'''];
- return {prepare(ctx){if(!ctx._matrix)enhanceContext(ctx);},async ready(){await Promise.all(images.map(img=>img.decode?img.decode():Promise.resolve()));},frameCount(name){return counts[name]||1;},draw(name,ctx,frame=0,time=0,color=identity){symbolStack.push({name,frame,slot:0});symbols[name](ctx,color,frame,0,time);symbolStack.pop();}};
+ return {prepare(ctx){if(!ctx._matrix)enhanceContext(ctx);},async ready(){await Promise.all(images.map(img=>img._bitmapReady||bitmapLoaded(img)));},frameCount(name){return counts[name]||1;},draw(name,ctx,frame=0,time=0,color=identity){symbolStack.push({name,frame,slot:0});symbols[name](ctx,color,frame,0,time);symbolStack.pop();}};
 }
 '''
 assert not re.search(r'\beval\s*\(|new\s+Function\b',code)
@@ -185,8 +241,11 @@ for i in ['206','209','215','221']:
 (out/'font-provenance.json').write_text(json.dumps([t.attrib for t in tags if t.get('type')=='DefineFontNameTag'],ensure_ascii=False,indent=2)+'\n')
 (out/'text-metadata.json').write_text(json.dumps(texts,ensure_ascii=False,indent=2)+'\n')
 inputs=[ref/'racing.xml',ref/'frame-canvas/frames.html',ref/'frame-canvas/canvas.js']+linked
-embedded={m[1]:{'mime':m[2],'bytes':len(base64.b64decode(m[3])),'sha256':hashlib.sha256(base64.b64decode(m[3])).hexdigest()}for m in re.finditer(r'(imageObj\d+)\.src="data:([^;]+);base64,([^"\n]+)";',art)}
 source=a.source_swf
-provenance={'sourceSWF':'QPetLover/QPetGames classical_games/swf/QQ飞车.swf','sourceCommit':subprocess.check_output(['git','-C',str(source.parents[2]),'rev-parse','HEAD'],text=True).strip(),'sourceSHA256':hashlib.sha256(source.read_bytes()).hexdigest(),'sourceBytes':source.stat().st_size,'stage':{'width':760,'height':420,'fps':25},'tool':'JPEXS FFDec 26.4.0','symbols':len(known),'embeddedImages':embedded,'inputs':{str(v.relative_to(ref)):hashlib.sha256(v.read_bytes()).hexdigest()for v in inputs},'corrections':[f'{mask_fixes} mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged','Selected linked-symbol crop translation removed; original twip registration restored','Static explicit dispatch replaces eval','CXFORM 256 identity and composed additive correction','All authored button states restored','Dynamic text uses original embedded font outlines/advances where available',f'{radialfix} transparent radial centre export pre-fills removed'],'artworkSHA256':hashlib.sha256(code.encode()).hexdigest()}
+provenance={'sourceSWF':'QPetLover/QPetGames classical_games/swf/QQ飞车.swf','sourceCommit':subprocess.check_output(['git','-C',str(source.parents[2]),'rev-parse','HEAD'],text=True).strip(),'sourceSHA256':hashlib.sha256(source.read_bytes()).hexdigest(),'sourceBytes':source.stat().st_size,'stage':{'width':760,'height':420,'fps':25},'tool':'JPEXS FFDec 26.4.0','symbols':len(known),'embeddedImages':embedded,'inputs':{str(v.relative_to(ref)):hashlib.sha256(v.read_bytes()).hexdigest()for v in inputs},'corrections':['All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted',f'{mask_fixes} mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged','Selected linked-symbol crop translation removed; original twip registration restored','Static explicit dispatch replaces eval','CXFORM 256 identity and composed additive correction','All authored button states restored','Dynamic text uses original embedded font outlines/advances where available',f'{radialfix} transparent radial centre export pre-fills removed'],'artworkSHA256':hashlib.sha256(code.encode()).hexdigest()}
+provenance['bitmapEncoding']=a.bitmap_encoding
+provenance['bitmapPayloadBytes']=sum(v['bytes']for v in embedded.values())
+provenance['previousFFDecBitmapBytes']=sum(v['bytes']for v in legacy_images.values())
+if a.bitmap_encoding=='jpeg-alpha':provenance['corrections'].insert(1,'Original JPEG payloads retained with lossless source-alpha PNG; premultiplied RGB restored once, decoded bitmaps shared across artwork instances')
 (out/'provenance.json').write_text(json.dumps(provenance,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'symbols':len(known),'images':len(images),'bytes':len(code),'linked':len(linked),'bounds':localbounds},ensure_ascii=False))

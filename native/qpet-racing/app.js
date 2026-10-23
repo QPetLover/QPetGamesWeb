@@ -13,9 +13,14 @@ const sound=new OriginalAudio();
 const menuButtons=Object.fromEntries(['start','help','next','back','replay'].map(name=>[name,document.getElementById(name)]));
 const aliases={'next-help':'next','previous-help':'previous','menu':'back'};
 const driveKeys=new Set(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Control']);
+const keyNames={17:'Control',37:'ArrowLeft',38:'ArrowUp',39:'ArrowRight',40:'ArrowDown'};
 const keyboard=new Set(),fingers=new Map();
 let game,renderer,ready=false,lastFrame=-1,lastStatus='',pressedMenu=null;
 let pointer={x:-1,y:-1,down:false},cues=[];
+function keyboardKey(event) {
+  if(driveKeys.has(event.key))return event.key;
+  const code=Number(event.keyCode||event.which);return keyNames[code]||code;
+}
 
 function applyKey(key) {
   if(!game)return;
@@ -122,13 +127,17 @@ for(const button of touch.querySelectorAll('button[data-key]')) {
   button.addEventListener('lostpointercapture',release);
 }
 window.addEventListener('keydown',event=>{
-  if(!ready||!driveKeys.has(event.key))return;
+  if(!ready)return;
   if(!['playing','countdown'].includes(game.view().status)&&document.activeElement!==canvas)return;
-  event.preventDefault();game.advance(performance.now());keyboard.add(event.key);applyKey(event.key);consumeEvents();draw(true);
+  const key=keyboardKey(event),driving=driveKeys.has(key);
+  if(!key)return;
+  if(driving)event.preventDefault();
+  game.advance(performance.now());keyboard.add(key);applyKey(key);consumeEvents();draw(true);
 });
 window.addEventListener('keyup',event=>{
-  if(!driveKeys.has(event.key))return;
-  if(keyboard.has(event.key)){event.preventDefault();game.advance(performance.now());keyboard.delete(event.key);applyKey(event.key);consumeEvents();draw(true);}
+  const key=keyboardKey(event),driving=driveKeys.has(key);
+  if(!key)return;
+  if(keyboard.has(key)){if(driving)event.preventDefault();game.advance(performance.now());keyboard.delete(key);applyKey(key);consumeEvents();draw(true);}
 });
 window.addEventListener('blur',releaseAll);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();});
@@ -154,7 +163,12 @@ function resize() {
 window.addEventListener('resize',resize);
 if(window.visualViewport)window.visualViewport.addEventListener('resize',resize);
 if(window.ResizeObserver)new ResizeObserver(resize).observe(stage);
-function tick(now) {if(ready){game.advance(now);consumeEvents();draw();}requestAnimationFrame(tick);}
+function tick(now) {
+  // Queue the next frame before drawing: a reported rendering error must not
+  // silently cancel every subsequent logic/render callback for the whole run.
+  requestAnimationFrame(tick);
+  if(ready){game.advance(now);consumeEvents();draw();}
+}
 async function initialize() {try {
   renderer=await createRenderer(canvas);
   game=createRacingGame({now:performance.now(),hitTestNPC:(...args)=>renderer.hitTestNPC(...args)});

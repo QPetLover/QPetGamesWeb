@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Verify the native games and optional HTTP bytes."""
-import argparse, hashlib, json, re
+import argparse, gzip, hashlib, json, re
 from pathlib import Path
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from urllib.parse import urljoin
 parser=argparse.ArgumentParser()
@@ -26,8 +26,11 @@ checks=[]
 for name in sorted(expected):
     data=(dist/name).read_bytes()
     if args.url and name!='.nojekyll':
-        with urlopen(urljoin(args.url.rstrip('/')+'/',name),timeout=20) as response:
-            assert response.read()==data,f'HTTP mismatch: {name}'
+        request=Request(urljoin(args.url.rstrip('/')+'/',name),headers={'Accept-Encoding':'gzip'})
+        with urlopen(request,timeout=20) as response:
+            remote=response.read()
+            if response.headers.get('Content-Encoding')=='gzip':remote=gzip.decompress(remote)
+            assert remote==data,f'HTTP mismatch: {name}'
     checks.append({'file':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
 retired=[]
 if args.url:

@@ -16,7 +16,7 @@
 
 ## QQ飞车（宠爱飞车）原素材与规则
 
-第三款《QQ飞车》原画题名“宠爱飞车”，来自 `QPetLover/QPetGames@30c70e0457082b25ff024a3253968e3cbb1b714d` 的 `classical_games/swf/QQ飞车.swf`，849,248 bytes，SHA-256 `c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f`，760×420、25 FPS。`native/qpet-racing/assets/provenance.json` 记录627个静态绘图/字形/动画符号、22张原位图与导出修正；`audio-provenance.json` 记录12段原 MPEG、1条根流式 MPEG、样本、seek、事件和流块哈希，未转码。原 AS fixture 只进入离线测试，不进入网页。
+第三款《QQ飞车》原画题名“宠爱飞车”，来自 `QPetLover/QPetGames@30c70e0457082b25ff024a3253968e3cbb1b714d` 的 `classical_games/swf/QQ飞车.swf`，849,248 bytes，SHA-256 `c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f`，760×420、25 FPS。`native/qpet-racing/assets/provenance.json` 记录627个静态绘图/字形/动画符号、30张原位图与导出修正；`audio-provenance.json` 记录12段原 MPEG、1条根流式 MPEG、样本、seek、事件和流块哈希，未转码。原 AS fixture 只进入离线测试，不进入网页。
 
 原图、署名与商标保留，不对原游戏素材追加代码许可。`assets/font-provenance.json` 保留原嵌入字体的名称与版权字段，包括 Franklin Gothic Medium、方正毡笔黑简体、宋体、方正粗圆简体、黑体和 Impact；动态文字复用原字形轮廓，原 `_sans` 设备小字使用系统 Arial / sans-serif 后备，不包含新增字体文件或网络字体请求。此来源记录不推断原游戏或字体授予了新增再授权。FFDec 导出 Canvas helper 沿用下述 GPL-3.0 说明。
 

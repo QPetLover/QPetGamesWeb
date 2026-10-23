@@ -12,114 +12,820 @@
   "symbols": 627,
   "embeddedImages": {
     "imageObj227": {
-      "mime": "image/PNG",
-      "bytes": 462643,
-      "sha256": "f4ab2a92a3419aff3b46582b5ada35c5d237b0d22a045f51936f4c943658065e"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 1055,
+      "height": 583,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 30810,
+      "sha256": "05529b6069b3da217904e91d19358987acacf71ceb97b38a65708eed24c7204a",
+      "originalJPEG": {
+        "bytes": 25002,
+        "sha256": "ca63b9b554740a0b5d4abd55a4b584ba3c15e75c9b8ac8a6d941fe196d0d9cdb",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 5808,
+        "sha256": "d2e0599da862d2b1864fad63fcf85e55d1334b2469afd4af542d9130907f0c57"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 3540,
+        "sha256": "83c0cc97918a0d6c5d73e0146a2e49d321b9742643e84a0b6cda2954abc6cfdd",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 462643,
+        "sha256": "f4ab2a92a3419aff3b46582b5ada35c5d237b0d22a045f51936f4c943658065e"
+      }
     },
     "imageObj229": {
-      "mime": "image/PNG",
-      "bytes": 433514,
-      "sha256": "8d553121b8b0721416df6675b339d24c4594c54d35f6bec3b4efdfbd3c6150c7"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 1055,
+      "height": 583,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 29731,
+      "sha256": "f71cf189f1ec7fd394fd36ddc0185ec9154c342c2abb0daf2d21b13020ef6115",
+      "originalJPEG": {
+        "bytes": 23761,
+        "sha256": "01189a9a3610503c060de5ec615cfe65ce9360bedb993134602359852f683af9",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 5970,
+        "sha256": "60dafeb3ef8c0d5780d610cb842e0e2a033134d0366ae39e430ff50f51497f81"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 3443,
+        "sha256": "903a54d2ef05eec120d1affa7cff50d3622e1709c46014c2c5642ca294902bd7",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 433514,
+        "sha256": "8d553121b8b0721416df6675b339d24c4594c54d35f6bec3b4efdfbd3c6150c7"
+      }
     },
     "imageObj231": {
-      "mime": "image/PNG",
-      "bytes": 439352,
-      "sha256": "c746358c627f4c26e5806b3cca92bfc118ef05a89863d68b6e6e80a02d8ae063"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 1055,
+      "height": 583,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 28577,
+      "sha256": "7bcd877f0ef542c4b078be55042a20620cdac4bdf420d2e014338e50066db37a",
+      "originalJPEG": {
+        "bytes": 23619,
+        "sha256": "b501a3966f1e47d551874b1ef8c6488454c8bdb345065482ab6c071f875948ae",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 4958,
+        "sha256": "f2adc5950c0f7174b6f422f01ebac452a8e3d40bfbfce5c3b8792e20713f8b50"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2798,
+        "sha256": "6530971e522349c6698f975e07c4c958e9dbac7a8541bd71148679316f0d08e1",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 439352,
+        "sha256": "c746358c627f4c26e5806b3cca92bfc118ef05a89863d68b6e6e80a02d8ae063"
+      }
     },
     "imageObj266": {
-      "mime": "image/PNG",
-      "bytes": 1252592,
-      "sha256": "7b9bd2a1db626189f2f2cbda0dd219e73dfe4375160bfeb39188134db5ce5781"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 2154,
+      "height": 1191,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 73407,
+      "sha256": "3ad5fc7c4ad9b5f328bcf686e78f6ed4633b251fab171b68604e0660a11ac8a2",
+      "originalJPEG": {
+        "bytes": 50695,
+        "sha256": "dc30b4e1cdd6fdc29d7bdd90e240c58ecb4ab2e9dd06d8a2259dacabcb0ca3fd",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 22712,
+        "sha256": "62b9260772b79f7fa158419a2036d13593d1d7f5c8fe1fdc7ef3d602c2d2e2ab"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 11890,
+        "sha256": "83f58fad9d27938b32351d802b53e770b863838d017857883fde15c649ae9805",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 1252592,
+        "sha256": "7b9bd2a1db626189f2f2cbda0dd219e73dfe4375160bfeb39188134db5ce5781"
+      }
     },
     "imageObj268": {
-      "mime": "image/PNG",
-      "bytes": 1277602,
-      "sha256": "651db3111522be9ebbb6210283beb0369e9762a68279208f1097e0bcd09ae04e"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 2154,
+      "height": 1191,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 74365,
+      "sha256": "ba86ff9e9b160d90453d9fefdc2518de875be89814be950532180bd53d9223aa",
+      "originalJPEG": {
+        "bytes": 50257,
+        "sha256": "50755a6e6a86f5841b0e6d31647c0bd2819fb5a2dcbd0d29bfe66e29a455191c",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 24108,
+        "sha256": "82752716ba41e827c657d240767207f980bb1cac6a59ad109e94baf4a8b138f2"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 13244,
+        "sha256": "dc5ecd7b13e3f263e44ca738eae59f5691fa5d6917a11f7b770adc3eb69eac0b",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 1277602,
+        "sha256": "651db3111522be9ebbb6210283beb0369e9762a68279208f1097e0bcd09ae04e"
+      }
     },
     "imageObj270": {
-      "mime": "image/PNG",
-      "bytes": 1345976,
-      "sha256": "beac841ce9562fa03613387e3c87ed7210f8901718efb09042f29a1f535fa9dd"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 2154,
+      "height": 1191,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 77728,
+      "sha256": "7d7055847378d12353c96b72c770c0c3a4047ffe037db6a515247110eacad22d",
+      "originalJPEG": {
+        "bytes": 52240,
+        "sha256": "45326d11f061631bfec5041ea74bc6e16c73df01a016f3b11af956263c3c7283",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 25488,
+        "sha256": "313ddd60c6bc880c222919f4ffe20eea2ef40827300746a7dc8fc63aeb00ad12"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 13595,
+        "sha256": "a47b4dd7b3f138f8f4bdb9f1d48166417aae448d8a2a3803d79b07e2c33da6dd",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 1345976,
+        "sha256": "beac841ce9562fa03613387e3c87ed7210f8901718efb09042f29a1f535fa9dd"
+      }
     },
     "imageObj342": {
-      "mime": "image/PNG",
-      "bytes": 202534,
-      "sha256": "1167a03d7139f731954e12bc28d81216321abe0bcfccc187723831531a9e553d"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 800,
+      "height": 531,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 65437,
+      "sha256": "4d17ac79421a13a4aa14fe543d03ef226f4f93dd083f4e23d0b8559bbdf88e2e",
+      "originalJPEG": {
+        "bytes": 57520,
+        "sha256": "9da3aa8d26c35c919265ac2a8ddeedaa3516aeb160b935bf460459ae479e469e",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 7917,
+        "sha256": "31e320a84135e48ab2815ed700c03460b622f2c55c90f94ddfbb3835f650795c"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 5871,
+        "sha256": "625a84c5006cad1cf268adb85e1d9556ece4e8a492e0036cb060eff52b53dbfb",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 202534,
+        "sha256": "1167a03d7139f731954e12bc28d81216321abe0bcfccc187723831531a9e553d"
+      }
     },
     "imageObj380": {
-      "mime": "image/PNG",
-      "bytes": 208994,
-      "sha256": "be3d5fcaf16b8520972486637b4f78b6144417ea2d73558a96d2d8732f9a2f7e"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 760,
+      "height": 420,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 28955,
+      "sha256": "8c9e698d452cd53c7ce8b74dc758b4c66c577aa9fcab89b6f554375cb9a9fcc9",
+      "originalJPEG": {
+        "bytes": 27440,
+        "sha256": "8e6d66f16723950b17f25a8f81e4568ba82d8dbde14dbc6df988e9d868c26257",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 1515,
+        "sha256": "c1169b1d81e3e0b36a6b4a6e013e9d4ee6624ec0630920d4ab820581509816a2"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 445,
+        "sha256": "6055f775fd5c43619fc95da6d48c13e87c90610c9430a102bc20930d3fc9a2b9",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 208994,
+        "sha256": "be3d5fcaf16b8520972486637b4f78b6144417ea2d73558a96d2d8732f9a2f7e"
+      }
     },
     "imageObj384": {
-      "mime": "image/JPEG",
+      "tag": "DefineBitsJPEG2Tag",
+      "width": 323,
+      "height": 209,
+      "mime": "image/jpeg",
       "bytes": 24272,
-      "sha256": "5cad8badf342d1e2551053a78ae08ec718d8bf2d91ef6e383a97805cdf662766"
+      "sha256": "5cad8badf342d1e2551053a78ae08ec718d8bf2d91ef6e383a97805cdf662766",
+      "originalJPEG": {
+        "bytes": 24272,
+        "sha256": "5cad8badf342d1e2551053a78ae08ec718d8bf2d91ef6e383a97805cdf662766",
+        "removedLegacyPrefixBytes": 4
+      },
+      "alphaMaskPNG": null,
+      "sourceAlphaZlib": null,
+      "previousFFDecExport": {
+        "mime": "image/JPEG",
+        "bytes": 24272,
+        "sha256": "5cad8badf342d1e2551053a78ae08ec718d8bf2d91ef6e383a97805cdf662766"
+      }
     },
     "imageObj395": {
-      "mime": "image/JPEG",
+      "tag": "DefineBitsJPEG2Tag",
+      "width": 323,
+      "height": 209,
+      "mime": "image/jpeg",
       "bytes": 24254,
-      "sha256": "e0af63ea663582c97a6827868b0b8454947d34c53c733019aaafc5cf3363a12e"
+      "sha256": "e0af63ea663582c97a6827868b0b8454947d34c53c733019aaafc5cf3363a12e",
+      "originalJPEG": {
+        "bytes": 24254,
+        "sha256": "e0af63ea663582c97a6827868b0b8454947d34c53c733019aaafc5cf3363a12e",
+        "removedLegacyPrefixBytes": 4
+      },
+      "alphaMaskPNG": null,
+      "sourceAlphaZlib": null,
+      "previousFFDecExport": {
+        "mime": "image/JPEG",
+        "bytes": 24254,
+        "sha256": "e0af63ea663582c97a6827868b0b8454947d34c53c733019aaafc5cf3363a12e"
+      }
     },
     "imageObj399": {
-      "mime": "image/JPEG",
+      "tag": "DefineBitsJPEG2Tag",
+      "width": 323,
+      "height": 209,
+      "mime": "image/jpeg",
       "bytes": 24349,
-      "sha256": "e39043fb57c0b4380e74ef424931ac39829109ff6b3db24871571a2191b83fce"
+      "sha256": "e39043fb57c0b4380e74ef424931ac39829109ff6b3db24871571a2191b83fce",
+      "originalJPEG": {
+        "bytes": 24349,
+        "sha256": "e39043fb57c0b4380e74ef424931ac39829109ff6b3db24871571a2191b83fce",
+        "removedLegacyPrefixBytes": 4
+      },
+      "alphaMaskPNG": null,
+      "sourceAlphaZlib": null,
+      "previousFFDecExport": {
+        "mime": "image/JPEG",
+        "bytes": 24349,
+        "sha256": "e39043fb57c0b4380e74ef424931ac39829109ff6b3db24871571a2191b83fce"
+      }
     },
     "imageObj408": {
-      "mime": "image/PNG",
-      "bytes": 26392,
-      "sha256": "e789287156d15eda6518d3841350c98276b3cdba30efd3bc7c1b47b47b1f9567"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 67,
+      "height": 158,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 5216,
+      "sha256": "22372c933538ab7d67da7c6802dde9c3718978d2a5576ab555e959536169a9ef",
+      "originalJPEG": {
+        "bytes": 3497,
+        "sha256": "360697d7beb1a21f86000af9aaab055f68964168aa1b60118f07131905a1de8b",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 1719,
+        "sha256": "2a2bb237f6e363b47cb9f7d1b4e79f6fa7cf77afc684c29e4a186a45c90d806d"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 1332,
+        "sha256": "9750f602b923a8fc17a13fac74b5875fa815c39a7cf2247a9ddb52d3b3c24c57",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 26392,
+        "sha256": "e789287156d15eda6518d3841350c98276b3cdba30efd3bc7c1b47b47b1f9567"
+      }
     },
     "imageObj410": {
-      "mime": "image/PNG",
-      "bytes": 8744,
-      "sha256": "3d34dff35e2196eebbe14d69794f25e50eb3e72c2a598fe8fd1902a2f3b0d4ee"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 67,
+      "height": 80,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 3243,
+      "sha256": "ec318f3dd5e1cd6d1dc36c2dd62de715230aec3d8573a7b68a6373f999f11efb",
+      "originalJPEG": {
+        "bytes": 1995,
+        "sha256": "8ed974c71faf57f5875f14927e14855fd20642aac3d1a3f44e5d68a29e3f9c19",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 1248,
+        "sha256": "6a7813975610a5a70b12a923d675f986d33f2e613b618fc6f91155e51970d0e7"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 942,
+        "sha256": "4e24524de5940f1ba0214d987507669efe6ebdaf8a7a708478062370b19fa774",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 8744,
+        "sha256": "3d34dff35e2196eebbe14d69794f25e50eb3e72c2a598fe8fd1902a2f3b0d4ee"
+      }
     },
     "imageObj412": {
-      "mime": "image/PNG",
-      "bytes": 52205,
-      "sha256": "0ea6d6f5757ee8651cfc5e0ef3464be053028389a45dacc06d1e057e1c3a58b8"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 172,
+      "height": 149,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 9524,
+      "sha256": "9e269e687fef2c485bd7ee2170ac999189aed5bd5bfe25fdb9643ede658fa3dd",
+      "originalJPEG": {
+        "bytes": 7173,
+        "sha256": "73d8619b95137616dbedb1753c104f8a8b2a7e8519a38b06474794d6f4bfeaf7",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2351,
+        "sha256": "82b8f06d0235924388272e223ba8545bb8f4ce5348f3558b62f09472e9480f14"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 1722,
+        "sha256": "3ce4946b133facedbc699f078a2f59599cf037b1104573d77c379b9aaecb56d6",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 52205,
+        "sha256": "0ea6d6f5757ee8651cfc5e0ef3464be053028389a45dacc06d1e057e1c3a58b8"
+      }
     },
     "imageObj415": {
-      "mime": "image/PNG",
-      "bytes": 48075,
-      "sha256": "d493b4af4392ce6102ef6b6fe0382cde44a1188b3be77f8d7c28f4b734a3f7e5"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 176,
+      "height": 116,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 9645,
+      "sha256": "5199829552f32c9731ec6ad26d21a4e59b2c07057a9925aae67a5420090ce01c",
+      "originalJPEG": {
+        "bytes": 7448,
+        "sha256": "efd13370a9808584fa9ced20699fc959f2e783f7feebc2d9ef785c368bc82a6c",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2197,
+        "sha256": "d416b4f93e8942a3b706ddd87d9e337d619bc6273fed91c2f5b0e29d138cd5af"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 1688,
+        "sha256": "e1446175a4b4e6c9fca428762a8e7b7c337ebcd5a9e4b99ef71e0c300d097793",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 48075,
+        "sha256": "d493b4af4392ce6102ef6b6fe0382cde44a1188b3be77f8d7c28f4b734a3f7e5"
+      }
     },
     "imageObj442": {
-      "mime": "image/PNG",
-      "bytes": 60542,
-      "sha256": "c9906892c9db913fd6fb71d27594ef59d004a9e123861539c9c73b8d17bfdcc3"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 203,
+      "height": 149,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 7944,
+      "sha256": "24d84c85f12ca8e88e7db6f6dd0e5569ab1fba9514d48dab33a5dc32fa9425ac",
+      "originalJPEG": {
+        "bytes": 4199,
+        "sha256": "23e8359044f523fa7fa024a26c99849dd3d0c1b5b3a6705c026b32ead513907f",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3745,
+        "sha256": "5984d122f371e20ce9c9b8564d18223aa513d08582210ffba7077230b8bc6ac0"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2924,
+        "sha256": "49517e341081fb74bfd831f584f157589cf96cc998177705fafabc423eaec153",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 60542,
+        "sha256": "c9906892c9db913fd6fb71d27594ef59d004a9e123861539c9c73b8d17bfdcc3"
+      }
     },
     "imageObj486": {
-      "mime": "image/PNG",
-      "bytes": 64378,
-      "sha256": "42fc054719dba7f90ad7502da2005072463c1d029ee85b26dade4db5f36326e5"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 247,
+      "height": 147,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 8241,
+      "sha256": "a5956d2645739b931751c4516ea7c68d3a7280efac0f31b9585f335824a3b821",
+      "originalJPEG": {
+        "bytes": 4711,
+        "sha256": "a88a5649f9c78a2b78a6265ff993a940a3ae9d1affa021724c9959022733b2bc",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3530,
+        "sha256": "f091352e8b45d652c060abd52677ce3c53dbba92ffe503d92d1819c8d0da39ec"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2626,
+        "sha256": "c688bdca9f6b859f16c3fe484e85777d3097e0c2c4d00ce0c1bab081e692af74",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 64378,
+        "sha256": "42fc054719dba7f90ad7502da2005072463c1d029ee85b26dade4db5f36326e5"
+      }
     },
     "imageObj488": {
-      "mime": "image/PNG",
-      "bytes": 52172,
-      "sha256": "eccede3d8babb464c332f4b84fa8124eaab5bd9cdf1627788248e0c0856ee251"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 195,
+      "height": 149,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6467,
+      "sha256": "cdcd200a441f37fcfd0398123c08d45d3f9f11ed8ed84e3bb8a55eebbf8d95b7",
+      "originalJPEG": {
+        "bytes": 3118,
+        "sha256": "4d102ef9b8ec5d411e22ff80424f9deb75223b12f0811a330207d1175aa1f1d8",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3349,
+        "sha256": "0a682d49dbc337b94adde16ec245482ab9a2f7784fe61ce7ac6e278d0c2f01d1"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2533,
+        "sha256": "9f4229b914381030042fc102d62626802974c88fcabb668326bdc7d565264b60",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 52172,
+        "sha256": "eccede3d8babb464c332f4b84fa8124eaab5bd9cdf1627788248e0c0856ee251"
+      }
     },
     "imageObj517": {
-      "mime": "image/PNG",
-      "bytes": 54237,
-      "sha256": "4f68bf431a7d485e50910370ad20ddfe5ac5583019c31512d5e32eff1573a041"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 181,
+      "height": 146,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 7095,
+      "sha256": "bf0da12d6204583f694eee9ae322d93c3dd23eed40102c4c6b84eca8f6c1fd62",
+      "originalJPEG": {
+        "bytes": 3864,
+        "sha256": "cd0fc1c6c476a321a43b570644ee00b7683c246941824aaddb81b615e0f67cf1",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3231,
+        "sha256": "3ff8d311a13a736f103edc9feab3468471409d317c79a24ea2c4609b222d013d"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2441,
+        "sha256": "ea7573285307d21e22fa581d9e407ef19a1356bd09889b9de3d2066862ba76ab",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 54237,
+        "sha256": "4f68bf431a7d485e50910370ad20ddfe5ac5583019c31512d5e32eff1573a041"
+      }
     },
     "imageObj544": {
-      "mime": "image/PNG",
-      "bytes": 54237,
-      "sha256": "4f68bf431a7d485e50910370ad20ddfe5ac5583019c31512d5e32eff1573a041"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 181,
+      "height": 146,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 7095,
+      "sha256": "bf0da12d6204583f694eee9ae322d93c3dd23eed40102c4c6b84eca8f6c1fd62",
+      "originalJPEG": {
+        "bytes": 3864,
+        "sha256": "cd0fc1c6c476a321a43b570644ee00b7683c246941824aaddb81b615e0f67cf1",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3231,
+        "sha256": "3ff8d311a13a736f103edc9feab3468471409d317c79a24ea2c4609b222d013d"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2441,
+        "sha256": "ea7573285307d21e22fa581d9e407ef19a1356bd09889b9de3d2066862ba76ab",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 54237,
+        "sha256": "4f68bf431a7d485e50910370ad20ddfe5ac5583019c31512d5e32eff1573a041"
+      }
     },
     "imageObj547": {
-      "mime": "image/PNG",
-      "bytes": 64519,
-      "sha256": "38a8ff3163b1447aeb1296c4f932f204f7930996d788b22d1460e1b10a4cb418"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 246,
+      "height": 144,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 8310,
+      "sha256": "363fcb5175c5e64c8207929e19b2c81cd1ebad4d32e669ece5cbfff74f496247",
+      "originalJPEG": {
+        "bytes": 4723,
+        "sha256": "56814b276e2ef9be79af635b959bf59449d710256f5c58e0cac1235cbfedeb26",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3587,
+        "sha256": "3a22e02c196f84a1e3ce91ce42e6961756c2f66451e065017abf0499a67bb75b"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2657,
+        "sha256": "e0994f07383a09d5116e0872c5fe9608e8454db987810dce261205db3d13094a",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 64519,
+        "sha256": "38a8ff3163b1447aeb1296c4f932f204f7930996d788b22d1460e1b10a4cb418"
+      }
     },
     "imageObj549": {
-      "mime": "image/PNG",
-      "bytes": 51456,
-      "sha256": "9d113ffb736a5bb7a8cd8cdc01d1598ac3210588adb2aef5b13842cb4b1eb5d9"
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 197,
+      "height": 144,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6428,
+      "sha256": "6fc88794862bd3c978992d6c52dbe5e742a3900859d1fcdc1ec7cd5ce9eed943",
+      "originalJPEG": {
+        "bytes": 3078,
+        "sha256": "fa289bf9fe4db05770cfeaa359e086563601c3ac4b8ab0b451be5426fa7f4292",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3350,
+        "sha256": "9b71e0753edc0cd8966cc1593ad8ef8f4107184791d8e349d970bb66911fe3e3"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2525,
+        "sha256": "c9b769b18d44d0c25227d5e95cf7bac166b660bf72ca345d6e9f779342fb7d71",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 51456,
+        "sha256": "9d113ffb736a5bb7a8cd8cdc01d1598ac3210588adb2aef5b13842cb4b1eb5d9"
+      }
+    },
+    "imageObj30": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 145,
+      "height": 145,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6516,
+      "sha256": "6d68e692b58ee15d93e651bf4e5d0fe1e4ce16ebe0fdab453c18b9d4f21c06bb",
+      "originalJPEG": {
+        "bytes": 3294,
+        "sha256": "599e90dff1202277380856ee40921cca6b222eaf5670e536727657f84c3935b4",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3222,
+        "sha256": "51d39c20b92b980b379cf5e7032c2afaccb8e60bd6e1f4039aa7df70b2df68e0"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2487,
+        "sha256": "939fa38047bc70d0680ad2c2a302c4ec31502b3e64fdb14056c6564296960fc9",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 44037,
+        "sha256": "daef7de1023dd022f089a1fe14450e21c5ee4b4c5c0938cbc51f8a200fb03be0"
+      }
+    },
+    "imageObj96": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 148,
+      "height": 146,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 5972,
+      "sha256": "ab340acb73e0afc8a1b924538d3ed8f3578a607f49cfa1ec23b61f3d3ea41a2b",
+      "originalJPEG": {
+        "bytes": 3090,
+        "sha256": "87a688a68608956013e479de03bac99d59c6a92e9a125f773335969bef32eca3",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2882,
+        "sha256": "ceff8af4c123baa35e6b2ef25c319d3f45107ab52663114f508c32f13b8f6eeb"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2184,
+        "sha256": "6aebba4e97ee75347383f7ac437d5f0cedcb92bbcb4e6ad3ab78029dcd06d302",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 41972,
+        "sha256": "f3f71fbc431b9b6e21800463c481be0b4f1dc6d519ddb36046b1ed7f13d729f7"
+      }
+    },
+    "imageObj98": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 209,
+      "height": 119,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 7063,
+      "sha256": "4b9375de02073153316c2d764266872092544960405f0158f4d4fd33fcc87911",
+      "originalJPEG": {
+        "bytes": 4430,
+        "sha256": "79c8814f247fe29a7ed2357a272f1abac4062c86cbb925de87979b11403ab1f2",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2633,
+        "sha256": "169f398e7793886edebe917b676a9a1fa07b011300da54ab3a6a6e74ea7f8f3f"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2036,
+        "sha256": "0626b902f018ac0721036786c465f2e7ab993ff7b35046d2cc40967f02c04a0c",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 40581,
+        "sha256": "a7d42d6fedda0338900bb3efe7f62b7d7904f16f1e5821d5c812849cb3359029"
+      }
+    },
+    "imageObj100": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 187,
+      "height": 149,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6870,
+      "sha256": "d2746abd0295264d50eaab9a72f7a370504f24d53e52ca0cb136acad8d8e2f7e",
+      "originalJPEG": {
+        "bytes": 3972,
+        "sha256": "8e04e26cd55d588b6098e9bf3c3d002088e0667c996af47709c9f86207232bc1",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2898,
+        "sha256": "d8c144752057ee1ae34a98d24bd9f53d5143f592f6f28d931a552be629d130b0"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2228,
+        "sha256": "fea96779c163f64dbecc9b81326f1fde540539f3ecec6c9961f32622d6a75e2e",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 45354,
+        "sha256": "411182c52a7d3d7991fa2698905632c0afc523d4c5bbabd89c805ab1854bd68e"
+      }
+    },
+    "imageObj145": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 173,
+      "height": 159,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6477,
+      "sha256": "b05d6157589d6aa13c9f535afd43d363f6f00de46bd2c19c3ff26a838f0dfdc3",
+      "originalJPEG": {
+        "bytes": 3920,
+        "sha256": "cd0a6943bc983336ad2f0eb8bf20a4215fb1abd8b1d9c8c347bb22ca5dbc7431",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2557,
+        "sha256": "52cf28e62d832b5d5cde7137b5045819d9faf3883792a3ee7572c431a16cb9a9"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 1871,
+        "sha256": "3c508e5be39b4517df73afd0078f67ead02399e51c6c88909d7b645afe3e564c",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 52298,
+        "sha256": "c3093a460e35db6a83cfd99ce1871d92e0f6250276d842064260b0a186b74786"
+      }
+    },
+    "imageObj184": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 173,
+      "height": 159,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6477,
+      "sha256": "b05d6157589d6aa13c9f535afd43d363f6f00de46bd2c19c3ff26a838f0dfdc3",
+      "originalJPEG": {
+        "bytes": 3920,
+        "sha256": "cd0a6943bc983336ad2f0eb8bf20a4215fb1abd8b1d9c8c347bb22ca5dbc7431",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2557,
+        "sha256": "52cf28e62d832b5d5cde7137b5045819d9faf3883792a3ee7572c431a16cb9a9"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 1871,
+        "sha256": "3c508e5be39b4517df73afd0078f67ead02399e51c6c88909d7b645afe3e564c",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 52298,
+        "sha256": "c3093a460e35db6a83cfd99ce1871d92e0f6250276d842064260b0a186b74786"
+      }
+    },
+    "imageObj186": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 261,
+      "height": 143,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 9194,
+      "sha256": "1c140eb4bec0f91d118daf734edde3224878f5990d865fe9579162974c76838c",
+      "originalJPEG": {
+        "bytes": 5257,
+        "sha256": "e64eb27bd55380ead24bac92632385a6eb6904b0bac5182d3f9e0c70d2aa3609",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 3937,
+        "sha256": "25d666e5871c25b7b355af0d6d7c1af235d30fa344e5f8c23edae243a6d1b6f1"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 2946,
+        "sha256": "0c949fa5af9c3fc7739f72a1df61c906363eb8cb67d27f935cebbf7cf32170f4",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 75803,
+        "sha256": "9a05861640b99dbb228a35439cb14b61dfe4ae0b6f0658d27a3a8db0b52ecb54"
+      }
+    },
+    "imageObj188": {
+      "tag": "DefineBitsJPEG3Tag",
+      "width": 169,
+      "height": 159,
+      "mime": "image/jpeg+lossless-alpha-png",
+      "bytes": 6213,
+      "sha256": "ee7a09747f4e50c7e38ea14e03c3d76fee7f37055f972e414c30ceecc4eb0a1f",
+      "originalJPEG": {
+        "bytes": 3761,
+        "sha256": "74042ece631deee46c85e4a0667905efc2670838ae3062b782519016ee7fea08",
+        "removedLegacyPrefixBytes": 0
+      },
+      "alphaMaskPNG": {
+        "bytes": 2452,
+        "sha256": "7b2b5a26f7a82d06326b2e9468d1d55d5eeb1df9d88b739390f8e3904faaeefd"
+      },
+      "sourceAlphaZlib": {
+        "bytes": 1852,
+        "sha256": "d7ed442f548794cb58aadce69ee6611a7c31a24e48fdbdbeb8ba4994f31d41f0",
+        "alphaMin": 0,
+        "alphaMax": 255
+      },
+      "previousFFDecExport": {
+        "mime": "image/PNG",
+        "bytes": 61003,
+        "sha256": "2c027e9c5e2e1b750d69800791227efde2362581e15a3f5630bdc335dc84ce3d"
+      }
     }
   },
   "inputs": {
@@ -134,6 +840,8 @@
     "linked-unpacked/DefineSprite_221_itemCube/frames.html": "7e0ce77da5b2dcc2a09f49f7d1dec7017c96eaf56e9aa57dd0bd0dcf7f0aed01"
   },
   "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "Original JPEG payloads retained with lossless source-alpha PNG; premultiplied RGB restored once, decoded bitmaps shared across artwork instances",
     "280 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
     "Selected linked-symbol crop translation removed; original twip registration restored",
     "Static explicit dispatch replaces eval",
@@ -142,5 +850,8 @@
     "Dynamic text uses original embedded font outlines/advances where available",
     "125 transparent radial centre export pre-fills removed"
   ],
-  "artworkSHA256": "95271294fcd663235efcd23c746044d3b8ae99e363477ff2c6ae0757aadee78c"
+  "artworkSHA256": "5306b84bf9f3bc8d7af3fe2b025b2e474e06ba251d16dd23dbe9c7a22247f88c",
+  "bitmapEncoding": "jpeg-alpha",
+  "bitmapPayloadBytes": 615875,
+  "previousFFDecBitmapBytes": 6646385
 }
