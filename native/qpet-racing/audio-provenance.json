@@ -1,0 +1,935 @@
+{
+  "source": {
+    "path": "classical_games/swf/QQ飞车.swf",
+    "sha256": "c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f",
+    "bytes": 849248,
+    "version": 7,
+    "stage": [
+      760,
+      420
+    ],
+    "fps": 25,
+    "rootFrames": 137,
+    "actionScript": "AS2",
+    "tool": "JPEXS Free Flash Decompiler v.26.4.0"
+  },
+  "sounds": {
+    "1": {
+      "samples": 7019,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 1768,
+      "sha256": "c520e7dd99a10b0b4e8a8d9726f120b2becd96a98148858ac6889ed88e76d2ea"
+    },
+    "2": {
+      "samples": 12220,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 2704,
+      "sha256": "d52465e3cfdc9c8c788b8706322d5628d3fddadc804e397c20123baf9a416005"
+    },
+    "3": {
+      "samples": 6354,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 1664,
+      "sha256": "f5af1f0cf41140032c13dd670dbb96921077654ac44b83dfb2b9915684032dab"
+    },
+    "36": {
+      "samples": 15737,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 3328,
+      "sha256": "195bb559a39f16d3db7d95ab142dd668202831abbec88857b005712f65e19e8f"
+    },
+    "71": {
+      "samples": 6417,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 1664,
+      "sha256": "5e3502ba2323d96ef642287749e21508a11135db4d5caa44fd7e6bc25b80ee7c"
+    },
+    "104": {
+      "samples": 23087,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 4680,
+      "sha256": "003d68398cfdb1c5b6160c341c1440671f43058efca3137061ec2468ea5c1d4f"
+    },
+    "205": {
+      "samples": 3649,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 1144,
+      "sha256": "a8e421068e1cde37f39de531d2e0657fa5fb3a8883acf848890b0a1699b433ec"
+    },
+    "259": {
+      "samples": 25379,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 5096,
+      "sha256": "c3cf70e76d7c89ea5c67ca72e39f6f58b03d20ab95295994ab73b0594b32ae49"
+    },
+    "319": {
+      "samples": 14754,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 3120,
+      "sha256": "33e7d1d9e145e04e247b260fc9f94fb55c126194179af107c42ac798294f7556"
+    },
+    "356": {
+      "samples": 17739,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 3536,
+      "sha256": "01f8dfc6405ae18e6349ee8c9749090da82469f39b3f0b034844e176323fa24f"
+    },
+    "391": {
+      "samples": 16368,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 3432,
+      "sha256": "bc63fdd3db17c47d16c89d5ebfe92fdbe80027b004530a8e8108cf88216b7b13"
+    },
+    "604": {
+      "samples": 11024,
+      "rate": 11025,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 2496,
+      "sha256": "1d4d75e8668db57633bfae2b7ad61c6f5ca494f49c4626666b118ebb8bd66f68"
+    },
+    "root-stream": {
+      "samples": 23711,
+      "rate": 11025,
+      "seekSamples": 1633,
+      "channels": 1,
+      "bytes": 4576,
+      "sha256": "0bc9884e570f234000df8a3355cd6d38ccaa8af969ca59f0ab74b63dd90b34a8"
+    }
+  },
+  "exportAssets": {
+    "fx1": "1",
+    "fx2": "2",
+    "fx3": "3",
+    "npc1": "122",
+    "npc0": "202",
+    "bombAim": "206",
+    "banana": "209",
+    "bomb": "215",
+    "itemCube": "221"
+  },
+  "unresolvedAsSoundLinkages": [
+    "fx4",
+    "fx5",
+    "fx6",
+    "fx7",
+    "fx8",
+    "fx9",
+    "fx10",
+    "fx11",
+    "fx12",
+    "fx13",
+    "fx14",
+    "fx15",
+    "fx16",
+    "fx17",
+    "fx18",
+    "fx19",
+    "fx20"
+  ],
+  "startSoundEvents": [
+    {
+      "timeline": "60",
+      "frame": 2,
+      "id": "36",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 60
+    },
+    {
+      "timeline": "93",
+      "frame": 35,
+      "id": "71",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 93
+    },
+    {
+      "timeline": "118",
+      "frame": 2,
+      "id": "104",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 118
+    },
+    {
+      "timeline": "160",
+      "frame": 2,
+      "id": "36",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 160
+    },
+    {
+      "timeline": "182",
+      "frame": 30,
+      "id": "71",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 182
+    },
+    {
+      "timeline": "198",
+      "frame": 2,
+      "id": "104",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 198
+    },
+    {
+      "timeline": "206",
+      "frame": 1,
+      "id": "205",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 206
+    },
+    {
+      "timeline": "root",
+      "frame": 1,
+      "id": "259",
+      "options": {
+        "inPoint": 800,
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": null
+    },
+    {
+      "timeline": "root",
+      "frame": 22,
+      "id": "259",
+      "options": {
+        "outPoint": 77778,
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": null
+    },
+    {
+      "timeline": "root",
+      "frame": 56,
+      "id": "319",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": null
+    },
+    {
+      "timeline": "root",
+      "frame": 95,
+      "id": "356",
+      "options": {
+        "loops": 32767,
+        "noMultiple": true,
+        "stop": false,
+        "envelope": [
+          {
+            "leftLevel": 12989,
+            "pos44": 0,
+            "rightLevel": 13580
+          },
+          {
+            "leftLevel": 12989,
+            "pos44": 0,
+            "rightLevel": 32768
+          },
+          {
+            "leftLevel": 32768,
+            "pos44": 0,
+            "rightLevel": 32768
+          }
+        ]
+      },
+      "spriteId": null
+    },
+    {
+      "timeline": "394",
+      "frame": 9,
+      "id": "391",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 394
+    },
+    {
+      "timeline": "465",
+      "frame": 2,
+      "id": "36",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 465
+    },
+    {
+      "timeline": "483",
+      "frame": 34,
+      "id": "71",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 483
+    },
+    {
+      "timeline": "497",
+      "frame": 2,
+      "id": "104",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 497
+    },
+    {
+      "timeline": "525",
+      "frame": 2,
+      "id": "36",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 525
+    },
+    {
+      "timeline": "542",
+      "frame": 34,
+      "id": "71",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 542
+    },
+    {
+      "timeline": "557",
+      "frame": 2,
+      "id": "104",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 557
+    },
+    {
+      "timeline": "622",
+      "frame": 2,
+      "id": "604",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 622
+    },
+    {
+      "timeline": "622",
+      "frame": 20,
+      "id": "604",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 622
+    },
+    {
+      "timeline": "622",
+      "frame": 38,
+      "id": "604",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 622
+    },
+    {
+      "timeline": "622",
+      "frame": 56,
+      "id": "3",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      },
+      "spriteId": 622
+    }
+  ],
+  "defineButtonSoundEvents": [],
+  "stream": {
+    "id": "root-stream",
+    "timeline": "root",
+    "firstFrame": 46,
+    "lastDataFrame": 98,
+    "rate": 11025,
+    "seekSamples": 1633,
+    "samples": 23711,
+    "decodedSamples": 25344,
+    "fps": 25,
+    "channels": 1,
+    "bytes": 4576,
+    "sha256": "0bc9884e570f234000df8a3355cd6d38ccaa8af969ca59f0ab74b63dd90b34a8",
+    "blocks": [
+      {
+        "timeline": "root",
+        "frame": 46,
+        "samples": 2304,
+        "seekSamples": 1633,
+        "bytes": 416
+      },
+      {
+        "timeline": "root",
+        "frame": 47,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 48,
+        "samples": 576,
+        "seekSamples": 211,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 49,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 50,
+        "samples": 1152,
+        "seekSamples": 517,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 51,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 52,
+        "samples": 576,
+        "seekSamples": 247,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 53,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 54,
+        "samples": 1152,
+        "seekSamples": 553,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 55,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 56,
+        "samples": 1152,
+        "seekSamples": 283,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 57,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 58,
+        "samples": 576,
+        "seekSamples": 13,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 59,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 60,
+        "samples": 1152,
+        "seekSamples": 319,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 61,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 62,
+        "samples": 576,
+        "seekSamples": 49,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 63,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 64,
+        "samples": 1152,
+        "seekSamples": 355,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 65,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 66,
+        "samples": 576,
+        "seekSamples": 85,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 67,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 68,
+        "samples": 1152,
+        "seekSamples": 391,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 69,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 70,
+        "samples": 576,
+        "seekSamples": 121,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 71,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 72,
+        "samples": 1152,
+        "seekSamples": 427,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 73,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 74,
+        "samples": 576,
+        "seekSamples": 157,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 75,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 76,
+        "samples": 1152,
+        "seekSamples": 463,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 77,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 78,
+        "samples": 576,
+        "seekSamples": 193,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 79,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 80,
+        "samples": 1152,
+        "seekSamples": 499,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 81,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 82,
+        "samples": 576,
+        "seekSamples": 229,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 83,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 84,
+        "samples": 1152,
+        "seekSamples": 535,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 85,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 86,
+        "samples": 576,
+        "seekSamples": 265,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 87,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 88,
+        "samples": 1152,
+        "seekSamples": 571,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 89,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 90,
+        "samples": 1152,
+        "seekSamples": 301,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 91,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 92,
+        "samples": 576,
+        "seekSamples": 31,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 93,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 94,
+        "samples": 1152,
+        "seekSamples": 337,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 95,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 96,
+        "samples": 576,
+        "seekSamples": 67,
+        "bytes": 104
+      },
+      {
+        "timeline": "root",
+        "frame": 97,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 98,
+        "samples": 1152,
+        "seekSamples": 373,
+        "bytes": 208
+      },
+      {
+        "timeline": "root",
+        "frame": 99,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 100,
+        "samples": 0,
+        "seekSamples": -545,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 101,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 103,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 105,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 107,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 109,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 111,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 113,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 115,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 117,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 119,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 121,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 123,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 125,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 127,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 129,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 131,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 133,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 135,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      },
+      {
+        "timeline": "root",
+        "frame": 137,
+        "samples": 0,
+        "seekSamples": 0,
+        "bytes": 0
+      }
+    ]
+  },
+  "notes": [
+    "All DefineSound MPEG payloads preserve original bytes after the signed SI16 seek prefix.",
+    "root-stream preserves all MP3 stream bytes after each block UI16 sample count and SI16 seek header.",
+    "SOUNDINFO inPoint/outPoint/envelope positions are in 44100 Hz samples, independent of MPEG rate.",
+    "AS Sound objects fx4..fx20 have no exported source sound linkage; fx4.start is deliberately silent."
+  ]
+}

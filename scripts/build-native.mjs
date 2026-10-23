@@ -3,14 +3,16 @@ import {readFile, writeFile, mkdir, rm, cp, readdir} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const game = process.argv.find(arg=>arg.startsWith('--game='))?.slice(7) || 'qpet-match';
-assert(['qpet-match','magpie-bridge'].includes(game),'Unknown native game');
+assert(['qpet-match','magpie-bridge','qpet-racing'].includes(game),'Unknown native game');
 const source = path.join(root, 'native',game);
 // Public deployment copies this native build; the minitool candidate stays separate.
 const xhs = process.argv.includes('--xhs');
-const output = path.join(root, game==='qpet-match' ? (xhs?'minitool-candidate':'preview-native') : (xhs?'minitool-magpie-candidate':'preview-magpie'));
+const folders={'qpet-match':['preview-native','minitool-candidate'],'magpie-bridge':['preview-magpie','minitool-magpie-candidate'],'qpet-racing':['preview-racing','minitool-racing-candidate']};
+const output = path.join(root,folders[game][xhs?1:0]);
 await rm(output, {recursive: true, force: true});
 await mkdir(output, {recursive: true});
 const license=await readFile(path.join(root,'licenses/FFDEC-GPL-3.0.txt'),'utf8');
@@ -20,6 +22,14 @@ await build({entryPoints:[path.join(source,'app.js')],bundle:true,format:'iife',
 let html = await readFile(path.join(source,'index.html'),'utf8');
 html = html.replace('type="module" src="app.js"','defer src="app.js"');
 if (xhs) html = html.replace(/<!-- web-only:start -->[\s\S]*?<!-- web-only:end -->/g, '');
+else {
+  // A new deploy must not silently keep executing an older cached bundle.
+  for(const file of ['app.js','style.css']) {
+    const bytes=await readFile(file==='app.js'?path.join(output,file):path.join(source,file));
+    const version=createHash('sha256').update(bytes).digest('hex').slice(0,16);
+    html=html.replace(`${file}"`,`${file}?v=${version}"`);
+  }
+}
 await writeFile(path.join(output,'index.html'),html);
 await cp(path.join(source,'style.css'),path.join(output,'style.css'));
 // Artwork, glyphs and sound are compiled into app.js; no duplicate source modules.

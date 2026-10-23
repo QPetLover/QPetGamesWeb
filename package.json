@@ -2,7 +2,7 @@
   "name": "qpet-games-web",
   "private": true,
   "type": "module",
-  "description": "Q宠游戏：原生 HTML / Canvas / JavaScript 版 Q宠速配与搭鹊桥",
+  "description": "Q宠游戏：原生 HTML / Canvas / JavaScript 版 Q宠速配、搭鹊桥与QQ飞车",
   "engines": {
     "node": ">=20"
   },
@@ -12,6 +12,7 @@
     "start": "python3 scripts/serve.py",
     "build:native": "node scripts/build-native.mjs",
     "build:magpie": "node scripts/build-native.mjs --game=magpie-bridge",
+    "build:racing": "node scripts/build-native.mjs --game=qpet-racing",
     "test": "node --test native/*/tests/*.test.mjs"
   },
   "devDependencies": {

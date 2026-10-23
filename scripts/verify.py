@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the two native games and optional HTTP bytes."""
+"""Verify the native games and optional HTTP bytes."""
 import argparse, hashlib, json, re
 from pathlib import Path
 from urllib.request import urlopen
@@ -10,10 +10,11 @@ parser.add_argument('--url')
 args=parser.parse_args()
 root=Path(__file__).resolve().parents[1]; dist=root/'dist'
 expected={'index.html','app.js','style.css','player.html','maintenance.css','.nojekyll',
-          'magpie-bridge/index.html','magpie-bridge/app.js','magpie-bridge/style.css'}
+          'magpie-bridge/index.html','magpie-bridge/app.js','magpie-bridge/style.css',
+          'qpet-racing/index.html','qpet-racing/app.js','qpet-racing/style.css'}
 actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
 assert actual==expected, f'Unexpected release files: {actual ^ expected}'
-for folder in ['', 'magpie-bridge/']:
+for folder in ['', 'magpie-bridge/', 'qpet-racing/']:
     js=(dist/(folder+'app.js')).read_text(); html=(dist/(folder+'index.html')).read_text()
     for pattern in [r'\beval\s*\(',r'\bnew\s+Function\s*\(',r'\bWebAssembly\b',r'\bfetch\s*\(',r'\bXMLHttpRequest\b',r'\bWebSocket\b',r'\bimport\s*\(']:
         assert not re.search(pattern,js),f'{folder}: Forbidden runtime feature: {pattern}'
@@ -37,5 +38,5 @@ if args.url:
         except HTTPError as error:
             assert error.code==404,f'{name}: expected404, got{error.code}'
         retired.append(name)
-print(json.dumps({'result':'passed','releaseMode':'native-javascript','games':['qpet-match','magpie-bridge'],
+print(json.dumps({'result':'passed','releaseMode':'native-javascript','games':['qpet-match','magpie-bridge','qpet-racing'],
                   'noSWFRuntime':True,'httpVerified':bool(args.url),'files':checks,'retired404':retired},ensure_ascii=False,indent=2))

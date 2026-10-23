@@ -1,0 +1,51 @@
+[
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": " ITC Franklin Gothic is a trademark of The International Typeface Corporation which may be registered in certain jurisdictions. Portions copyright Microsoft Corporation.  All rights reserved.",
+    "fontId": "18",
+    "fontName": "Franklin Gothic Medium",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.2001",
+    "fontId": "332",
+    "fontName": "方正毡笔黑简体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "336",
+    "fontName": "宋体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.1997",
+    "fontId": "362",
+    "fontName": "方正粗圆简体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "563",
+    "fontName": "黑体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Digitized data copyright (C) 1991-1996 The Monotype Corporation. All rights reserved. Impact is a trademark of Stephenson Blake (Holdings) Ltd.",
+    "fontId": "587",
+    "fontName": "Impact",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "596",
+    "fontName": "黑体",
+    "forceWriteAsLong": "true"
+  }
+]
