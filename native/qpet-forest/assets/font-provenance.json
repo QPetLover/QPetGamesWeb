@@ -1,0 +1,72 @@
+[
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "4",
+    "fontName": "黑体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "19",
+    "fontName": "黑体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Digitized data copyright The Monotype Corporation 1991-1995. All rights reserved. Arial® is a trademark of The Monotype Corporation which may be registered in certain jurisdictions.",
+    "fontId": "137",
+    "fontName": "Arial Black",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(C)Copyright DynaComware Corp. 2002 本字库由字体精品网（GoodfonT.NET)内码转换，更多字库期待您的光临！承接手写字体定制，您只需在我们的专用纸上写出３００个左右的汉字，我们就能为您合成出标准的PC用汉字库！详情请访问：http://www.goodfon8\\u0001D\\u0001",
+    "fontId": "173",
+    "fontName": "华康海报体W12(P)",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(C) Copyright Stone Co., 1996",
+    "fontId": "183",
+    "fontName": "幼圆",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "",
+    "fontId": "206",
+    "fontName": "恅隋棉埴潠翷",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "216",
+    "fontName": "黑体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "443",
+    "fontName": "宋体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Typeface © The Monotype Corporation plc. Data © The Monotype Corporation plc/Type Solutions Inc. 1990-1992. All Rights Reserved",
+    "fontId": "444",
+    "fontName": "Arial",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.2000",
+    "fontId": "559",
+    "fontName": "方正胖娃_GBK",
+    "forceWriteAsLong": "true"
+  }
+]

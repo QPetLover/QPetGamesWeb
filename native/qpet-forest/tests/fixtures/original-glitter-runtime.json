@@ -1,0 +1,317 @@
+{
+  "sourceSHA256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b",
+  "instrumentedSHA256": "d1cdc85120a6e415c21ec1ee1dfb08fec8c28f702e3f03b0c9148cacb6cb3538",
+  "rawTraceSHA256": "82feacf5c7228ba165a59836811509b091a410f0945629f8124034ff5f5a1afb",
+  "runtime": "Ruffle0.5.0, real browser public inputs by parent task",
+  "publicInputs": [
+    "fresh menu start",
+    "bottom-floor pointer x500",
+    "collect bingo5/6/7; no private state write"
+  ],
+  "rows": [
+    {
+      "kind": "phase-before",
+      "path": "/gameStage/bingo5/light/instance42/instance43",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 2
+    },
+    {
+      "kind": "phase-after",
+      "path": "/gameStage/bingo5/light/instance42/instance43",
+      "self": 32,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 2
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance44/instance45",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 32
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance44/instance45",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 32
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance48/instance49",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 32
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance48/instance49",
+      "self": 3,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 32
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance50/instance51",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 1
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance50/instance51",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 1
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance52/instance53",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 5
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo5/light/instance42/instance43/instance52/instance53",
+      "self": 3,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 5
+    },
+    {
+      "kind": "phase-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 2
+    },
+    {
+      "kind": "phase-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57",
+      "self": 6,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 2
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance58/instance59",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 6
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance58/instance59",
+      "self": 5,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 6
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance60/instance61",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 6
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance60/instance61",
+      "self": 2,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 6
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance62/instance63",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 6
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance62/instance63",
+      "self": 2,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 6
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance64/instance65",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 10
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance64/instance65",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 10
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance66/instance67",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 10
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance66/instance67",
+      "self": 5,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 10
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance68/instance69",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 14
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance68/instance69",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 14
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance70/instance71",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 14
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo6/light/instance56/instance57/instance70/instance71",
+      "self": 5,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 14
+    },
+    {
+      "kind": "phase-before",
+      "path": "/gameStage/bingo7/light/instance74/instance75",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 2
+    },
+    {
+      "kind": "phase-after",
+      "path": "/gameStage/bingo7/light/instance74/instance75",
+      "self": 21,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 2
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance76/instance77",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance76/instance77",
+      "self": 4,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance80/instance81",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance80/instance81",
+      "self": 2,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance82/instance83",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance82/instance83",
+      "self": 2,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance84/instance85",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance84/instance85",
+      "self": 4,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 21
+    },
+    {
+      "kind": "glyph-before",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance86/instance87",
+      "self": 1,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 23
+    },
+    {
+      "kind": "glyph-after",
+      "path": "/gameStage/bingo7/light/instance74/instance75/instance86/instance87",
+      "self": 5,
+      "depth": -16383,
+      "parent": 1,
+      "grand": 23
+    }
+  ]
+}

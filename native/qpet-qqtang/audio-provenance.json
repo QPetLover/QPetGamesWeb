@@ -1,0 +1,80 @@
+{
+  "sourceSHA256": "c8b38507e58d1d0b9aedcdd356c91b5638333253654c6508ab505161e5c9630a",
+  "sounds": {
+    "tool.wav": {
+      "id": 1,
+      "rate": 11025,
+      "samples": 8880,
+      "seekSamples": 1661,
+      "bytes": 2080,
+      "sha256": "e05b759484d9223686e5985faa8b6f258e9198c62350695921f3fb34155630dc"
+    },
+    "putBomb.wav": {
+      "id": 2,
+      "rate": 11025,
+      "samples": 1310,
+      "seekSamples": 1661,
+      "bytes": 728,
+      "sha256": "c06ec728853fb07a3d412a64e44a2e141dacbc417d7a62f357769ebf6ea202a3"
+    },
+    "exp.wav": {
+      "id": 3,
+      "rate": 11025,
+      "samples": 3977,
+      "seekSamples": 1661,
+      "bytes": 1248,
+      "sha256": "c358ad4c8397ea91cce522127e75c7408a033821dd3a642ad32b8b0960ea9389"
+    },
+    "bgSound3": {
+      "id": 4,
+      "rate": 11025,
+      "samples": 388224,
+      "seekSamples": 0,
+      "bytes": 70103,
+      "sha256": "56944337a472a1fa63b91499d0ebdfe7fcdaa2ad76ed276a986e24f9ada1c5b5"
+    },
+    "bgSound2": {
+      "id": 5,
+      "rate": 11025,
+      "samples": 520704,
+      "seekSamples": 0,
+      "bytes": 94023,
+      "sha256": "ffdf7c3a7163b2fc6a69f7b07f46d9d2bee088d0dbf92042fc5a7e06d0a5e30b"
+    },
+    "bgSound1": {
+      "id": 6,
+      "rate": 11025,
+      "samples": 349056,
+      "seekSamples": 0,
+      "bytes": 63031,
+      "sha256": "b1017443215caf3397ed9171b0338f803c246eaae44a5ed07ab1d1b33225661c"
+    },
+    "bgSound0": {
+      "id": 7,
+      "rate": 11025,
+      "samples": 540288,
+      "seekSamples": 0,
+      "bytes": 97559,
+      "sha256": "8b34249beb924daafd4c3397acee1da6e9e55d15664b0c19e632461c7df9201a"
+    }
+  },
+  "mixing": {
+    "owner": "bgMusic_sound = new Sound(game); vo_sound = new Sound(game.vo_mc)",
+    "stageOwnerVolume": 50,
+    "effectiveBackgroundGain": 0.5,
+    "effectiveShortSoundGain": 0.5,
+    "reason": "Source Sound(game).setVolume(50) sets the parent clip transform; child vo_mc sounds inherit it. Sound(game).stop() stops only that owner, leaving child one-shots to finish.",
+    "referenceSemantics": [
+      "https://github.com/ruffle-rs/ruffle/blob/v0.5.0/core/src/avm1/globals/sound.rs#L690",
+      "https://github.com/ruffle-rs/ruffle/blob/v0.5.0/core/src/backend/audio.rs#L753"
+    ]
+  },
+  "events": {
+    "putBomb.wav": "606.putBomb: vo_sound attachSound/start",
+    "exp.wav": "606.bombExp: vo_sound attachSound/start",
+    "tool.wav": "606.movHero.onEnterFrame successful pickup",
+    "bgSoundN": "606/frame3 stageNum % 4, volume 50, start(0,999)",
+    "stop-bg": "606.gameover bgMusic_sound.stop",
+    "stop": "root/frame7 stopAllSounds"
+  }
+}

@@ -1,0 +1,23 @@
+:root{color-scheme:dark;font-family:system-ui,"PingFang SC",sans-serif;background:#171a20;color:#e5e9f1}*{box-sizing:border-box}body{margin:0;padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}main{max-width:760px;margin:auto}header{display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap}h1{font-size:18px;margin:0 auto 0 0}a{color:#b6d5ff;text-decoration:none}button{font:inherit;touch-action:none;user-select:none;border:1px solid #617086;background:#293341;color:#fff;border-radius:9px;padding:8px 14px;cursor:pointer}.game{position:relative;width:100%;height:auto;background:#000;overflow:hidden;border-radius:6px}.game::before{content:"";display:block;padding-top:55.2631578947%}canvas{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none;outline:none}#loading{position:absolute;inset:0;display:grid;place-content:center;background:#181c23}.controls{display:flex;align-items:flex-end;justify-content:space-between;margin-top:12px;gap:8px}.controls button{width:54px;height:50px;padding:3px}.controls button.active{background:#527aaa}.directions{text-align:center}.directions>button{margin-bottom:4px}.directions>div,.actions{display:flex;gap:4px}.actions{align-items:end}.hint,.source{color:#aeb8c7;font-size:13px;line-height:1.65}.source{font-size:12px}@media(max-width:480px){body{padding:8px}header{gap:9px;font-size:12px}h1{font-size:14px}header button{padding:6px}.controls button{width:42px;height:46px}.hint{font-size:12px}.controls{gap:3px}.actions{gap:3px}}
+
+#loading[hidden]{display:none}
+@media(max-width:360px){.controls button{width:38px;height:44px}}
+
+/* Short landscape keeps the complete original stage between separate controls. */
+@media (max-height:500px) and (min-width:600px){
+ body{padding:max(8px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+ main{width:100%;max-width:none}
+ header{min-height:30px;gap:8px;margin-bottom:6px;flex-wrap:nowrap;font-size:11px}
+ h1{font-size:13px;line-height:1.2}
+ header button{font-size:12px;line-height:1.2;padding:5px 8px}
+ .game{width:calc(100% - 260px);max-width:calc((100vh - 75px)*1.8095238095);max-width:calc((100svh - 75px)*1.8095238095);margin:auto}
+ .controls{position:fixed;left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));bottom:max(8px,env(safe-area-inset-bottom));margin:0;pointer-events:none}
+ .controls button{pointer-events:auto;background:#293341}
+ .directions button{width:38px;height:32px}
+ .actions{display:grid;grid-template-columns:repeat(2,42px);gap:4px}
+ .actions button{width:42px;height:42px;padding:1px;line-height:1.05}
+ .actions small{font-size:10px}
+ .hint,.source{display:none}
+}
+
+#loading{gap:10px;padding:16px;text-align:center}#loading-text{max-width:36em;line-height:1.6}#loading-retry{justify-self:center}#loading-retry[hidden]{display:none}

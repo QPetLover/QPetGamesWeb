@@ -1,0 +1,58 @@
+{
+  "122": {
+    "text": "<p align=\"left\"><font face=\"arial_12pt_st\" size=\"12\" color=\"#ffeb7b\" letterSpacing=\"0.000000\" kerning=\"1\">100%</font></p>",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      684,
+      322
+    ],
+    "color": [
+      255,
+      235,
+      123,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "121",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "units": 20480
+    },
+    "outlines": false,
+    "variable": ""
+  },
+  "1185": {
+    "text": "<p align=\"center\"><font face=\"宋体_12pt_st\" size=\"12\" color=\"#ffffff\" letterSpacing=\"0.000000\" kerning=\"1\">180</font></p>",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      1961,
+      280
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "30",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "units": 20480
+    },
+    "outlines": false,
+    "variable": ""
+  }
+}

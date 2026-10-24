@@ -1,0 +1,58 @@
+[
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "30",
+    "fontName": "宋体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.1998",
+    "fontId": "887",
+    "fontName": "方正粗圆简体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.2000",
+    "fontId": "897",
+    "fontName": "方正粗圆_GBK",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Typeface © The Monotype Corporation plc. Data © The Monotype Corporation plc/Type Solutions Inc. 1990-1992. All Rights Reserved",
+    "fontId": "898",
+    "fontName": "Arial Bold",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.1998",
+    "fontId": "926",
+    "fontName": "方正准圆简体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Typeface © The Monotype Corporation plc. Data © The Monotype Corporation plc/Type Solutions Inc. 1990-1992. All Rights Reserved",
+    "fontId": "934",
+    "fontName": "Arial",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "976",
+    "fontName": "宋体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "Copyright(c) Founder Corporation.2000",
+    "fontId": "979",
+    "fontName": "方正粗倩_GBK",
+    "forceWriteAsLong": "true"
+  }
+]

@@ -1,0 +1,394 @@
+{
+  "39": {
+    "text": "",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      789,
+      309
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "38",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "txt"
+  },
+  "592": {
+    "text": "000000",
+    "size": 580,
+    "box": [
+      -331,
+      -40,
+      2075,
+      858
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "538",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Arial Black"
+    },
+    "outlines": false,
+    "variable": "timeOutput"
+  },
+  "597": {
+    "text": "000000",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1867,
+      604
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "596",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Arial Black"
+    },
+    "outlines": false,
+    "variable": "score"
+  },
+  "598": {
+    "text": "000000",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1867,
+      604
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "596",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Arial Black"
+    },
+    "outlines": false,
+    "variable": "totalScore"
+  },
+  "641": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "name1"
+  },
+  "642": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "score1"
+  },
+  "643": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "name2"
+  },
+  "644": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "score2"
+  },
+  "645": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "name3"
+  },
+  "646": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "score3"
+  },
+  "647": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "name4"
+  },
+  "648": {
+    "text": "00000000000",
+    "size": 400,
+    "box": [
+      1516,
+      -40,
+      3800,
+      483
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "640",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "Times New Roman"
+    },
+    "outlines": false,
+    "variable": "score4"
+  },
+  "658": {
+    "text": "",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      3739,
+      280
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "617",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "文鼎特圆简"
+    },
+    "outlines": false,
+    "variable": ""
+  },
+  "662": {
+    "text": "",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      3739,
+      280
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "617",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0,
+      "name": "文鼎特圆简"
+    },
+    "outlines": false,
+    "variable": ""
+  }
+}

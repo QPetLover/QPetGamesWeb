@@ -1,0 +1,846 @@
+ConstantPool "fightable", "countLeft", "player", "_xscale", "timeokLeft", "jumping", "run", "gotoAndStop", "walk", "_x", "playerCon_mc", "ledgeX0", "bgNear_mc", "DISTANCE", "_width", "bgFar_mc", "count", "timeok", "ledgeX1", "Stage", "width", "door", "Keyjump", "Key", "isDown", "jumpable", "jump", "Keyattack", "attackable", "attack", "Keyfight", "angry", "fight", "show", "cant_mc", "gotoAndPlay", "hitgoo", "_alpha", "rightDown", "leftDown", "_y", "ledgeY0", "ledgeY1", "monLeft", "preScore", "score", "onEnterFrame", "keyListener_obj", "removeListener", "play", "blood", "bloodtemp", "gameover", "dialogue_mc", "monNumber", "attacking", "fighting", "activeArr", "Array", "Object", "onKeyUp", "getCode", "stand", "onKeyDown", "addListener", "KeyDown", "depthCharge"
+DefineFunction "angryAccum", 0 {
+Push "fightable", true
+SetVariable
+}
+DefineFunction2 "leftDown", 0, 2, false, false, true, false, true, false, true, false, false {
+Push undefined
+StoreRegister 1
+Pop
+Push "countLeft", "countLeft"
+GetVariable
+Decrement
+SetVariable
+Push "player"
+GetVariable
+Push "_xscale"
+GetMember
+Push 0.0
+Greater
+Not
+If loc02ae
+Push "player"
+GetVariable
+Push "_xscale", "player"
+GetVariable
+Push "_xscale"
+GetMember
+Push -1
+Multiply
+SetMember
+loc02ae:Push "timeokLeft"
+GetVariable
+Not
+If loc02ed
+Push "jumping"
+GetVariable
+Not
+Not
+If loc02db
+Push "run", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc02db:Push 2
+StoreRegister 1
+Pop
+Jump loc031b
+loc02ed:Push "jumping"
+GetVariable
+Not
+Not
+If loc030e
+Push "walk", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc030e:Push 1
+StoreRegister 1
+Pop
+loc031b:Push "player"
+GetVariable
+Push "_x"
+GetMember
+Push "playerCon_mc"
+GetVariable
+Push "_x"
+GetMember
+Add2
+Push "ledgeX0"
+GetVariable
+Greater
+PushDuplicate
+If loc0363
+Pop
+Push "bgNear_mc"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Add2
+Push 0.0
+Less2
+Not
+loc0363:Not
+If loc03b0
+Push "player"
+GetVariable
+Push "_x"
+GetMember
+Push "player"
+GetVariable
+Push "_width"
+GetMember
+Less2
+Not
+Not
+If loc03ab
+Push "player"
+GetVariable
+Push "_x", "player"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Subtract
+SetMember
+loc03ab:Jump loc0434
+loc03b0:Push "player"
+GetVariable
+Push "_x", "player"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Subtract
+SetMember
+Push "bgNear_mc"
+GetVariable
+Push "_x", "bgNear_mc"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Add2
+SetMember
+Push "playerCon_mc"
+GetVariable
+Push "_x", "bgNear_mc"
+GetVariable
+Push "_x"
+GetMember
+SetMember
+Push "bgFar_mc"
+GetVariable
+Push "_x", "bgFar_mc"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Push 2
+Divide
+Add2
+SetMember
+}
+loc0434:DefineFunction2 "rightDown", 0, 2, false, false, true, false, true, false, true, false, false {
+Push undefined
+StoreRegister 1
+Pop
+Push "count", "count"
+GetVariable
+Decrement
+SetVariable
+Push "player"
+GetVariable
+Push "_xscale"
+GetMember
+Push 0.0
+Less2
+Not
+If loc0498
+Push "player"
+GetVariable
+Push "_xscale", "player"
+GetVariable
+Push "_xscale"
+GetMember
+Push -1
+Multiply
+SetMember
+loc0498:Push "timeok"
+GetVariable
+Not
+If loc04d7
+Push "jumping"
+GetVariable
+Not
+Not
+If loc04c5
+Push "run", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc04c5:Push 2
+StoreRegister 1
+Pop
+Jump loc0505
+loc04d7:Push "jumping"
+GetVariable
+Not
+Not
+If loc04f8
+Push "walk", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc04f8:Push 1
+StoreRegister 1
+Pop
+loc0505:Push "player"
+GetVariable
+Push "_x"
+GetMember
+Push "playerCon_mc"
+GetVariable
+Push "_x"
+GetMember
+Add2
+Push "ledgeX1"
+GetVariable
+Less2
+PushDuplicate
+If loc0560
+Pop
+Push "bgNear_mc"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Subtract
+Push "Stage"
+GetVariable
+Push "width"
+GetMember
+Push "bgNear_mc"
+GetVariable
+Push "_width"
+GetMember
+Subtract
+Greater
+Not
+loc0560:Not
+If loc05b2
+Push "playerCon_mc"
+GetVariable
+Push "door"
+GetMember
+Push "_x"
+GetMember
+Push "player"
+GetVariable
+Push "_x"
+GetMember
+Greater
+Not
+If loc05ad
+Push "player"
+GetVariable
+Push "_x", "player"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Add2
+SetMember
+loc05ad:Jump loc0636
+loc05b2:Push "player"
+GetVariable
+Push "_x", "player"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Add2
+SetMember
+Push "bgNear_mc"
+GetVariable
+Push "_x", "bgNear_mc"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Subtract
+SetMember
+Push "playerCon_mc"
+GetVariable
+Push "_x", "bgNear_mc"
+GetVariable
+Push "_x"
+GetMember
+SetMember
+Push "bgFar_mc"
+GetVariable
+Push "_x", "bgFar_mc"
+GetVariable
+Push "_x"
+GetMember
+Push "DISTANCE"
+GetVariable
+Push register1
+Multiply
+Push 2
+Divide
+Subtract
+SetMember
+}
+loc0636:DefineFunction "KeyDown", 0 {
+Push "Keyjump"
+GetVariable
+Push 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+PushDuplicate
+Not
+If loc066a
+Pop
+Push "jumpable"
+GetVariable
+loc066a:Not
+If loc0691
+Push "jump", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+Push "jumpable", false
+SetVariable
+Jump loc0921
+loc0691:Push "Keyattack"
+GetVariable
+Push 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+PushDuplicate
+Not
+If loc06b6
+Pop
+Push "attackable"
+GetVariable
+loc06b6:PushDuplicate
+Not
+If loc06c5
+Pop
+Push "jumping"
+GetVariable
+Not
+loc06c5:Not
+If loc06ec
+Push "attack", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+Push "attackable", false
+SetVariable
+Jump loc0921
+loc06ec:Push "Keyfight"
+GetVariable
+Push 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+PushDuplicate
+Not
+If loc0712
+Pop
+Push "jumping"
+GetVariable
+Not
+loc0712:Not
+If loc0760
+Push "fightable"
+GetVariable
+Not
+If loc0747
+Push "angry", "angry"
+GetVariable
+Increment
+SetVariable
+Push "fight", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+Jump loc075b
+loc0747:Push "show", 1, "cant_mc"
+GetVariable
+Push "gotoAndPlay"
+CallMethod
+Pop
+loc075b:Jump loc0921
+loc0760:Push 39, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+Not
+If loc07a1
+Push "hitgoo"
+GetVariable
+Push "_alpha", 0.0
+SetMember
+Push 0.0, "rightDown"
+CallFunction
+Pop
+loc07a1:Push 37, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+Not
+If loc07cd
+Push 0.0, "leftDown"
+CallFunction
+Pop
+loc07cd:Push 38, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+PushDuplicate
+Not
+If loc0805
+Pop
+Push "player"
+GetVariable
+Push "_y"
+GetMember
+Push "DISTANCE"
+GetVariable
+Subtract
+Push "ledgeY0"
+GetVariable
+Greater
+loc0805:Not
+If loc0877
+Push "player"
+GetVariable
+Push "_y", "player"
+GetVariable
+Push "_y"
+GetMember
+Push "DISTANCE"
+GetVariable
+Subtract
+SetMember
+Push 37, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+Not
+PushDuplicate
+Not
+If loc085d
+Pop
+Push 39, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+Not
+loc085d:Not
+If loc0877
+Push "walk", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc0877:Push 40, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+PushDuplicate
+Not
+If loc08af
+Pop
+Push "player"
+GetVariable
+Push "_y"
+GetMember
+Push "DISTANCE"
+GetVariable
+Add2
+Push "ledgeY1"
+GetVariable
+Less2
+loc08af:Not
+If loc0921
+Push "player"
+GetVariable
+Push "_y", "player"
+GetVariable
+Push "_y"
+GetMember
+Push "DISTANCE"
+GetVariable
+Add2
+SetMember
+Push 37, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+Not
+PushDuplicate
+Not
+If loc0907
+Pop
+Push 39, 1, "Key"
+GetVariable
+Push "isDown"
+CallMethod
+Not
+loc0907:Not
+If loc0921
+Push "walk", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+}
+loc0921:DefineFunction2 "passedCharge", 0, 3, true, false, true, false, true, false, false, true, false {
+Push "monLeft", "monLeft"
+GetVariable
+Decrement
+SetVariable
+Push "monLeft"
+GetVariable
+Push 0.0
+Greater
+Not
+Not
+If loc09a6
+Push register2, "preScore", register2, "score"
+GetMember
+SetMember
+Push register1, "onEnterFrame"
+Delete
+Pop
+Push "keyListener_obj"
+GetVariable
+Push 1, "Key"
+GetVariable
+Push "removeListener"
+CallMethod
+Pop
+Push 0.0, "playerCon_mc"
+GetVariable
+Push "door"
+GetMember
+Push "play"
+CallMethod
+Pop
+}
+loc09a6:DefineFunction2 "gameoverCharge", 0, 3, true, false, true, false, true, false, false, true, false {
+Push "player"
+GetVariable
+Push "blood"
+GetMember
+Push 0.0
+Greater
+Not
+Not
+If loc0a30
+Push register2, "blood", register2, "bloodtemp"
+GetMember
+SetMember
+Push register2, "score", register2, "preScore"
+GetMember
+SetMember
+Push register1, "onEnterFrame"
+Delete
+Pop
+Push "keyListener_obj"
+GetVariable
+Push 1, "Key"
+GetVariable
+Push "removeListener"
+CallMethod
+Pop
+Push "gameover", 1, register2, "dialogue_mc"
+GetMember
+Push "gotoAndPlay"
+CallMethod
+Pop
+}
+loc0a30:Push "DISTANCE", 5
+DefineLocal
+Push "ledgeX0", 240
+DefineLocal
+Push "ledgeX1", 520
+DefineLocal
+Push "ledgeY0", 300
+DefineLocal
+Push "ledgeY1", 420
+DefineLocal
+Push "monNumber", 7
+DefineLocal
+Push "monLeft", "monNumber"
+GetVariable
+DefineLocal
+Push "Keyfight", 90
+DefineLocal
+Push "Keyattack", 88
+DefineLocal
+Push "Keyjump", 67
+DefineLocal
+Push "jumpable", true
+DefineLocal
+Push "jumping", false
+DefineLocal
+Push "attacking", false
+DefineLocal
+Push "attackable", true
+DefineLocal
+Push "fighting", false
+DefineLocal
+Push "angry", 0.0
+DefineLocal
+Push "fightable", true
+DefineLocal
+Push "activeArr", 0.0, "Array"
+NewObject
+DefineLocal
+Push "count", 4
+DefineLocal
+Push "countLeft", 4
+DefineLocal
+Push "timeok", false
+DefineLocal
+Push "timeokLeft", false
+DefineLocal
+Push "keyListener_obj", 0.0, "Object"
+NewObject
+DefineLocal
+Push "keyListener_obj"
+GetVariable
+Push "onKeyUp"
+DefineFunction "", 0 {
+Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push "Keyfight"
+GetVariable
+Equals2
+PushDuplicate
+Not
+If loc0b63
+Pop
+Push "jumping"
+GetVariable
+Not
+loc0b63:Not
+If loc0b78
+Push "angry", 0.0
+SetVariable
+loc0b78:Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push "Keyattack"
+GetVariable
+Equals2
+PushDuplicate
+Not
+If loc0ba3
+Pop
+Push "jumping"
+GetVariable
+Not
+loc0ba3:Not
+If loc0bb1
+Push "attackable", true
+SetVariable
+loc0bb1:Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push "Keyjump"
+GetVariable
+Equals2
+Not
+If loc0bdb
+Push "jumpable", true
+SetVariable
+loc0bdb:Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push 38
+Equals2
+PushDuplicate
+Not
+If loc0c08
+Pop
+Push "fighting"
+GetVariable
+Not
+loc0c08:Not
+If loc0c22
+Push "stand", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc0c22:Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push 40
+Equals2
+PushDuplicate
+Not
+If loc0c4f
+Pop
+Push "fighting"
+GetVariable
+Not
+loc0c4f:Not
+If loc0c69
+Push "stand", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+loc0c69:Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push 37
+Equals2
+PushDuplicate
+Not
+If loc0c96
+Pop
+Push "fighting"
+GetVariable
+Not
+loc0c96:Not
+If loc0ce9
+Push "stand", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+Push "countLeft"
+GetVariable
+Push 0.0
+Greater
+Not
+If loc0cd6
+Push "timeokLeft", true
+SetVariable
+Jump loc0cde
+loc0cd6:Push "timeokLeft", false
+SetVariable
+loc0cde:Push "countLeft", 4
+SetVariable
+loc0ce9:Push 0.0, "Key"
+GetVariable
+Push "getCode"
+CallMethod
+Push 39
+Equals2
+PushDuplicate
+Not
+If loc0d16
+Pop
+Push "fighting"
+GetVariable
+Not
+loc0d16:Not
+If loc0d69
+Push "stand", 1, "player"
+GetVariable
+Push "gotoAndStop"
+CallMethod
+Pop
+Push "count"
+GetVariable
+Push 0.0
+Greater
+Not
+If loc0d56
+Push "timeok", true
+SetVariable
+Jump loc0d5e
+loc0d56:Push "timeok", false
+SetVariable
+loc0d5e:Push "count", 4
+SetVariable
+}
+loc0d69:SetMember
+Push "keyListener_obj"
+GetVariable
+Push "onKeyDown"
+DefineFunction "", 0 {
+}
+SetMember
+Push "keyListener_obj"
+GetVariable
+Push 1, "Key"
+GetVariable
+Push "addListener"
+CallMethod
+Pop
+Push "onEnterFrame"
+DefineFunction "", 0 {
+Push "fighting"
+GetVariable
+Not
+PushDuplicate
+Not
+If loc0db9
+Pop
+Push "attacking"
+GetVariable
+Not
+loc0db9:Not
+If loc0dcf
+Push 0.0, "KeyDown"
+CallFunction
+Pop
+loc0dcf:Push 0.0, "playerCon_mc"
+GetVariable
+Push "depthCharge"
+CallMethod
+Pop
+}
+SetVariable

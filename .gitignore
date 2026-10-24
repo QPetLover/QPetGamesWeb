@@ -2,6 +2,7 @@ node_modules/
 dist/
 .DS_Store
 *.log
+__pycache__/
 
 preview-native/
 minitool-candidate/
@@ -9,3 +10,10 @@ preview-magpie/
 minitool-magpie-candidate/
 preview-racing/
 minitool-racing-candidate/
+
+preview-forest/
+minitool-forest-candidate/
+preview-qqtang/
+minitool-qqtang-candidate/
+preview-dungeon/
+minitool-dungeon-candidate/

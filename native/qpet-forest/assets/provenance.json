@@ -1,0 +1,72 @@
+{
+  "sourceSWF": "qqpet_automation qq-pet-macos/src/assets/game/Q宠爱森林.swf (fixed community backup)",
+  "sourceCommit": null,
+  "sourceSHA256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b",
+  "sourceBytes": 1044839,
+  "stage": {
+    "width": 760,
+    "height": 420,
+    "fps": 30
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 468,
+  "embeddedImages": {
+    "imageObj169": {
+      "mime": "image/PNG",
+      "bytes": 4392,
+      "sha256": "5ab854911da265fd7a652f534f5451948b12845d699c938cfe7929e5402ae369"
+    },
+    "imageObj198": {
+      "mime": "image/PNG",
+      "bytes": 34466,
+      "sha256": "d64d83f87e7006ce61fe089eb4f2fe807d14b2be174f464c4a51a23808eccb98"
+    },
+    "imageObj233": {
+      "mime": "image/JPEG",
+      "bytes": 88372,
+      "sha256": "23db460d411430deea9355b52532f64071303a0db66dd2f8f13f00e8ca6e2d72"
+    },
+    "imageObj499": {
+      "mime": "image/JPEG",
+      "bytes": 77284,
+      "sha256": "96fd099b6c33af390d00dfd713d122e2a431e5f25e537e2c2ed5dd0f65fa9353"
+    },
+    "imageObj519": {
+      "mime": "image/JPEG",
+      "bytes": 121458,
+      "sha256": "f07c02bc2993cb2da5096cc4626bd6c749440b67f5fcad8a7c5c53995865dbf4"
+    },
+    "imageObj523": {
+      "mime": "image/JPEG",
+      "bytes": 72149,
+      "sha256": "a0e55abe018a43897f33f94fc1c62050665116dc24379b397ddc071f4f2c4ae7"
+    },
+    "imageObj530": {
+      "mime": "image/JPEG",
+      "bytes": 105602,
+      "sha256": "90527cc6a2a17c1ff13815197b40f402a33a9d0319bdac03c4ba75dbbcc85a47"
+    }
+  },
+  "inputs": {
+    "forest.xml": "1a0f7b7e6a1623f077c78666a23bd00cad320b940d801eaa88b6b27583d97577",
+    "frame-unpacked/frames.html": "49d0decbfb0300460802836cdef7905599c78cf36bb36e6b25bd6864adcbc1d7",
+    "frame-unpacked/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked-unpacked/DefineSprite_141_plusScore/frames.html": "355f24fe525b36826f03131fa0d1c6a2127bdcf521eec0038b0f918180b2226f"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "5 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "172 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "785c3ec8ecc5367d4999931c070485a06f005e9b9aeee8eac1721ee1e58ad371",
+  "sourceURL": "https://raw.githubusercontent.com/xuemian168/qqpet_automation/main/qq-pet-macos/src/assets/game/Q%E5%AE%A0%E7%88%B1%E6%A3%AE%E6%9E%97.swf",
+  "sourceVersionCaution": "Fixed community snapshot; no claim that the community file is byte-identical to a historical Tencent server copy.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 503723,
+  "previousFFDecBitmapBytes": 503723
+}

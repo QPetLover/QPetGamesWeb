@@ -2,7 +2,7 @@
   "name": "qpet-games-web",
   "private": true,
   "type": "module",
-  "description": "Q宠游戏：原生 HTML / Canvas / JavaScript 版 Q宠速配、搭鹊桥与QQ飞车",
+  "description": "Q宠游戏：从原 SWF 迁移的六款独立 HTML / Canvas / JavaScript 游戏",
   "engines": {
     "node": ">=20"
   },

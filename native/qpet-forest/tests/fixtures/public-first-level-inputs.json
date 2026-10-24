@@ -1,0 +1,132 @@
+{
+  "method": "Fresh untouched production game; public action/pointer/step only. Deterministic RNG controls original NPC directions; no private state writes. Native logic proof, not historical Flash or browser input proof.",
+  "sourceSHA256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b",
+  "seed": 1,
+  "passed": {
+    "frame": 1691,
+    "life": 1,
+    "score": 1105,
+    "level": 1,
+    "grown": 11,
+    "passFrame": 11
+  },
+  "next": {
+    "frame": 1796,
+    "life": 1,
+    "score": 1107,
+    "level": 2,
+    "stageId": "518",
+    "seedsTotal": 13,
+    "gameTime": "03:30"
+  },
+  "commands": [
+    {
+      "frame": 0,
+      "action": "start"
+    },
+    {
+      "frame": 70,
+      "action": "plant:seed1"
+    },
+    {
+      "frame": 120,
+      "action": "plant:seed0"
+    },
+    {
+      "frame": 210,
+      "action": "plant:seed0"
+    },
+    {
+      "frame": 259,
+      "action": "plant:seed3"
+    },
+    {
+      "frame": 325,
+      "action": "plant:seed3"
+    },
+    {
+      "frame": 374,
+      "action": "plant:seed6"
+    },
+    {
+      "frame": 434,
+      "action": "plant:seed6"
+    },
+    {
+      "frame": 483,
+      "action": "plant:seed9"
+    },
+    {
+      "frame": 541,
+      "action": "plant:seed6"
+    },
+    {
+      "frame": 600,
+      "action": "plant:seed3"
+    },
+    {
+      "frame": 661,
+      "action": "plant:seed0"
+    },
+    {
+      "frame": 728,
+      "action": "plant:seed2"
+    },
+    {
+      "frame": 891,
+      "action": "plant:seed2"
+    },
+    {
+      "frame": 943,
+      "action": "plant:seed5"
+    },
+    {
+      "frame": 1003,
+      "action": "plant:seed5"
+    },
+    {
+      "frame": 1052,
+      "action": "plant:seed8"
+    },
+    {
+      "frame": 1113,
+      "action": "plant:seed8"
+    },
+    {
+      "frame": 1162,
+      "action": "plant:seed10"
+    },
+    {
+      "frame": 1219,
+      "action": "plant:seed8"
+    },
+    {
+      "frame": 1277,
+      "action": "plant:seed5"
+    },
+    {
+      "frame": 1368,
+      "action": "plant:seed2"
+    },
+    {
+      "frame": 1429,
+      "action": "plant:seed1"
+    },
+    {
+      "frame": 1537,
+      "action": "plant:seed4"
+    },
+    {
+      "frame": 1595,
+      "action": "plant:seed4"
+    },
+    {
+      "frame": 1644,
+      "action": "plant:seed7"
+    },
+    {
+      "frame": 1691,
+      "action": "continue"
+    }
+  ]
+}

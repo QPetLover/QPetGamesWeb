@@ -1,0 +1,35 @@
+{
+  "source": "https://github.com/ruffle-rs/ruffle/blob/v0.5.0/core/assets/notosans.subset.ttf.gz",
+  "ttfSHA256": "e47bcaaf16673637bb29b8d59fbcd650ea635f32718cf59b8f577e3ef988b975",
+  "compressedSHA256": "7169d53b641ef63abb98fc771ff1c944b53fbeab3ed040ed57d1f01339ffa32b",
+  "originalDeviceFonts": {
+    "538": "Arial Black",
+    "596": "Arial Black",
+    "640": "Times New Roman"
+  },
+  "fallback": "Noto Sans, Ruffle v0.5.0",
+  "unitsPerEm": 1000,
+  "ascent": 1069,
+  "descent": 293,
+  "leading": 0,
+  "characters": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    ":",
+    "Q",
+    "G",
+    "M",
+    "-",
+    "."
+  ],
+  "license": "SIL Open Font License 1.1",
+  "note": "Matches the verified emulator fallback, not proof of historical Flash system-font typography. Unsupported Chinese names retain the native browser fallback; that path is not calibrated against Ruffle."
+}

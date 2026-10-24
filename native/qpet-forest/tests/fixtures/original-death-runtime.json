@@ -1,0 +1,251 @@
+{
+  "sourceSHA256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b",
+  "instrumentedSHA256": "1004ab3f8a7cf7ff500d94e0a826b29842071da53f5ffebc76bf321c575e62de",
+  "rawTraceSHA256": "c814b0bffe986be71ed596366d8064ef5d45d1eb63b55c12584bf2d97344d6d1",
+  "runtime": "Ruffle0.5.0, Chrome CUA, same-origin original comparison server",
+  "publicInputs": [
+    "menu start",
+    "pointer to bottom-floor stage x500",
+    "wait naturally for six collisions; no private state writes"
+  ],
+  "observedResult": {
+    "rootFrame": 147,
+    "life": -1,
+    "score": 3,
+    "method": "Parent browser observed root147 original failed screen after final before-life; callback produced no after-life or reward-entry on fatal hit."
+  },
+  "rows": [
+    {
+      "kind": "score-before",
+      "value": 1,
+      "count": "",
+      "oldName": "",
+      "oldDepth": ""
+    },
+    {
+      "kind": "score-after",
+      "value": 1,
+      "count": 1,
+      "newName": "plusScore1",
+      "newDepth": 1
+    },
+    {
+      "kind": "score-before",
+      "value": 1,
+      "count": 1,
+      "oldName": "",
+      "oldDepth": ""
+    },
+    {
+      "kind": "score-after",
+      "value": 1,
+      "count": 2,
+      "newName": "plusScore2",
+      "newDepth": 2
+    },
+    {
+      "kind": "score-before",
+      "value": 1,
+      "count": 2,
+      "oldName": "",
+      "oldDepth": ""
+    },
+    {
+      "kind": "score-after",
+      "value": 1,
+      "count": 3,
+      "newName": "plusScore3",
+      "newDepth": 3
+    },
+    {
+      "kind": "before-life",
+      "rootframe": 15,
+      "life": 5,
+      "score": 3,
+      "stageName": "gameStage",
+      "floor": 0,
+      "bingos": 5,
+      "row": 9
+    },
+    {
+      "kind": "after-life",
+      "rootframe": 15,
+      "life": 4,
+      "score": 3,
+      "stageName": "gameStage",
+      "stageFrame": 1,
+      "stageY": 420,
+      "oldFloor": 0,
+      "oldBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "scopeFloor": 0,
+      "scopeBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "parent": "_level0",
+      "rootStage": "_level0.gameStage",
+      "cachedRow": 9
+    },
+    {
+      "kind": "reward-entry",
+      "rootframe": 15,
+      "life": 4,
+      "score": 3,
+      "i": 0,
+      "scopeFloor": 0,
+      "row": 9,
+      "oldName": "gameStage"
+    },
+    {
+      "kind": "before-life",
+      "rootframe": 15,
+      "life": 4,
+      "score": 3,
+      "stageName": "gameStage",
+      "floor": 0,
+      "bingos": 5,
+      "row": 9
+    },
+    {
+      "kind": "after-life",
+      "rootframe": 15,
+      "life": 3,
+      "score": 3,
+      "stageName": "gameStage",
+      "stageFrame": 1,
+      "stageY": 420,
+      "oldFloor": 0,
+      "oldBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "scopeFloor": 0,
+      "scopeBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "parent": "_level0",
+      "rootStage": "_level0.gameStage",
+      "cachedRow": 9
+    },
+    {
+      "kind": "reward-entry",
+      "rootframe": 15,
+      "life": 3,
+      "score": 3,
+      "i": 0,
+      "scopeFloor": 0,
+      "row": 9,
+      "oldName": "gameStage"
+    },
+    {
+      "kind": "before-life",
+      "rootframe": 15,
+      "life": 3,
+      "score": 3,
+      "stageName": "gameStage",
+      "floor": 0,
+      "bingos": 5,
+      "row": 9
+    },
+    {
+      "kind": "after-life",
+      "rootframe": 15,
+      "life": 2,
+      "score": 3,
+      "stageName": "gameStage",
+      "stageFrame": 1,
+      "stageY": 420,
+      "oldFloor": 0,
+      "oldBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "scopeFloor": 0,
+      "scopeBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "parent": "_level0",
+      "rootStage": "_level0.gameStage",
+      "cachedRow": 9
+    },
+    {
+      "kind": "reward-entry",
+      "rootframe": 15,
+      "life": 2,
+      "score": 3,
+      "i": 0,
+      "scopeFloor": 0,
+      "row": 9,
+      "oldName": "gameStage"
+    },
+    {
+      "kind": "before-life",
+      "rootframe": 15,
+      "life": 2,
+      "score": 3,
+      "stageName": "gameStage",
+      "floor": 0,
+      "bingos": 5,
+      "row": 9
+    },
+    {
+      "kind": "after-life",
+      "rootframe": 15,
+      "life": 1,
+      "score": 3,
+      "stageName": "gameStage",
+      "stageFrame": 1,
+      "stageY": 420,
+      "oldFloor": 0,
+      "oldBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "scopeFloor": 0,
+      "scopeBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "parent": "_level0",
+      "rootStage": "_level0.gameStage",
+      "cachedRow": 9
+    },
+    {
+      "kind": "reward-entry",
+      "rootframe": 15,
+      "life": 1,
+      "score": 3,
+      "i": 0,
+      "scopeFloor": 0,
+      "row": 9,
+      "oldName": "gameStage"
+    },
+    {
+      "kind": "before-life",
+      "rootframe": 15,
+      "life": 1,
+      "score": 3,
+      "stageName": "gameStage",
+      "floor": 0,
+      "bingos": 5,
+      "row": 9
+    },
+    {
+      "kind": "after-life",
+      "rootframe": 15,
+      "life": 0,
+      "score": 3,
+      "stageName": "gameStage",
+      "stageFrame": 1,
+      "stageY": 420,
+      "oldFloor": 0,
+      "oldBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "scopeFloor": 0,
+      "scopeBingos": "bingo0,bingo1,bingo2,bingo3,bingo4,bingo8,bingo9,bingo10,bingo11,bingo12,bingo13,bingo14,bingo15,bingo16,bingo17,bingo18,bingo19,bingo20,bingo21,bingo22,bingo23,bingo24,bingo25,bingo26,bingo27,bingo28,bingo29,bingo30,bingo31,bingo32,bingo33,bingo34,bingo35,bingo36,bingo37,bingo38,bingo39,bingo40,bingo41,bingo42,bingo43,bingo44,bingo45,bingo46,bingo47,bingo48",
+      "parent": "_level0",
+      "rootStage": "_level0.gameStage",
+      "cachedRow": 9
+    },
+    {
+      "kind": "reward-entry",
+      "rootframe": 15,
+      "life": 0,
+      "score": 3,
+      "i": 0,
+      "scopeFloor": 0,
+      "row": 9,
+      "oldName": "gameStage"
+    },
+    {
+      "kind": "before-life",
+      "rootframe": 15,
+      "life": 0,
+      "score": 3,
+      "stageName": "gameStage",
+      "floor": 0,
+      "bingos": 5,
+      "row": 9
+    }
+  ]
+}

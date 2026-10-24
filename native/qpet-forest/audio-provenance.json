@@ -1,0 +1,294 @@
+{
+  "sourceSHA256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b",
+  "metadata": {
+    "1": {
+      "rate": 22050,
+      "samples": 26496,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 4791,
+      "sha256": "f8dc074abe11545e5026f2aaa65d9934714b4432e88e1980893a8d31dfc8738d"
+    },
+    "2": {
+      "rate": 11025,
+      "samples": 11934,
+      "seekSamples": 1633,
+      "channels": 1,
+      "bytes": 2600,
+      "sha256": "90d2a8048abd51cbbf8a9b83ebb568ab50ef9a4ce1d9693ff68ec109dd5025de"
+    },
+    "222": {
+      "rate": 44100,
+      "samples": 31104,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 11284,
+      "sha256": "24421c2259ed7cfaf16a452fbbdc7199abe9d87f69d57f4258b378dae21e4804"
+    },
+    "223": {
+      "rate": 44100,
+      "samples": 31104,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 11284,
+      "sha256": "07102afd884c382232ef934fc5739acff092f300ffea0077e001cbae84980efb"
+    },
+    "225": {
+      "rate": 22050,
+      "samples": 274909,
+      "seekSamples": 1669,
+      "channels": 1,
+      "bytes": 62660,
+      "sha256": "f44dfb91a1b78d05d8aafecf536e2a67e1551178722eed93ae119f560acb7691"
+    },
+    "241": {
+      "rate": 11025,
+      "samples": 15552,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 3328,
+      "sha256": "7e8e1c1e0a4b49187f68f98ad2a6e09fd4fa960d64ab6a71495772d579504852"
+    },
+    "335": {
+      "rate": 11025,
+      "samples": 16704,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 3536,
+      "sha256": "6406710bddc3651c628a3dde0ef7718cc29ee12159d43ed77691e9011ff0c790"
+    },
+    "486": {
+      "rate": 44100,
+      "samples": 222336,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 80666,
+      "sha256": "88e059658b95cc7275a4e710104c02df1f6d4f8b816d1c494abac1437dda8de8"
+    },
+    "495": {
+      "rate": 11025,
+      "samples": 4608,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 839,
+      "sha256": "c4e6093a22af08923fbc66489ae0c12ae59d7f2bf58d432f0a9ec566594f58c0"
+    },
+    "496": {
+      "rate": 22050,
+      "samples": 37440,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 6767,
+      "sha256": "0fb52c7136561effed94a1fcd2037b9de8301457f7344199036df2fa39191a02"
+    },
+    "497": {
+      "rate": 11025,
+      "samples": 17280,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 3127,
+      "sha256": "8ba9e71b31f07bbc68c5af010a02cf809c95622037c40de618a87ed71e8aa809"
+    }
+  },
+  "timelineEvents": [
+    {
+      "timeline": "224",
+      "frame": 2,
+      "id": "222",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "224",
+      "frame": 12,
+      "id": "223",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "root",
+      "frame": 1,
+      "id": "225",
+      "options": {
+        "noMultiple": true,
+        "stop": false,
+        "loops": 32767,
+        "envelope": [
+          {
+            "leftLevel": 13580,
+            "pos44": 0,
+            "rightLevel": 13875
+          }
+        ]
+      }
+    },
+    {
+      "timeline": "256",
+      "frame": 2,
+      "id": "241",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "343",
+      "frame": 195,
+      "id": "335",
+      "options": {
+        "noMultiple": false,
+        "stop": false,
+        "envelope": [
+          {
+            "leftLevel": 19484,
+            "pos44": 0,
+            "rightLevel": 19188
+          }
+        ]
+      }
+    },
+    {
+      "timeline": "421",
+      "frame": 204,
+      "id": "335",
+      "options": {
+        "noMultiple": false,
+        "stop": false,
+        "envelope": [
+          {
+            "leftLevel": 24207,
+            "pos44": 0,
+            "rightLevel": 24207
+          }
+        ]
+      }
+    },
+    {
+      "timeline": "487",
+      "frame": 2,
+      "id": "222",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "487",
+      "frame": 11,
+      "id": "486",
+      "options": {
+        "noMultiple": true,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "487",
+      "frame": 12,
+      "id": "223",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "root",
+      "frame": 4,
+      "id": "486",
+      "options": {
+        "noMultiple": false,
+        "stop": true
+      }
+    },
+    {
+      "timeline": "498",
+      "frame": 1,
+      "id": "495",
+      "options": {
+        "noMultiple": false,
+        "stop": false,
+        "envelope": [
+          {
+            "leftLevel": 25093,
+            "pos44": 0,
+            "rightLevel": 24797
+          }
+        ]
+      }
+    },
+    {
+      "timeline": "498",
+      "frame": 10,
+      "id": "496",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "498",
+      "frame": 47,
+      "id": "497",
+      "options": {
+        "noMultiple": true,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "512",
+      "frame": 2,
+      "id": "241",
+      "options": {
+        "noMultiple": false,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "root",
+      "frame": 52,
+      "id": "496",
+      "options": {
+        "noMultiple": true,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "root",
+      "frame": 76,
+      "id": "496",
+      "options": {
+        "noMultiple": true,
+        "stop": false
+      }
+    },
+    {
+      "timeline": "root",
+      "frame": 122,
+      "id": "486",
+      "options": {
+        "noMultiple": true,
+        "stop": false
+      }
+    }
+  ],
+  "linkage": {
+    "npcHurt": "1",
+    "getBingo": "2",
+    "FScrollBarSymbol": "41",
+    "FlashGuard": "57",
+    "FUIComponentSymbol": "58",
+    "UpArrow": "91",
+    "ScrollThumb": "111",
+    "DownArrow": "136",
+    "plusScore": "141"
+  },
+  "stream": {
+    "headCount": 150,
+    "blockCount": 0,
+    "allHeadsZeroSamplePCM": true,
+    "note": "No stream blocks or samples exist; no fabricated stream audio."
+  }
+}

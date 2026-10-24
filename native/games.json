@@ -1,0 +1,56 @@
+[
+  {
+    "id": "qpet-match",
+    "title": "Q宠速配",
+    "path": "",
+    "preview": "preview-native",
+    "candidate": "minitool-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-014"
+  },
+  {
+    "id": "magpie-bridge",
+    "title": "搭鹊桥",
+    "path": "magpie-bridge",
+    "preview": "preview-magpie",
+    "candidate": "minitool-magpie-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-002"
+  },
+  {
+    "id": "qpet-racing",
+    "title": "QQ飞车（宠爱飞车）",
+    "path": "qpet-racing",
+    "preview": "preview-racing",
+    "candidate": "minitool-racing-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-003"
+  },
+  {
+    "id": "qpet-forest",
+    "title": "宠爱森林",
+    "path": "qpet-forest",
+    "preview": "preview-forest",
+    "candidate": "minitool-forest-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/happy-forest"
+  },
+  {
+    "id": "qpet-qqtang",
+    "title": "宠爱QQ堂",
+    "path": "qpet-qqtang",
+    "preview": "preview-qqtang",
+    "candidate": "minitool-qqtang-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/happy-qqtang"
+  },
+  {
+    "id": "qpet-dungeon",
+    "title": "地下城与勇士 · Q宠版",
+    "path": "qpet-dungeon",
+    "preview": "preview-dungeon",
+    "candidate": "minitool-dungeon-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/happy-dungeon"
+  }
+]

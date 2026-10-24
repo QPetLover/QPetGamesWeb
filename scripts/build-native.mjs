@@ -7,12 +7,13 @@ import {createHash} from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const game = process.argv.find(arg=>arg.startsWith('--game='))?.slice(7) || 'qpet-match';
-assert(['qpet-match','magpie-bridge','qpet-racing'].includes(game),'Unknown native game');
+const catalog=JSON.parse(await readFile(path.join(root,'native/games.json'),'utf8'));
+const entry=catalog.find(item=>item.id===game);
+assert(entry,'Unknown native game');
 const source = path.join(root, 'native',game);
 // Public deployment copies this native build; the minitool candidate stays separate.
 const xhs = process.argv.includes('--xhs');
-const folders={'qpet-match':['preview-native','minitool-candidate'],'magpie-bridge':['preview-magpie','minitool-magpie-candidate'],'qpet-racing':['preview-racing','minitool-racing-candidate']};
-const output = path.join(root,folders[game][xhs?1:0]);
+const output = path.join(root,xhs?entry.candidate:entry.preview);
 await rm(output, {recursive: true, force: true});
 await mkdir(output, {recursive: true});
 const license=await readFile(path.join(root,'licenses/FFDEC-GPL-3.0.txt'),'utf8');
@@ -21,6 +22,16 @@ await build({entryPoints:[path.join(source,'app.js')],bundle:true,format:'iife',
   outfile:path.join(output,'app.js'),minify:false,legalComments:'inline',charset:'utf8',banner:{js:notice}});
 let html = await readFile(path.join(source,'index.html'),'utf8');
 html = html.replace('type="module" src="app.js"','defer src="app.js"');
+if(entry.path==='') {
+  const marker='<!-- published-game-links -->';
+  assert.equal(html.split(marker).length,2,'One published game-list placeholder on the home page');
+  const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const links=catalog.filter(item=>item.published).map(item=>{
+    const href=item.path?item.path+'/':'./';
+    return `<div data-game="${escapeHtml(item.id)}"><a href="${escapeHtml(href)}"${item.id===game?' aria-current="page"':''}>${escapeHtml(item.title)}</a><a href="${escapeHtml(item.original)}" target="_blank" rel="noopener noreferrer">原版对照 ↗</a></div>`;
+  }).join('');
+  html=html.replace(marker,links);
+}
 if (xhs) html = html.replace(/<!-- web-only:start -->[\s\S]*?<!-- web-only:end -->/g, '');
 else {
   // A new deploy must not silently keep executing an older cached bundle.

@@ -1,0 +1,46 @@
+{
+  "sourceSHA256": "c8b38507e58d1d0b9aedcdd356c91b5638333253654c6508ab505161e5c9630a",
+  "probeSHA256": "f993bba371e3b0e628206eea142ea8a1811e28a068407425d481b7c6bbc2d4c6",
+  "runtime": "Ruffle0.5.0 Chrome sex2, public Space3300ms then release",
+  "callbackOrder": [
+    {
+      "type": "bomb",
+      "name": "bomb7_12",
+      "heroNum": 2,
+      "depth": 995,
+      "counter": 6
+    },
+    {
+      "type": "bomb",
+      "name": "bomb7_1",
+      "heroNum": 1,
+      "depth": 1105,
+      "counter": 6
+    },
+    {
+      "type": "hero",
+      "name": "hero4",
+      "heroNum": 4,
+      "depth": 146,
+      "counter": 6
+    },
+    {
+      "type": "hero",
+      "name": "hero3",
+      "heroNum": 3,
+      "depth": 267,
+      "counter": 6
+    },
+    {
+      "type": "hero",
+      "name": "hero2",
+      "heroNum": 2,
+      "depth": 998,
+      "counter": 6
+    }
+  ],
+  "unloadedClipObservations": [
+    "QT|hurt-after|61|undefined|undefined|undefined|undefined|undefined|undefined|undefined|undefined|1|0|undefined|undefined|undefined|undefined|undefined|undefined|undefined|undefined|undefined|undefined|undefined"
+  ],
+  "interpretation": "Bombs created2 then1 execute before original heroes4/3/2; current depths995/1105/146/267/998 are not sorted. hurt-after old hero dynamic/builtin fields all undefined."
+}
