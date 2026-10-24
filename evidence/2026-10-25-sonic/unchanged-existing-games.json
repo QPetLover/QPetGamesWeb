@@ -1,0 +1,17 @@
+{
+  "files_unchanged": [
+    "dist/style.css",
+    "dist/app.js",
+    "dist/qpet-qqtang/style.css",
+    "dist/qpet-qqtang/app.js",
+    "dist/qpet-racing/style.css",
+    "dist/qpet-racing/app.js",
+    "dist/qpet-forest/style.css",
+    "dist/qpet-forest/app.js",
+    "dist/qpet-dungeon/style.css",
+    "dist/qpet-dungeon/app.js",
+    "dist/magpie-bridge/style.css",
+    "dist/magpie-bridge/app.js"
+  ],
+  "script_sha256": "47502c482a32f748345a99f55e4f9219222977ac4d20b6ed8c0974b1271c0a27"
+}

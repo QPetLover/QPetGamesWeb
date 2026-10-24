@@ -52,5 +52,16 @@
     "candidate": "minitool-dungeon-candidate",
     "published": true,
     "original": "https://qpetlover.cn/QPetGames/#/play/happy-dungeon"
+  },
+  {
+    "id": "qpet-sonic",
+    "title": "Q宠爱音速",
+    "path": "qpet-sonic",
+    "preview": "preview-sonic",
+    "candidate": "minitool-sonic-candidate",
+    "published": true,
+    "builder": "embedded-python",
+    "original": "qpet-sonic/#version-notes",
+    "comparisonLabel": "版本与来源"
   }
 ]

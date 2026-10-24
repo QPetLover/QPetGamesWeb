@@ -44,6 +44,10 @@ Noto 字形采用 **SIL Open Font License 1.1**，Copyright 2022 The Noto Projec
 
 ## JPEXS FFDec
 
+### Q宠爱音速
+
+音速使用经用户明确选择的人类角色同源版本，来源 `https://img1.yo4399.com/fl_8/20100705/5.swf`，4,252,418字节，SHA-256 `dd090edfc4d3161b10279b860abfa4a2964487089bccf02f22aac5a2d48bfd0d`。760×420、30fps；三关、障碍序列、规则、原声及嵌入字形由此迁移。企鹅、头像、鼓励和结算角色为参照腾讯历史截图补制的新素材，不能称为找回的原素材。菜单题字轮廓与源中未嵌入的企鹅专属文字为近似绘制。详细身份和各素材哈希见 [`native/qpet-sonic/provenance.json`](native/qpet-sonic/provenance.json)。企鹅原始 SWF 尚未找回，公开目录链接为版本来源说明。原素材与字体权利归原权利人。
+
 [FFDec 26.4.0](https://github.com/jindrapetrik/jpexs-decompiler) 用于构建前导出。`assets/artwork.js` 包含其 Canvas 绘制辅助代码及修改后的静态符号派发、渐变与文字修正。FFDec 的 GPL-3.0 许可证完整副本见 [licenses/FFDEC-GPL-3.0.txt](licenses/FFDEC-GPL-3.0.txt)。本仓库保留可读修改源码，不将原始 ActionScript 字节码、解释器或 Flash 虚拟机打入网页。
 
 ## 对照字体

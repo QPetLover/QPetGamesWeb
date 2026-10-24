@@ -1,0 +1,447 @@
+{
+  "source_url": "https://img1.yo4399.com/fl_8/20100705/5.swf",
+  "source_page": "https://www.u7u9.com/flash/play/709950",
+  "bytes": 4252418,
+  "sha256": "dd090edfc4d3161b10279b860abfa4a2964487089bccf02f22aac5a2d48bfd0d",
+  "swf_version": 6,
+  "width": 760,
+  "height": 420,
+  "fps": 30,
+  "root_frames": 5,
+  "identity": "human-character derivative; penguin art replacement explicitly authorized as substitute",
+  "source_evidence_project": "../10-22-qpet-sonic-archive",
+  "original_penguin_swf_recovered": false,
+  "artwork_manifest": {
+    "source_sha256": "dd090edfc4d3161b10279b860abfa4a2964487089bccf02f22aac5a2d48bfd0d",
+    "generator": "JPEXS FFDec 26.4.0 static Canvas export, adapted by build_artwork.py",
+    "symbols": 273,
+    "bitmaps": [
+      {
+        "id": 216,
+        "file": "images/216.png",
+        "bytes": 11698,
+        "sha256": "e4db041b7302239ce46ef23257f04d2250d03486af50f6c607e43e4caa7f3f2d"
+      },
+      {
+        "id": 218,
+        "file": "images/218.png",
+        "bytes": 1315,
+        "sha256": "c35e2b5ee23d641a6a895da50146f1e50ce9b795dc264d1d4714ce3a386d3f85"
+      },
+      {
+        "id": 223,
+        "file": "images/223.png",
+        "bytes": 12326,
+        "sha256": "414188a06825b2e707deea008a19e3c1bc1d802f77d9756955591e94110412a0"
+      },
+      {
+        "id": 225,
+        "file": "images/225.png",
+        "bytes": 25566,
+        "sha256": "c9f7b92756e4ae6663f3b50148afa05e7a7fe63f00b823988ac18f4582178bf0"
+      },
+      {
+        "id": 227,
+        "file": "images/227.png",
+        "bytes": 6733,
+        "sha256": "15fabed608cd7a82933b4ddc87f8adc6cce28588e9185515dcf1c5c842de5c87"
+      },
+      {
+        "id": 230,
+        "file": "images/230.png",
+        "bytes": 14507,
+        "sha256": "6be6b75c13e45946765e10c84d94a5be0a49a797aa503504c9f447b487cef93d"
+      },
+      {
+        "id": 233,
+        "file": "images/233.png",
+        "bytes": 8853,
+        "sha256": "cdeef42e7860d299d9d8193ca7478317ef3d5d321680f4e0e83e8f701d222b6e"
+      },
+      {
+        "id": 238,
+        "file": "images/238.png",
+        "bytes": 299138,
+        "sha256": "c822b68e11c19c4408f73666a7b47848c0bc303d414bef8bd3077c114d4f2179"
+      },
+      {
+        "id": 240,
+        "file": "images/240.png",
+        "bytes": 63428,
+        "sha256": "f78e7adc1b11497c855a0f4c42b44166239b47010f2d10cfc4c3722cc28584fb"
+      },
+      {
+        "id": 242,
+        "file": "images/242.png",
+        "bytes": 32371,
+        "sha256": "df73c60bb7208942f4046e6a79f06d27e332258e34203acbac31057492352770"
+      },
+      {
+        "id": 245,
+        "file": "images/245.png",
+        "bytes": 13277,
+        "sha256": "becd190bc1c8ce2f9408ef9bb522903aae80b8be0a077975e1e444fcf33fdf46"
+      },
+      {
+        "id": 247,
+        "file": "images/247.png",
+        "bytes": 22764,
+        "sha256": "46747b778138194e7bb592f685e1fcdaa3bca44f8f24ec8b6ddf2e2256bb050f"
+      },
+      {
+        "id": 250,
+        "file": "images/250.png",
+        "bytes": 5818,
+        "sha256": "69e6b043c28eaadb7932566cd1e9bf53444029b91668fad7eab5da0aac325cf3"
+      },
+      {
+        "id": 252,
+        "file": "images/252.png",
+        "bytes": 5812,
+        "sha256": "4a2b7b22c531f0068a5a4795d83a09e1cb90a3a0c3d6a211561ad6bf0c79c1f2"
+      },
+      {
+        "id": 254,
+        "file": "images/254.png",
+        "bytes": 5745,
+        "sha256": "1ce2efddd6823e2b37f11444fb32cc168fda766b88981a30b642d81eccb9847c"
+      },
+      {
+        "id": 256,
+        "file": "images/256.png",
+        "bytes": 5892,
+        "sha256": "042f0c7a08ca95e5a644781ba7dc6dcb453f9c615f9755c5bad19ae60b7482ee"
+      },
+      {
+        "id": 259,
+        "file": "images/259.png",
+        "bytes": 288706,
+        "sha256": "287073386b4861e0732a413b76cbfeab9a65acb2f6eaedc78b72a4b854e9ba8f"
+      },
+      {
+        "id": 261,
+        "file": "images/261.png",
+        "bytes": 39788,
+        "sha256": "023bd17e2deb20c98b033e17dd72ed1d381a997cc39eb8bb932d991a8bee3a4e"
+      },
+      {
+        "id": 264,
+        "file": "images/264.png",
+        "bytes": 5529,
+        "sha256": "40662d140f08e1ec53f58236d0a345fb2ddd813c0cc528c3322a10f9e394c151"
+      },
+      {
+        "id": 267,
+        "file": "images/267.jpg",
+        "bytes": 15808,
+        "sha256": "d6fc4e2f06cb123e1a1651a5db55ec1de139a0afde4e142a0f53d882c04e27ad"
+      },
+      {
+        "id": 442,
+        "file": "images/442.png",
+        "bytes": 11056,
+        "sha256": "58d314166a6c74781e8a8cf218935a180bb3b5a89dee1582428d2c949a5e3c0e"
+      },
+      {
+        "id": 446,
+        "file": "images/446.png",
+        "bytes": 11400,
+        "sha256": "67a6aabd310180f36ebd4cc428564e3ed9fb05d76237e899244df34e0914afca"
+      },
+      {
+        "id": 448,
+        "file": "images/448.png",
+        "bytes": 21652,
+        "sha256": "163916e5274e197d9743a024f4ebb1c65681bd2043765657105404a724613459"
+      },
+      {
+        "id": 450,
+        "file": "images/450.png",
+        "bytes": 7204,
+        "sha256": "b9ec035a876a36a2ab1a9f88c849ba9944afb5b31bc6d0a43f6a622faa07353c"
+      },
+      {
+        "id": 453,
+        "file": "images/453.png",
+        "bytes": 14365,
+        "sha256": "692c5f2124cb214cdce7376de1bb0051b6479142d499be8954ca30d166b7ffce"
+      },
+      {
+        "id": 456,
+        "file": "images/456.png",
+        "bytes": 7521,
+        "sha256": "b804012cb8628b3f43f3c8b6a8b17246d3de1cb2e7dae35b61d6dda74319df7c"
+      },
+      {
+        "id": 462,
+        "file": "images/462.png",
+        "bytes": 10806,
+        "sha256": "810ac85c07825599e40a3c73cccfd5da2891fff79021758940abc267923daedb"
+      },
+      {
+        "id": 464,
+        "file": "images/464.png",
+        "bytes": 25815,
+        "sha256": "eaea824ed76a34867a1f72c5d34a49b6893425954d176762f3ed4b60da450eca"
+      },
+      {
+        "id": 466,
+        "file": "images/466.png",
+        "bytes": 6065,
+        "sha256": "0db99752595c298ff1dcbc56fdbc8c425060d1e0a8e6daaa5454ea2959e39dcd"
+      },
+      {
+        "id": 469,
+        "file": "images/469.png",
+        "bytes": 12489,
+        "sha256": "6bac2f1c53a5547755bdbea19512d644ec7d221a8e9af138f5cc399a4e6eb491"
+      },
+      {
+        "id": 472,
+        "file": "images/472.png",
+        "bytes": 6003,
+        "sha256": "bf15b8a26455a41100bd096bcfc63f48950a95f26cc695c31802c3cf464d37e5"
+      },
+      {
+        "id": 476,
+        "file": "images/476.png",
+        "bytes": 677,
+        "sha256": "8357996d4f1f25d1126c35ee99ca3d232cb3d63b3e72fd92d73374226b64b193"
+      },
+      {
+        "id": 508,
+        "file": "images/508.png",
+        "bytes": 1091,
+        "sha256": "976b5caaf4154f437ff690332149d1ccb103cb28713bd3f19d140a936907143d"
+      },
+      {
+        "id": 519,
+        "file": "images/519.png",
+        "bytes": 1066,
+        "sha256": "60ec49c18dfef5ee511e10c9a8d5c889b840ef840815b7bb394c980cefa095c8"
+      },
+      {
+        "id": 523,
+        "file": "images/523.png",
+        "bytes": 3667,
+        "sha256": "50d4c786d7074f20b4d9149d3addd2fe75da419efcfc2a00ab5dc752f60fa8f8"
+      },
+      {
+        "id": 526,
+        "file": "images/526.png",
+        "bytes": 506,
+        "sha256": "962586e46be7cb337bfd15968ea6c6de1f18b975fc451c263d1bdee2aa2c5d74"
+      },
+      {
+        "id": 529,
+        "file": "images/529.png",
+        "bytes": 834,
+        "sha256": "2fb9200d00d482e94d205890a70ecdbd8f192364df14c709d9267680b37446f3"
+      },
+      {
+        "id": 530,
+        "file": "images/530.png",
+        "bytes": 2117,
+        "sha256": "1135351f034db6182880864a737bb0a9d9699cd242f1e76f0a523484bb1d0917"
+      },
+      {
+        "id": 547,
+        "file": "images/547.png",
+        "bytes": 9353,
+        "sha256": "736f63ba8ce33c9cdaa56ff2f45da4d17eb0f098b9155b8be7141708fd5140e2"
+      },
+      {
+        "id": 562,
+        "file": "images/562.png",
+        "bytes": 7721,
+        "sha256": "3a6e83a0079bf718b71eac9cb31394c0e11358374489ae30ec6e1a85fbf580ac"
+      },
+      {
+        "id": 564,
+        "file": "images/564.png",
+        "bytes": 7862,
+        "sha256": "9b40a933de43dd3731e2ac141f21be86d9876bdfef640b78fef514562399c0a4"
+      },
+      {
+        "id": 566,
+        "file": "images/566.png",
+        "bytes": 7336,
+        "sha256": "12cb373544824430f2590c7cea3f67ee0690921b89431ff0e2e923cfebefbef1"
+      },
+      {
+        "id": 568,
+        "file": "images/568.png",
+        "bytes": 7112,
+        "sha256": "e5e17773dbeb8814bc94a88cba519732152d962dcfd2018b9e3223eacd41131d"
+      },
+      {
+        "id": 570,
+        "file": "images/570.png",
+        "bytes": 6867,
+        "sha256": "f62edd8fed32ef59509c2ef7f778670dafff6af93e5216c61f200d205038e483"
+      },
+      {
+        "id": 572,
+        "file": "images/572.png",
+        "bytes": 6915,
+        "sha256": "c73f8f5d21359d81e264cef040646aea53b1de92bffe410f93fad87c74024c47"
+      },
+      {
+        "id": 574,
+        "file": "images/574.png",
+        "bytes": 6837,
+        "sha256": "126f57b2459ba74783aea06ed5d021fcad9b6d9a361620b40eaf4f09f7f246ce"
+      },
+      {
+        "id": 576,
+        "file": "images/576.png",
+        "bytes": 7099,
+        "sha256": "36383c9f6236b7a773cdf2847817f95f5691462a58597836fb698532c1211b95"
+      },
+      {
+        "id": 579,
+        "file": "images/579.png",
+        "bytes": 2530,
+        "sha256": "f35d232276bf06fc3c877f5c08b32f5f690738f42669e7ec37d4e925812c5b10"
+      },
+      {
+        "id": 633,
+        "file": "images/633.png",
+        "bytes": 7725,
+        "sha256": "220a69109e4fa5f002141b66f8233c9c6a1828e8b6e2895dd7690080ae23e626"
+      },
+      {
+        "id": 644,
+        "file": "images/644.png",
+        "bytes": 3951,
+        "sha256": "652e2baeef6734672b4343e7bac57edfa5c88af9c8646828ec23938b1ac4ca20"
+      },
+      {
+        "id": 649,
+        "file": "images/649.png",
+        "bytes": 512,
+        "sha256": "167321aa927c0d3a5a4c9f05fd1ea5801b09a9bb65415d63dc7b042b79e4aec3"
+      },
+      {
+        "id": 742,
+        "file": "images/742.png",
+        "bytes": 48867,
+        "sha256": "55978cb4551ac0d90c9cd4b669c1398225f77d139ff177a8c822f3dfcb5fadad"
+      }
+    ],
+    "module_bytes": 2213669,
+    "module_sha256": "8129bf7aee782314b5c5d2d490a942d2b27ccdab4b76339d37b47d08cb9d8f29"
+  },
+  "screenshots": [
+    {
+      "reference": "tencent-04.jpg",
+      "bytes": 105331,
+      "sha256": "b7dd5df0cb1cd0ab2145ffd51495b5ede367fd3d0ccafd690cf81d633bd8f41d",
+      "source": "Tencent historical QQ Pet launch screenshots, archived act/happy_v/index2.shtml; local archive project",
+      "role": "layout reference only; not enlarged into the current game",
+      "preserved_reference": "reference/old-ui-screenshots/menu-reference.jpg"
+    },
+    {
+      "reference": "tencent-03.jpg",
+      "bytes": 70053,
+      "sha256": "3d366d2e361789a408a54025a9dfd2386f2aad0e66286bba017b01f8bdf7781e",
+      "source": "Tencent historical QQ Pet launch screenshots, archived act/happy_v/index2.shtml; local archive project",
+      "role": "layout reference only; not enlarged into the current game",
+      "preserved_reference": "reference/old-ui-screenshots/portrait-reference.jpg"
+    },
+    {
+      "reference": "tencent-08.jpg",
+      "bytes": 63526,
+      "sha256": "8b1fb8c347fd8d9bb23790ab4c498f68df969fb64aec53f7a468f2795d970a90",
+      "source": "Tencent historical QQ Pet launch screenshots, archived act/happy_v/index2.shtml; local archive project",
+      "role": "layout reference only; not enlarged into the current game",
+      "preserved_reference": "reference/old-ui-screenshots/ending-reference.jpg"
+    }
+  ],
+  "new_character_assets": [
+    {
+      "file": "penguin-sheet.png",
+      "sha256": "58b6fe2f3de06b6619b9681d67f76b6e51ed1da7e82c66aedc374ca3bca4e1a8",
+      "generator": "built-in image_gen",
+      "identity": "new artwork based on historical screenshots; not recovered original"
+    },
+    {
+      "file": "penguin-front.png",
+      "sha256": "8eb4edfd46c539e583a15b7e2a42c9cef942796e75e5a3b825f8d908e2929017",
+      "generator": "built-in image_gen",
+      "identity": "new artwork based on historical screenshots; not recovered original"
+    },
+    {
+      "file": "penguin-hud-cheer.png",
+      "sha256": "881c8d600f22797840369263548a69427ff01e38d07dd30a020efa6818dc2615",
+      "generator": "built-in image_gen",
+      "identity": "new HD portrait and three pom-pom cheer poses, based on Tencent03/07; not recovered original artwork"
+    }
+  ],
+  "front_atlas_regions": [
+    [
+      235,
+      105,
+      460,
+      435
+    ],
+    [
+      880,
+      53,
+      464,
+      490
+    ],
+    [
+      130,
+      576,
+      679,
+      420
+    ],
+    [
+      972,
+      635,
+      342,
+      360
+    ]
+  ],
+  "known_differences": [
+    "skating and ending characters are newly reconstructed",
+    "local start replaces discontinued QQ authentication",
+    "old scores/ranking/exchange service unavailable",
+    "touch/pause/local best are native adaptations",
+    "native vector menu and replacement HD characters follow historical screenshot layout; original wordmark contours are approximate"
+  ],
+  "fonts": {
+    "159": "source embedded YouYuan outlines for available menu/button characters",
+    "511": "source Arial Black score outlines",
+    "513": "source rounded bold stage-number outlines",
+    "other_ui": "source static text paths",
+    "missing_penguin_words": "rounded system-font fallback; title contours approximate"
+  },
+  "hud_cheer_regions": [
+    [
+      60,
+      65,
+      550,
+      555
+    ],
+    [
+      615,
+      105,
+      630,
+      515
+    ],
+    [
+      40,
+      660,
+      610,
+      525
+    ],
+    [
+      650,
+      655,
+      595,
+      535
+    ]
+  ]
+}

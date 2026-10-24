@@ -46,6 +46,7 @@ def verify_home_links(html,catalog):
         assert ''.join(native['text'])==game['title'],f"{game['id']}: incorrect title"
         assert native_attrs.get('aria-current')==('page' if game['id']==home[0]['id'] else None),f"{game['id']}: incorrect current-page label"
         assert original_attrs.get('href')==game['original'],f"{game['id']}: incorrect original comparison"
+        assert ''.join(original['text'])==game.get('comparisonLabel','原版对照')+' ↗',f"{game['id']}: incorrect comparison label"
         assert original_attrs.get('target')=='_blank' and {'noopener','noreferrer'}<=set(original_attrs.get('rel','').split()),f"{game['id']}: original-link isolation"
     for game in catalog:
         if not game['published']:
@@ -65,7 +66,8 @@ for game in games:
     folder=(game['path']+'/') if game['path'] else ''
     expected.update(folder+name for name in ['index.html','app.js','style.css'])
     source=root/'native'/game['id']/'assets'
-    expected.update(folder+path.relative_to(root/'native'/game['id']).as_posix() for path in source.rglob('*') if path.is_file() and path.suffix in media)
+    if game.get('builder')!='embedded-python':
+        expected.update(folder+path.relative_to(root/'native'/game['id']).as_posix() for path in source.rglob('*') if path.is_file() and path.suffix in media)
 actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
 assert actual==expected, f'Unexpected release files: {actual ^ expected}'
 for game in games:

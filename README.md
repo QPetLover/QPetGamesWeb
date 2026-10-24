@@ -1,6 +1,6 @@
 # Q宠游戏 · QPetGamesWeb
 
-**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
+**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版、Q宠爱音速**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
 
 | 游戏 | 原生网页 | 原版对照 | 实现与验证范围 |
 | --- | --- | --- | --- |
@@ -10,8 +10,9 @@
 | 宠爱森林 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-forest/) | [happy-forest](https://qpetlover.cn/QPetGames/#/play/happy-forest) | [迁移说明](native/qpet-forest/README.md)：五张原关卡；公开输入首关过关，未声称五关自然连胜 |
 | 宠爱QQ堂 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-qqtang/) | [happy-qqtang](https://qpetlover.cn/QPetGames/#/play/happy-qqtang) | [迁移说明](native/qpet-qqtang/README.md)：五张原地图、单／双人及原道具；未声称自然串通全部五关 |
 | 地下城与勇士 · Q宠版 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-dungeon/) | [happy-dungeon](https://qpetlover.cn/QPetGames/#/play/happy-dungeon) | [迁移说明](native/qpet-dungeon/README.md)：两角色、三关；“宠爱地下城”正式名称及欢乐谷归属尚未证实 |
+| Q宠爱音速 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-sonic/) | [版本与来源](native/qpet-sonic/provenance.json) | [迁移说明](native/qpet-sonic/README.md)：同源人类版三关、规则与原声迁移，企鹅素材按历史截图补制；企鹅原始SWF仍缺 |
 
-`native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页，首页每个原生入口旁都生成对应的独立原版链接。候选可以单独构建预览，仍不会进入公开首页。原版入口由独立仓库维护，只作为外部对照；此前的 SWF / Ruffle 集合不进入原生发布包，旧 `player.html?game=...` 地址显示下架通知。
+`native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页。已有六款旁保留独立原版链接；音速旁标明「版本与来源」，不将同源人类文件标为企鹅原件。候选可以单独构建预览，仍不会进入公开首页。此前的 SWF / Ruffle 集合不进入原生发布包，旧 `player.html?game=...` 地址显示下架通知。
 
 ## 本地运行
 
@@ -33,6 +34,7 @@ npm start
 - 森林：移动鼠标或拖动手指控制行走，点击本层种子种植，植物长成后点按攀爬；点击下层长成的植物可向下。
 - QQ堂：单人方向键移动、空格放弹；双人 P1 用 WASD／空格，P2 用方向键／回车。手机提供对应双人触控键，建议横屏。
 - 地下城：方向键移动，连续两次同方向可跑，X 攻击、C 跳跃、Z 蓄力技能、回车对话。手机横屏提供两侧操作键。
+- 音速：方向键左右移动、上跳、下蹲；斜向障碍同时按两个方向。保留糖果王国、万圣之夜、圣诞星空三关；手机提供多指方向按钮。
 
 GitHub Pages 工作流先执行测试、构建和校验，再部署 `dist/`。构建从注册表选择已发布游戏，复制其 HTML / JS / CSS 与允许的静态媒体，再加入旧链接通知 `player.html` / `maintenance.css` 和 `.nojekyll`；不会复制历史游戏或模拟器。校验同时核对首页入口顺序、原版链接与候选不可见，并拒绝 SWF / WASM、动态执行和联网 API；部署后可核对线上字节及旧资源 404：
 

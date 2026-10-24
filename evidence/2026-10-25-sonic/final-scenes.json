@@ -1,0 +1,110 @@
+{
+  "passed": true,
+  "method": "production renderer; natural direction-key replay through three full engine levels; explicit start(level,keep) between levels; no clock/health/score writes",
+  "captures": [
+    {
+      "name": "menu",
+      "level": 1,
+      "phase": "menu",
+      "tick": 0,
+      "score": 0,
+      "damage": 1,
+      "sun": {},
+      "buttons": [
+        167,
+        172,
+        185,
+        900
+      ]
+    },
+    {
+      "name": "help",
+      "level": 1,
+      "phase": "menu",
+      "tick": 0,
+      "score": 0,
+      "damage": 1,
+      "sun": {},
+      "buttons": [
+        214
+      ]
+    },
+    {
+      "name": "reward",
+      "level": 1,
+      "phase": "playing",
+      "tick": 1043,
+      "score": 520,
+      "damage": 1,
+      "sun": {
+        "frame": 2,
+        "tick": 17
+      },
+      "buttons": []
+    },
+    {
+      "name": "result-1",
+      "level": 1,
+      "phase": "clear",
+      "tick": 4079,
+      "score": 3330,
+      "damage": 1,
+      "sun": {
+        "frame": 1,
+        "tick": 0
+      },
+      "buttons": [
+        717
+      ]
+    },
+    {
+      "name": "result-2",
+      "level": 2,
+      "phase": "clear",
+      "tick": 4114,
+      "score": 8180,
+      "damage": 1,
+      "sun": {
+        "frame": 1,
+        "tick": 0
+      },
+      "buttons": [
+        717
+      ]
+    },
+    {
+      "name": "result-3",
+      "level": 3,
+      "phase": "victory",
+      "tick": 3782,
+      "score": 13310,
+      "damage": 1,
+      "sun": {
+        "frame": 1,
+        "tick": 0
+      },
+      "buttons": [
+        700,
+        807,
+        808
+      ]
+    },
+    {
+      "name": "failure",
+      "level": 1,
+      "phase": "over",
+      "tick": 1754,
+      "score": 0,
+      "damage": 101,
+      "sun": {
+        "frame": 1,
+        "tick": 0
+      },
+      "buttons": [
+        700,
+        703,
+        708
+      ]
+    }
+  ]
+}

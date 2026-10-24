@@ -1,0 +1,147 @@
+{
+  "result": "passed",
+  "releaseMode": "native-javascript",
+  "games": [
+    "qpet-match",
+    "magpie-bridge",
+    "qpet-racing",
+    "qpet-forest",
+    "qpet-qqtang",
+    "qpet-dungeon",
+    "qpet-sonic"
+  ],
+  "homeLinksVerified": [
+    "qpet-match",
+    "magpie-bridge",
+    "qpet-racing",
+    "qpet-forest",
+    "qpet-qqtang",
+    "qpet-dungeon",
+    "qpet-sonic"
+  ],
+  "noSWFRuntime": true,
+  "httpVerified": false,
+  "files": [
+    {
+      "file": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "app.js",
+      "bytes": 1449785,
+      "sha256": "5589eb8d1b4b9fdbc6411b13e024a6848244eef07baef139a9efaa11689ff815"
+    },
+    {
+      "file": "index.html",
+      "bytes": 3177,
+      "sha256": "fa772911a0e96e5ebea271f35b2b9c437f574338934eec96af0a18091c3b9f4c"
+    },
+    {
+      "file": "magpie-bridge/app.js",
+      "bytes": 2254160,
+      "sha256": "879ffa17c1260f8801fa4cc984248587abbdbbdfdfc0afd1e220bafeb96b6168"
+    },
+    {
+      "file": "magpie-bridge/index.html",
+      "bytes": 1772,
+      "sha256": "22a4963fb9df82e4fb49a996d29c20e934bbd11a74613418b53e714c99683c72"
+    },
+    {
+      "file": "magpie-bridge/style.css",
+      "bytes": 2321,
+      "sha256": "955716cefd95c29c011b8d95cda305bcda538bee4d350f66ab1804e0c9e9558b"
+    },
+    {
+      "file": "maintenance.css",
+      "bytes": 686,
+      "sha256": "a681872ee097d946b6d62147f866707402abed3da0faabfee7e76e6c1741c15c"
+    },
+    {
+      "file": "player.html",
+      "bytes": 589,
+      "sha256": "f1f168a161e552c7afc7bdf3c43a1eb4587df2d02d377f2f914490becf3a09b1"
+    },
+    {
+      "file": "qpet-dungeon/app.js",
+      "bytes": 16088962,
+      "sha256": "d81c2303841e6a4432eb64f3d8b970f9ff362b6b9a45a715e66f04ae6c1b647e"
+    },
+    {
+      "file": "qpet-dungeon/index.html",
+      "bytes": 1857,
+      "sha256": "2ca2f23f18890370c6af8c0e65cf0cd279f51a91c75a77104c8af16b3153688f"
+    },
+    {
+      "file": "qpet-dungeon/style.css",
+      "bytes": 3013,
+      "sha256": "4a11f33bca34751203a9cf1fc37978f18e00202835826a2fda15c913919549dc"
+    },
+    {
+      "file": "qpet-forest/app.js",
+      "bytes": 6678357,
+      "sha256": "964a336748a5711ec27ee92a222045109e4c36a31e571699d6dfb9f39329b1d0"
+    },
+    {
+      "file": "qpet-forest/index.html",
+      "bytes": 1909,
+      "sha256": "a76ba8de4a9cd55b50e1159281e265eca139246d6823c34fe53f774686cee636"
+    },
+    {
+      "file": "qpet-forest/style.css",
+      "bytes": 2799,
+      "sha256": "7e06422067c3d15aa52e8b611a752d3bb9923656c404e9254dde6a63c28340a7"
+    },
+    {
+      "file": "qpet-qqtang/app.js",
+      "bytes": 4304614,
+      "sha256": "713e4adf5285096cd4d9bfc228276bc5224c6f8ecc94ee733c3316919edd888f"
+    },
+    {
+      "file": "qpet-qqtang/index.html",
+      "bytes": 2187,
+      "sha256": "aac25b8c43fc402d43ce1c625b6965651a812dd2327aa0df2cbe35174a24bb0e"
+    },
+    {
+      "file": "qpet-qqtang/style.css",
+      "bytes": 3226,
+      "sha256": "c47f1fec75a6c2649fd9ff88e39cb4fc5e7427391eac4630047de7a47b03ad9c"
+    },
+    {
+      "file": "qpet-racing/app.js",
+      "bytes": 5300467,
+      "sha256": "d770f876f5de11fe1bbce94898d00baf54e412b2c8b6b63166119621902f3446"
+    },
+    {
+      "file": "qpet-racing/index.html",
+      "bytes": 2333,
+      "sha256": "f160cf28b71e02d53b6afc3841be9a2e1994cb419e2460d600a6a6d0a0db9e00"
+    },
+    {
+      "file": "qpet-racing/style.css",
+      "bytes": 2799,
+      "sha256": "7e06422067c3d15aa52e8b611a752d3bb9923656c404e9254dde6a63c28340a7"
+    },
+    {
+      "file": "qpet-sonic/app.js",
+      "bytes": 13065695,
+      "sha256": "6dec6a3d64595f8ba7716c2c5c7ec6ec44c34ddb92d96cd171207e4f6e1f940f"
+    },
+    {
+      "file": "qpet-sonic/index.html",
+      "bytes": 2336,
+      "sha256": "1ae02f4182758adfc3bd6b15beb6d2ac471f41257fdb4002d60a0869255497c8"
+    },
+    {
+      "file": "qpet-sonic/style.css",
+      "bytes": 3594,
+      "sha256": "97ed9aea55a851b62f94c85ed8a965edc898d33eac32c83e78fc885441021c17"
+    },
+    {
+      "file": "style.css",
+      "bytes": 2735,
+      "sha256": "45cd1311ee64aa89d73195fedf46c08daec0a76fba8b242c224ffb964617a459"
+    }
+  ],
+  "retired404": []
+}

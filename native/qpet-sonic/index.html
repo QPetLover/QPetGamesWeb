@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Q宠爱音速 · 原生迁移版</title><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"></head>
+<body>
+<main>
+  <header><div><h1>Q宠爱音速 <span>原生迁移版</span></h1><p>糖果王国 · 万圣之夜 · 圣诞星空</p></div><div class="best">本机最高 <strong id="best">0</strong></div></header>
+  <section class="stage" aria-label="Q宠音速游戏">
+    <canvas id="game" width="760" height="420" tabindex="0" aria-label="使用方向键游玩"></canvas>
+    <div id="loading" class="loading"><span class="spinner"></span><p id="status">正在准备场景与声音…</p></div>
+    <div id="paused" class="paused" hidden><button id="resume">继续游戏</button></div>
+  </section>
+  <nav class="toolbar" aria-label="游戏控制">
+    <button id="start" disabled>开始游戏</button><button id="pause" disabled>暂停</button><button id="sound" disabled aria-pressed="true">声音开</button><button id="help" disabled>操作说明</button>
+  </nav>
+  <section class="touch" aria-label="触屏方向键">
+    <div class="side-keys"><button data-key="37" aria-label="左">←</button><button data-key="39" aria-label="右">→</button></div>
+    <div class="touch-hint">可同时按两个方向</div>
+    <div class="side-keys"><button data-key="38" aria-label="跳跃">↑</button><button data-key="40" aria-label="下蹲">↓</button></div>
+  </section>
+  <p class="hint" id="hint" aria-live="polite">方向键 ← → 移动，↑ 跳跃，↓ 下蹲；斜向障碍需要组合方向键。</p>
+  <details id="version-notes"><summary>版本说明</summary><p>基于已保存的人类角色同源版本制作，保留三关、场景、障碍序列和原声；企鹅角色为参照腾讯历史截图补制的素材。历史企鹅版文件仍未找回。成绩仅保存在本机，旧版排行榜与积分兑换服务已停止。</p><p><a href="https://github.com/QPetLover/QPetGamesWeb/tree/main/native/qpet-sonic" target="_blank" rel="noopener noreferrer">源码与素材来源 ↗</a> · <a href="../">游戏目录</a></p></details>
+</main>
+<script type="module" src="app.mjs"></script>
+</body></html>

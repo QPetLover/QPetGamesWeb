@@ -4,6 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const game = process.argv.find(arg=>arg.startsWith('--game='))?.slice(7) || 'qpet-match';
@@ -16,6 +17,11 @@ const xhs = process.argv.includes('--xhs');
 const output = path.join(root,xhs?entry.candidate:entry.preview);
 await rm(output, {recursive: true, force: true});
 await mkdir(output, {recursive: true});
+if(entry.builder==='embedded-python') {
+  execFileSync('python3',[path.join(source,'build.py'),'--web','--out',output],{stdio:'inherit'});
+  console.log(`Native ${game}: embedded media, readable static JS and no external runtime.`);
+  process.exit(0);
+}
 const license=await readFile(path.join(root,'licenses/FFDEC-GPL-3.0.txt'),'utf8');
 const notice=`/* FFDec-derived Canvas helper: GPL-3.0. Modified, readable source and notices:\nhttps://github.com/QPetLover/QPetGamesWeb/tree/main/native/${game}\nOriginal game artwork/audio/font rights remain with their respective authors.\n\n${license}\n*/`;
 await build({entryPoints:[path.join(source,'app.js')],bundle:true,format:'iife',target:['chrome61'],
@@ -28,7 +34,7 @@ if(entry.path==='') {
   const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const links=catalog.filter(item=>item.published).map(item=>{
     const href=item.path?item.path+'/':'./';
-    return `<div data-game="${escapeHtml(item.id)}"><a href="${escapeHtml(href)}"${item.id===game?' aria-current="page"':''}>${escapeHtml(item.title)}</a><a href="${escapeHtml(item.original)}" target="_blank" rel="noopener noreferrer">原版对照 ↗</a></div>`;
+    return `<div data-game="${escapeHtml(item.id)}"><a href="${escapeHtml(href)}"${item.id===game?' aria-current="page"':''}>${escapeHtml(item.title)}</a><a href="${escapeHtml(item.original)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.comparisonLabel||'原版对照')} ↗</a></div>`;
   }).join('');
   html=html.replace(marker,links);
 }

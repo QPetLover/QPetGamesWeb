@@ -1,0 +1,155 @@
+{
+  "passed": true,
+  "browser": "155.0.8059.85",
+  "mode": "Chrome local game context; read-only debugger observer; original delivered script bytes; trusted start/touch and in-page DOM keyboard replay; no game-state or clock overrides",
+  "script_sha256": "f12fb5c20f04bab916cd6c3fc7d697a11b736fda893a55cb62b69175391c2b39",
+  "snapshots": [
+    {
+      "name": "menu-hd",
+      "ready": true,
+      "paused": false,
+      "phase": "menu",
+      "level": 1,
+      "tick": 403,
+      "score": 0,
+      "damage": 1,
+      "manFrame": 1,
+      "keys": [],
+      "sun": null,
+      "queue": []
+    },
+    {
+      "name": "playing-hd",
+      "ready": true,
+      "paused": false,
+      "phase": "playing",
+      "level": 1,
+      "tick": 50,
+      "score": 0,
+      "damage": 1,
+      "manFrame": 1,
+      "keys": [],
+      "sun": {
+        "frame": 1,
+        "tick": 0
+      },
+      "queue": []
+    },
+    {
+      "name": "reward-penguin-hd",
+      "ready": true,
+      "paused": true,
+      "phase": "playing",
+      "level": 1,
+      "tick": 1083,
+      "score": 500,
+      "damage": 6,
+      "manFrame": 1,
+      "keys": [],
+      "sun": {
+        "frame": 2,
+        "tick": 13
+      },
+      "queue": [
+        {
+          "type": 10,
+          "frame": 18,
+          "collected": false
+        },
+        {
+          "type": 9,
+          "frame": 3,
+          "collected": false
+        }
+      ]
+    },
+    {
+      "name": "hurt-hd",
+      "ready": true,
+      "paused": false,
+      "phase": "playing",
+      "level": 1,
+      "tick": 1120,
+      "score": 500,
+      "damage": 11,
+      "manFrame": 1,
+      "keys": [],
+      "sun": {
+        "frame": 2,
+        "tick": 50
+      },
+      "queue": [
+        {
+          "type": 9,
+          "frame": 15,
+          "collected": false
+        }
+      ]
+    },
+    {
+      "name": "mobile-input",
+      "multi_pointer": true,
+      "cancel": true,
+      "landscape_stage": {
+        "x": 121.625,
+        "y": 7,
+        "width": 600.75,
+        "height": 331.984375
+      },
+      "landscape_toolbar": {
+        "x": 121.625,
+        "y": 346.984375,
+        "width": 600.75,
+        "height": 32
+      }
+    }
+  ],
+  "audio": {
+    "state": "running",
+    "buffers": [
+      {
+        "id": 505,
+        "duration": 1.3583541666666668
+      },
+      {
+        "id": 397,
+        "duration": 0.9403958333333333
+      },
+      {
+        "id": 504,
+        "duration": 1.253875
+      },
+      {
+        "id": 711,
+        "duration": 12.173041666666666
+      },
+      {
+        "id": 746,
+        "duration": 11.807333333333334
+      },
+      {
+        "id": 1,
+        "duration": 126.38039583333334
+      },
+      {
+        "id": 2,
+        "duration": 137.14285416666667
+      },
+      {
+        "id": 3,
+        "duration": 137.5085625
+      }
+    ],
+    "muted": false,
+    "position": 0.6559999999999999,
+    "rms": [
+      0.12970611850143052,
+      0.12182672068955806,
+      0.1398241921491131,
+      0.09294461269531401,
+      0.09536248892086648
+    ]
+  },
+  "errors": [],
+  "blocked": []
+}
