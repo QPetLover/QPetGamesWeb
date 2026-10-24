@@ -1,0 +1,259 @@
+{
+  "sourceSWF": "/Users/wangzhihong/Playground/core/qpet-adventure/site/myfont.swf",
+  "sourceSHA256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c",
+  "sourceBytes": 2055402,
+  "sourceFontTags": [
+    {
+      "tag": "DefineFont3",
+      "fontID": "1",
+      "fontName": "站酷快乐体2016修订版",
+      "fontNameBytesHex": "e7ab99e985b7e5bfabe4b990e4bd9332303136e4bfaee8aea2e7898800",
+      "glyphs": 7746,
+      "flags": 140,
+      "languageCode": 4,
+      "uniqueCodepoints": 7746,
+      "codeTableSHA256": "6e6beccf1c197c9db93718d5183e703b34be55ab177f631f66c1bfed4fedd639",
+      "layoutRaw": {
+        "ascent": 17879,
+        "descent": 3113,
+        "leading": 0,
+        "glyphAdvanceSHA256": "3eb13e6a3a211bd2d2e417834189b2abe9295bac476bab3354a06ecf9c8f8f29"
+      }
+    }
+  ],
+  "sourceFontNameTags": [
+    {
+      "fontID": "1",
+      "fontName": "站酷快乐体2016修订版",
+      "fontCopyright": "(c) Copyright LuiBingKe 2016"
+    }
+  ],
+  "faces": [
+    {
+      "file": "myfont.ttf",
+      "exportedFrom": "/Users/wangzhihong/Playground/projects/10-25-qpet-adventure-native/resource-export/reference/myfont/fonts/1_my_font_站酷快乐体2016修订版.ttf",
+      "bytes": 3258460,
+      "sha256": "ab3508878a875e78703a481a198a5ace048685a0b4e858acf10c7242e4844a99",
+      "tables": {
+        "OS/2": {
+          "offset": 316,
+          "length": 96,
+          "checksum": 1408775679
+        },
+        "cmap": {
+          "offset": 1276,
+          "length": 49972,
+          "checksum": 1978113564
+        },
+        "glyf": {
+          "offset": 338064,
+          "length": 2920364,
+          "checksum": 2114868545
+        },
+        "hdmx": {
+          "offset": 113248,
+          "length": 224816,
+          "checksum": 933436460
+        },
+        "head": {
+          "offset": 192,
+          "length": 56,
+          "checksum": 3571002670
+        },
+        "hhea": {
+          "offset": 248,
+          "length": 36,
+          "checksum": 924877574
+        },
+        "hmtx": {
+          "offset": 82248,
+          "length": 31000,
+          "checksum": 3814323023
+        },
+        "loca": {
+          "offset": 51248,
+          "length": 31000,
+          "checksum": 2915083264
+        },
+        "maxp": {
+          "offset": 284,
+          "length": 32,
+          "checksum": 1493107230
+        },
+        "name": {
+          "offset": 412,
+          "length": 864,
+          "checksum": 2096292955
+        },
+        "post": {
+          "offset": 3258428,
+          "length": 32,
+          "checksum": 50347008
+        }
+      },
+      "names": [
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 0,
+          "text": "© Copyright (c) Copyright LuiBingKe 2016, FFDec v.26.4.0."
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 1,
+          "text": "?????2016???"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 2,
+          "text": "Regular"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 3,
+          "text": "dtype: FFDec v.26.4.0: ?????2016??? Regular: Version 1.0: (c) Copyright LuiBingKe 2016"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 4,
+          "text": "?????2016???"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 5,
+          "text": "Version 1.0"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 6,
+          "text": "?????2016???"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 7,
+          "text": "n/a"
+        },
+        {
+          "platformID": 1,
+          "encodingID": 0,
+          "languageID": 0,
+          "nameID": 8,
+          "text": "FFDec v.26.4.0"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 0,
+          "text": "© Copyright (c) Copyright LuiBingKe 2016, FFDec v.26.4.0."
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 1,
+          "text": "站酷快乐体2016修订版"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 2,
+          "text": "Regular"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 3,
+          "text": "dtype: FFDec v.26.4.0: 站酷快乐体2016修订版 Regular: Version 1.0: (c) Copyright LuiBingKe 2016"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 4,
+          "text": "站酷快乐体2016修订版"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 5,
+          "text": "Version 1.0"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 6,
+          "text": "站酷快乐体2016修订版"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 7,
+          "text": "n/a"
+        },
+        {
+          "platformID": 3,
+          "encodingID": 1,
+          "languageID": 1033,
+          "nameID": 8,
+          "text": "FFDec v.26.4.0"
+        }
+      ],
+      "familyNames": [
+        "?????2016???",
+        "站酷快乐体2016修订版"
+      ],
+      "copyrightNotices": [
+        "© Copyright (c) Copyright LuiBingKe 2016, FFDec v.26.4.0."
+      ],
+      "licenseDescriptions": [],
+      "licenseURLs": [],
+      "glyphs": 7749,
+      "unitsPerEm": 1024,
+      "fsTypeRaw": 0,
+      "horizontalMetrics": {
+        "ascent": 894,
+        "descent": -156,
+        "lineGap": 170
+      },
+      "unicodeCmapFormats": [
+        {
+          "platform": 3,
+          "encoding": 1,
+          "format": 4
+        }
+      ],
+      "mappedUnicodeCodepoints": 7746,
+      "sourceCodepointsMissingFromTTF": []
+    }
+  ],
+  "tool": "JPEXS FFDec 26.4.0 -format font:ttf -export font",
+  "purpose": "Device EditText fallback matching the current archive Ruffle defaultFonts=myfont baseline",
+  "historicalSimSunPixelIdentityEstablished": false,
+  "sourceRepositoryNotice": "Original resources belong to their respective rights holders; QPetLover/qpet-adventure does not claim their copyright. See source NOTICE.md.",
+  "metadataReferences": [
+    "https://learn.microsoft.com/en-us/typography/opentype/spec/name",
+    "https://learn.microsoft.com/en-us/typography/opentype/spec/otff"
+  ],
+  "browserFontDecodeValidated": false
+}

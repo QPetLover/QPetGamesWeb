@@ -63,5 +63,15 @@
     "builder": "embedded-python",
     "original": "qpet-sonic/#version-notes",
     "comparisonLabel": "版本与来源"
+  },
+  {
+    "id": "qpet-adventure",
+    "title": "Q宠冒险岛",
+    "path": "qpet-adventure",
+    "preview": "preview-adventure",
+    "candidate": "minitool-adventure-candidate",
+    "published": true,
+    "kind": "chapters",
+    "original": "https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0"
   }
 ]

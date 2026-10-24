@@ -19,3 +19,9 @@ preview-dungeon/
 minitool-dungeon-candidate/
 preview-sonic/
 minitool-sonic-candidate/
+
+preview-adventure/
+preview-adventure-web-sample/
+preview-adventure-zip-sample/
+minitool-adventure-candidate/
+.build/

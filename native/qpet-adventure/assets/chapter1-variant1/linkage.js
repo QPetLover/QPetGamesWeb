@@ -1,0 +1,2 @@
+// Fixed source ExportAssets names.
+export const sourceLinkage={"getItem":"1","useItem":"2","FUIComponentSymbol":"3","UpArrow":"36","ScrollThumb":"56","DownArrow":"81","event1":"2243","end":"717","event6":"932","event000":"934","event00":"978","event0":"1011","event9":"1522","event3":"1848","talkTxt":"1853","player":"2197","items":"2253","talker":"2257","FScrollBarSymbol":"2261","FlashGuard":"2305"};

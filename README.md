@@ -1,6 +1,6 @@
 # Q宠游戏 · QPetGamesWeb
 
-**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版、Q宠爱音速**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
+**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版、Q宠爱音速、Q宠冒险岛**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
 
 | 游戏 | 原生网页 | 原版对照 | 实现与验证范围 |
 | --- | --- | --- | --- |
@@ -11,6 +11,7 @@
 | 宠爱QQ堂 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-qqtang/) | [happy-qqtang](https://qpetlover.cn/QPetGames/#/play/happy-qqtang) | [迁移说明](native/qpet-qqtang/README.md)：五张原地图、单／双人及原道具；未声称自然串通全部五关 |
 | 地下城与勇士 · Q宠版 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-dungeon/) | [happy-dungeon](https://qpetlover.cn/QPetGames/#/play/happy-dungeon) | [迁移说明](native/qpet-dungeon/README.md)：两角色、三关；“宠爱地下城”正式名称及欢乐谷归属尚未证实 |
 | Q宠爱音速 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-sonic/) | [版本与来源](native/qpet-sonic/provenance.json) | [迁移说明](native/qpet-sonic/README.md)：同源人类版三关、规则与原声迁移，企鹅素材按历史截图补制；企鹅原始SWF仍缺 |
+| Q宠冒险岛 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-adventure/) | [逐集原版](https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0) | [迁移说明](native/qpet-adventure/README.md)：序章及八集双角色、逐集存档；规则端点夹具通过，Chrome局部检查，未声称整集人工通关 |
 
 `native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页。已有六款旁保留独立原版链接；音速旁标明「版本与来源」，不将同源人类文件标为企鹅原件。候选可以单独构建预览，仍不会进入公开首页。此前的 SWF / Ruffle 集合不进入原生发布包，旧 `player.html?game=...` 地址显示下架通知。
 
@@ -35,6 +36,7 @@ npm start
 - QQ堂：单人方向键移动、空格放弹；双人 P1 用 WASD／空格，P2 用方向键／回车。手机提供对应双人触控键，建议横屏。
 - 地下城：方向键移动，连续两次同方向可跑，X 攻击、C 跳跃、Z 蓄力技能、回车对话。手机横屏提供两侧操作键。
 - 音速：方向键左右移动、上跳、下蹲；斜向障碍同时按两个方向。保留糖果王国、万圣之夜、圣诞星空三关；手机提供多指方向按钮。
+- 冒险岛：方向键移动、空格互动或攻击；手机使用方向及互动键。各集原说明与改键设置仍适用；从第1集逐集解锁，两角色共用本机进度。
 
 GitHub Pages 工作流先执行测试、构建和校验，再部署 `dist/`。构建从注册表选择已发布游戏，复制其 HTML / JS / CSS 与允许的静态媒体，再加入旧链接通知 `player.html` / `maintenance.css` 和 `.nojekyll`；不会复制历史游戏或模拟器。校验同时核对首页入口顺序、原版链接与候选不可见，并拒绝 SWF / WASM、动态执行和联网 API；部署后可核对线上字节及旧资源 404：
 
@@ -60,3 +62,14 @@ node scripts/build-native.mjs --game=qpet-dungeon --xhs
 本轮三款固定社区原件的字节大小与 SHA-256 见[来源说明](THIRD_PARTY_NOTICES.md)；社区备份与同期新闻不能证明这些文件等于历史腾讯服务器逐字节原件。原版对照、规则差分、浏览器操作、手机布局与真实触摸分别记录；不会把测试通过或手机模拟截图视作全像素一致、物理手机或小红书验收，也不将显式关卡绘图当作自然全关通关。具体范围见各游戏说明。
 
 原素材、字体及导出辅助代码的来源与许可证说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+## 冒险岛章节与独立包
+
+冒险岛提供序章与第1–8集的17个原生入口，正式Web首页与直链按原完成回调逐集开放。独立ZIP无站点选关页，可单独游玩，不读写正式Web存档。
+
+```sh
+node scripts/build-adventure.mjs --mode=web
+node scripts/build-adventure.mjs --mode=zip --entries=chapter1-v0 --output=preview-adventure-zip
+```
+
+固定17份原件身份、字体/声音来源、原腾讯账号及领奖功能边界和验证范围见[冒险岛迁移说明](native/qpet-adventure/README.md)。已做生产规则链端点夹具与局部Chrome/手机模拟检查，未将这些证据称为全部章节人工通关或小红书验收。

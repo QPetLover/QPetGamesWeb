@@ -1,0 +1,9 @@
+# Original event PCM and numerical helpers
+
+The WAV files preserve the original game MPEG decoded at its original sample rate and actual mono/stereo channel count. They are source game assets, not generated replacement effects. The original MPEG payloads remain in each chapter audio-assets.js; provenance.json maps exact identities, source SWF SHA-256, decoded WAV SHA-256 and accurate-seek prefixes.
+
+The finite PCM window/loop and integer linear interpolation functions in common/event-pcm-model.js and common/event-pcm-plan.js are a JavaScript numerical port of the fixed reference behavior: Ruffle a4f5b5256e245693bc9077ef6c6b6abc95490e7f EventSoundStream and dasp 0.11.0 Linear<i16>. They do not parse or run SWF, ActionScript, bytecode, or a media VM. Ruffle and dasp offer MIT OR Apache-2.0; these ports use the MIT option. See LICENSE-RUFFLE.md and LICENSE-DASP-MIT (RustAudio Developers copyright). The dasp 0.11.0 published crate declares this exact dual licence; the licence text was obtained from the upstream RustAudio/dasp repository LICENSE-MIT. Detailed fixed-source files and hashes are retained in the workspace research project.
+
+Offline MPEG decoding used Symphonia 0.5.5 under MPL-2.0. No decoder code or compiled decoder is included in the website. The complete offline tool sources, exact 28 dependency versions/checksums and original licence records are retained at projects/10-25-qpet-adventure-native/audio-baseline/canonical-pcm in the development workspace. No envelope, loop, in/out point, or declared-duration trim is baked into the shared PCM bodies. Seven small original decoder cold-seek prefixes reproduce source seek/reset behavior.
+
+Streams retain the existing original MPEG playback path. Event PCM validation does not establish stream decoder equality or complete browser acoustic acceptance. Publication remains gated by original/native comparison.

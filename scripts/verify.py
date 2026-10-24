@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verify the native games and optional HTTP bytes."""
-import argparse, gzip, hashlib, json, re
-from pathlib import Path
+import argparse, gzip, hashlib, json, re, subprocess
+from pathlib import Path, PurePosixPath
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from urllib.parse import urljoin
@@ -54,6 +54,24 @@ def verify_home_links(html,catalog):
             assert all(link.get('href') not in [draft_href,game['original']] for link in parsed.links),f"{game['id']}: draft linked from public home"
     return [game['id'] for game in published]
 
+def chapter_expected(root,folder):
+    """Use only the fixed portable manifest; JS verifier checks its closed schema."""
+    manifest=json.loads((folder/'build-manifest.json').read_text())
+    assert manifest.get('mode')=='web' and manifest.get('entries'),'A published chapter game needs a Web build'
+    names={'build-manifest.json','verification.json'}
+    def add(name):
+        path=PurePosixPath(name)
+        assert not path.is_absolute() and '..' not in path.parts and str(path)==name and '\\' not in name,'Unsafe chapter output path'
+        assert name not in names,'Duplicate chapter output path'
+        names.add(name)
+    for entry in manifest['entries']:
+        assert re.fullmatch(r'chapter[0-8]-v[01]',entry['id']),'Unknown chapter entry'
+        for file in entry['files']:add(entry['id']+'/'+file['path'])
+        assert not entry.get('zip'),'Web manifest must not include ZIP archives'
+    for shared in manifest.get('shared',[]):add(shared['path'])
+    subprocess.run(['node',str(root/'scripts/verify-adventure.mjs'),str(folder)],check=True,stdout=subprocess.PIPE,text=True)
+    return names
+
 parser=argparse.ArgumentParser()
 parser.add_argument('--url')
 args=parser.parse_args()
@@ -64,6 +82,11 @@ expected={'player.html','maintenance.css','.nojekyll'}
 media={'.png','.jpg','.jpeg','.gif','.webp','.svg','.woff','.woff2'}
 for game in games:
     folder=(game['path']+'/') if game['path'] else ''
+    if game.get('kind')=='chapters':
+        assert game['id']=='qpet-adventure' and game['path'],'Unsupported chapter package'
+        expected.update(folder+name for name in chapter_expected(root,dist/game['path']))
+        continue
+    assert 'kind' not in game,'Unknown published game kind'
     expected.update(folder+name for name in ['index.html','app.js','style.css'])
     source=root/'native'/game['id']/'assets'
     if game.get('builder')!='embedded-python':
@@ -71,6 +94,7 @@ for game in games:
 actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
 assert actual==expected, f'Unexpected release files: {actual ^ expected}'
 for game in games:
+    if game.get('kind')=='chapters':continue  # verified above, including only fixed Web PCM requests
     folder=(game['path']+'/') if game['path'] else ''
     js=(dist/(folder+'app.js')).read_text(); html=(dist/(folder+'index.html')).read_text()
     for pattern in [r'\beval\s*\(',r'\bnew\s+Function\s*\(',r'\bWebAssembly\b',r'\bfetch\s*\(',r'\bXMLHttpRequest\b',r'\bWebSocket\b',r'\bimport\s*\(']:

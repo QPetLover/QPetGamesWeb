@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14222d">
+<title>{{TITLE}} · Q宠游戏</title>
+<link rel="stylesheet" href="{{STYLE_HREF}}">
+<script defer src="{{SCRIPT_SRC}}"></script>
+</head>
+<body class="game-page">
+<header class="page-header">
+  <a class="brand" data-home>Q宠冒险岛</a>
+  <h1>{{TITLE}}</h1>
+  <nav class="toolbar" aria-label="游戏操作">
+    <a data-home>返回选关</a>
+    <a id="original-reference" target="_blank" rel="noopener">原版对照</a>
+    <button id="sound" disabled>开启声音</button>
+    <button id="restart" disabled>重新开始</button>
+    <button id="fullscreen" disabled>全屏</button>
+  </nav>
+</header>
+<main id="game-shell" class="game-shell">
+  <div class="stage-wrap">
+    <canvas id="stage" width="760" height="420" tabindex="0" aria-label="冒险岛游戏画面"></canvas>
+    <div id="loading" role="status">正在准备游戏…</div>
+    <button id="begin-prologue" class="begin-prologue" hidden disabled>播放序章</button>
+  </div>
+  <button id="exit-fullscreen" aria-label="退出全屏">退出全屏</button>
+  <div id="touch-controls" aria-label="触屏游戏操作">
+    <div class="arrows">
+      <button data-key="38" aria-label="向上">▲</button>
+      <button data-key="37" aria-label="向左">◀</button>
+      <button data-key="40" aria-label="向下">▼</button>
+      <button data-key="39" aria-label="向右">▶</button>
+    </div>
+    <button id="action" data-key="32" aria-label="互动或攻击">互动<br>攻击</button>
+  </div>
+  <section id="completion" class="completion" hidden aria-live="polite">
+    <h2 id="completion-title">本集已完成</h2>
+    <div class="completion-actions">
+      <a id="next-chapter" hidden>继续下一集</a>
+      <a data-home>返回选关</a>
+      <button id="completion-restart">重新开始</button>
+    </div>
+  </section>
+</main>
+<footer>电脑使用方向键移动、空格键互动；手机使用画面下方的方向键和互动键。游戏中的操作说明以原画面为准。</footer>
+</body>
+</html>

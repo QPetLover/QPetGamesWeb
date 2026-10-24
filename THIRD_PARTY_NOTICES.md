@@ -57,3 +57,9 @@ Noto 字形采用 **SIL Open Font License 1.1**，Copyright 2022 The Noto Projec
 ## 历史资源
 
 `games/`、`assets/fonts/` 和较早 `evidence/` 保留此前已撤下版本的追溯资料；当前原生构建从明确白名单取文件，不复制这些历史 SWF 或字体 SWF。原版网站的 Ruffle 播放器由另一个仓库维护，只作为外部比较基准。本项目已经移除 Ruffle 依赖，原生包没有 WASM、SWF或模拟器。
+
+## Q宠冒险岛原件与运行边界
+
+冒险岛序章及第1–8集双角色来自 [QPetLover/qpet-adventure@cbd3a75ee7787d62911c8ee58125931961741752](https://github.com/QPetLover/qpet-adventure/tree/cbd3a75ee7787d62911c8ee58125931961741752/site) 的17份 `xmxd_N_S.swf`。原件字节、SHA-256与章节/角色映射保留在 [native/qpet-adventure/README.md](native/qpet-adventure/README.md)。它们用于离线迁移和独立原版对照，原生包不运行SWF、Ruffle、ActionScript解释器或WASM。原游戏角色、美术、声音、商标与字形归各自权利人；社区归档不认证历史服务器逐字节身份，也不追加素材授权。此非官方迁移不恢复腾讯账号、历史积分/上传/排行或通关领奖，不伪造旧服务端成功结果。
+
+设备字体由同归档 `myfont.swf` 离线导出TTF，其版权/字体名与SHA见 [myfont-provenance.json](native/qpet-adventure/assets/fonts/myfont-provenance.json)，用于匹配当前归档对照后备字体，未声称历史宋体像素一致。事件声PCM保留原MPEG身份及离线解码哈希，详见 [provenance.json](native/qpet-adventure/assets/audio-pcm/provenance.json) 与 [PCM NOTICE](native/qpet-adventure/assets/audio-pcm/NOTICE.md)。FFDec helper采用GPL-3.0；有限音频数值函数沿用Ruffle/dasp的MIT选项，许可全文随源码与构建保留。Symphonia只用于离线素材解码，不包含在网站运行时。
