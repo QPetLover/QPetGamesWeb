@@ -12,7 +12,8 @@
       "classic-005 now launches the verified native differences game; original player remains explicit",
       "classic-008 now launches the verified native fishing game; original player remains explicit",
       "classic-006 now launches the verified native trays game; original player remains explicit",
-      "classic-010 now launches the verified native blocks game; original player remains explicit"
+      "classic-010 now launches the verified native blocks game; original player remains explicit",
+      "classic-009 now launches the verified native nanny game; original player remains explicit"
     ],
     "originalGamePayloadsUnchanged": 19,
     "rufflePayloadsUnchanged": 7
@@ -492,8 +493,8 @@
     },
     {
       "path": "assets/js/app.js",
-      "bytes": 13787,
-      "sha256": "11c862efb0ef3d539b4bb160aa815956659e4bd32ae48b96cb01b116a2853e45"
+      "bytes": 13932,
+      "sha256": "30f314831a4b8640854735dc9914caca127a14b0bbe71252c9cbb239c4fc66cd"
     },
     {
       "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
@@ -738,7 +739,7 @@
     {
       "path": "index.html",
       "bytes": 1221,
-      "sha256": "6edb10b4ae22f0330e666f0f693c2c895a6da0f4d892a2b233711cbe95ed6aa8"
+      "sha256": "5f29e3c2bbe86d5dbc536aebfd0a427c5967ea404145a7f4509ca40826e95250"
     },
     {
       "path": "onegame.html",

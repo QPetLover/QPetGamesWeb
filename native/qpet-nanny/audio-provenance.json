@@ -1,0 +1,149 @@
+{
+  "metadata": {
+    "1": {
+      "rate": 11025,
+      "samples": 9792,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 1775,
+      "sha256": "6fb7e1f8fc2e32a8b1271dd287d312a45f84724e624fb0371e7d07a524bc3004"
+    },
+    "2": {
+      "rate": 11025,
+      "samples": 14976,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 2711,
+      "sha256": "f535a6af16176689a958e0770817d6758f461301212e5c78ca7999a5479acd14"
+    },
+    "3": {
+      "rate": 11025,
+      "samples": 31680,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 5727,
+      "sha256": "8f79298a5d57f828142b7514560fee14bd2b58a18d05a73b445220a125804905"
+    },
+    "4": {
+      "rate": 11025,
+      "samples": 23616,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 4271,
+      "sha256": "3520e9e4824d50aa27ca3f5a5721905c6f6bc1f84a8b84f857c6473ceadf038d"
+    },
+    "5": {
+      "rate": 11025,
+      "samples": 18432,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 3335,
+      "sha256": "9eda304d0f3993e2d7d093f959f1e748ca23ef75f52435e5b608eb2a606bad3c"
+    },
+    "6": {
+      "rate": 11025,
+      "samples": 288576,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 52111,
+      "sha256": "7b02b348d6595d3f30d61c01f1e8228fd5663c9dd531fb1dc9d9149d1512ebd4"
+    },
+    "7": {
+      "rate": 11025,
+      "samples": 320256,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 57831,
+      "sha256": "e221950cb10370d23de67efdf563351e867bd97c5ba24fd017d3240397727636"
+    },
+    "8": {
+      "rate": 11025,
+      "samples": 31680,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 5727,
+      "sha256": "f1bde4493f9a4346e5a79bcdd62258f51d28f46fadec38583ef08534c9e0074e"
+    },
+    "9": {
+      "rate": 11025,
+      "samples": 10368,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 7530,
+      "sha256": "901f8be8fd7fbe4fba85cb77952c159ec956ad19a52830f267175b3993a7fe7f"
+    },
+    "10": {
+      "rate": 11025,
+      "samples": 38592,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 6975,
+      "sha256": "8ad902f8de7eb9a02ea3f18abc04792dacc3590dec857d5dc8ffa3b9be4f1633"
+    },
+    "281": {
+      "rate": 11025,
+      "samples": 7488,
+      "seekSamples": 0,
+      "channels": 1,
+      "bytes": 1359,
+      "sha256": "1a9bdfc8f9190737e34a9588122786bd0e0288a697a5a399d173f1ac61704c0c"
+    }
+  },
+  "AS3SoundNames": {
+    "MCORRECT": "1",
+    "MSTART": "2",
+    "MDEFEATED": "3",
+    "MTRASH": "4",
+    "MSPACE": "5",
+    "MSTARTFRONT": "6",
+    "MSTARTBACK": "7",
+    "MAFTER": "8",
+    "MERROR": "9",
+    "MKEYPRESS": "10"
+  },
+  "sourceClass": "music/GMusic.as",
+  "timelineStartSoundCount": 0,
+  "streamCount": 0,
+  "unusedNames": [
+    "MSTART",
+    "MSPACE"
+  ],
+  "unlinkedDefineSoundIds": [],
+  "note": "All11 DefineSound payloads retained: eight GMusic calls plus button281 idle-to-over on Help282/286/290/317. Declared MSPACE/MSTART are unused; no prize-use sound. 106 zero-sample stream headers have no blocks; no valid stream content.",
+  "buttonSoundEvents": {
+    "282": {
+      "id": "281",
+      "transition": "idle-to-over",
+      "loops": 0,
+      "syncNoMultiple": false,
+      "syncStop": false,
+      "envelope": null
+    },
+    "286": {
+      "id": "281",
+      "transition": "idle-to-over",
+      "loops": 0,
+      "syncNoMultiple": false,
+      "syncStop": false,
+      "envelope": null
+    },
+    "290": {
+      "id": "281",
+      "transition": "idle-to-over",
+      "loops": 0,
+      "syncNoMultiple": false,
+      "syncStop": false,
+      "envelope": null
+    },
+    "317": {
+      "id": "281",
+      "transition": "idle-to-over",
+      "loops": 0,
+      "syncNoMultiple": false,
+      "syncStop": false,
+      "envelope": null
+    }
+  },
+  "streamHeadCount": 106,
+  "streamBlockCount": 0
+}

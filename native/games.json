@@ -181,5 +181,17 @@
     "category": "classic",
     "summary": "看准位置，放下积木，搭起越来越高的积木塔。",
     "cover": "covers/qpet-blocks.png"
+  },
+  {
+    "id": "qpet-nanny",
+    "title": "Q宠保姆",
+    "path": "qpet-nanny",
+    "preview": "preview-nanny",
+    "candidate": "minitool-nanny-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-009",
+    "category": "classic",
+    "summary": "接住食物，分给客人，清理垃圾。",
+    "cover": "covers/qpet-nanny.png"
   }
 ]
