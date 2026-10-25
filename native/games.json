@@ -241,5 +241,17 @@
     "category": "classic",
     "summary": "移动瞄准，切换猎场，使用55发子弹挑战本局得分。",
     "cover": "covers/qpet-hunting.png"
+  },
+  {
+    "id": "qpet-clouds",
+    "title": "QQ企鹅穿云",
+    "path": "qpet-clouds",
+    "preview": "preview-clouds",
+    "candidate": "minitool-clouds-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-012",
+    "category": "classic",
+    "summary": "看准角度起跳，穿过森林，收集果实补充能量。",
+    "cover": "covers/qpet-clouds.png"
   }
 ]

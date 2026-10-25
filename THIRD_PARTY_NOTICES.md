@@ -67,3 +67,7 @@ Noto 字形采用 **SIL Open Font License 1.1**，Copyright 2022 The Noto Projec
 ## QQ宝宝守猎
 
 原件由 awesome-qpet-games `b82b791a053c51d385b18d98f2d9951929240c50` 保存，归档标题QQ宝宝守猎，游戏标题图为QQ宠物狩猎场；SWF SHA-256 `586642f95a64d87c30076988d600563a85a4643ffe5fad5211a462617e8fd23b`。原画、声音、字形与商标归腾讯或各原作者，社区保存与原生迁移不追加素材授权。静态Canvas helper由JPEXS FFDec26.4导出并修改，遵循GPL-3.0；可读源码与具体音频/字体来源保留于 [native/qpet-hunting](native/qpet-hunting/README.md)。旧账号、收费和兑换服务未恢复；本地练习不伪造提交或兑换成功。
+
+## QQ企鹅穿云
+
+原件来自QPetLover/QPetGames保存的 `classical_games/swf/QQ企鹅穿云.swf`，SHA-256 `1f02ce6d9affb433e95c09fd8bcd05653b1cfb9938afa1e04c0cdfe5eeb66da9`。原画、10段MPEG声音、游戏作品与商标归腾讯或各原作者；素材权利不因社区归档或迁移而改为开源。JPEXS FFDec派生的静态Canvas helper按GPL-3.0，原设备字采用固定校对字体的包内字形，来源见 [迁移说明](native/qpet-clouds/README.md) 及该目录assets的provenance文件。原积分服务不恢复，不伪造上传、排名或账号成功。

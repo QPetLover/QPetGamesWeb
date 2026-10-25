@@ -1,0 +1,16 @@
+[
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "(c) Copyright ZHONGYI Electronic Co. 1995",
+    "fontId": "968",
+    "fontName": "宋体",
+    "forceWriteAsLong": "true"
+  },
+  {
+    "type": "DefineFontNameTag",
+    "fontCopyright": "",
+    "fontId": "992",
+    "fontName": "",
+    "forceWriteAsLong": "true"
+  }
+]

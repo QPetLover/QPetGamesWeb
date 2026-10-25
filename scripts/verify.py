@@ -81,7 +81,7 @@ def verify_home_links(html,catalog,cover_sizes=None):
     assert not re.search(r'<(?:script|canvas|iframe|object|embed)\b|\bon\w+\s*=',html,re.I),'Portal must remain static HTML'
     return [game['id'] for game in ordered]
 
-ORIGINAL_IDS={'qpet-hunting':'classic-011','qpet-guardian':'classic-001','magpie-bridge':'classic-002','qpet-racing':'classic-003',
+ORIGINAL_IDS={'qpet-clouds':'classic-012','qpet-hunting':'classic-011','qpet-guardian':'classic-001','magpie-bridge':'classic-002','qpet-racing':'classic-003',
               'qpet-differences':'classic-005','qpet-fishing':'classic-008','qpet-trays':'classic-006','qpet-blocks':'classic-010','qpet-nanny':'classic-009','qpet-penguin-challenge':'classic-004','qpet-full-stars':'classic-016','qpet-mining':'classic-013',
               'qpet-match':'classic-014','qpet-stars':'classic-015','qpet-forest':'happy-forest',
               'qpet-qqtang':'happy-qqtang','qpet-dungeon':'happy-dungeon'}

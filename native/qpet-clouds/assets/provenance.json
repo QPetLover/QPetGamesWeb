@@ -1,0 +1,120 @@
+{
+  "sourceSWF": "QPetLover/QPetGames classical_games/swf/QQ企鹅穿云.swf",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourceSHA256": "1f02ce6d9affb433e95c09fd8bcd05653b1cfb9938afa1e04c0cdfe5eeb66da9",
+  "sourceBytes": 2789909,
+  "stage": {
+    "width": 800,
+    "height": 600,
+    "fps": 24
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 1004,
+  "embeddedImages": {
+    "imageObj35": {
+      "mime": "image/PNG",
+      "bytes": 1119,
+      "sha256": "b5377d949717e1c777e9a82d39ab6ad944acad1450d76708d182218c9cc549ba"
+    },
+    "imageObj41": {
+      "mime": "image/PNG",
+      "bytes": 94173,
+      "sha256": "7fed48cc54cdf81f146f9817ec46165ee244d9792c8713328d9ce044c301d1ac"
+    },
+    "imageObj44": {
+      "mime": "image/JPEG",
+      "bytes": 145039,
+      "sha256": "cfee2bf1aff0ff6c495dfe7bfa1e8ee4c0c9a86f52f41c47c29ac6a10baf2d7e"
+    },
+    "imageObj47": {
+      "mime": "image/PNG",
+      "bytes": 173579,
+      "sha256": "10a51f2f5dc7d3b4b65b8c6c4cb1428a46e6dfec4e34098447e926ee95a06976"
+    },
+    "imageObj94": {
+      "mime": "image/PNG",
+      "bytes": 155138,
+      "sha256": "741093135182d7d8bd4051baa447cd8aaa46f5cf93a09150cc8b1c4dc864803f"
+    },
+    "imageObj110": {
+      "mime": "image/PNG",
+      "bytes": 60007,
+      "sha256": "2f88afe4843a2e0e8d8fc2f933e6c274e6da5fc305102196f80b9becbf084421"
+    },
+    "imageObj113": {
+      "mime": "image/PNG",
+      "bytes": 382336,
+      "sha256": "55dd5e5fde4e450279c759b6eed9a94d1fba3aec9e533117b8c466239cdc1c11"
+    },
+    "imageObj116": {
+      "mime": "image/PNG",
+      "bytes": 11248,
+      "sha256": "d39368275c582889506858d9ccd607d40e92b601a40a4b991c156458ee8cd4c0"
+    },
+    "imageObj124": {
+      "mime": "image/PNG",
+      "bytes": 10743,
+      "sha256": "46b6e3ba0fc0a0fba43bc7c7c7f941ed9ab856e8343f29d12f6726940732ae3a"
+    },
+    "imageObj127": {
+      "mime": "image/PNG",
+      "bytes": 87973,
+      "sha256": "81fe2018fc135c0d43f8c69ea6e5ee36f4841ac157327ac6dbd80cac7ff47bac"
+    },
+    "imageObj917": {
+      "mime": "image/PNG",
+      "bytes": 12120,
+      "sha256": "199c33e2899279d63da829a038e440909865893fadbf4ef152087701274dc478"
+    },
+    "imageObj959": {
+      "mime": "image/PNG",
+      "bytes": 3952,
+      "sha256": "7be4feb3f733faeadf865221c0e9b0a6f99c6d55df6252cc2b9956598ee67524"
+    },
+    "imageObj962": {
+      "mime": "image/PNG",
+      "bytes": 4279,
+      "sha256": "b14a7c67597013e20b0631def4cc6ef83de5d6f8025dd9bd4e3c0cf43aaeb163"
+    },
+    "imageObj964": {
+      "mime": "image/PNG",
+      "bytes": 4035,
+      "sha256": "ca87db832b93f2bb09069ee58aa65acb2f643a687b6169d0e0e065296d031835"
+    }
+  },
+  "inputs": {
+    "source.xml": "578e950d84082811ca43def7b7815fb401ce3a50cccfffac1d0dfb7f4754e93a",
+    "canvas/frames.html": "e2c76918bca279b7c203380c78d9c15894d92f619d10d3b6395bc3e45afc7e49",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked/DefineSprite_13_Space/frames.html": "7af53f119eb69b3835bdcd0038c473dd530a9f08150d6cb265f646c8f07142f3",
+    "linked/DefineSprite_22_Scoring/frames.html": "fa562c4c8dc9910116a31013af3726a43033431874a18751516a1b2359127e40",
+    "linked/DefineSprite_29_com.Yezi/frames.html": "64efc68bdd9784392f3c135ff5565ce3045e615ce53c1e2663b300632b9676e1"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "16 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "1106 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "2a493455e18ea55af4b5546e1a3ecbc663cb85d887dc63200b337e6ae1b1099b",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/cac5e2d7636da081a178a2300865eb5090649969/classical_games/swf/QQ企鹅穿云.swf",
+  "sourceVersionCaution": "Fixed archived classic SWF; no claim of historical Flash Player equivalence.",
+  "runtimeCaches": {
+    "paths": "immutable Path2D source paths; strokes and morphs retain native paths",
+    "bitmap": "immutable input plus complete CXFORM;16MiB admission",
+    "filters": "original glow/blur paths retained; performance still to validate"
+  },
+  "scaledLinkedRootSymbols": [
+    "sprite13",
+    "sprite22",
+    "sprite29"
+  ],
+  "bitmapEncoding": "FFDec lossless PNG for Lossless2; original opaque JPEG payloads",
+  "linkedExportUnpack": "Static packer decoded as base-radix word substitution only; no dynamic execution",
+  "bitmapPayloadBytes": 1145741,
+  "previousFFDecBitmapBytes": 1145741
+}

@@ -11,6 +11,7 @@ export const CATEGORIES=[
 ];
 export const PORTAL_FONTS=['qpet-rounded.woff2','OFL-ZCOOL-KuaiLe.txt','source.json'];
 const CONTROLS={
+ 'qpet-clouds':'按空格起跳，撞墙后看准轮盘角度再次跳跃；能量满后连续按空格向上冲。手机按下方跳跃按钮。原积分服务不可用，本局分数在游戏中显示。',
  'qpet-hunting':'移动鼠标瞄准，点击射击；悬停左右边缘切换场景。手机按住左右按钮，用另一根手指点按射击。选择Q哥或Q妹开始本地练习，不扣费、不兑换元宝。',
  'qpet-match':'点击管道改变方向，连接两侧带着爱心的 Q宠。',
  'magpie-bridge':'移动鼠标或拖动手指抓住喜鹊，避开乌鸦。',

@@ -1,0 +1,95 @@
+{
+  "130": {
+    "text": "<p align=\"left\"></p>",
+    "size": 240,
+    "box": [
+      1048,
+      -40,
+      7671,
+      1580
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "129",
+    "fontData": {
+      "advance": {},
+      "ascent": 894,
+      "descent": 156,
+      "leading": 170
+    },
+    "outlines": false,
+    "variable": ""
+  },
+  "922": {
+    "text": "<p align=\"left\"></p>",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1279,
+      531
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "921",
+    "fontData": {
+      "advance": {},
+      "ascent": 894,
+      "descent": 156,
+      "leading": 170
+    },
+    "outlines": false,
+    "variable": ""
+  },
+  "993": {
+    "text": "\r\r",
+    "size": 360,
+    "box": [
+      -40,
+      -40,
+      2781,
+      439
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "992",
+    "fontData": {
+      "advance": {
+        ".": 5120,
+        "0": 10240,
+        "1": 10240,
+        "2": 10240,
+        "3": 10240,
+        "4": 10240,
+        "5": 10240,
+        "6": 10240,
+        "7": 10240,
+        "8": 10240,
+        "9": 10240
+      },
+      "ascent": 18260,
+      "descent": 4440,
+      "leading": 2220
+    },
+    "outlines": true,
+    "variable": ""
+  }
+}
