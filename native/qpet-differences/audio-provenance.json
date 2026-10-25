@@ -1,0 +1,94 @@
+{
+  "sourceCommit": "a28b5d3928141955b01ba06cdd739974cf5b7ecc",
+  "sourceSHA256": "660a57fbfd080557147b980969c1904403bb9ec491e67d392644708b34b4c23f",
+  "sourceBytes": 1936532,
+  "soundId": "48",
+  "sourceEncoding": "SWF ADPCM (format1)",
+  "sourceRateFlag": 0,
+  "referenceSampleRate": 5512,
+  "nominalRate": 5512.5,
+  "sourceSampleCountHeader": 5681,
+  "sourcePayloadBytes": 3556,
+  "sourcePayloadSHA256": "d3600d0d85d6b481906c8bf40bde251f0cc932973b4db8f824d1d947a2ad20e2",
+  "exportedWAV": {
+    "bytes": 11404,
+    "sha256": "305b84bbf765d519c50222a83ad2de87085fcdeb550920d95c7b03ffa032940c",
+    "rate": 5512,
+    "samples": 5680,
+    "channels": 1,
+    "width": 2
+  },
+  "method": "FFDec26.4 ADPCM to PCM WAV, independently cross-checked against fixed Ruffle0.5 decoder rules; no source resampling/denoising/replacement",
+  "decodeComparison": {
+    "decoder": "Ruffle v0.5.0 ADPCM rules, offline Python translation",
+    "bitsPerSample": 5,
+    "decodedSamples": 5680,
+    "ffdecSamples": 5680,
+    "samePCM": true,
+    "pcmSHA256": "b23fcb95c8871281f13edf376d133ba07924df3079d318726896e74a2735dda7"
+  },
+  "sampleCountNote": "Header5681; both independent decoders produce5680 available samples. WAV preserves those exact samples, does not fabricate a missing sample. Reference integer sample rate5512 retained.",
+  "bindings": [
+    {
+      "timeline": "49",
+      "frame": 2,
+      "id": "48",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "timeline": "51",
+      "frame": 2,
+      "id": "48",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "timeline": "62",
+      "frame": 2,
+      "id": "48",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "timeline": "70",
+      "frame": 2,
+      "id": "48",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    }
+  ],
+  "streams": []
+}

@@ -8,7 +8,8 @@
     "candidateReportSHA256": "5254e5d2cf8cd3032f0ccb17b9a08699fb9cb443fee3d3874f998d6d718c8176",
     "migrationChanges": [
       "index.html same-site hall links and matching app cache key",
-      "assets/js/app.js same-site native root and Adventure links"
+      "assets/js/app.js same-site native root and Adventure links",
+      "classic-005 now launches the verified native differences game; original player remains explicit"
     ],
     "originalGamePayloadsUnchanged": 19,
     "rufflePayloadsUnchanged": 7
@@ -488,8 +489,8 @@
     },
     {
       "path": "assets/js/app.js",
-      "bytes": 13322,
-      "sha256": "7b0113e8cbdf16413ecb0eee63f7a4f97c9b8356a7c515461f151d785c3d785a"
+      "bytes": 13455,
+      "sha256": "95173156201e1905e9ba440bec0751b642010dba1bf304d8816e88aa46a1dc9a"
     },
     {
       "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
@@ -734,7 +735,7 @@
     {
       "path": "index.html",
       "bytes": 1221,
-      "sha256": "ea024ee6f53222aca57dea8736a9a9741595ae590850d2167340c73cc1aedb8e"
+      "sha256": "80e7a115557f0a2498fbac3b4881f985d1a3155f329191b83dcf0865a6d432e2"
     },
     {
       "path": "onegame.html",

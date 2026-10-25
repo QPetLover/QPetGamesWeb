@@ -1,0 +1,29 @@
+{
+  "38": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -120,
+      -120,
+      790,
+      647
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "37",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "time"
+  }
+}

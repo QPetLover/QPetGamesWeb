@@ -1,0 +1,24 @@
+onClipEvent(enterFrame){
+   if(_root.k == 5)
+   {
+      _root.k = 0;
+      trace(_root.k);
+      if(_root.m == 9)
+      {
+         tellTarget(_parent)
+         {
+            gotoAndPlay(22);
+         }
+      }
+      else
+      {
+         tellTarget(_parent)
+         {
+            nextFrame();
+         }
+         _root.m++;
+         trace(_root.m);
+         time = "45";
+      }
+   }
+}

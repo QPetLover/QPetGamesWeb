@@ -133,5 +133,17 @@
     "summary": "移动 QGG 接住 QMM，调整弹跳角度，收集星星。",
     "badge": "弹跳收集",
     "cover": "covers/qpet-stars.png"
+  },
+  {
+    "id": "qpet-differences",
+    "title": "Q宠邀你来找茬",
+    "path": "qpet-differences",
+    "preview": "preview-differences",
+    "candidate": "minitool-differences-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-005",
+    "category": "classic",
+    "summary": "和 Q宠一起找出两图的不同之处。",
+    "cover": "covers/qpet-differences.png"
   }
 ]

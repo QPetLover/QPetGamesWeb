@@ -1,0 +1,9 @@
+if(Number(time) == 0)
+{
+   stop();
+   tellTarget("/")
+   {
+      gotoAndStop("loser");
+      play();
+   }
+}

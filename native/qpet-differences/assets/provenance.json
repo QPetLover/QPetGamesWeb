@@ -1,0 +1,142 @@
+{
+  "sourceSWF": "QPetLover/QPetGames/classical_games/swf/Q宠邀你来找茬.swf",
+  "sourceCommit": "a28b5d3928141955b01ba06cdd739974cf5b7ecc",
+  "sourceSHA256": "660a57fbfd080557147b980969c1904403bb9ec491e67d392644708b34b4c23f",
+  "sourceBytes": 1936532,
+  "stage": {
+    "width": 640,
+    "height": 480,
+    "fps": 12,
+    "version": 6
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 102,
+  "embeddedImages": {
+    "imageObj2": {
+      "mime": "image/PNG",
+      "bytes": 185571,
+      "sha256": "15f988eed294fae702cb299c7b28cf935ad783e97cfc1b8d73c7f34186e66396"
+    },
+    "imageObj40": {
+      "mime": "image/JPEG",
+      "bytes": 81674,
+      "sha256": "b11d84e5f81e451674fc8126a86d0e210448d82a8974c8bb8b5284a5b867d220"
+    },
+    "imageObj41": {
+      "mime": "image/JPEG",
+      "bytes": 81695,
+      "sha256": "654e69ad560918cfaa7f8c05ab6e48fed039adb8a0155c40cf7b52dc368ee0c5"
+    },
+    "imageObj52": {
+      "mime": "image/JPEG",
+      "bytes": 94460,
+      "sha256": "a424de4c258885c30360b472464905d4c98289763517a8f200ecaf8dee9b25fe"
+    },
+    "imageObj53": {
+      "mime": "image/JPEG",
+      "bytes": 95713,
+      "sha256": "4c70565dece89ea592d0779409a47a3432df576410bec6f00e1ac7a3542f3638"
+    },
+    "imageObj55": {
+      "mime": "image/JPEG",
+      "bytes": 81028,
+      "sha256": "6334a42b24934155e0e4a1c82196f28558c24b91bf0be1178b39706bd28e6621"
+    },
+    "imageObj56": {
+      "mime": "image/JPEG",
+      "bytes": 78334,
+      "sha256": "7895bb52deba06f9c2df1a15f486bc77d8aa5ffa5d9be9b6b2409af1f1248d5b"
+    },
+    "imageObj58": {
+      "mime": "image/PNG",
+      "bytes": 162983,
+      "sha256": "14d16388cb9029cf47efda12ae6157ccd203ae87c9405c5f6834681b505d79c2"
+    },
+    "imageObj59": {
+      "mime": "image/PNG",
+      "bytes": 167313,
+      "sha256": "b5d7980f248d7dd64a93f9afb6806720483c06661cd0c585e18f1c1eb69c5252"
+    },
+    "imageObj63": {
+      "mime": "image/JPEG",
+      "bytes": 42089,
+      "sha256": "b7e2ff72d6989a2b05410c3028e5525e7f994f52f7fe19e2e01be78d6289f095"
+    },
+    "imageObj64": {
+      "mime": "image/JPEG",
+      "bytes": 43042,
+      "sha256": "f503bbf275ecf8b2c805eb015125f96fe46e9456c5568b6241422d6050f1cf32"
+    },
+    "imageObj66": {
+      "mime": "image/JPEG",
+      "bytes": 86868,
+      "sha256": "f94941496697871fac998b9543c9791b2149a47d40deaadca78272c94373e5d7"
+    },
+    "imageObj67": {
+      "mime": "image/JPEG",
+      "bytes": 86862,
+      "sha256": "7ca5c854ffe4510d755cd51df1329c389682a1108d40cc1f547f636375bc9ab3"
+    },
+    "imageObj71": {
+      "mime": "image/JPEG",
+      "bytes": 90682,
+      "sha256": "a7ab27769808bdf50ee382c176e0d06192c38e55bf8efeca058742a72d3ffd39"
+    },
+    "imageObj72": {
+      "mime": "image/JPEG",
+      "bytes": 89953,
+      "sha256": "f867d858e980ce52a2f174936e6fc41ac0af116feb0453df98967619d1d947e5"
+    },
+    "imageObj74": {
+      "mime": "image/JPEG",
+      "bytes": 82702,
+      "sha256": "480b79eef59460d0f2fdeb11615707259773971514119e326a2c2fb94b712343"
+    },
+    "imageObj75": {
+      "mime": "image/JPEG",
+      "bytes": 82499,
+      "sha256": "79f251a2b39ad5a9d516a6990d4d5828abaf2902986fb1ae5c5589d8e2cc07d6"
+    },
+    "imageObj77": {
+      "mime": "image/JPEG",
+      "bytes": 99589,
+      "sha256": "2a15bf6dd97afb51cadc8f7c40c959157b1b9d76df8f2b1970f3ae83c5fe3b62"
+    },
+    "imageObj78": {
+      "mime": "image/JPEG",
+      "bytes": 99256,
+      "sha256": "2ab3de831800d1e79959a9121d6c2f9f489af956d6ba6a99be35d86a0ced963d"
+    },
+    "imageObj80": {
+      "mime": "image/JPEG",
+      "bytes": 68376,
+      "sha256": "9ce0d76223960dc2b7fe76517118a8ac2284ba18e1c9031fd09eb6d4b279177d"
+    },
+    "imageObj81": {
+      "mime": "image/JPEG",
+      "bytes": 68782,
+      "sha256": "7053a49c43f171fb551a83d9abd2fa73a94db7423eccbb40dd1bce1d77a2a30c"
+    }
+  },
+  "inputs": {
+    "differences.xml": "3b5cafaa0bb718b9084ab19497951c32d75bceae2caa5a497bb67556c47f1443",
+    "frame-unpacked/frames.html": "886021d2c056a86dcc71ae6afab850dfbe3900a407493287c97cf2d618cc9652",
+    "frame-unpacked/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "0 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "0 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "52d1975cfda9c37dc49c1891e0749362947b89e9a573cb7a02b9409f4e0c192a",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/master/classical_games/swf/Q%E5%AE%A0%E9%82%80%E4%BD%A0%E6%9D%A5%E6%89%BE%E8%8C%AC.swf",
+  "sourceVersionCaution": "Fixed community snapshot; no claim that the community file is byte-identical to a historical Tencent server copy.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 1969471,
+  "previousFFDecBitmapBytes": 1969471
+}
