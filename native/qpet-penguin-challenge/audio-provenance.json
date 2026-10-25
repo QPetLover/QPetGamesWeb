@@ -1,0 +1,402 @@
+{
+  "sourceSHA256": "11380ec505e2edcc54e00646e487be91bea6fe627199923681b5cef96197aace",
+  "sourceBytes": 1592613,
+  "xmlSHA256": "689750f8de5c470e6928497d89a381e30778ed6baea41dd8648543c28d722708",
+  "tool": "FFDec26.4.0 XML",
+  "linkage": {
+    "AddScore": "595",
+    "SnowMov": "589",
+    "SnowMan": "585",
+    "SnowFlakes": "582",
+    "StartMc": "580",
+    "Lost": "569",
+    "StartWood": "557",
+    "Qgg3": "554",
+    "Wood": "498",
+    "qedtz_fla.Timeline_28": "492",
+    "qedtz_fla.Timeline_31": "440",
+    "Bg": "420",
+    "BgStart": "417",
+    "Wall": "414",
+    "Time": "388",
+    "qedtz_fla.Timeline_46": "374",
+    "Qgg1": "360",
+    "Qgg2": "312",
+    "qedtz_fla.QG_62": "257",
+    "Qmm1": "246",
+    "qedtz_fla.QM_73": "202",
+    "Qmm2": "196",
+    "Qmm3": "124",
+    "qedtz_fla.03QM_96": "59",
+    "SoundAndExit": "43",
+    "SureCancelPanel": "28",
+    "GameLoader": "15",
+    "BgSound": "1",
+    "ORG.Index": "0"
+  },
+  "sounds": {
+    "1": {
+      "rate": 44100,
+      "samples": 2034432,
+      "seekSamples": 0,
+      "channels": 2,
+      "bytes": 738116,
+      "sha256": "b3b02450d7daa320a4ee1c2a1abc7019e079abf3d70481168d17f6be794d669d"
+    },
+    "71": {
+      "rate": 22050,
+      "samples": 13824,
+      "seekSamples": 0,
+      "channels": 2,
+      "bytes": 7523,
+      "sha256": "4b47f60e38fb5a8545f8531740e87a2a61e3d1efd8ddfbffa3eeb3551442bf26"
+    },
+    "109": {
+      "rate": 11025,
+      "samples": 7244,
+      "seekSamples": 1633,
+      "channels": 1,
+      "bytes": 1768,
+      "sha256": "ff2d76494ec3f466c667995740a14d6d51e6e036c219dccdc5eb12ec80ee9517"
+    },
+    "365": {
+      "rate": 11025,
+      "samples": 12960,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 2808,
+      "sha256": "f5317028365a3d9dd5ce749c6a273415a165124f6c63e8d1c4d923a4fd4df834"
+    },
+    "592": {
+      "rate": 22050,
+      "samples": 23160,
+      "seekSamples": 1671,
+      "channels": 1,
+      "bytes": 4680,
+      "sha256": "cf01c2e4a5219d8520c0ec28cb225b4b80575bf6831013504e5df126f379a835"
+    }
+  },
+  "timelineSounds": [
+    {
+      "owner": "124",
+      "frame": 2,
+      "id": "71",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "124",
+      "frame": 5,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "124",
+      "frame": 6,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "196",
+      "frame": 2,
+      "id": "71",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "196",
+      "frame": 5,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "196",
+      "frame": 6,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "246",
+      "frame": 2,
+      "id": "71",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "246",
+      "frame": 5,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "246",
+      "frame": 6,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "312",
+      "frame": 2,
+      "id": "71",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "312",
+      "frame": 5,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "312",
+      "frame": 6,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "360",
+      "frame": 2,
+      "id": "71",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "360",
+      "frame": 5,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "360",
+      "frame": 6,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "374",
+      "frame": 2,
+      "id": "365",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "554",
+      "frame": 2,
+      "id": "71",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "554",
+      "frame": 5,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "554",
+      "frame": 6,
+      "id": "109",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    },
+    {
+      "owner": "595",
+      "frame": 2,
+      "id": "592",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      },
+      "envelopes": []
+    }
+  ],
+  "streamBlocks": []
+}

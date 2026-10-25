@@ -1,0 +1,11 @@
+import {audioAssets,audioMetadata} from './audio-assets.js';
+/** Source SoundAndExit controls only the BGM channel. Event sounds keep their
+ * original independent lifecycle; stopping music never suppresses jumping. */
+export class ChallengeAudio{
+ constructor(){this.context=null;this.buffers={};this.sources=new Set();this.enabled=true;this.prepared=false;this.music=null;this.musicOffset=0;}
+ async prepare(){if(!this.context){const C=globalThis.AudioContext||globalThis.webkitAudioContext;this.context=new C();this.output=this.context.createGain();this.output.connect(this.context.destination);}await this.context.resume();if(!this.preparation)this.preparation=Promise.all(Object.entries(audioAssets).map(async([id,data])=>{const bytes=Uint8Array.from(atob(data.split(',')[1]),c=>c.charCodeAt(0));this.buffers[id]=await this.context.decodeAudioData(bytes.buffer);}));await this.preparation;this.prepared=true;if(this.enabled&&!this.music)this.playMusic();}
+ play(id,{offset=0,volume=1,onended}={}){id=String(id);const buffer=this.buffers[id],metadata=audioMetadata[id];if(!this.prepared||!buffer)return null;const seek=Math.max(0,metadata.seekSamples/metadata.rate),duration=Math.min(metadata.samples/metadata.rate,buffer.duration-seek);if(duration<=0)return null;const source=this.context.createBufferSource(),gain=this.context.createGain();source.buffer=buffer;source.originalSoundId=id;gain.gain.value=volume;source.connect(gain);gain.connect(this.output);source.onended=()=>{this.sources.delete(source);source.disconnect();gain.disconnect();onended?.(source);};source.start(0,seek+offset%duration,duration-offset%duration);this.sources.add(source);return{source,duration};}
+ playMusic(){const result=this.play(1,{offset:this.musicOffset,volume:.5,onended:source=>{if(this.music===source){this.music=null;this.musicOffset=0;if(this.enabled)this.playMusic();}}});if(result){this.music=result.source;this.musicStarted=this.context.currentTime;this.musicDuration=result.duration;}}
+ pause(){this.enabled=false;if(this.music){this.musicOffset=(this.musicOffset+this.context.currentTime-this.musicStarted)%this.musicDuration;const source=this.music;this.music=null;this.sources.delete(source);source.stop();}}
+ async resume(){this.enabled=true;await this.prepare();}
+}

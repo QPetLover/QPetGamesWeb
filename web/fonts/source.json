@@ -11,10 +11,10 @@
   "upstreamLicenseSha256": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
   "modifications": "Local UI WOFF2 subset, renamed QPet Rounded; original outlines and copyright/license retained. No remote font dependency.",
   "file": "qpet-rounded.woff2",
-  "bytes": 49536,
-  "sha256": "ccb6015bc0ce878568aee0497cf6ba81c8b938dd6f308ae789944d9068f6833b",
-  "chineseCharacters": 424,
-  "totalCodepoints": 531,
+  "bytes": 49728,
+  "sha256": "9cfe05a19fe6ecce7bf726e6f896cadc800d3720c764b8c50138cf0acacfdf83",
+  "chineseCharacters": 425,
+  "totalCodepoints": 532,
   "chineseCoverageComplete": true,
   "chineseCodepoints": [
     "U+4E00",
@@ -83,6 +83,7 @@
     "U+529F",
     "U+52A0",
     "U+52A8",
+    "U+52A9",
     "U+52C7",
     "U+5305",
     "U+5316",
@@ -451,26 +452,12 @@
     "core/QPetGamesWeb/native/games.json"
   ],
   "subsetExtension": {
-    "text": "接住食物，分给客人，清理垃圾。← → 移动；Z、X、C、V 分别送给红、蓝、橙、绿客人，↓ 丢弃垃圾，空格使用礼物。手机使用下方按钮。",
+    "text": "左右助跑，向更高的平台跳跃。左右方向键助跑，空格跳跃。手机可同时按方向和跳跃按钮。",
     "addedCodepoints": [
-      "U+4E22",
-      "U+522B",
-      "U+573E",
-      "U+5783",
-      "U+5BA2",
-      "U+5F03",
-      "U+6A59",
-      "U+6E05",
-      "U+7406",
-      "U+793C",
-      "U+7EA2",
-      "U+7ED9",
-      "U+7EFF",
-      "U+84DD",
-      "U+98DF"
+      "U+52A9"
     ],
-    "preservedCodepoints": 516,
-    "previousSha256": "dab8a526afb0a12b6ff294fc527dea50e4fc27bf3503157ffc9415caf3bbff90",
+    "preservedCodepoints": 531,
+    "previousSha256": "ccb6015bc0ce878568aee0497cf6ba81c8b938dd6f308ae789944d9068f6833b",
     "method": "Union of previous cmap and new game UI; all previous outlines and hmtx exactly compared using RecordingPen; upstream source/name/license options retained."
   }
 }

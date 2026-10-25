@@ -193,5 +193,17 @@
     "category": "classic",
     "summary": "接住食物，分给客人，清理垃圾。",
     "cover": "covers/qpet-nanny.png"
+  },
+  {
+    "id": "qpet-penguin-challenge",
+    "title": "企鹅的挑战",
+    "path": "qpet-penguin-challenge",
+    "preview": "preview-penguin-challenge",
+    "candidate": "minitool-penguin-challenge-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-004",
+    "category": "classic",
+    "summary": "左右助跑，向更高的平台跳跃。",
+    "cover": "covers/qpet-penguin-challenge.png"
   }
 ]
