@@ -2,7 +2,7 @@
   "name": "qpet-games-web",
   "private": true,
   "type": "module",
-  "description": "Q宠游戏：八款独立 HTML / Canvas / JavaScript 游戏",
+  "description": "Q宠游戏：独立 HTML / Canvas / JavaScript 游戏合集",
   "engines": {
     "node": ">=20"
   },

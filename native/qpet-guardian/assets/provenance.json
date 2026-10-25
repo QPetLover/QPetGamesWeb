@@ -1,0 +1,50 @@
+{
+  "sourceSWF": "qqpet_automation qq-pet-macos/src/assets/game/QQ宠守护使.swf (fixed community backup)",
+  "sourceCommit": "a28b5d3928141955b01ba06cdd739974cf5b7ecc",
+  "sourceSHA256": "6ef3e55d86431714fe8d1da849a37fb5c08844a44accdc469296fe0118377654",
+  "sourceBytes": 665215,
+  "stage": {
+    "width": 600,
+    "height": 210,
+    "fps": 12
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 568,
+  "embeddedImages": {
+    "imageObj474": {
+      "mime": "image/JPEG",
+      "bytes": 24733,
+      "sha256": "b489ca8eda83dd65a6a9a3c4337d3ebae7dddc6d38bbe7adae711681c28623ea"
+    },
+    "imageObj475": {
+      "mime": "image/JPEG",
+      "bytes": 16283,
+      "sha256": "f54bc827c220b2bc581e3228ce2e935a8bcfcda585ff8835ef8401acab1c6082"
+    }
+  },
+  "inputs": {
+    "guardian.xml": "775d0d0ca537aa2d7b8abb2d1a04027b779c28c9ecbc3aaf214a87edc3645fd9",
+    "canvas/frames.html": "35f1817a897097e8e6f8a1125127e878312ac6e14f0dabe66b1756a122cebefc",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked/DefineSprite_188_haibao/frames.html": "c03ae07469c8dda90b574f7bca24e551984b6bfb15953bb6eac054b1fb7d17ae",
+    "linked/DefineSprite_229_zd/frames.html": "7a0cc8a9a131b67d286526038c97160caf2bcea31b52079b9acdc49d2b1bb451",
+    "linked/DefineSprite_60_xueguai/frames.html": "9717b5599f0121f0441add87fc4223b6288b055ed7e7f741aac677dee9e55db3",
+    "linked/DefineSprite_96_haiou/frames.html": "5878ac3867a1df99c7a402f51a0b96e939f8f0491bd0d7288b4436784cd5e5ab"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "4428 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "48 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "35dea890f8710e49794e836eb04651dc2c2d6437760810a404acdaa43381e788",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/a28b5d3928141955b01ba06cdd739974cf5b7ecc/classical_games/swf/Q宠守护使.swf",
+  "sourceVersionCaution": "Fixed community snapshot; no claim that the community file is byte-identical to a historical Tencent server copy.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 41016,
+  "previousFFDecBitmapBytes": 41016
+}

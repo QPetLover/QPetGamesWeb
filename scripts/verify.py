@@ -21,7 +21,8 @@ class HomeLinks(HTMLParser):
             assert attrs.get('id')==self.category,'Section anchor differs from category'
         if tag=='article' and 'data-game' in attrs:
             assert self.category is not None and self.row is None,'Game outside a category or nested card'
-            self.row={'id':attrs['data-game'],'category':self.category,'links':[],'title':[],'summary':[],'note':[]}; self.rows.append(self.row)
+            self.row={'id':attrs['data-game'],'category':self.category,'links':[],'images':[],'title':[],'summary':[],'note':[]}; self.rows.append(self.row)
+        if tag=='img' and self.row is not None:self.row['images'].append(attrs)
         if tag=='a':
             self.links.append(attrs)
             if self.row is not None:
@@ -39,7 +40,7 @@ class HomeLinks(HTMLParser):
         elif tag=='article':self.row=None
         elif tag=='section':self.category=None
 
-def verify_home_links(html,catalog):
+def verify_home_links(html,catalog,cover_sizes=None):
     published=[game for game in catalog if game['published']]
     assert len({game['path'] for game in published})==len(published),'Unique published paths'
     for game in published:
@@ -56,6 +57,14 @@ def verify_home_links(html,catalog):
         assert ''.join(row['title'])==game['title'],f"{game['id']}: incorrect title"
         assert ''.join(row['summary'])==game['summary'],f"{game['id']}: incorrect summary"
         assert ''.join(row['note'])==game.get('sourceNote',''),f"{game['id']}: incorrect source note"
+        if game.get('cover'):
+            assert len(row['images'])==1,f"{game['id']}: one original opening cover required"
+            cover=row['images'][0]
+            assert cover.get('src')==game['cover'],f"{game['id']}: incorrect cover"
+            assert cover.get('alt')==game['title']+'游戏开始画面',f"{game['id']}: incorrect cover label"
+            assert cover.get('loading')=='lazy' and int(cover.get('width',0))>0 and int(cover.get('height',0))>0,f"{game['id']}: cover dimensions and loading required"
+            if cover_sizes is not None:assert (int(cover['width']),int(cover['height']))==cover_sizes[game['cover']],f"{game['id']}: cover aspect ratio differs from original"
+        else:assert not row['images'],f"{game['id']}: unexpected cover"
         assert len(row['links'])==2,f"{game['id']}: native and comparison links must be adjacent in one card"
         native,original=row['links']; native_attrs=native['attrs']; original_attrs=original['attrs']
         assert native_attrs.get('href')==game['path']+'/',f"{game['id']}: incorrect native entry"
@@ -95,6 +104,15 @@ root=Path(__file__).resolve().parents[1]; dist=args.dist.resolve() if args.dist 
 catalog=json.loads((root/'native/games.json').read_text())
 games=[game for game in catalog if game['published']]
 expected={'index.html','portal.css','player.html','maintenance.css','.nojekyll'}
+cover_sizes={}
+for game in games:
+    if not game.get('cover'):continue
+    assert re.fullmatch(r'covers/[a-z0-9]+(?:-[a-z0-9]+)*\.png',game['cover']),'Unsafe cover path'
+    source=root/'web'/game['cover']; output=dist/game['cover']; data=source.read_bytes()
+    assert len(data)>=24 and data[:8]==b'\x89PNG\r\n\x1a\n','Cover must be PNG'
+    assert output.read_bytes()==data,'Cover must retain exact source pixels: '+game['id']
+    cover_sizes[game['cover']]=(int.from_bytes(data[16:20],'big'),int.from_bytes(data[20:24],'big'))
+    expected.add(game['cover'])
 media={'.png','.jpg','.jpeg','.gif','.webp','.svg','.woff','.woff2'}
 for game in games:
     folder=game['path']+'/'
@@ -121,7 +139,7 @@ for game in games:
     assert '<canvas' in html and 'app.js' in html
     assert not re.search(r'<(?:iframe|object|embed)\b|\bon\w+\s*=',html,re.I)
 assert '游戏已下架' in (dist/'player.html').read_text()
-home_links=verify_home_links((dist/'index.html').read_text(),catalog)
+home_links=verify_home_links((dist/'index.html').read_text(),catalog,cover_sizes)
 checks=[]
 for name in sorted(expected):
     data=(dist/name).read_bytes()

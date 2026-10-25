@@ -9,7 +9,8 @@
     "original": "https://qpetlover.cn/QPetGames/#/play/classic-014",
     "category": "classic",
     "summary": "转动管道，连接两侧带着爱心的 Q宠。",
-    "badge": "轻松益智"
+    "badge": "轻松益智",
+    "cover": "covers/qpet-match.png"
   },
   {
     "id": "magpie-bridge",
@@ -21,7 +22,8 @@
     "original": "https://qpetlover.cn/QPetGames/#/play/classic-002",
     "category": "classic",
     "summary": "抓住飞过的喜鹊，帮牛郎织女搭起一座桥。",
-    "badge": "手眼配合"
+    "badge": "手眼配合",
+    "cover": "covers/magpie-bridge.png"
   },
   {
     "id": "qpet-racing",
@@ -33,7 +35,8 @@
     "original": "https://qpetlover.cn/QPetGames/#/play/classic-003",
     "category": "classic",
     "summary": "加速、转弯、用道具，和 Q宠一起冲过终点。",
-    "badge": "动作竞速"
+    "badge": "动作竞速",
+    "cover": "covers/qpet-racing.png"
   },
   {
     "id": "qpet-forest",
@@ -45,7 +48,8 @@
     "original": "https://qpetlover.cn/QPetGames/#/play/happy-forest",
     "category": "happy-valley",
     "summary": "种下种子，沿着长成的植物探索森林。",
-    "badge": "宠爱森林"
+    "badge": "宠爱森林",
+    "cover": "covers/qpet-forest.png"
   },
   {
     "id": "qpet-qqtang",
@@ -57,7 +61,8 @@
     "original": "https://qpetlover.cn/QPetGames/#/play/happy-qqtang",
     "category": "happy-valley",
     "summary": "放下泡泡，躲开爆炸，一个人或两个人都能玩。",
-    "badge": "支持双人"
+    "badge": "支持双人",
+    "cover": "covers/qpet-qqtang.png"
   },
   {
     "id": "qpet-dungeon",
@@ -70,7 +75,8 @@
     "category": "happy-valley",
     "summary": "选择角色，在熟悉的场景里闯关、战斗。",
     "badge": "社区版",
-    "sourceNote": "社区保存版本，欢乐谷归属尚未证实。"
+    "sourceNote": "社区保存版本，欢乐谷归属尚未证实。",
+    "cover": "covers/qpet-dungeon.png"
   },
   {
     "id": "qpet-sonic",
@@ -85,7 +91,8 @@
     "category": "happy-valley",
     "summary": "跟着音乐穿过糖果王国、万圣之夜与圣诞星空。",
     "badge": "三关节奏挑战",
-    "sourceNote": "同源版本规则与原声迁移；企鹅素材按历史截图补制。"
+    "sourceNote": "同源版本规则与原声迁移；企鹅素材按历史截图补制。",
+    "cover": "covers/qpet-sonic.png"
   },
   {
     "id": "qpet-adventure",
@@ -99,5 +106,18 @@
     "category": "adventure",
     "summary": "序章与八集故事，双角色冒险，通关后逐集开放。",
     "badge": "八集冒险"
+  },
+  {
+    "id": "qpet-guardian",
+    "title": "Q宠守护使",
+    "path": "qpet-guardian",
+    "preview": "preview-guardian",
+    "candidate": "minitool-guardian-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-001",
+    "category": "classic",
+    "summary": "瞄准抛出雪球，挡住海豹、海鸥和雪怪，守护 QMM。",
+    "badge": "雪球守护",
+    "cover": "covers/qpet-guardian.png"
   }
 ]
