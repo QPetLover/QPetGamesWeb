@@ -40,3 +40,24 @@ test('stream playback corrects source-frame accumulation without seeking game st
  a.context.state='suspended';a.context.currentTime=8;assert.equal(a.streamSync(0).action,'none');assert.equal(a.active.size,1);
  a.context.state='running';const restart=a.streamSync(0);assert.equal(restart.action,'restart-at-next-block');assert.equal(a.active.size,0);assert.equal(a.streamOwners.size,0);assert.equal(node.frame,11);assert.equal(diagnostics[0].type,'stream-resync');
 });
+test('failed stream decode releases its owner so the next authored block can retry',async()=>{
+ const dummy=()=>({connect(){},disconnect(){}}),sources=[];
+ const context={state:'running',currentTime:0,sampleRate:44100,destination:dummy(),async resume(){},
+  createGain:()=>({...dummy(),gain:{setValueAtTime(){},cancelScheduledValues(){},linearRampToValueAtTime(){}}}),
+  createChannelSplitter:dummy,createChannelMerger:dummy,
+  createBufferSource:()=>{const source={...dummy(),start(){this.started=true;},stop(){this.stopped=true;}};sources.push(source);return source;}};
+ const stream={id:'stream1',head:{samples:441},blocks:[{frame:1,samples:1152,bytes:1},{frame:2,samples:576,bytes:1}]};
+ const a=new AdventureAudio({assets:{stream1:'data:audio/mpeg;base64,AAA='},metadata:{stream1:{rate:11025,samples:1728}},streams:{movie:stream},timelineEvents:[],frameCount:()=>2,contextFactory:()=>context});
+ let decodes=0;a.decode=async()=>++decodes===1?null:{duration:2,numberOfChannels:1};await a.enable();
+ const node={id:'movie',uid:7,frame:1,playing:true};
+ a.handle({type:'frame-enter',node,frame:1});await Promise.resolve();await Promise.resolve();
+ assert.equal(a.active.size,0,'a failed pending stream must not occupy a channel');
+ assert.equal(a.streamOwners.size,0,'a failed owner must not suppress all subsequent source blocks');
+ node.frame=2;a.setTime(40);a.handle({type:'frame-enter',node,frame:2});await Promise.resolve();await Promise.resolve();
+ assert.equal(decodes,2);assert.equal(a.streamOwners.get(7)?.source,sources[0]);assert.equal(sources[0].started,true);
+ a.handle({type:'stream-stop',owner:7,reason:'stop'});assert.equal(sources[0].stopped,true);assert.equal(a.active.size,0);assert.equal(a.streamOwners.size,0);
+ // A failed decode arriving after a source stop cannot restore its record.
+ let finish;a.decode=()=>new Promise(resolve=>finish=resolve);node.frame=1;a.handle({type:'frame-enter',node,frame:1});
+ a.handle({type:'stream-stop',owner:7,reason:'remove'});finish(null);await Promise.resolve();await Promise.resolve();
+ assert.equal(a.active.size,0);assert.equal(a.streamOwners.size,0);
+});

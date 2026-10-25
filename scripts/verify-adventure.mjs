@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 const REPO=fileURLToPath(new URL('../',import.meta.url));
 const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
-const COMMON=new Set(['host.js','scene-graph.js','renderer.js','audio.js','event-pcm.js','event-pcm-plan.js','event-pcm-model.js','chapter-context.js','chapter-controller.js']);
+const COMMON=new Set(['host.js','scene-graph.js','renderer.js','bitmap-cache.js','audio.js','event-pcm.js','event-pcm-plan.js','event-pcm-model.js','chapter-context.js','chapter-controller.js']);
 const OPTIONAL_COMMON=new Set(['progress.js']);
 const ASSETS=new Set(['drawing.js','collision-paths.js','scene-data.js','linkage.js','timeline-order.js','text-bindings.js','event-pcm.js','audio-assets.js']);
 const ENTRY=/^chapter([0-8])-v([01])$/;

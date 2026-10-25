@@ -99,7 +99,7 @@ for(const entry of entries){
  const permittedAssets=new Set(['drawing.js','collision-paths.js','scene-data.js','linkage.js','timeline-order.js','text-bindings.js','event-pcm.js','audio-assets.js']);
  for(const key of Object.keys(built.metafile.inputs)){
   const p=path.resolve(REPO,key);
-  const commonFiles=new Set(['host.js','scene-graph.js','renderer.js','audio.js','event-pcm.js','event-pcm-plan.js','event-pcm-model.js','chapter-context.js','chapter-controller.js','progress.js']);
+  const commonFiles=new Set(['host.js','scene-graph.js','renderer.js','bitmap-cache.js','audio.js','event-pcm.js','event-pcm-plan.js','event-pcm-model.js','chapter-context.js','chapter-controller.js','progress.js']);
   const selectedActions=path.join(NATIVE,'chapters',`chapter${entry.chapter}-actions.js`),prologueWrapper=entry.chapter===0?path.join(NATIVE,'chapters/chapter0-controller.js'):null;
   assert(p===generated||(path.dirname(p)===path.join(NATIVE,'common')&&commonFiles.has(path.basename(p)))||p===selectedActions||p===prologueWrapper||p===audioFile||(path.dirname(p)===folder&&permittedAssets.has(path.basename(p))),`Unexpected module closure ${relative(p)}`);
   assert(!['artwork.js','instances.js'].includes(path.basename(p)),'Raw duplicate source in release');

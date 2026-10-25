@@ -1,9 +1,10 @@
+import {createBitmapColorCache,fillVisiblePatternRect} from '../../common/bitmap-cache.js';
 /* Original QQ宠物冒险岛 xmxd_0_0.swf symbols. JPEXS FFDec 26.4.0 static Canvas extraction.
  * No SWF parser, ActionScript interpreter, generated player, or dynamic execution.
  * FFDec Canvas drawing helpers: GPL-3.0; repository licenses apply.
  */
 function bitmapLoaded(image){if(image.decode)return image.decode();if(image.complete&&image.width)return Promise.resolve();return new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;});}
-export function createArtwork(canvas,hooks={}){const symbolStack=[];let defaultFill,maskDepth=0;
+export function createArtwork(canvas,hooks={}){const bitmapColorCache=createBitmapColorCache();const symbolStack=[];let defaultFill,maskDepth=0;
 /**
  *  JPEXS Free Flash Decompiler Filters
  */
@@ -855,6 +856,12 @@ var cxform = function (r_add, g_add, b_add, a_add, r_mult, g_mult, b_mult, a_mul
             return fimg
         }
         ;
+        // Only the immutable, embedded original images are eligible. Canvas
+        // inputs used by blend/filter work are frame-dependent and stay uncached.
+        const cacheable=images.includes(fimg);
+        const colorKey=[this.r_add,this.g_add,this.b_add,this.a_add,this.r_mult,this.g_mult,this.b_mult,this.a_mult].join(",");
+        const cached=cacheable?bitmapColorCache.get(fimg,colorKey):undefined;
+        if(cached)return cached;
         var icanvas = createCanvas(fimg.width, fimg.height);
         var ictx = icanvas.getContext("2d");
         ictx.drawImage(fimg, 0, 0);
@@ -868,6 +875,7 @@ var cxform = function (r_add, g_add, b_add, a_add, r_mult, g_mult, b_mult, a_mul
             idata[i + 3] = Math.round(c[3] * 255);
         }
         ictx.putImageData(imdata, 0, 0);
+        if(cacheable)bitmapColorCache.put(fimg,colorKey,icanvas);
         return icanvas;
     };
     this.merge = function (cx) {
@@ -1413,9 +1421,9 @@ function image5(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0008984725965857,0,0,1.0009398496240602,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj5);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -1427,9 +1435,9 @@ function shape6(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,-2437,-1);
 	ctx.transform(1.0008984725965857,0,0,1.0009398496240602,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj5);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -1445,7 +1453,7 @@ function shape8(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5254901960784314,tocolor(ctrans.apply([0,0,0,0.0])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([0,0,0,0.28235295])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -3026,7 +3034,7 @@ function shape28(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([244,255,255,0.0])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -3717,9 +3725,9 @@ function image43(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0011627906976743,0,0,1.0012515644555695,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj43);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -3731,9 +3739,9 @@ function shape44(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,-1097,-6303);
 	ctx.transform(1.0011627906976743,0,0,1.0012515644555695,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj43);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -16375,7 +16383,7 @@ function shape199(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -20 -320 Q 154 -320 277 -197 400 -74 400 100 400 274 277 397 154 520 -20 520 -194 520 -317 397 -440 274 -440 100 -440 -74 -317 -197 -194 -320 -20 -320 Z";
 	var scaleMode = "NORMAL";
@@ -32175,7 +32183,7 @@ function shape380(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 342 -223 Q 480 -85 480 110 480 305 342 442 205 580 10 580 -185 580 -323 442 -460 305 -460 110 -460 -85 -323 -223 -185 -360 10 -360 205 -360 342 -223 Z";
 	var scaleMode = "NORMAL";
@@ -36680,7 +36688,7 @@ function shape412(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -30 -300 Q 132 -300 246 -186 360 -72 360 90 360 252 246 366 132 480 -30 480 -192 480 -306 366 -420 252 -420 90 -420 -72 -306 -186 -192 -300 -30 -300 Z";
 	var scaleMode = "NORMAL";
@@ -37062,9 +37070,9 @@ function image421(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0014044943820224,0,0,1.0020703933747412,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj421);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -37076,9 +37084,9 @@ function shape422(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0014044943820224,0,0,1.0020703933747412,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj421);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -43648,7 +43656,7 @@ function shape529(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.7607843137254902,tocolor(ctrans.apply([133,92,88,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([77,77,119,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 20830 8348 Q 20897 8399 20997 8495 20997 8520 20977 8586 20977 8644 21042 8667 L 21076 8679 Q 21087 8714 21106 8740 L 21232 8853 Q 20877 8626 20043 8541 19210 8455 18581 8478 17952 8500 17472 8635 17279 8689 17133 8754 16999 8812 16903 8880 L 16919 8814 16947 8801 Q 17036 8769 17086 8741 17084 8672 17169 8641 L 17172 8639 Q 17309 8591 17346 8560 17406 8493 17450 8452 L 17486 8420 Q 17574 8346 17656 8290 17698 8239 17838 8175 17947 8124 17956 8050 L 17962 8017 Q 18021 7970 18107 7923 18188 7879 18316 7810 18473 7696 18509 7657 18543 7619 18564 7577 L 18633 7535 Q 19170 7220 19341 7291 19513 7363 19862 7564 19985 7635 20203 7797 20232 7846 20257 7910 20277 7960 20360 7989 20446 8020 20477 8080 20491 8106 20528 8128 20560 8146 20577 8200 20591 8241 20646 8263 L 20654 8266 20757 8300 Q 20787 8315 20830 8348";
 	var grd=ctx.createLinearGradient(18799.25,7898.25,18626.75,10171.75);
@@ -47195,7 +47203,7 @@ function shape580(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.7254901960784313,tocolor(ctrans.apply([123,189,23,1])));
 	grd.addColorStop(0.9921568627450981,tocolor(ctrans.apply([254,223,103,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -54386,7 +54394,7 @@ function shape690(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.611764705882353,tocolor(ctrans.apply([37,63,65,1])));
 	grd.addColorStop(0.803921568627451,tocolor(ctrans.apply([40,63,39,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 12998 8805 Q 13044 8848 13099 8912 13245 9035 13507 9036 13626 9036 13855 9139 14135 9267 14177 9278 14246 9296 14515 9385 14748 9462 14881 9493 14984 9518 15070 9600 L 15207 9755 Q 15288 9848 15363 9886 15467 9937 15613 9921 15965 9880 16508 10047 17052 10213 17199 10406 17260 10489 17561 10526 L 17899 10560 Q 17982 10584 18200 10666 18366 10727 18843 10873 L 2905 10873 2905 10869 Q 2978 10801 3004 10745 3012 10728 3051 10676 L 3123 10581 Q 3221 10452 3231 10423 3237 10405 3237 10336 3236 10282 3262 10256 L 3269 10250 Q 3376 10161 3414 10102 L 3542 9919 Q 3567 9880 3568 9775 3537 9629 3537 9576 3647 9154 3842 9020 3924 8963 3919 8782 L 4015 8703 Q 4035 8680 4079 8654 4122 8627 4173 8569 L 4191 8548 Q 4260 8478 4307 8282 4332 8175 4364 8105 4390 8046 4421 8013 4451 7982 4477 7918 L 4485 7898 4494 7875 4526 7800 Q 4574 7693 4657 7627 4695 7595 4740 7573 L 4714 7502 4694 7442 Q 4694 7402 4729 7369 L 4822 7266 4822 7265 4829 7249 4848 7209 4853 7210 Q 8201 8357 8667 7165 L 8668 7162 8919 7240 8932 7244 9059 7284 9254 7345 9374 7383 9485 7418 9562 7442 9767 7506 9922 7553 10184 7634 Q 10323 7666 10482 7787 L 10522 7819 Q 10566 7854 10611 7896 L 10631 7914 10789 8060 Q 10890 8144 10977 8181 11047 8210 11306 8239 11563 8269 11647 8304 11763 8355 11959 8413 L 12295 8512 Q 12645 8618 12775 8731 L 12899 8731 Q 12941 8752 12998 8805";
 	var grd=ctx.createLinearGradient(8508.0,6984.75,9708.0,13911.25);
@@ -54521,7 +54529,7 @@ function shape691(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.43137254901960786,tocolor(ctrans.apply([173,149,124,1])));
 	grd.addColorStop(0.9921568627450981,tocolor(ctrans.apply([211,220,197,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 679 176 Q 829 138 1078 109 1747 28 2888 28 L 3235 0 Q 4165 53 4953 208 5488 313 5203 378 5069 408 4752 430 4047 477 3830 529 3741 550 3733 572 3709 633 3683 664 L 3665 681 Q 3459 739 3231 645 L 3227 644 Q 2997 547 2894 542 L 2755 529 Q 2719 522 2680 585 2612 640 2502 620 L 2172 571 Q 2220 595 2048 651 1875 706 1704 683 1532 660 1403 564 1273 467 1169 452 861 397 738 351 614 305 639 255 L 679 176";
 	var grd=ctx.createLinearGradient(1511.5,876.25,1598.5,101.75);
@@ -54694,9 +54702,9 @@ function image693(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0009765625,0,0,1.0013774104683195,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj693);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -54708,9 +54716,9 @@ function shape694(ctx,ctrans,frame,ratio,time){
 	ctx.transform(16.1065673828125,0,0,12.4462890625,2564,-4642);
 	ctx.transform(1.0009765625,0,0,1.0013774104683195,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj693);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -54877,7 +54885,7 @@ function shape696(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.8,tocolor(ctrans.apply([80,128,158,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([78,77,94,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -55025,7 +55033,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2981 4991 Q 2967 5037 2936 5076 L 2922 5059 Q 2904 5044 2878 5044 2852 5043 2833 5058 2814 5072 2814 5093 2814 5113 2832 5128 2845 5138 2862 5142 2794 5183 2711 5179 2602 5172 2529 5090 2457 5008 2464 4899 2470 4790 2552 4718 2634 4645 2743 4652 2821 4656 2881 4700 L 2924 4740 Q 2997 4822 2991 4931 L 2981 4991 M 2921 4993 Q 2911 4993 2905 4999 2899 5005 2899 5015 2899 5024 2905 5030 2911 5036 2920 5037 2929 5037 2934 5031 L 2941 5015 2935 5000 Q 2929 4993 2921 4993 M 2860 4989 L 2862 4973 Q 2865 4929 2835 4896 2806 4863 2762 4860 2718 4857 2685 4886 2652 4916 2650 4960 2647 5004 2676 5037 2705 5070 2750 5073 2777 5074 2800 5064 2808 5064 2814 5057 L 2816 5054 2826 5046 2843 5028 Q 2848 5032 2855 5032 L 2869 5026 2875 5011 2869 4995 2860 4989 M 2795 5124 Q 2802 5119 2802 5110 L 2795 5094 Q 2788 5089 2777 5089 2766 5088 2759 5094 2752 5100 2752 5109 2751 5117 2759 5123 2766 5130 2777 5130 L 2795 5124";
 	drawPath(ctx,pathData,false);
@@ -55036,7 +55044,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2921 4993 Q 2929 4993 2935 5000 L 2941 5015 2934 5031 Q 2929 5037 2920 5037 2911 5036 2905 5030 2899 5024 2899 5015 2899 5005 2905 4999 2911 4993 2921 4993";
 	drawPath(ctx,pathData,false);
@@ -55047,7 +55055,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2843 5028 L 2841 5025 Q 2835 5019 2835 5010 2835 5001 2841 4995 2847 4988 2856 4989 L 2860 4989 2869 4995 2875 5011 2869 5026 2855 5032 Q 2848 5032 2843 5028";
 	drawPath(ctx,pathData,false);
@@ -55058,7 +55066,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2800 5064 Q 2792 5063 2787 5056 2781 5050 2782 5041 2782 5032 2787 5025 2792 5018 2801 5019 2809 5019 2814 5025 L 2820 5041 2816 5054 2814 5057 Q 2808 5064 2800 5064";
 	drawPath(ctx,pathData,false);
@@ -55069,7 +55077,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2936 5076 L 2941 5095 Q 2940 5115 2921 5130 2902 5144 2877 5143 L 2862 5142 Q 2845 5138 2832 5128 2814 5113 2814 5093 2814 5072 2833 5058 2852 5043 2878 5044 2904 5044 2922 5059 L 2936 5076";
 	drawPath(ctx,pathData,false);
@@ -55080,7 +55088,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2795 5124 L 2777 5130 Q 2766 5130 2759 5123 2751 5117 2752 5109 2752 5100 2759 5094 2766 5088 2777 5089 2788 5089 2795 5094 L 2802 5110 Q 2802 5119 2795 5124";
 	drawPath(ctx,pathData,false);
@@ -55091,7 +55099,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3243 4862 L 3245 4864 3248 4878 3242 4892 3227 4896 3224 4895 3215 4889 Q 3210 4882 3211 4874 3211 4866 3218 4861 3223 4855 3232 4856 L 3243 4862";
 	drawPath(ctx,pathData,false);
@@ -55102,7 +55110,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3271 4877 Q 3272 4869 3278 4864 3283 4858 3291 4859 3298 4860 3303 4866 L 3307 4881 3301 4894 3287 4899 3275 4892 Q 3270 4885 3271 4877";
 	drawPath(ctx,pathData,false);
@@ -55113,7 +55121,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3344 4894 L 3349 4899 3352 4915 3346 4928 Q 3340 4934 3333 4933 3327 4932 3323 4928 L 3321 4925 3318 4911 Q 3318 4903 3324 4897 3330 4891 3337 4892 L 3344 4894";
 	drawPath(ctx,pathData,false);
@@ -55124,7 +55132,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3326 4975 Q 3327 4966 3334 4962 L 3351 4958 3367 4965 3372 4980 3364 4992 3347 4996 3331 4989 Q 3325 4983 3326 4975";
 	drawPath(ctx,pathData,false);
@@ -55135,7 +55143,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3314 4939 L 3317 4958 Q 3315 4977 3297 4988 3278 4999 3255 4997 L 3249 4996 Q 3229 4992 3216 4980 3200 4965 3202 4946 3204 4927 3223 4916 3240 4904 3264 4907 3288 4910 3304 4925 L 3314 4939";
 	drawPath(ctx,pathData,false);
@@ -55146,7 +55154,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 4200 4586 L 4199 4585 4226 4586 4260 4595 4254 4611 4248 4703 4238 4702 4244 4612 4249 4596 4216 4587 4200 4586 M 4351 4584 L 4360 4582 Q 4410 4585 4407 4636 4405 4666 4400 4669 L 4398 4695 4397 4695 4384 4694 4385 4667 Q 4390 4664 4392 4636 4394 4589 4351 4584 M 4406 4697 L 4412 4698 4508 4725 4566 4754 Q 4580 4760 4607 4791 L 4604 4813 4596 4987 Q 4593 5024 4596 5052 4586 5069 4591 5066 L 4584 5073 4584 5072 4569 5076 4544 5072 4464 5069 4460 5107 4439 5105 Q 4403 5092 4387 5093 L 4390 5080 4423 5090 4444 5091 4448 5055 4525 5058 4549 5061 4563 5058 4564 5058 4570 5052 Q 4565 5055 4575 5038 4572 5011 4575 4975 L 4583 4807 4586 4786 4546 4749 4490 4721 4406 4697 M 4429 4811 Q 4387 4854 4341 5112 4324 5104 4288 5103 L 4289 5088 4328 5097 Q 4374 4840 4416 4803 L 4429 4804 4429 4811 M 4337 4843 L 4324 4846 4269 4829 4270 4826 4312 4839 Q 4323 4839 4327 4833 L 4341 4777 4351 4776 4355 4783 4354 4783 4343 4828 4337 4843 M 4269 4791 L 4251 4793 4249 4823 Q 4253 4876 4247 4905 L 4235 4905 Q 4244 4877 4239 4816 L 4240 4788 4263 4784 4270 4785 4269 4791 M 4274 4914 L 4285 4914 4282 4960 Q 4274 4974 4273 4995 L 4231 4995 Q 4206 5108 4172 5106 4151 5104 4149 5085 L 4164 5090 Q 4197 5092 4221 4983 L 4262 4983 Q 4263 4963 4271 4950 L 4274 4914 M 4167 4980 L 4101 4991 Q 4078 4990 4077 4972 4082 4979 4096 4980 4119 4981 4168 4966 L 4167 4980 M 4171 4764 L 4147 4773 Q 4123 4820 4093 4819 4051 4816 4040 4794 4052 4810 4088 4813 4117 4814 4140 4768 L 4166 4758 4171 4764 M 4131 4594 Q 4146 4590 4162 4605 L 4162 4606 Q 4173 4615 4186 4651 L 4181 4663 4180 4675 4175 4680 4172 4677 4173 4661 4178 4650 Q 4166 4616 4155 4606 L 4154 4606 Q 4142 4594 4131 4594 M 4470 4985 L 4450 4981 Q 4488 4871 4491 4828 L 4489 4821 4496 4821 4499 4890 4470 4985";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -55161,7 +55169,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3557 4494 L 3534 4512 3511 4532 Q 3501 4514 3465 4509 3428 4503 3388 4547 3348 4590 3338 4591 3328 4592 3314 4580 3296 4565 3297 4551 3299 4519 3349 4482 3404 4440 3467 4444 3495 4446 3509 4454 L 3557 4494";
 	drawPath(ctx,pathData,false);
@@ -55172,7 +55180,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3433 4766 Q 3427 4749 3429 4729 3433 4644 3472 4580 3482 4559 3511 4532 L 3534 4512 3557 4494 Q 3591 4471 3621 4467 L 3699 4458 Q 3703 4469 3700 4495 3695 4584 3646 4614 L 3634 4612 3595 4615 Q 3576 4613 3560 4653 3547 4682 3546 4698 L 3547 4717 Q 3472 4770 3433 4766";
 	drawPath(ctx,pathData,false);
@@ -55183,7 +55191,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3547 4717 L 3546 4698 Q 3547 4682 3560 4653 3576 4613 3595 4615 L 3634 4612 3646 4614 Q 3715 4624 3711 4699 3704 4802 3632 4798 3602 4796 3575 4770 3551 4746 3547 4717 M 3673 4681 Q 3655 4693 3653 4732 3651 4752 3674 4753 3701 4755 3703 4722 3703 4708 3696 4693 L 3685 4679 3679 4681 3673 4681";
 	drawPath(ctx,pathData,false);
@@ -55194,7 +55202,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3654 4966 L 3603 4961 3592 5007 Q 3583 5025 3563 5024 3537 5022 3541 4975 L 3550 4863 Q 3468 4859 3470 4831 3470 4826 3477 4816 L 3483 4807 3487 4812 3565 4812 3563 4812 3746 4827 Q 3791 4830 3881 4825 L 3920 4827 3929 4827 3929 4826 3938 4823 3961 4848 Q 3958 4874 3912 4887 3932 4889 3931 4915 3928 4956 3884 4967 3854 4974 3779 4969 L 3733 4966 3728 4965 Q 3724 4970 3723 4984 3720 5027 3779 5031 3811 5033 3864 4984 3890 4985 3889 5009 3888 5029 3863 5054 L 3861 5056 3824 5078 3823 5078 3764 5086 Q 3717 5083 3686 5051 3652 5016 3654 4966 L 3667 4967 3654 4966 M 3642 4880 L 3627 4883 3625 4919 3668 4922 3671 4884 3642 4880 M 3912 4887 L 3864 4893 3774 4885 Q 3726 4881 3726 4899 L 3729 4921 3799 4925 3912 4887";
 	drawPath(ctx,pathData,false);
@@ -55205,7 +55213,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3433 4766 Q 3472 4770 3547 4717 3551 4746 3575 4770 3602 4796 3632 4798 3704 4802 3711 4699 3715 4624 3646 4614 3695 4584 3700 4495 3703 4469 3699 4458 L 3705 4457 Q 3746 4454 3842 4495 L 3853 4500 3896 4542 3942 4591 Q 3980 4647 3975 4731 3972 4786 3929 4826 L 3929 4827 3920 4827 3881 4825 Q 3791 4830 3746 4827 L 3563 4812 3565 4812 3487 4812 3483 4807 3477 4816 Q 3443 4796 3433 4766 M 3792 4640 L 3789 4638 Q 3761 4647 3745 4683 3732 4709 3731 4729 3726 4806 3819 4816 3902 4821 3908 4731 3913 4645 3825 4640 L 3792 4640";
 	drawPath(ctx,pathData,false);
@@ -55216,7 +55224,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3896 4542 L 3853 4500 3842 4495 Q 3849 4475 3881 4462 3913 4448 3943 4450 3956 4451 4027 4483 L 4053 4510 Q 4073 4538 4072 4559 4070 4584 4042 4583 4017 4581 3995 4546 3973 4509 3942 4507 3917 4505 3896 4542";
 	drawPath(ctx,pathData,false);
@@ -55227,7 +55235,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3792 4640 L 3825 4640 Q 3913 4645 3908 4731 3902 4821 3819 4816 3726 4806 3731 4729 3732 4709 3745 4683 3761 4647 3789 4638 L 3792 4640 M 3855 4729 L 3841 4762 Q 3839 4786 3858 4787 3889 4789 3891 4747 3892 4726 3875 4725 L 3864 4726 3859 4721 3855 4729";
 	drawPath(ctx,pathData,false);
@@ -55238,7 +55246,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3673 4681 L 3679 4681 3685 4679 3696 4693 Q 3703 4708 3703 4722 3701 4755 3674 4753 3651 4752 3653 4732 3655 4693 3673 4681";
 	drawPath(ctx,pathData,false);
@@ -55249,7 +55257,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3855 4729 L 3864 4726 3875 4725 Q 3892 4726 3891 4747 3889 4789 3858 4787 3839 4786 3841 4762 L 3855 4729";
 	drawPath(ctx,pathData,false);
@@ -55260,7 +55268,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3863 5054 L 3905 5066 Q 3940 5068 3957 5046 3974 5024 3980 5025 3996 5025 3995 5048 3994 5063 3978 5084 L 3974 5085 3879 5093 Q 3835 5090 3824 5078 L 3861 5056 3863 5054";
 	drawPath(ctx,pathData,false);
@@ -55271,7 +55279,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3433 4766 Q 3472 4770 3547 4717 L 3546 4698 Q 3547 4682 3560 4653 3576 4613 3595 4615 L 3634 4612 3646 4614 Q 3695 4584 3700 4495 3703 4469 3699 4458 M 3557 4494 L 3534 4512 3511 4532 M 3224 4895 L 3227 4896 3242 4892 3248 4878 3245 4864 3243 4862 3232 4856 Q 3223 4855 3218 4861 3211 4866 3211 4874 3210 4882 3215 4889 L 3224 4895 M 3271 4877 Q 3270 4885 3275 4892 L 3287 4899 3301 4894 3307 4881 3303 4866 Q 3298 4860 3291 4859 3283 4858 3278 4864 3272 4869 3271 4877 M 3654 4966 L 3667 4967 M 3487 4812 L 3565 4812 3563 4812 3746 4827 Q 3791 4830 3881 4825 L 3920 4827 3929 4827 3929 4826 M 3896 4542 L 3853 4500 3842 4495 M 3547 4717 Q 3551 4746 3575 4770 3602 4796 3632 4798 3704 4802 3711 4699 3715 4624 3646 4614 M 3323 4928 L 3314 4939 3304 4925 Q 3288 4910 3264 4907 3240 4904 3223 4916 3204 4927 3202 4946 3200 4965 3216 4980 3229 4992 3249 4996 M 2881 4700 L 2924 4740 Q 2997 4822 2991 4931 L 2981 4991 M 3792 4640 L 3789 4638 Q 3761 4647 3745 4683 3732 4709 3731 4729 3726 4806 3819 4816 3902 4821 3908 4731 3913 4645 3825 4640 L 3792 4640 M 3673 4681 Q 3655 4693 3653 4732 3651 4752 3674 4753 3701 4755 3703 4722 3703 4708 3696 4693 L 3685 4679 3679 4681 3673 4681 M 3864 4726 L 3855 4729 3841 4762 Q 3839 4786 3858 4787 3889 4789 3891 4747 3892 4726 3875 4725 L 3864 4726 3859 4721 3855 4729 M 4270 4826 L 4258 4822 4269 4791 M 3824 5078 L 3861 5056 3863 5054 M 3344 4894 L 3337 4892 Q 3330 4891 3324 4897 3318 4903 3318 4911 L 3321 4925 3323 4928 M 2921 4993 Q 2929 4993 2935 5000 L 2941 5015 2934 5031 Q 2929 5037 2920 5037 2911 5036 2905 5030 2899 5024 2899 5015 2899 5005 2905 4999 2911 4993 2921 4993 M 2800 5064 Q 2792 5063 2787 5056 2781 5050 2782 5041 2782 5032 2787 5025 2792 5018 2801 5019 2809 5019 2814 5025 L 2820 5041 2816 5054 2826 5046 2843 5028 2841 5025 Q 2835 5019 2835 5010 2835 5001 2841 4995 2847 4988 2856 4989 L 2860 4989 2869 4995 2875 5011 2869 5026 2855 5032 Q 2848 5032 2843 5028 M 2800 5064 Q 2808 5064 2814 5057 L 2816 5054 M 2862 5142 Q 2845 5138 2832 5128 2814 5113 2814 5093 2814 5072 2833 5058 2852 5043 2878 5044 2904 5044 2922 5059 L 2936 5076 M 2795 5124 L 2777 5130 Q 2766 5130 2759 5123 2751 5117 2752 5109 2752 5100 2759 5094 2766 5088 2777 5089 2788 5089 2795 5094 L 2802 5110 Q 2802 5119 2795 5124";
 	var scaleMode = "NORMAL";
@@ -55298,7 +55306,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2929 3157 Q 2889 3050 2889 2927 2889 2659 3080 2469 3270 2279 3538 2279 L 3630 2285 Q 3521 2294 3316 2460 3110 2624 3150 3062 3150 3105 3119 3147 3086 3193 3038 3193 3007 3193 2961 3173 L 2929 3157";
 	drawPath(ctx,pathData,false);
@@ -55309,7 +55317,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3513 2648 Q 3648 2644 3705 2719 3760 2789 3745 2897 L 3750 2901 Q 3794 2957 3794 2998 3794 3039 3780 3039 3759 3039 3748 3019 L 3713 3019 3702 3073 Q 3714 3076 3733 3095 L 3748 3114 Q 3748 3170 3639 3170 3553 3170 3526 3127 3513 3162 3457 3162 L 3375 3150 Q 3326 3137 3326 3127 3326 3090 3360 3088 L 3357 2996 Q 3345 3004 3320 3004 3291 3004 3291 2981 3291 2921 3346 2877 3348 2875 3351 2874 3382 2653 3513 2648";
 	var grd=ctx.createLinearGradient(3291.5,2909.0,3794.5,2909.0);
@@ -55327,7 +55335,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2961 3173 Q 3007 3193 3038 3193 3086 3193 3119 3147 3150 3105 3150 3062 3110 2624 3316 2460 3521 2294 3630 2285 L 3665 2291 3664 2296 Q 3587 2317 3587 2411 3587 2492 3661 2538 L 3866 2632 Q 4065 2722 4093 2929 4121 3137 4084 3282 L 4015 3361 Q 4059 3219 3975 3187 3889 3154 3707 3268 3523 3380 3322 3381 3121 3383 2961 3173 M 3513 2648 Q 3382 2653 3351 2874 3348 2875 3346 2877 3291 2921 3291 2981 3291 3004 3320 3004 3345 3004 3357 2996 L 3360 3088 Q 3326 3090 3326 3127 3326 3137 3375 3150 L 3457 3162 Q 3513 3162 3526 3127 3553 3170 3639 3170 3748 3170 3748 3114 L 3733 3095 Q 3714 3076 3702 3073 L 3713 3019 3748 3019 Q 3759 3039 3780 3039 3794 3039 3794 2998 3794 2957 3750 2901 L 3745 2897 Q 3760 2789 3705 2719 3648 2644 3513 2648";
 	drawPath(ctx,pathData,false);
@@ -55338,7 +55346,7 @@ function shape699(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3630 2285 L 3538 2279 Q 3270 2279 3080 2469 2889 2659 2889 2927 2889 3050 2929 3157 L 2961 3173 M 3630 2285 L 3665 2291 3690 2296 3702 2299 Q 3868 2340 3996 2469 4186 2659 4186 2927 4186 3125 4084 3282 L 4015 3361 3996 3386 Q 3806 3576 3538 3576 3270 3576 3080 3386 2977 3283 2929 3157 M 3664 2296 L 3690 2296";
 	var scaleMode = "NORMAL";
@@ -58099,7 +58107,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2682 6556 L 2682 6604 2684 6598 Q 2686 6594 2688 6597 2692 6600 2692 6610 L 2692 6630 2689 6644 2686 6647 Q 2690 6677 2697 6687 2707 6699 2717 6671 2727 6642 2731 6589 L 2732 6488 Q 2727 6441 2718 6427 2711 6418 2704 6430 L 2698 6444 Q 2688 6472 2684 6526 L 2682 6556 M 2687 6566 L 2689 6571 2688 6580 2687 6586 2686 6587 2684 6582 2685 6574 2685 6567 2687 6566 M 2693 6573 L 2694 6565 Q 2695 6543 2699 6532 2704 6520 2707 6526 L 2713 6549 2712 6590 2707 6623 Q 2702 6635 2698 6630 L 2695 6618 2694 6613 2694 6611 2693 6606 2692 6595 2691 6595 2690 6590 2691 6582 2692 6575 2693 6573 M 2692 6648 L 2692 6641 2693 6634 2695 6633 2697 6639 2697 6647 2696 6653 2694 6653 2692 6648";
 	drawPath(ctx,pathData,false);
@@ -58110,7 +58118,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2687 6566 L 2685 6567 2685 6574 2684 6582 2686 6587 2687 6586 2688 6580 2689 6571 2687 6566";
 	drawPath(ctx,pathData,false);
@@ -58121,7 +58129,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2692 6595 L 2692 6593 2694 6587 2694 6579 2693 6574 2693 6573 2692 6575 2691 6582 2690 6590 2691 6595 2692 6595";
 	drawPath(ctx,pathData,false);
@@ -58132,7 +58140,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2695 6618 L 2696 6616 2698 6610 2697 6601 2697 6597 2695 6597 2694 6604 2694 6611 2694 6613 2695 6618";
 	drawPath(ctx,pathData,false);
@@ -58143,7 +58151,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2682 6604 L 2681 6612 2681 6632 2684 6645 2686 6647 2689 6644 2692 6630 2692 6610 Q 2692 6600 2688 6597 2686 6594 2684 6598 L 2682 6604";
 	drawPath(ctx,pathData,false);
@@ -58154,7 +58162,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2692 6648 L 2694 6653 2696 6653 2697 6647 2697 6639 2695 6633 2693 6634 2692 6641 2692 6648";
 	drawPath(ctx,pathData,false);
@@ -58165,7 +58173,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2665 6455 L 2665 6456 2664 6462 2664 6470 2665 6474 2666 6473 2667 6466 2668 6458 2666 6454 2665 6455";
 	drawPath(ctx,pathData,false);
@@ -58176,7 +58184,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2662 6458 L 2662 6451 2661 6446 2660 6449 2659 6455 2658 6462 2660 6467 2661 6465 2662 6458";
 	drawPath(ctx,pathData,false);
@@ -58187,7 +58195,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2655 6456 L 2654 6458 2653 6464 2653 6472 2654 6476 2655 6476 2656 6474 2656 6467 2656 6460 2655 6456";
 	drawPath(ctx,pathData,false);
@@ -58198,7 +58206,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2653 6497 L 2653 6490 2651 6485 2650 6486 2648 6493 2649 6501 2650 6504 2652 6503 2653 6497";
 	drawPath(ctx,pathData,false);
@@ -58209,7 +58217,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2655 6482 L 2654 6490 2655 6508 2658 6519 2659 6519 2662 6516 2665 6502 2664 6484 2662 6473 2657 6476 2655 6482";
 	drawPath(ctx,pathData,false);
@@ -58220,7 +58228,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2594 6180 L 2592 6176 2589 6176 2588 6185 2585 6230 2586 6230 2589 6186 2590 6178 2593 6179 2594 6180 M 2581 6157 L 2580 6155 Q 2576 6149 2574 6174 L 2573 6191 2572 6204 2573 6206 2574 6193 2575 6176 Q 2577 6153 2581 6157 M 2571 6203 L 2571 6204 2561 6202 2555 6208 Q 2553 6208 2550 6219 L 2549 6230 2542 6315 2539 6347 2538 6354 2539 6359 2539 6358 2540 6362 2542 6364 2549 6375 2548 6393 2550 6396 2555 6397 2556 6391 2552 6391 2550 6388 2551 6370 2545 6360 2543 6358 2541 6354 2541 6351 2541 6343 2544 6312 2551 6230 2551 6220 2557 6208 2563 6203 2571 6203 M 2564 6255 L 2558 6414 2563 6417 2563 6410 2560 6408 Q 2568 6277 2565 6253 L 2564 6252 2564 6255 M 2571 6285 L 2571 6288 2577 6288 2577 6286 2573 6286 2572 6281 2574 6252 2573 6250 2572 6253 2571 6276 2571 6285 M 2579 6269 L 2581 6272 2579 6288 2576 6328 2577 6330 2581 6286 2582 6272 2580 6267 2579 6267 2579 6269 M 2573 6328 L 2572 6326 2570 6349 2570 6367 2573 6373 2573 6436 2576 6428 2574 6429 Q 2571 6425 2574 6369 L 2571 6363 2572 6345 2573 6328 M 2579 6376 L 2585 6391 2588 6385 2585 6386 2580 6369 2579 6376 M 2589 6270 L 2591 6279 2593 6309 2599 6305 2594 6306 Q 2591 6303 2591 6277 L 2589 6269 2589 6270 M 2600 6194 Q 2599 6190 2596 6195 L 2592 6214 2593 6221 2592 6226 2592 6230 2592 6228 2593 6221 2593 6214 2597 6197 Q 2599 6192 2600 6194 M 2553 6333 L 2554 6334 2558 6254 2559 6251 2558 6250 2554 6283 2553 6333";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -58235,7 +58243,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2654 6231 L 2655 6243 2657 6256 Q 2658 6249 2662 6252 L 2667 6282 2669 6310 2671 6309 2675 6297 2673 6256 2665 6220 2660 6219 2654 6231";
 	drawPath(ctx,pathData,false);
@@ -58246,7 +58254,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2653 6380 L 2655 6364 2657 6286 2657 6256 2655 6243 2654 6231 2651 6209 2644 6193 2642 6210 Q 2638 6254 2641 6276 L 2642 6277 2646 6283 2647 6308 2646 6332 2645 6340 Q 2649 6377 2653 6380";
 	drawPath(ctx,pathData,false);
@@ -58257,7 +58265,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2645 6340 L 2646 6332 2647 6308 2646 6283 2642 6277 2641 6276 Q 2634 6271 2632 6307 2627 6358 2635 6367 L 2641 6361 2645 6340 M 2636 6304 L 2636 6332 2633 6339 2631 6319 2633 6306 2635 6301 2635 6303 2636 6304";
 	drawPath(ctx,pathData,false);
@@ -58268,7 +58276,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2625 6445 L 2629 6450 2628 6474 2630 6486 2634 6465 2639 6410 Q 2646 6420 2647 6407 L 2647 6399 2647 6393 2646 6395 2639 6384 2640 6384 2623 6364 2611 6343 2607 6338 2607 6337 2607 6336 2606 6334 2603 6342 2606 6368 Q 2603 6367 2602 6379 2601 6399 2605 6411 L 2614 6427 2618 6433 2618 6443 Q 2616 6464 2611 6457 L 2605 6423 Q 2603 6419 2602 6431 L 2602 6456 2603 6457 2605 6473 2605 6474 Q 2606 6482 2610 6486 2614 6491 2618 6481 L 2625 6445 2623 6443 2625 6445 M 2630 6404 L 2631 6409 2629 6426 2625 6422 2627 6402 2630 6404 M 2606 6368 L 2609 6379 2618 6388 2621 6402 2620 6412 2614 6403 2606 6368";
 	drawPath(ctx,pathData,false);
@@ -58279,7 +58287,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2653 6380 Q 2649 6377 2645 6340 L 2641 6361 2635 6367 Q 2627 6358 2632 6307 2634 6271 2641 6276 2638 6254 2642 6210 L 2644 6193 2643 6191 2629 6189 2628 6190 2623 6204 2617 6221 Q 2610 6242 2608 6283 L 2607 6336 2607 6337 2607 6338 2611 6343 2623 6364 2640 6384 2639 6384 2646 6395 2647 6393 2647 6399 2653 6380 M 2630 6294 L 2629 6319 Q 2625 6357 2617 6348 2610 6338 2613 6293 2616 6251 2625 6262 L 2628 6267 2630 6294";
 	drawPath(ctx,pathData,false);
@@ -58290,7 +58298,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2623 6204 L 2628 6190 2629 6189 2628 6168 2622 6153 Q 2621 6151 2614 6156 L 2611 6166 2606 6186 2608 6202 2614 6191 Q 2618 6176 2621 6180 L 2623 6204";
 	drawPath(ctx,pathData,false);
@@ -58301,7 +58309,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2630 6294 L 2628 6267 2625 6262 Q 2616 6251 2613 6293 2610 6338 2617 6348 2625 6357 2629 6319 L 2630 6294 M 2618 6301 L 2617 6318 2615 6328 Q 2612 6324 2614 6304 L 2616 6296 2617 6298 2618 6296 2618 6301";
 	drawPath(ctx,pathData,false);
@@ -58312,7 +58320,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2636 6304 L 2635 6303 2635 6301 2633 6306 2631 6319 2633 6339 2636 6332 2636 6304";
 	drawPath(ctx,pathData,false);
@@ -58323,7 +58331,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2618 6301 L 2617 6298 2616 6296 2614 6304 Q 2612 6324 2615 6328 L 2617 6318 2618 6301";
 	drawPath(ctx,pathData,false);
@@ -58334,7 +58342,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2602 6456 L 2598 6456 2594 6439 2593 6424 2591 6434 2591 6454 2592 6454 Q 2594 6466 2599 6472 L 2605 6473 2603 6457 2602 6456";
 	drawPath(ctx,pathData,false);
@@ -58345,7 +58353,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2653 6380 Q 2649 6377 2645 6340 L 2646 6332 2647 6308 2646 6283 2642 6277 2641 6276 Q 2638 6254 2642 6210 L 2644 6193 M 2654 6231 L 2655 6243 2657 6256 M 2665 6474 L 2664 6470 2664 6462 2665 6456 2665 6455 2666 6454 2668 6458 2667 6466 2666 6473 2665 6474 M 2662 6458 L 2661 6465 2660 6467 2658 6462 2659 6455 2660 6449 2661 6446 2662 6451 2662 6458 M 2625 6445 L 2623 6443 M 2646 6395 L 2639 6384 2640 6384 2623 6364 2611 6343 2607 6338 2607 6337 2607 6336 M 2623 6204 L 2628 6190 2629 6189 M 2641 6276 Q 2634 6271 2632 6307 2627 6358 2635 6367 L 2641 6361 2645 6340 M 2655 6476 L 2655 6482 2657 6476 2662 6473 2664 6484 2665 6502 2662 6516 2659 6519 M 2704 6430 L 2698 6444 Q 2688 6472 2684 6526 L 2682 6556 M 2630 6294 L 2629 6319 Q 2625 6357 2617 6348 2610 6338 2613 6293 2616 6251 2625 6262 L 2628 6267 2630 6294 M 2636 6304 L 2636 6332 2633 6339 2631 6319 2633 6306 2635 6301 2635 6303 2636 6304 M 2617 6298 L 2618 6301 2617 6318 2615 6328 Q 2612 6324 2614 6304 L 2616 6296 2617 6298 2618 6296 2618 6301 M 2577 6286 L 2578 6285 2579 6269 M 2605 6473 L 2603 6457 2602 6456 M 2655 6456 L 2656 6460 2656 6467 2656 6474 2655 6476 M 2687 6566 L 2685 6567 2685 6574 2684 6582 2686 6587 2687 6586 2688 6580 2689 6571 2687 6566 M 2695 6618 L 2696 6616 2698 6610 2697 6601 2697 6597 2695 6597 2694 6604 2694 6611 2693 6606 2692 6595 2692 6593 2694 6587 2694 6579 2693 6574 2693 6573 2692 6575 2691 6582 2690 6590 2691 6595 2692 6595 M 2695 6618 L 2694 6613 2694 6611 M 2686 6647 L 2689 6644 2692 6630 2692 6610 Q 2692 6600 2688 6597 2686 6594 2684 6598 L 2682 6604 M 2692 6648 L 2694 6653 2696 6653 2697 6647 2697 6639 2695 6633 2693 6634 2692 6641 2692 6648";
 	var scaleMode = "NORMAL";
@@ -58372,7 +58380,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2492 4484 Q 2481 4476 2481 4532 2480 4578 2491 4625 L 2519 4729 Q 2546 4828 2548 4955 2550 5079 2544 5155 L 2534 5185 Q 2541 5111 2530 5077 2518 5036 2492 5058 2465 5076 2437 5031 2408 4981 2387 4821 L 2398 4853 Q 2404 4863 2410 4845 L 2415 4803 Q 2411 4535 2442 4492 2472 4446 2487 4468 L 2493 4481 2492 4484 M 2506 4924 L 2500 4857 2500 4852 Q 2502 4794 2495 4740 2487 4681 2469 4653 2450 4621 2444 4742 L 2444 4744 Q 2435 4754 2435 4791 L 2439 4813 2444 4816 2444 4870 Q 2439 4863 2439 4886 L 2446 4909 2458 4937 Q 2465 4950 2467 4933 2471 4964 2483 4985 2498 5010 2499 4980 L 2497 4964 2493 4944 2494 4916 2499 4924 Q 2500 4937 2504 4945 L 2506 4924";
 	drawPath(ctx,pathData,false);
@@ -58383,7 +58391,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2544 5155 Q 2550 5079 2548 4955 2546 4828 2519 4729 L 2491 4625 Q 2480 4578 2481 4532 2481 4476 2492 4484 L 2496 4490 2498 4494 Q 2521 4559 2538 4667 2563 4821 2561 4978 2559 5090 2544 5155";
 	drawPath(ctx,pathData,false);
@@ -58394,7 +58402,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2506 4924 L 2504 4945 Q 2500 4937 2499 4924 L 2494 4916 2493 4944 2497 4964 2499 4980 Q 2498 5010 2483 4985 2471 4964 2467 4933 2465 4950 2458 4937 L 2446 4909 2439 4886 Q 2439 4863 2444 4870 L 2444 4816 2439 4813 2435 4791 Q 2435 4754 2444 4744 L 2444 4742 Q 2450 4621 2469 4653 2487 4681 2495 4740 2502 4794 2500 4852 L 2500 4857 2506 4924";
 	var grd=ctx.createLinearGradient(2436.5,4842.5,2509.5,4923.5);
@@ -58412,7 +58420,7 @@ function shape739(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2544 5155 Q 2559 5090 2561 4978 2563 4821 2538 4667 2521 4559 2498 4494 L 2496 4490 2492 4484 M 2493 4481 L 2487 4468 2475 4441 Q 2436 4372 2408 4439 2379 4501 2378 4660 2377 4731 2383 4804 L 2387 4821 M 2534 5185 L 2544 5155 M 2496 4490 L 2493 4481 M 2383 4804 Q 2388 4888 2403 4975 2428 5128 2466 5195 2504 5256 2531 5195 L 2534 5185";
 	var scaleMode = "NORMAL";
@@ -58648,7 +58656,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2586 6621 L 2595 6673 2599 6669 Q 2604 6666 2611 6673 2619 6678 2623 6690 L 2626 6712 Q 2625 6722 2620 6724 L 2611 6724 Q 2628 6761 2650 6780 2680 6803 2703 6783 2726 6761 2729 6707 2733 6653 2714 6597 2695 6541 2665 6517 2644 6499 2626 6505 L 2613 6514 Q 2589 6535 2587 6589 2585 6605 2586 6621 M 2603 6637 L 2607 6644 2607 6653 2605 6659 2601 6658 2597 6651 2596 6643 2598 6636 2603 6637 M 2619 6650 L 2619 6642 Q 2621 6620 2630 6612 L 2651 6613 Q 2663 6622 2671 6644 L 2676 6689 Q 2675 6711 2666 6720 L 2644 6719 2632 6701 2628 6695 2628 6692 2625 6687 2621 6674 2618 6672 2615 6666 2614 6657 Q 2614 6652 2617 6651 L 2619 6650 M 2630 6732 L 2629 6724 2631 6718 2636 6719 2641 6727 2643 6736 2640 6741 Q 2638 6742 2635 6739 L 2630 6732";
 	drawPath(ctx,pathData,false);
@@ -58659,7 +58667,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2603 6637 L 2598 6636 2596 6643 2597 6651 2601 6658 2605 6659 2607 6653 2607 6644 2603 6637";
 	drawPath(ctx,pathData,false);
@@ -58670,7 +58678,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2619 6650 L 2617 6651 Q 2614 6652 2614 6657 L 2615 6666 2618 6672 2621 6674 2622 6672 2625 6667 2624 6658 2620 6651 2619 6650";
 	drawPath(ctx,pathData,false);
@@ -58681,7 +58689,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2628 6692 L 2628 6695 2632 6701 2636 6701 2638 6695 2637 6686 2634 6680 2629 6679 2628 6685 2628 6692";
 	drawPath(ctx,pathData,false);
@@ -58692,7 +58700,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2595 6673 L 2592 6681 Q 2591 6691 2597 6703 L 2607 6720 2611 6724 2620 6724 Q 2625 6722 2626 6712 L 2623 6690 Q 2619 6678 2611 6673 2604 6666 2599 6669 L 2595 6673";
 	drawPath(ctx,pathData,false);
@@ -58703,7 +58711,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2630 6732 L 2635 6739 Q 2638 6742 2640 6741 L 2643 6736 2641 6727 2636 6719 2631 6718 2629 6724 2630 6732";
 	drawPath(ctx,pathData,false);
@@ -58714,7 +58722,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2525 6513 L 2528 6512 2530 6506 2529 6498 2525 6492 2522 6492 2522 6493 2520 6498 2520 6507 2524 6512 2525 6513";
 	drawPath(ctx,pathData,false);
@@ -58725,7 +58733,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2514 6492 L 2513 6485 2509 6478 2506 6479 2504 6485 2505 6493 2508 6499 2512 6498 2514 6492";
 	drawPath(ctx,pathData,false);
@@ -58736,7 +58744,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2493 6482 L 2492 6484 2490 6490 2491 6498 2494 6504 2498 6504 2498 6503 2499 6496 2498 6489 2495 6483 2493 6482";
 	drawPath(ctx,pathData,false);
@@ -58747,7 +58755,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2495 6525 L 2493 6517 2488 6511 2484 6510 2481 6517 2484 6525 2488 6530 2493 6531 2495 6525";
 	drawPath(ctx,pathData,false);
@@ -58758,7 +58766,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2499 6511 L 2497 6520 2502 6540 2513 6554 2515 6555 2523 6556 2529 6543 2524 6523 2514 6508 2503 6507 2499 6511";
 	drawPath(ctx,pathData,false);
@@ -58769,7 +58777,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2219 6119 L 2219 6120 2223 6123 2224 6110 2224 6093 Q 2225 6069 2237 6077 L 2234 6075 Q 2221 6063 2220 6089 L 2220 6107 2219 6119 M 2259 6161 L 2262 6163 2264 6118 2264 6109 2273 6113 2277 6116 2278 6117 2270 6110 2261 6106 2262 6116 2259 6161 M 2279 6164 L 2280 6169 2281 6167 2281 6160 2280 6153 2288 6138 2289 6138 Q 2293 6135 2296 6138 2292 6132 2286 6136 2283 6137 2278 6152 L 2279 6159 2279 6164 M 2311 6258 L 2297 6255 Q 2290 6248 2285 6220 L 2278 6209 2277 6210 2283 6221 Q 2288 6249 2296 6256 2307 6266 2311 6258 M 2293 6334 L 2287 6334 2269 6308 2268 6316 2286 6337 Q 2292 6343 2293 6334 M 2269 6370 L 2264 6369 Q 2255 6362 2254 6303 L 2243 6293 2242 6274 2242 6257 2239 6254 2238 6277 2240 6296 2251 6307 Q 2253 6368 2262 6375 2267 6380 2269 6370 M 2251 6260 L 2254 6263 Q 2252 6246 2257 6219 L 2257 6204 2251 6196 2249 6196 2250 6198 2255 6203 2253 6219 2251 6260 M 2247 6215 L 2236 6211 2232 6204 2231 6174 2229 6170 2227 6173 2228 6197 2229 6207 2232 6211 2248 6217 2247 6215 M 2230 6337 L 2220 6331 Q 2220 6195 2209 6167 L 2206 6164 2206 6167 Q 2215 6199 2215 6336 L 2231 6344 2230 6337 M 2204 6307 L 2194 6304 2189 6299 2190 6281 2169 6262 2163 6258 2159 6253 2159 6252 2157 6249 2157 6241 2160 6210 2164 6127 2165 6116 2177 6108 2193 6109 2217 6118 2215 6118 2189 6107 2172 6106 Q 2167 6104 2159 6112 L 2159 6124 2153 6210 2150 6242 2150 6250 2152 6255 2152 6254 2156 6260 2163 6264 2184 6284 2184 6303 2190 6307 2204 6314 2204 6307 M 2187 6241 L 2192 6244 Q 2187 6182 2188 6160 L 2190 6157 2188 6156 2183 6188 2187 6241";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -58784,7 +58792,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2465 6265 Q 2468 6259 2479 6265 2488 6272 2497 6304 L 2509 6337 2515 6338 2522 6329 Q 2522 6312 2511 6282 2498 6248 2481 6234 L 2469 6228 2454 6235 2459 6250 2465 6265";
 	drawPath(ctx,pathData,false);
@@ -58795,7 +58803,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2475 6397 L 2478 6381 Q 2481 6338 2473 6298 L 2465 6265 2459 6250 2454 6235 2439 6206 2418 6182 2415 6199 Q 2413 6243 2425 6270 L 2428 6272 2439 6283 Q 2444 6287 2446 6311 L 2448 6337 2447 6345 Q 2465 6389 2475 6397";
 	drawPath(ctx,pathData,false);
@@ -58806,7 +58814,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2447 6345 L 2448 6337 2446 6311 Q 2444 6287 2439 6283 L 2428 6272 2425 6270 Q 2405 6258 2403 6295 2400 6347 2421 6363 2429 6370 2437 6363 2444 6358 2447 6345 M 2415 6296 L 2418 6326 Q 2418 6336 2411 6330 2404 6325 2405 6308 L 2408 6296 2411 6292 2413 6294 2415 6296";
 	drawPath(ctx,pathData,false);
@@ -58817,7 +58825,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2339 6301 L 2337 6298 2329 6304 Q 2329 6318 2342 6335 2335 6331 2334 6343 2333 6364 2345 6380 L 2373 6408 2386 6418 2387 6419 2387 6430 Q 2386 6451 2370 6438 2362 6431 2349 6394 2342 6388 2342 6400 2341 6409 2347 6428 L 2347 6429 2356 6449 2356 6450 2372 6469 2394 6471 Q 2405 6463 2407 6438 L 2420 6449 2421 6474 Q 2423 6484 2428 6489 2435 6495 2437 6471 L 2440 6415 Q 2462 6433 2462 6420 L 2461 6411 2460 6405 2459 6407 2438 6387 2388 6348 2352 6313 2341 6304 2339 6302 2339 6301 M 2414 6399 L 2418 6405 2417 6423 2405 6414 2406 6394 2414 6399 M 2342 6335 L 2353 6350 2379 6369 Q 2391 6379 2390 6388 L 2389 6397 2370 6382 2342 6335 M 2403 6435 L 2407 6438 2403 6435";
 	drawPath(ctx,pathData,false);
@@ -58828,7 +58836,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2418 6182 L 2416 6180 Q 2405 6168 2377 6163 L 2374 6163 2361 6172 2346 6185 Q 2333 6202 2332 6243 2329 6271 2339 6301 L 2339 6302 2341 6304 2352 6313 2388 6348 2438 6387 2459 6407 2460 6405 2461 6411 Q 2471 6410 2475 6397 2465 6389 2447 6345 2444 6358 2437 6363 2429 6370 2421 6363 2400 6347 2403 6295 2405 6258 2425 6270 2413 6243 2415 6199 L 2418 6182 M 2386 6246 L 2395 6278 2397 6305 Q 2394 6343 2370 6325 2347 6306 2350 6260 2351 6218 2376 6238 L 2385 6247 2386 6246";
 	drawPath(ctx,pathData,false);
@@ -58839,7 +58847,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2377 6163 L 2369 6138 2352 6116 2329 6111 2321 6118 Q 2313 6125 2313 6136 2312 6148 2320 6155 2326 6161 2334 6149 2342 6137 2350 6144 2357 6149 2361 6172 L 2374 6163 2377 6163";
 	drawPath(ctx,pathData,false);
@@ -58850,7 +58858,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2386 6246 L 2385 6247 2376 6238 Q 2351 6218 2350 6260 2347 6306 2370 6325 2394 6343 2397 6305 L 2395 6278 2386 6246 M 2361 6269 L 2363 6269 2364 6274 2366 6292 Q 2365 6305 2360 6301 2352 6293 2353 6273 2354 6262 2358 6267 L 2361 6269";
 	drawPath(ctx,pathData,false);
@@ -58861,7 +58869,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2415 6296 L 2413 6294 2411 6292 2408 6296 2405 6308 Q 2404 6325 2411 6330 2418 6336 2418 6326 L 2415 6296";
 	drawPath(ctx,pathData,false);
@@ -58872,7 +58880,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2364 6274 L 2361 6269 2358 6267 Q 2354 6262 2353 6273 2352 6293 2360 6301 2365 6305 2366 6292 L 2364 6274";
 	drawPath(ctx,pathData,false);
@@ -58883,7 +58891,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2347 6428 L 2334 6423 2321 6401 2316 6384 Q 2312 6380 2311 6392 L 2315 6414 2316 6415 2340 6443 Q 2352 6453 2356 6449 L 2347 6429 2347 6428";
 	drawPath(ctx,pathData,false);
@@ -58894,7 +58902,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2475 6397 Q 2465 6389 2447 6345 L 2448 6337 2446 6311 Q 2444 6287 2439 6283 L 2428 6272 2425 6270 Q 2413 6243 2415 6199 L 2418 6182 M 2465 6265 L 2459 6250 2454 6235 M 2522 6492 L 2525 6492 2529 6498 2530 6506 2528 6512 2525 6513 2524 6512 2520 6507 2520 6498 2522 6493 2522 6492 M 2514 6492 L 2512 6498 2508 6499 2505 6493 2504 6485 2506 6479 2509 6478 2513 6485 2514 6492 M 2459 6407 L 2438 6387 2388 6348 2352 6313 2341 6304 2339 6302 2339 6301 M 2447 6345 Q 2444 6358 2437 6363 2429 6370 2421 6363 2400 6347 2403 6295 2405 6258 2425 6270 M 2498 6504 L 2499 6511 2503 6507 2514 6508 2524 6523 2529 6543 2523 6556 2515 6555 M 2626 6505 L 2613 6514 Q 2589 6535 2587 6589 2585 6605 2586 6621 M 2361 6172 L 2374 6163 2377 6163 M 2386 6246 L 2395 6278 2397 6305 Q 2394 6343 2370 6325 2347 6306 2350 6260 2351 6218 2376 6238 L 2385 6247 2386 6246 M 2415 6296 L 2418 6326 Q 2418 6336 2411 6330 2404 6325 2405 6308 L 2408 6296 2411 6292 2413 6294 2415 6296 M 2364 6274 L 2361 6269 2363 6269 2364 6274 2366 6292 Q 2365 6305 2360 6301 2352 6293 2353 6273 2354 6262 2358 6267 L 2361 6269 M 2250 6198 L 2251 6216 2247 6215 M 2347 6428 L 2347 6429 2356 6449 M 2407 6438 L 2403 6435 M 2493 6482 L 2495 6483 2498 6489 2499 6496 2498 6503 2498 6504 M 2603 6637 L 2598 6636 2596 6643 2597 6651 2601 6658 2605 6659 2607 6653 2607 6644 2603 6637 M 2619 6650 L 2617 6651 Q 2614 6652 2614 6657 L 2615 6666 2618 6672 2621 6674 2625 6687 2628 6692 2628 6695 2632 6701 2636 6701 2638 6695 2637 6686 2634 6680 2629 6679 2628 6685 2628 6692 M 2619 6650 L 2620 6651 2624 6658 2625 6667 2622 6672 2621 6674 M 2630 6732 L 2635 6739 Q 2638 6742 2640 6741 L 2643 6736 2641 6727 2636 6719 2631 6718 2629 6724 2630 6732 M 2611 6724 L 2620 6724 Q 2625 6722 2626 6712 L 2623 6690 Q 2619 6678 2611 6673 2604 6666 2599 6669 L 2595 6673";
 	var scaleMode = "NORMAL";
@@ -58921,7 +58929,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2252 4521 L 2252 4524 Q 2221 4504 2221 4565 2218 4615 2247 4676 L 2323 4820 Q 2396 4958 2403 5098 2408 5236 2392 5311 L 2365 5332 Q 2383 5261 2353 5210 2321 5153 2250 5149 2177 5140 2101 5061 2024 4975 1965 4777 L 1995 4823 Q 2013 4842 2027 4828 2039 4813 2041 4788 2032 4493 2115 4479 2196 4461 2238 4503 L 2252 4521 M 2288 5018 Q 2288 4990 2273 4939 L 2271 4934 Q 2279 4873 2260 4807 2238 4735 2188 4683 2137 4629 2121 4754 L 2119 4756 Q 2097 4757 2097 4798 2095 4810 2107 4825 L 2122 4835 2122 4894 Q 2108 4879 2108 4905 L 2126 4938 2157 4981 Q 2178 5003 2184 4987 2193 5023 2226 5060 2267 5104 2269 5071 L 2264 5052 2252 5026 2257 4998 2270 5012 Q 2273 5026 2283 5038 2288 5041 2288 5018";
 	drawPath(ctx,pathData,false);
@@ -58932,7 +58940,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2252 4524 L 2261 4535 2266 4541 Q 2329 4637 2376 4773 2442 4969 2438 5137 2433 5257 2392 5311 2408 5236 2403 5098 2396 4958 2323 4820 L 2247 4676 Q 2218 4615 2221 4565 2221 4504 2252 4524";
 	drawPath(ctx,pathData,false);
@@ -58943,7 +58951,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2288 5018 Q 2288 5041 2283 5038 2273 5026 2270 5012 L 2257 4998 2252 5026 2264 5052 2269 5071 Q 2267 5104 2226 5060 2193 5023 2184 4987 2178 5003 2157 4981 L 2126 4938 2108 4905 Q 2108 4879 2122 4894 L 2122 4835 2107 4825 Q 2095 4810 2097 4798 2097 4757 2119 4756 L 2121 4754 Q 2137 4629 2188 4683 2238 4735 2260 4807 2279 4873 2271 4934 L 2273 4939 Q 2288 4990 2288 5018";
 	var grd=ctx.createLinearGradient(2100.25,4854.25,2297.75,5021.75);
@@ -58961,7 +58969,7 @@ function shape740(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2261 4535 L 2252 4521 2238 4503 2203 4459 Q 2099 4343 2023 4384 1945 4421 1942 4593 1939 4669 1954 4754 1969 4852 2008 4961 2078 5158 2181 5270 2282 5378 2358 5340 L 2365 5332 2392 5311 Q 2433 5257 2438 5137 2442 4969 2376 4773 2329 4637 2266 4541 L 2261 4535 2252 4524 M 1965 4777 L 1954 4754";
 	var scaleMode = "NORMAL";
@@ -59223,7 +59231,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2480 6759 Q 2484 6784 2496 6809 L 2503 6804 2522 6806 Q 2533 6810 2541 6821 L 2548 6842 Q 2548 6852 2539 6855 L 2527 6856 Q 2554 6890 2590 6904 2636 6923 2667 6898 2700 6872 2698 6818 2697 6764 2665 6713 2631 6661 2586 6643 2553 6629 2527 6638 L 2508 6649 Q 2476 6674 2476 6728 L 2480 6759 M 2505 6772 L 2511 6779 2513 6788 2510 6794 2504 6794 2498 6788 2495 6779 2499 6773 2505 6772 M 2530 6783 L 2530 6774 Q 2529 6753 2542 6743 2555 6732 2574 6739 2592 6747 2606 6768 2619 6789 2619 6811 2620 6832 2607 6842 L 2575 6846 2555 6831 2549 6825 2548 6823 2544 6817 2537 6805 2531 6805 2526 6799 2523 6791 2527 6784 2530 6783 M 2556 6861 L 2553 6853 2556 6847 2563 6848 2571 6854 2574 6862 2571 6868 2562 6867 2556 6861";
 	drawPath(ctx,pathData,false);
@@ -59234,7 +59242,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2505 6772 L 2499 6773 2495 6779 2498 6788 2504 6794 2510 6794 2513 6788 2511 6779 2505 6772";
 	drawPath(ctx,pathData,false);
@@ -59245,7 +59253,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2537 6805 L 2537 6803 2540 6798 2538 6789 2532 6783 2530 6783 2527 6784 2523 6791 2526 6799 2531 6805 2537 6805";
 	drawPath(ctx,pathData,false);
@@ -59256,7 +59264,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2555 6831 L 2560 6830 2562 6823 2560 6814 2554 6809 2549 6809 2546 6816 2548 6823 2549 6825 2555 6831";
 	drawPath(ctx,pathData,false);
@@ -59267,7 +59275,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2496 6809 L 2494 6817 Q 2495 6828 2502 6838 L 2520 6854 2527 6856 2539 6855 Q 2548 6852 2548 6842 L 2541 6821 Q 2533 6810 2522 6806 L 2503 6804 2496 6809";
 	drawPath(ctx,pathData,false);
@@ -59278,7 +59286,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2556 6861 L 2562 6867 2571 6868 2574 6862 2571 6854 2563 6848 2556 6847 2553 6853 2556 6861";
 	drawPath(ctx,pathData,false);
@@ -59289,7 +59297,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2372 6644 L 2371 6645 2369 6651 2372 6659 2377 6664 2379 6664 2383 6664 2385 6656 2382 6649 2376 6644 2372 6644";
 	drawPath(ctx,pathData,false);
@@ -59300,7 +59308,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2360 6646 L 2357 6638 2351 6633 2346 6634 2345 6641 2347 6648 2352 6653 2358 6653 2360 6646";
 	drawPath(ctx,pathData,false);
@@ -59311,7 +59319,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2329 6640 L 2326 6641 Q 2324 6644 2325 6648 L 2327 6655 2333 6661 2337 6660 2338 6659 2339 6653 2337 6645 2332 6640 2329 6640";
 	drawPath(ctx,pathData,false);
@@ -59322,7 +59330,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2335 6682 L 2331 6675 2324 6669 2317 6669 2315 6676 2319 6683 2326 6688 2333 6688 2335 6682";
 	drawPath(ctx,pathData,false);
@@ -59333,7 +59341,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2341 6668 L 2338 6676 Q 2339 6686 2347 6695 L 2364 6708 2367 6708 2381 6707 Q 2388 6703 2388 6693 L 2379 6675 Q 2372 6666 2362 6662 L 2345 6663 2341 6668";
 	drawPath(ctx,pathData,false);
@@ -59344,7 +59352,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1975 6320 L 1975 6319 1964 6315 1949 6312 1951 6321 1952 6366 1957 6368 1955 6323 1954 6314 1968 6317 1975 6320 M 1911 6289 L 1907 6286 Q 1886 6277 1887 6303 L 1889 6320 1889 6332 1890 6333 1895 6335 1895 6322 1893 6306 Q 1893 6282 1911 6289 M 1886 6332 L 1884 6332 1842 6325 1818 6328 Q 1812 6328 1800 6338 L 1801 6349 1801 6435 1800 6467 1802 6474 1804 6479 1804 6478 1811 6483 1821 6486 Q 1850 6504 1855 6501 L 1856 6520 1865 6523 1887 6528 1886 6521 1872 6519 1863 6515 1862 6497 Q 1859 6501 1830 6483 L 1820 6480 1814 6475 1811 6472 1809 6464 1810 6433 1810 6350 1808 6340 Q 1821 6330 1826 6330 L 1851 6327 1886 6332 M 1874 6383 Q 1891 6413 1906 6547 L 1929 6552 1928 6545 1912 6541 Q 1896 6408 1880 6382 L 1874 6379 1874 6383 M 1912 6417 L 1917 6421 1942 6423 1941 6422 1923 6420 1917 6414 1912 6384 1908 6382 Q 1906 6382 1905 6384 L 1906 6384 1910 6408 1912 6417 M 1942 6405 L 1949 6410 1950 6425 1949 6465 1954 6467 Q 1951 6452 1954 6423 L 1954 6410 1944 6403 1941 6402 1942 6405 M 1937 6464 L 1933 6462 1933 6485 1937 6503 1955 6512 Q 1963 6572 1977 6578 1986 6581 1987 6572 L 1981 6571 Q 1967 6566 1959 6508 L 1942 6500 1939 6482 1937 6464 M 1981 6518 L 2009 6536 Q 2019 6540 2019 6531 L 2011 6532 1981 6510 1981 6518 M 1984 6412 L 1994 6421 Q 2003 6448 2016 6454 L 2038 6452 Q 2033 6457 2018 6452 2005 6446 1997 6420 L 1986 6410 1984 6412 M 2004 6337 Q 1997 6333 1991 6337 L 1990 6337 Q 1985 6339 1979 6354 L 1982 6361 1981 6367 1983 6370 1984 6370 1985 6361 1983 6355 Q 1988 6341 1992 6338 L 1993 6338 2004 6337 M 1854 6459 L 1863 6461 Q 1849 6400 1848 6379 L 1849 6376 1846 6375 1844 6407 1854 6459";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -59359,7 +59367,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2246 6403 L 2255 6417 2265 6431 2284 6429 Q 2300 6433 2317 6463 2332 6492 2337 6494 L 2347 6494 2354 6483 Q 2354 6467 2334 6439 2311 6408 2284 6397 L 2267 6394 Q 2263 6395 2246 6403";
 	drawPath(ctx,pathData,false);
@@ -59370,7 +59378,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2294 6560 L 2295 6543 Q 2296 6501 2280 6462 L 2265 6431 2255 6417 2246 6403 2220 6378 2187 6358 Q 2185 6362 2186 6375 2187 6420 2206 6444 L 2211 6445 2228 6455 Q 2236 6458 2242 6480 L 2247 6505 2247 6513 Q 2277 6554 2294 6560";
 	drawPath(ctx,pathData,false);
@@ -59381,7 +59389,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2247 6513 L 2247 6505 2242 6480 Q 2236 6458 2228 6455 L 2211 6445 2206 6444 Q 2177 6435 2178 6472 2179 6523 2209 6535 L 2234 6534 Q 2244 6527 2247 6513 M 2194 6471 Q 2201 6481 2201 6499 2202 6510 2192 6506 2181 6502 2180 6485 L 2184 6473 2189 6468 2191 6470 2194 6471";
 	drawPath(ctx,pathData,false);
@@ -59392,7 +59400,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2197 6613 L 2218 6620 2223 6645 2234 6659 Q 2245 6663 2244 6640 L 2243 6584 Q 2277 6598 2277 6584 L 2274 6575 2272 6570 2270 6571 2237 6556 2238 6556 2161 6527 2105 6500 2088 6492 2084 6490 2081 6487 2070 6495 Q 2071 6507 2091 6523 2082 6520 2082 6533 2082 6553 2100 6567 2113 6577 2144 6589 L 2164 6597 2166 6597 2168 6608 Q 2168 6629 2143 6619 2130 6614 2109 6580 2098 6575 2098 6587 2098 6596 2108 6614 L 2109 6616 2123 6633 2124 6633 2149 6649 2182 6648 Q 2197 6637 2197 6613 L 2191 6610 2197 6613 M 2204 6573 L 2210 6578 2210 6596 2192 6589 2192 6570 2204 6573 M 2091 6523 L 2111 6535 2148 6550 Q 2169 6558 2168 6566 L 2166 6576 2137 6564 2091 6523";
 	drawPath(ctx,pathData,false);
@@ -59403,7 +59411,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2294 6560 Q 2277 6554 2247 6513 2244 6527 2234 6534 L 2209 6535 Q 2179 6523 2178 6472 2177 6435 2206 6444 2187 6420 2186 6375 2185 6362 2187 6358 L 2184 6356 2126 6346 2121 6347 2103 6359 2083 6373 Q 2066 6393 2066 6435 2066 6462 2084 6490 L 2088 6492 2105 6500 2161 6527 2238 6556 2237 6556 2270 6571 2272 6570 2274 6575 Q 2289 6572 2294 6560 M 2145 6427 L 2146 6427 Q 2158 6437 2164 6458 L 2169 6483 Q 2170 6521 2131 6507 2096 6493 2094 6448 2094 6405 2131 6421 L 2145 6427";
 	drawPath(ctx,pathData,false);
@@ -59414,7 +59422,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2103 6359 L 2121 6347 2126 6346 Q 2124 6336 2111 6323 L 2085 6305 2049 6304 Q 2046 6304 2037 6312 2029 6321 2028 6332 2029 6345 2041 6349 2051 6353 2062 6341 2071 6327 2084 6332 2094 6336 2103 6359";
 	drawPath(ctx,pathData,false);
@@ -59425,7 +59433,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2145 6427 L 2131 6421 Q 2094 6405 2094 6448 2096 6493 2131 6507 2170 6521 2169 6483 L 2164 6458 Q 2158 6437 2146 6427 L 2145 6427 M 2116 6458 L 2122 6477 Q 2122 6489 2114 6485 2101 6480 2101 6460 2101 6449 2108 6452 L 2113 6455 2116 6453 2116 6458";
 	drawPath(ctx,pathData,false);
@@ -59436,7 +59444,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2194 6471 L 2191 6470 2189 6468 2184 6473 2180 6485 Q 2181 6502 2192 6506 2202 6510 2201 6499 2201 6481 2194 6471";
 	drawPath(ctx,pathData,false);
@@ -59447,7 +59455,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2116 6458 L 2113 6455 2108 6452 Q 2101 6449 2101 6460 2101 6480 2114 6485 2122 6489 2122 6477 L 2116 6458";
 	drawPath(ctx,pathData,false);
@@ -59458,7 +59466,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2108 6614 L 2090 6611 Q 2075 6605 2069 6591 L 2059 6576 Q 2052 6573 2053 6585 L 2059 6605 2060 6607 2100 6629 2123 6633 2109 6616 2108 6614";
 	drawPath(ctx,pathData,false);
@@ -59469,7 +59477,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2294 6560 Q 2277 6554 2247 6513 L 2247 6505 2242 6480 Q 2236 6458 2228 6455 L 2211 6445 2206 6444 Q 2187 6420 2186 6375 2185 6362 2187 6358 M 2246 6403 L 2255 6417 2265 6431 M 2379 6664 L 2377 6664 2372 6659 2369 6651 2371 6645 2372 6644 2376 6644 2382 6649 2385 6656 2383 6664 2379 6664 M 2360 6646 L 2358 6653 2352 6653 2347 6648 2345 6641 2346 6634 2351 6633 2357 6638 2360 6646 M 2197 6613 L 2191 6610 M 2270 6571 L 2237 6556 2238 6556 2161 6527 2105 6500 2088 6492 2084 6490 M 2103 6359 L 2121 6347 2126 6346 M 2206 6444 Q 2177 6435 2178 6472 2179 6523 2209 6535 L 2234 6534 Q 2244 6527 2247 6513 M 2337 6660 L 2341 6668 2345 6663 2362 6662 Q 2372 6666 2379 6675 L 2388 6693 Q 2388 6703 2381 6707 L 2367 6708 M 2527 6638 L 2508 6649 Q 2476 6674 2476 6728 L 2480 6759 M 2145 6427 L 2146 6427 Q 2158 6437 2164 6458 L 2169 6483 Q 2170 6521 2131 6507 2096 6493 2094 6448 2094 6405 2131 6421 L 2145 6427 M 2194 6471 Q 2201 6481 2201 6499 2202 6510 2192 6506 2181 6502 2180 6485 L 2184 6473 2189 6468 2191 6470 2194 6471 M 2113 6455 L 2116 6458 2122 6477 Q 2122 6489 2114 6485 2101 6480 2101 6460 2101 6449 2108 6452 L 2113 6455 2116 6453 2116 6458 M 1941 6422 L 1946 6422 1942 6405 M 2123 6633 L 2109 6616 2108 6614 M 2329 6640 L 2332 6640 2337 6645 2339 6653 2338 6659 2337 6660 M 2505 6772 L 2499 6773 2495 6779 2498 6788 2504 6794 2510 6794 2513 6788 2511 6779 2505 6772 M 2555 6831 L 2560 6830 2562 6823 2560 6814 2554 6809 2549 6809 2546 6816 2548 6823 2544 6817 2537 6805 2537 6803 2540 6798 2538 6789 2532 6783 2530 6783 2527 6784 2523 6791 2526 6799 2531 6805 2537 6805 M 2555 6831 L 2549 6825 2548 6823 M 2527 6856 L 2539 6855 Q 2548 6852 2548 6842 L 2541 6821 Q 2533 6810 2522 6806 L 2503 6804 2496 6809 M 2556 6861 L 2562 6867 2571 6868 2574 6862 2571 6854 2563 6848 2556 6847 2553 6853 2556 6861";
 	var scaleMode = "NORMAL";
@@ -59496,7 +59504,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2066 4573 Q 2016 4558 2016 4623 2012 4677 2059 4737 L 2180 4877 Q 2299 5010 2310 5161 2319 5307 2293 5392 L 2249 5421 Q 2279 5339 2230 5292 2178 5236 2063 5246 1946 5252 1824 5181 1698 5105 1604 4903 L 1652 4947 1704 4945 Q 1723 4928 1726 4900 1711 4584 1845 4552 1976 4516 2044 4553 L 2067 4570 2066 4573 M 2125 5097 Q 2125 5066 2101 5016 L 2098 5009 Q 2110 4944 2079 4875 2044 4802 1963 4757 1881 4708 1856 4847 1853 4846 1853 4850 1816 4855 1816 4900 1814 4912 1833 4926 L 1856 4933 1856 4997 Q 1834 4984 1834 5012 1832 5017 1864 5045 L 1914 5083 1957 5085 Q 1972 5123 2025 5155 2091 5195 2094 5158 L 2085 5139 2067 5114 2075 5081 2096 5093 Q 2101 5110 2116 5120 2124 5123 2125 5097";
 	drawPath(ctx,pathData,false);
@@ -59507,7 +59515,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2293 5392 Q 2319 5307 2310 5161 2299 5010 2180 4877 L 2059 4737 Q 2012 4677 2016 4623 2016 4558 2066 4573 L 2082 4582 2090 4589 Q 2190 4679 2266 4816 2374 5013 2367 5195 2359 5324 2293 5392";
 	drawPath(ctx,pathData,false);
@@ -59518,7 +59526,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2125 5097 Q 2124 5123 2116 5120 2101 5110 2096 5093 L 2075 5081 2067 5114 2085 5139 2094 5158 Q 2091 5195 2025 5155 1972 5123 1957 5085 L 1914 5083 1864 5045 Q 1832 5017 1834 5012 1834 4984 1856 4997 L 1856 4933 1833 4926 Q 1814 4912 1816 4900 1816 4855 1853 4850 1853 4846 1856 4847 1881 4708 1963 4757 2044 4802 2079 4875 2110 4944 2098 5009 L 2101 5016 Q 2125 5066 2125 5097";
 	var grd=ctx.createLinearGradient(1821.75,4960.0,2140.25,5100.0);
@@ -59536,7 +59544,7 @@ function shape741(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2293 5392 Q 2359 5324 2367 5195 2374 5013 2266 4816 2190 4679 2090 4589 L 2082 4582 2066 4573 M 2067 4570 L 2044 4553 1988 4512 Q 1820 4408 1697 4468 1571 4524 1566 4710 1561 4793 1585 4882 L 1604 4903 M 2249 5421 L 2293 5392 M 2082 4582 L 2067 4570 M 1585 4882 Q 1610 4983 1673 5094 1786 5290 1952 5390 2115 5486 2237 5431 L 2249 5421";
 	var scaleMode = "NORMAL";
@@ -59751,7 +59759,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2346 6905 Q 2350 6929 2364 6951 L 2372 6943 2395 6939 Q 2409 6940 2417 6949 2426 6957 2425 6968 2424 6978 2414 6984 L 2398 6989 Q 2429 7015 2471 7018 2528 7022 2570 6985 2611 6947 2615 6892 2618 6837 2582 6794 2545 6752 2489 6749 2449 6746 2416 6764 L 2392 6782 Q 2349 6818 2345 6874 L 2346 6905 M 2377 6910 L 2385 6914 2387 6923 2383 6930 2374 6932 2368 6928 2366 6920 2370 6912 2377 6910 M 2409 6912 L 2409 6904 Q 2409 6881 2427 6867 2444 6852 2466 6853 2489 6854 2503 6872 2518 6889 2516 6911 2516 6933 2498 6948 2481 6963 2458 6961 2445 6961 2434 6954 L 2427 6949 2426 6948 2422 6943 2414 6933 2408 6935 2401 6931 2399 6922 2403 6915 2409 6912 M 2433 6984 L 2430 6977 2435 6969 2444 6969 2453 6972 2455 6980 2451 6987 2441 6989 2433 6984";
 	drawPath(ctx,pathData,false);
@@ -59762,7 +59770,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2377 6910 L 2370 6912 2366 6920 2368 6928 2374 6932 2383 6930 2387 6923 2385 6914 2377 6910";
 	drawPath(ctx,pathData,false);
@@ -59773,7 +59781,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2409 6912 L 2403 6915 2399 6922 2401 6931 2408 6935 2414 6933 2415 6931 2419 6924 2417 6916 Q 2415 6912 2411 6912 L 2409 6912";
 	drawPath(ctx,pathData,false);
@@ -59784,7 +59792,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2426 6948 L 2427 6949 2434 6954 2441 6951 2444 6943 2443 6935 2437 6931 2429 6933 2425 6941 2426 6948";
 	drawPath(ctx,pathData,false);
@@ -59795,7 +59803,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2364 6951 Q 2361 6955 2361 6961 2359 6971 2368 6979 2376 6988 2390 6989 L 2398 6989 2414 6984 Q 2424 6978 2425 6968 2426 6957 2417 6949 2409 6940 2395 6939 L 2372 6943 2364 6951";
 	drawPath(ctx,pathData,false);
@@ -59806,7 +59814,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2433 6984 L 2441 6989 2451 6987 2455 6980 2453 6972 2444 6969 2435 6969 2430 6977 2433 6984";
 	drawPath(ctx,pathData,false);
@@ -59817,7 +59825,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2230 6841 L 2235 6838 2238 6830 2235 6824 2228 6820 2222 6822 2221 6823 2219 6831 2221 6838 2228 6841 2230 6841";
 	drawPath(ctx,pathData,false);
@@ -59828,7 +59836,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2207 6829 L 2205 6821 2198 6818 Q 2194 6818 2192 6820 2189 6823 2189 6828 L 2191 6836 2197 6838 2204 6836 2207 6829";
 	drawPath(ctx,pathData,false);
@@ -59839,7 +59847,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2169 6833 L 2166 6834 2163 6842 2166 6850 2172 6853 2178 6851 2179 6849 2181 6842 2179 6835 2173 6832 2169 6833";
 	drawPath(ctx,pathData,false);
@@ -59850,7 +59858,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2172 6875 L 2169 6867 2162 6864 2152 6867 2149 6874 2152 6880 2161 6884 2170 6882 2172 6875";
 	drawPath(ctx,pathData,false);
@@ -59861,7 +59869,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2181 6857 L 2179 6867 Q 2178 6877 2187 6883 2196 6890 2207 6891 L 2210 6890 2228 6884 2237 6868 Q 2238 6858 2228 6852 2221 6845 2209 6844 2196 6844 2187 6850 L 2181 6857";
 	drawPath(ctx,pathData,false);
@@ -59872,7 +59880,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1647 6663 L 1648 6663 1654 6663 1655 6649 1653 6634 Q 1656 6610 1678 6609 L 1674 6608 Q 1648 6607 1646 6633 L 1647 6649 1647 6663 M 1722 6677 L 1727 6677 1730 6631 1729 6622 1747 6620 1755 6620 1742 6619 1723 6621 1725 6630 1722 6677 M 1759 6667 L 1761 6670 1763 6669 1763 6660 1762 6655 1776 6634 Q 1783 6628 1789 6629 1781 6626 1773 6633 L 1772 6634 1758 6654 1759 6660 1759 6667 M 1822 6737 Q 1815 6744 1797 6743 1782 6742 1773 6717 L 1761 6710 1757 6713 1770 6719 Q 1779 6744 1794 6746 1815 6747 1822 6737 M 1792 6824 L 1782 6827 1746 6815 1746 6822 1778 6833 Q 1791 6833 1792 6824 M 1748 6878 L 1740 6879 Q 1723 6877 1718 6821 L 1697 6818 1695 6801 1695 6782 1690 6782 1688 6805 1691 6823 1712 6826 Q 1718 6885 1735 6886 L 1748 6878 M 1710 6779 L 1716 6780 Q 1713 6765 1720 6735 L 1721 6721 1710 6717 1706 6717 1706 6720 1715 6722 1714 6738 Q 1709 6765 1710 6779 M 1703 6738 L 1681 6742 Q 1675 6741 1674 6738 L 1670 6708 1665 6707 1663 6710 1664 6710 1666 6734 1668 6742 Q 1671 6745 1675 6744 L 1704 6740 1703 6738 M 1677 6869 L 1657 6872 Q 1649 6738 1631 6716 L 1625 6716 1624 6720 Q 1642 6744 1649 6878 L 1676 6877 1677 6869 M 1626 6859 L 1609 6862 1598 6861 1598 6842 1559 6839 1547 6839 1540 6837 1539 6837 1536 6833 1535 6826 1539 6794 1545 6707 1546 6697 1568 6681 1599 6670 1643 6664 1639 6663 1590 6671 1558 6682 Q 1550 6685 1534 6698 L 1535 6710 1528 6798 1523 6831 1525 6839 1528 6842 1536 6845 1548 6845 1589 6848 1589 6868 1600 6869 1627 6866 1626 6859 M 1592 6806 L 1602 6805 Q 1590 6746 1591 6724 L 1592 6721 1589 6721 1583 6756 1592 6806";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -59887,7 +59895,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2107 6638 Q 2113 6630 2133 6629 2151 6628 2169 6654 L 2191 6679 2204 6675 2215 6662 Q 2216 6645 2193 6623 2168 6598 2136 6596 L 2113 6598 Q 2108 6600 2087 6616 L 2098 6626 2107 6638";
 	drawPath(ctx,pathData,false);
@@ -59898,7 +59906,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2132 6762 L 2136 6743 Q 2140 6700 2124 6664 L 2107 6638 2098 6626 2087 6616 Q 2071 6602 2056 6598 L 2017 6588 Q 2014 6593 2014 6607 2011 6652 2034 6671 L 2040 6671 2060 6674 Q 2069 6675 2074 6696 L 2079 6720 2077 6730 Q 2112 6761 2132 6762";
 	drawPath(ctx,pathData,false);
@@ -59909,7 +59917,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2077 6730 L 2079 6720 2074 6696 Q 2069 6675 2060 6674 L 2040 6671 2034 6671 Q 1998 6672 1995 6710 1992 6762 2029 6765 2044 6766 2060 6755 L 2077 6730 M 2016 6703 Q 2024 6711 2022 6730 2022 6741 2011 6739 1997 6739 1998 6721 1999 6714 2003 6708 L 2010 6702 2013 6703 2016 6703";
 	drawPath(ctx,pathData,false);
@@ -59920,7 +59928,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1876 6760 L 1872 6758 1859 6769 Q 1859 6782 1881 6792 1871 6792 1869 6805 1869 6826 1890 6835 L 1943 6843 1967 6844 1969 6844 1971 6853 Q 1969 6875 1939 6874 1923 6872 1899 6844 1886 6843 1885 6855 1884 6865 1895 6880 L 1896 6881 1914 6895 1943 6903 Q 1967 6905 1986 6890 2005 6875 2007 6849 L 2033 6850 2035 6874 Q 2039 6883 2049 6885 2062 6885 2063 6861 L 2067 6803 Q 2108 6807 2109 6793 L 2107 6784 2104 6779 2102 6782 2062 6776 2063 6777 1969 6773 1901 6763 1881 6761 1876 6761 1876 6760 M 2019 6806 L 2025 6808 2025 6827 2003 6826 2003 6807 2019 6806 M 1881 6792 L 1905 6798 1951 6800 Q 1976 6801 1974 6810 L 1972 6821 1936 6818 Q 1917 6812 1881 6792 M 2000 6849 L 2007 6849 2000 6849";
 	drawPath(ctx,pathData,false);
@@ -59931,7 +59939,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2017 6588 L 2014 6587 Q 1993 6583 1942 6597 L 1936 6600 1912 6618 1885 6640 Q 1862 6665 1859 6709 1857 6737 1876 6760 L 1876 6761 1881 6761 1901 6763 1969 6773 2063 6777 2062 6776 2102 6782 2104 6779 2107 6784 Q 2125 6776 2132 6762 2112 6761 2077 6730 L 2060 6755 Q 2044 6766 2029 6765 1992 6762 1995 6710 1998 6672 2034 6671 2011 6652 2014 6607 2014 6593 2017 6588 M 1983 6724 Q 1980 6763 1933 6762 1890 6760 1893 6713 1896 6669 1941 6673 L 1958 6675 1959 6674 Q 1974 6680 1979 6700 L 1983 6724";
 	drawPath(ctx,pathData,false);
@@ -59942,7 +59950,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1942 6597 Q 1940 6587 1925 6578 1909 6569 1894 6568 L 1849 6579 Q 1844 6581 1834 6592 1822 6604 1821 6616 1821 6628 1835 6629 1848 6630 1861 6614 1875 6596 1891 6597 1903 6598 1912 6618 L 1936 6600 1942 6597";
 	drawPath(ctx,pathData,false);
@@ -59953,7 +59961,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1983 6724 L 1979 6700 Q 1974 6680 1959 6674 L 1958 6675 1941 6673 Q 1896 6669 1893 6713 1890 6760 1933 6762 1980 6763 1983 6724 M 1916 6713 L 1919 6711 1920 6716 1925 6734 Q 1925 6746 1915 6744 1900 6743 1901 6722 1902 6711 1911 6712 L 1916 6713";
 	drawPath(ctx,pathData,false);
@@ -59964,7 +59972,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2016 6703 L 2013 6703 2010 6702 2003 6708 Q 1999 6714 1998 6721 1997 6739 2011 6739 2022 6741 2022 6730 2024 6711 2016 6703";
 	drawPath(ctx,pathData,false);
@@ -59975,7 +59983,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1920 6716 L 1916 6713 1911 6712 Q 1902 6711 1901 6722 1900 6743 1915 6744 1925 6746 1925 6734 L 1920 6716";
 	drawPath(ctx,pathData,false);
@@ -59986,7 +59994,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1895 6880 L 1873 6883 Q 1855 6882 1848 6870 L 1837 6857 Q 1829 6856 1829 6869 1828 6876 1834 6888 L 1836 6889 1885 6899 1914 6895 1896 6881 1895 6880";
 	drawPath(ctx,pathData,false);
@@ -59997,7 +60005,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2132 6762 Q 2112 6761 2077 6730 L 2079 6720 2074 6696 Q 2069 6675 2060 6674 L 2040 6671 2034 6671 Q 2011 6652 2014 6607 2014 6593 2017 6588 M 2107 6638 L 2098 6626 2087 6616 M 2222 6822 L 2228 6820 2235 6824 2238 6830 2235 6838 2230 6841 2228 6841 2221 6838 2219 6831 2221 6823 2222 6822 M 2207 6829 L 2204 6836 2197 6838 2191 6836 2189 6828 Q 2189 6823 2192 6820 2194 6818 2198 6818 L 2205 6821 2207 6829 M 2102 6782 L 2062 6776 2063 6777 1969 6773 1901 6763 1881 6761 1876 6761 1876 6760 M 2077 6730 L 2060 6755 Q 2044 6766 2029 6765 1992 6762 1995 6710 1998 6672 2034 6671 M 2178 6851 L 2181 6857 2187 6850 Q 2196 6844 2209 6844 2221 6845 2228 6852 2238 6858 2237 6868 L 2228 6884 2210 6890 M 2416 6764 L 2392 6782 Q 2349 6818 2345 6874 L 2346 6905 M 1912 6618 L 1936 6600 1942 6597 M 1983 6724 Q 1980 6763 1933 6762 1890 6760 1893 6713 1896 6669 1941 6673 L 1958 6675 1959 6674 Q 1974 6680 1979 6700 L 1983 6724 M 2016 6703 Q 2024 6711 2022 6730 2022 6741 2011 6739 1997 6739 1998 6721 1999 6714 2003 6708 L 2010 6702 2013 6703 2016 6703 M 1920 6716 L 1916 6713 1919 6711 1920 6716 1925 6734 Q 1925 6746 1915 6744 1900 6743 1901 6722 1902 6711 1911 6712 L 1916 6713 M 1706 6720 L 1709 6736 1703 6738 M 1895 6880 L 1896 6881 1914 6895 M 2007 6849 L 2000 6849 M 2169 6833 L 2173 6832 2179 6835 2181 6842 2179 6849 2178 6851 M 2377 6910 L 2370 6912 2366 6920 2368 6928 2374 6932 2383 6930 2387 6923 2385 6914 2377 6910 M 2409 6912 L 2403 6915 2399 6922 2401 6931 2408 6935 2414 6933 2422 6943 2426 6948 2427 6949 2434 6954 2441 6951 2444 6943 2443 6935 2437 6931 2429 6933 2425 6941 2426 6948 M 2409 6912 L 2411 6912 Q 2415 6912 2417 6916 L 2419 6924 2415 6931 2414 6933 M 2433 6984 L 2441 6989 2451 6987 2455 6980 2453 6972 2444 6969 2435 6969 2430 6977 2433 6984 M 2398 6989 L 2414 6984 Q 2424 6978 2425 6968 2426 6957 2417 6949 2409 6940 2395 6939 L 2372 6943 2364 6951";
 	var scaleMode = "NORMAL";
@@ -60024,7 +60032,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2012 5082 L 2011 5086 Q 1955 5092 1955 5157 1951 5213 2003 5253 L 2140 5339 Q 2273 5420 2285 5566 2295 5709 2266 5805 L 2216 5853 Q 2250 5758 2196 5732 2137 5699 2008 5760 1877 5817 1740 5800 1599 5779 1493 5619 1523 5638 1547 5642 1580 5646 1605 5617 1627 5591 1630 5562 1614 5252 1764 5162 1910 5068 1987 5075 1999 5076 2012 5082 M 2077 5584 Q 2077 5553 2050 5513 L 2047 5508 Q 2060 5437 2025 5382 1987 5324 1896 5315 1804 5302 1775 5452 L 1772 5456 Q 1731 5477 1731 5522 1729 5535 1750 5541 L 1776 5538 1776 5602 Q 1751 5599 1751 5627 1749 5632 1785 5646 1815 5658 1840 5663 1879 5667 1889 5646 1905 5677 1965 5686 2040 5696 2042 5659 L 2033 5643 2012 5626 2021 5590 2045 5593 Q 2050 5607 2067 5611 2076 5610 2077 5584";
 	drawPath(ctx,pathData,false);
@@ -60035,7 +60043,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2011 5086 L 2029 5088 2038 5091 Q 2150 5137 2236 5241 2356 5390 2349 5575 2340 5708 2266 5805 2295 5709 2285 5566 2273 5420 2140 5339 L 2003 5253 Q 1951 5213 1955 5157 1955 5092 2011 5086";
 	drawPath(ctx,pathData,false);
@@ -60046,7 +60054,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2077 5584 Q 2076 5610 2067 5611 2050 5607 2045 5593 L 2021 5590 2012 5626 2033 5643 2042 5659 Q 2040 5696 1965 5686 1905 5677 1889 5646 1879 5667 1840 5663 1815 5658 1785 5646 1749 5632 1751 5627 1751 5599 1776 5602 L 1776 5538 1750 5541 Q 1729 5535 1731 5522 1731 5477 1772 5456 L 1775 5452 Q 1804 5302 1896 5315 1987 5324 2025 5382 2060 5437 2047 5508 L 2050 5513 Q 2077 5553 2077 5584";
 	var grd=ctx.createLinearGradient(1736.5,5580.0,2093.5,5580.0);
@@ -60064,7 +60072,7 @@ function shape742(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 2029 5088 L 2012 5082 Q 1999 5076 1987 5075 L 1924 5059 Q 1735 5029 1597 5143 1456 5254 1450 5442 1445 5527 1472 5606 1500 5696 1570 5779 1697 5926 1883 5953 2066 5977 2203 5868 L 2216 5853 2266 5805 Q 2340 5708 2349 5575 2356 5390 2236 5241 2150 5137 2038 5091 L 2029 5088 2011 5086 M 1493 5619 L 1472 5606";
 	var scaleMode = "NORMAL";
@@ -60174,7 +60182,7 @@ function shape743(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.43137254901960786,tocolor(ctrans.apply([173,149,124,1])));
 	grd.addColorStop(0.9921568627450981,tocolor(ctrans.apply([211,220,197,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 679 176 Q 829 138 1078 109 1747 28 2888 28 L 3235 0 Q 4165 53 4953 208 5488 313 5203 378 5069 408 4752 430 4047 477 3830 529 3741 550 3733 572 3709 633 3683 664 L 3665 681 Q 3459 739 3231 645 L 3227 644 Q 2997 547 2894 542 L 2755 529 Q 2719 522 2680 585 2612 640 2502 620 L 2172 571 Q 2220 595 2048 651 1875 706 1704 683 1532 660 1403 564 1273 467 1169 452 861 397 738 351 614 305 639 255 L 679 176";
 	var grd=ctx.createLinearGradient(1511.5,876.25,1598.5,101.75);
@@ -63691,7 +63699,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2603 1620 Q -2608 1655 -2626 1686 L -2638 1675 Q -2652 1666 -2670 1669 -2689 1670 -2701 1683 -2713 1695 -2711 1710 -2709 1724 -2695 1733 L -2672 1740 Q -2716 1776 -2776 1781 -2854 1787 -2915 1737 -2974 1685 -2980 1606 -2987 1528 -2936 1468 -2884 1408 -2806 1402 -2750 1397 -2703 1423 L -2668 1447 Q -2607 1499 -2602 1576 -2599 1598 -2603 1620 M -2645 1627 Q -2652 1628 -2656 1634 L -2658 1645 -2653 1656 -2641 1659 -2632 1654 -2628 1641 -2635 1631 Q -2639 1626 -2645 1627 M -2697 1660 L -2688 1662 -2679 1656 -2676 1645 Q -2677 1638 -2682 1634 L -2689 1631 -2689 1619 Q -2691 1588 -2716 1567 -2740 1547 -2772 1549 -2803 1551 -2824 1575 -2844 1600 -2842 1631 -2839 1663 -2815 1684 -2792 1704 -2758 1701 L -2724 1690 -2715 1684 -2713 1682 -2707 1675 -2697 1660 M -2721 1734 L -2718 1723 Q -2719 1716 -2724 1712 L -2738 1711 -2750 1715 -2754 1727 -2747 1736 -2734 1740 Q -2727 1739 -2721 1734";
 	drawPath(ctx,pathData,false);
@@ -63702,7 +63710,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2645 1627 Q -2639 1626 -2635 1631 L -2628 1641 -2632 1654 -2641 1659 -2653 1656 -2658 1645 -2656 1634 Q -2652 1628 -2645 1627";
 	drawPath(ctx,pathData,false);
@@ -63713,7 +63721,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2689 1631 L -2682 1634 Q -2677 1638 -2676 1645 L -2679 1656 -2688 1662 -2697 1660 -2699 1658 -2705 1649 -2702 1637 Q -2698 1632 -2692 1632 L -2689 1631";
 	drawPath(ctx,pathData,false);
@@ -63724,7 +63732,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2713 1682 L -2715 1684 -2724 1690 -2734 1686 -2740 1676 -2737 1664 Q -2735 1658 -2728 1658 L -2718 1661 Q -2713 1665 -2713 1672 L -2713 1682";
 	drawPath(ctx,pathData,false);
@@ -63735,7 +63743,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2626 1686 L -2620 1698 Q -2619 1712 -2632 1725 -2643 1737 -2661 1739 L -2672 1740 -2695 1733 Q -2709 1724 -2711 1710 -2713 1695 -2701 1683 -2689 1670 -2670 1669 -2652 1666 -2638 1675 L -2626 1686";
 	drawPath(ctx,pathData,false);
@@ -63746,7 +63754,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2721 1734 Q -2727 1739 -2734 1740 L -2747 1736 -2754 1727 -2750 1715 -2738 1711 -2724 1712 Q -2719 1716 -2718 1723 L -2721 1734";
 	drawPath(ctx,pathData,false);
@@ -63757,7 +63765,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2438 1528 L -2446 1524 -2450 1514 -2447 1503 -2437 1499 -2428 1502 -2427 1503 -2423 1512 -2426 1523 -2436 1527 -2438 1528";
 	drawPath(ctx,pathData,false);
@@ -63768,7 +63776,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2407 1510 L -2403 1499 -2395 1495 -2385 1499 -2381 1509 -2384 1519 Q -2389 1523 -2394 1523 L -2402 1520 -2407 1510";
 	drawPath(ctx,pathData,false);
@@ -63779,7 +63787,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2353 1515 L -2349 1517 -2345 1529 -2349 1539 -2357 1544 -2365 1541 -2366 1539 -2370 1529 -2367 1519 -2358 1513 -2353 1515";
 	drawPath(ctx,pathData,false);
@@ -63790,7 +63798,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2358 1575 L -2353 1564 -2342 1559 -2330 1562 -2325 1573 -2329 1583 -2341 1587 -2353 1584 -2358 1575";
 	drawPath(ctx,pathData,false);
@@ -63801,7 +63809,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2370 1550 L -2366 1562 Q -2366 1577 -2377 1586 -2390 1596 -2406 1597 L -2411 1597 -2436 1589 Q -2449 1579 -2449 1566 -2450 1552 -2437 1543 -2426 1532 -2409 1532 -2392 1531 -2378 1541 L -2370 1550";
 	drawPath(ctx,pathData,false);
@@ -63812,7 +63820,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -1621 1267 L -1622 1267 -1631 1267 -1634 1248 Q -1630 1246 -1632 1226 -1635 1191 -1666 1193 L -1661 1190 Q -1624 1188 -1621 1224 -1619 1245 -1623 1248 L -1621 1267 M -1727 1288 L -1736 1288 -1740 1223 -1738 1211 -1762 1208 -1774 1209 -1755 1206 -1730 1210 -1733 1221 -1727 1288 M -1779 1275 L -1782 1278 -1785 1277 -1786 1266 -1783 1257 Q -1795 1234 -1804 1228 -1814 1221 -1822 1222 -1812 1217 -1799 1227 L -1799 1228 Q -1790 1233 -1778 1257 L -1779 1266 -1779 1275 M -1867 1374 Q -1857 1384 -1830 1382 -1810 1380 -1798 1345 L -1781 1335 Q -1779 1336 -1776 1339 L -1792 1348 Q -1806 1384 -1827 1386 -1857 1388 -1867 1374 M -1822 1496 L -1809 1500 Q -1792 1499 -1758 1483 L -1758 1493 -1804 1508 Q -1821 1509 -1822 1496 M -1760 1570 L -1749 1572 Q -1725 1570 -1719 1490 L -1689 1486 -1687 1462 -1688 1435 -1680 1434 -1678 1468 -1681 1493 -1711 1498 Q -1717 1580 -1742 1583 -1757 1584 -1760 1570 M -1708 1432 L -1717 1433 Q -1713 1412 -1723 1369 L -1725 1349 -1709 1343 -1704 1344 -1704 1348 -1716 1352 -1715 1373 Q -1707 1410 -1708 1432 M -1700 1373 L -1669 1379 -1658 1372 -1654 1331 -1647 1330 -1643 1334 -1644 1334 -1648 1367 -1650 1379 -1659 1382 -1700 1376 -1700 1373 M -1660 1558 L -1631 1561 Q -1625 1372 -1598 1342 L -1588 1342 -1588 1347 Q -1613 1381 -1620 1570 L -1659 1569 -1660 1558 M -1589 1542 L -1565 1546 -1549 1544 -1550 1519 -1495 1513 -1477 1513 -1468 1509 -1467 1509 -1463 1505 -1461 1494 -1467 1449 -1479 1328 -1478 1313 -1511 1290 -1554 1277 -1616 1267 -1611 1268 -1540 1277 -1496 1292 Q -1486 1295 -1463 1314 L -1463 1330 -1451 1455 -1444 1502 -1447 1513 -1451 1517 -1462 1522 -1479 1521 -1537 1527 -1536 1555 -1551 1555 -1589 1552 -1589 1542 M -1541 1467 L -1556 1466 Q -1540 1383 -1542 1353 L -1545 1348 -1540 1347 -1530 1396 -1541 1467";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -63827,7 +63835,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2271 1240 Q -2279 1228 -2306 1228 -2333 1227 -2357 1262 -2381 1297 -2388 1299 L -2406 1294 Q -2420 1285 -2421 1274 -2423 1251 -2391 1220 -2356 1185 -2310 1181 L -2279 1184 -2241 1208 -2256 1223 -2271 1240";
 	drawPath(ctx,pathData,false);
@@ -63838,7 +63846,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2271 1240 L -2256 1223 -2241 1208 Q -2220 1188 -2198 1182 L -2144 1168 Q -2140 1176 -2139 1194 -2134 1259 -2166 1284 L -2175 1285 -2202 1291 Q -2216 1291 -2223 1321 L -2229 1354 -2226 1368 Q -2275 1413 -2302 1415 L -2309 1388 Q -2314 1328 -2294 1278 L -2271 1240";
 	drawPath(ctx,pathData,false);
@@ -63849,7 +63857,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2226 1368 L -2229 1354 -2223 1321 Q -2216 1291 -2202 1291 L -2175 1285 -2166 1284 Q -2115 1284 -2111 1339 -2105 1413 -2158 1417 -2179 1419 -2201 1403 -2220 1388 -2226 1368 M -2140 1330 Q -2151 1341 -2150 1368 -2149 1383 -2132 1381 -2112 1380 -2115 1356 L -2122 1336 -2132 1328 -2136 1329 -2140 1330";
 	drawPath(ctx,pathData,false);
@@ -63860,7 +63868,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -1943 1407 L -1936 1404 -1918 1420 Q -1917 1439 -1949 1453 -1935 1452 -1932 1471 -1931 1500 -1961 1513 L -2036 1524 -2069 1527 -2072 1526 -2074 1541 Q -2072 1572 -2030 1569 -2006 1567 -1973 1527 -1955 1525 -1953 1542 -1952 1556 -1967 1577 L -1968 1578 -1993 1598 -2034 1610 Q -2068 1612 -2094 1592 -2121 1571 -2125 1535 L -2162 1537 -2165 1570 Q -2170 1584 -2184 1586 -2202 1586 -2204 1553 L -2209 1472 Q -2269 1477 -2270 1457 L -2266 1445 -2263 1439 -2259 1441 -2203 1434 -2205 1434 -2073 1426 -1977 1412 -1949 1409 -1943 1408 -1943 1407 M -2142 1475 L -2152 1478 -2151 1505 -2119 1502 -2121 1475 -2142 1475 M -1949 1453 L -1982 1462 -2047 1465 Q -2083 1467 -2081 1479 L -2076 1495 -2026 1491 -1949 1453 M -2116 1534 L -2125 1535 -2116 1534";
 	drawPath(ctx,pathData,false);
@@ -63871,7 +63879,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2144 1168 L -2140 1167 Q -2110 1160 -2038 1180 L -2030 1183 -1995 1208 -1958 1239 Q -1924 1275 -1920 1335 -1916 1375 -1943 1407 L -1943 1408 -1949 1409 -1977 1412 -2073 1426 -2205 1434 -2203 1434 -2259 1441 -2263 1439 -2266 1445 Q -2292 1435 -2302 1415 -2275 1413 -2226 1368 -2220 1388 -2201 1403 -2179 1419 -2158 1417 -2105 1413 -2111 1339 -2115 1284 -2166 1284 -2134 1259 -2139 1194 -2140 1176 -2144 1168 M -2094 1358 Q -2090 1413 -2022 1411 -1963 1407 -1968 1342 -1972 1280 -2036 1285 L -2060 1289 -2062 1287 Q -2081 1297 -2088 1323 -2095 1344 -2094 1358";
 	drawPath(ctx,pathData,false);
@@ -63882,7 +63890,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2038 1180 Q -2035 1165 -2014 1153 -1992 1140 -1971 1138 L -1908 1153 -1886 1170 Q -1869 1188 -1868 1203 -1866 1221 -1886 1223 -1905 1224 -1924 1201 -1943 1177 -1966 1179 -1983 1180 -1995 1208 L -2030 1183 -2038 1180";
 	drawPath(ctx,pathData,false);
@@ -63893,7 +63901,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2094 1358 Q -2095 1344 -2088 1323 -2081 1297 -2062 1287 L -2060 1289 -2036 1285 Q -1972 1280 -1968 1342 -1963 1407 -2022 1411 -2090 1413 -2094 1358 M -1999 1343 L -2004 1340 -2006 1345 -2013 1371 Q -2011 1388 -1997 1387 -1975 1385 -1978 1355 -1979 1340 -1991 1340 L -1999 1343";
 	drawPath(ctx,pathData,false);
@@ -63904,7 +63912,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2140 1330 L -2136 1329 -2132 1328 -2122 1336 -2115 1356 Q -2112 1380 -2132 1381 -2149 1383 -2150 1368 -2151 1341 -2140 1330";
 	drawPath(ctx,pathData,false);
@@ -63915,7 +63923,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -1999 1343 L -1991 1340 Q -1979 1340 -1978 1355 -1975 1385 -1997 1387 -2011 1388 -2013 1371 L -2006 1345 -1999 1343";
 	drawPath(ctx,pathData,false);
@@ -63926,7 +63934,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -1967 1577 L -1936 1581 Q -1911 1579 -1901 1561 -1891 1545 -1886 1544 -1875 1542 -1874 1559 -1872 1569 -1882 1586 L -1885 1588 -1951 1603 -1993 1598 -1968 1578 -1967 1577";
 	drawPath(ctx,pathData,false);
@@ -63937,7 +63945,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2271 1240 L -2256 1223 -2241 1208 M -2428 1502 L -2437 1499 -2447 1503 -2450 1514 -2446 1524 -2438 1528 -2436 1527 -2426 1523 -2423 1512 -2427 1503 -2428 1502 M -2407 1510 L -2402 1520 -2394 1523 Q -2389 1523 -2384 1519 L -2381 1509 -2385 1499 -2395 1495 -2403 1499 -2407 1510 M -2226 1368 L -2229 1354 -2223 1321 Q -2216 1291 -2202 1291 L -2175 1285 -2166 1284 Q -2134 1259 -2139 1194 -2140 1176 -2144 1168 M -2259 1441 L -2203 1434 -2205 1434 -2073 1426 -1977 1412 -1949 1409 -1943 1408 -1943 1407 M -2166 1284 Q -2115 1284 -2111 1339 -2105 1413 -2158 1417 -2179 1419 -2201 1403 -2220 1388 -2226 1368 -2275 1413 -2302 1415 M -2365 1541 L -2370 1550 -2378 1541 Q -2392 1531 -2409 1532 -2426 1532 -2437 1543 -2450 1552 -2449 1566 -2449 1579 -2436 1589 L -2411 1597 M -2703 1423 L -2668 1447 Q -2607 1499 -2602 1576 -2599 1598 -2603 1620 M -1995 1208 L -2030 1183 -2038 1180 M -2094 1358 Q -2090 1413 -2022 1411 -1963 1407 -1968 1342 -1972 1280 -2036 1285 L -2060 1289 -2062 1287 Q -2081 1297 -2088 1323 -2095 1344 -2094 1358 M -2140 1330 Q -2151 1341 -2150 1368 -2149 1383 -2132 1381 -2112 1380 -2115 1356 L -2122 1336 -2132 1328 -2136 1329 -2140 1330 M -2006 1345 L -2004 1340 -1999 1343 -1991 1340 Q -1979 1340 -1978 1355 -1975 1385 -1997 1387 -2011 1388 -2013 1371 L -2006 1345 -1999 1343 M -1704 1348 L -1708 1372 -1700 1373 M -1993 1598 L -1968 1578 -1967 1577 M -2125 1535 L -2116 1534 M -2353 1515 L -2358 1513 -2367 1519 -2370 1529 -2366 1539 -2365 1541 M -2645 1627 Q -2639 1626 -2635 1631 L -2628 1641 -2632 1654 -2641 1659 -2653 1656 -2658 1645 -2656 1634 Q -2652 1628 -2645 1627 M -2697 1660 L -2688 1662 -2679 1656 -2676 1645 Q -2677 1638 -2682 1634 L -2689 1631 -2692 1632 Q -2698 1632 -2702 1637 L -2705 1649 -2699 1658 -2697 1660 -2707 1675 -2713 1682 -2715 1684 -2724 1690 -2734 1686 -2740 1676 -2737 1664 Q -2735 1658 -2728 1658 L -2718 1661 Q -2713 1665 -2713 1672 L -2713 1682 M -2721 1734 Q -2727 1739 -2734 1740 L -2747 1736 -2754 1727 -2750 1715 -2738 1711 -2724 1712 Q -2719 1716 -2718 1723 L -2721 1734 M -2672 1740 L -2695 1733 Q -2709 1724 -2711 1710 -2713 1695 -2701 1683 -2689 1670 -2670 1669 -2652 1666 -2638 1675 L -2626 1686";
 	var scaleMode = "NORMAL";
@@ -63964,7 +63972,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2134 -386 Q -2210 -367 -2336 -225 -2463 -85 -2384 222 -2379 253 -2396 285 -2415 322 -2449 328 L -2505 323 -2530 316 Q -2571 243 -2585 156 -2616 -34 -2503 -192 -2390 -349 -2199 -380 L -2134 -386";
 	drawPath(ctx,pathData,false);
@@ -63975,7 +63983,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2174 -114 Q -2079 -133 -2030 -87 -1982 -43 -1980 35 L -1977 38 Q -1939 72 -1935 101 -1930 131 -1939 132 -1955 135 -1964 122 L -1989 126 -1991 166 Q -1982 166 -1966 177 L -1953 189 Q -1947 228 -2025 241 -2086 251 -2110 224 -2115 251 -2155 257 L -2214 258 Q -2250 255 -2252 247 -2256 221 -2232 216 L -2245 151 Q -2253 158 -2270 161 -2291 164 -2294 147 -2301 105 -2267 67 L -2263 64 Q -2268 -96 -2174 -114";
 	var grd=ctx.createLinearGradient(-2301.75,96.25,-1944.25,37.75);
@@ -63993,7 +64001,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2108 -386 L -2108 -383 Q -2161 -358 -2150 -292 -2141 -234 -2082 -210 L -1925 -168 Q -1774 -127 -1730 17 -1685 163 -1696 269 -1707 294 -1735 334 -1720 227 -1784 214 -1848 202 -1965 303 -2082 404 -2225 429 -2368 453 -2505 323 L -2449 328 Q -2415 322 -2396 285 -2379 253 -2384 222 -2463 -85 -2336 -225 -2210 -367 -2134 -386 L -2108 -386 M -2174 -114 Q -2268 -96 -2263 64 L -2267 67 Q -2301 105 -2294 147 -2291 164 -2270 161 -2253 158 -2245 151 L -2232 216 Q -2256 221 -2252 247 -2250 255 -2214 258 L -2155 257 Q -2115 251 -2110 224 -2086 251 -2025 241 -1947 228 -1953 189 L -1966 177 Q -1982 166 -1991 166 L -1989 126 -1964 122 Q -1955 135 -1939 132 -1930 131 -1935 101 -1939 72 -1977 38 L -1980 35 Q -1982 -43 -2030 -87 -2079 -133 -2174 -114";
 	drawPath(ctx,pathData,false);
@@ -64004,7 +64012,7 @@ function shape786(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -2108 -383 L -2090 -386 -2108 -386 -2134 -386 -2199 -380 Q -2390 -349 -2503 -192 -2616 -34 -2585 156 -2571 243 -2530 316 L -2505 323 M -1735 334 Q -1707 294 -1696 269 -1641 146 -1664 5 -1695 -185 -1852 -299 -1958 -375 -2081 -384 L -2090 -386 M -2530 316 Q -2481 399 -2396 460 -2239 573 -2048 542 -1858 510 -1745 353 L -1735 334";
 	var scaleMode = "NORMAL";
@@ -64800,7 +64808,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -64811,7 +64819,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -64822,7 +64830,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -64833,7 +64841,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -64844,7 +64852,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -64855,7 +64863,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -64866,7 +64874,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8181 8960 L 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960";
 	drawPath(ctx,pathData,false);
@@ -64877,7 +64885,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8221 8937 L 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937";
 	drawPath(ctx,pathData,false);
@@ -64888,7 +64896,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -64899,7 +64907,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -64910,7 +64918,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -64921,7 +64929,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -64936,7 +64944,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -64947,7 +64955,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -64958,7 +64966,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -64969,7 +64977,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -64980,7 +64988,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656";
 	drawPath(ctx,pathData,false);
@@ -64991,7 +64999,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -65002,7 +65010,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8657 8656 L 8661 8656 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 M 8736 8725 L 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -65013,7 +65021,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -65024,7 +65032,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -65035,7 +65043,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -65046,7 +65054,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 M 8194 8927 L 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 M 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 L 8221 8937 M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8449 8758 Q 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 M 8353 8816 Q 8388 8815 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8729 8729 L 8732 8722 8736 8725 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725 M 9111 8733 L 9105 8762 9116 8764 M 8777 9021 L 8775 9024 8745 9048 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	var scaleMode = "NORMAL";
@@ -65073,7 +65081,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536";
 	drawPath(ctx,pathData,false);
@@ -65084,7 +65092,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -65102,7 +65110,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -65113,7 +65121,7 @@ function shape808(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 L 8483 6545 Q 8242 6584 8099 6783 7956 6982 7995 7223 8013 7333 8065 7424 L 8096 7434 M 9071 7448 Q 9107 7397 9121 7366 9190 7210 9161 7032 9122 6791 8923 6648 8789 6551 8634 6539 L 8622 6537 8598 6541 M 8600 6537 L 8567 6536 M 8600 6537 L 8622 6537 M 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424";
 	var scaleMode = "NORMAL";
@@ -65460,7 +65468,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -65471,7 +65479,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -65482,7 +65490,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -65493,7 +65501,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -65504,7 +65512,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -65515,7 +65523,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -65526,7 +65534,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8181 8960 L 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960";
 	drawPath(ctx,pathData,false);
@@ -65537,7 +65545,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8221 8937 L 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937";
 	drawPath(ctx,pathData,false);
@@ -65548,7 +65556,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -65559,7 +65567,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -65570,7 +65578,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -65581,7 +65589,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -65596,7 +65604,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -65607,7 +65615,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -65618,7 +65626,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -65629,7 +65637,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -65640,7 +65648,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656";
 	drawPath(ctx,pathData,false);
@@ -65651,7 +65659,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -65662,7 +65670,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8657 8656 L 8661 8656 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 M 8736 8725 L 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -65673,7 +65681,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -65684,7 +65692,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -65695,7 +65703,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -65706,7 +65714,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 M 8194 8927 L 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 M 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 L 8221 8937 M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8449 8758 Q 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 M 8353 8816 Q 8388 8815 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8729 8729 L 8732 8722 8736 8725 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725 M 9111 8733 L 9105 8762 9116 8764 M 8777 9021 L 8775 9024 8745 9048 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	var scaleMode = "NORMAL";
@@ -65733,7 +65741,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536";
 	drawPath(ctx,pathData,false);
@@ -65744,7 +65752,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -65762,7 +65770,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -65773,7 +65781,7 @@ function shape813(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 L 8483 6545 Q 8242 6584 8099 6783 7956 6982 7995 7223 8013 7333 8065 7424 L 8096 7434 M 9071 7448 Q 9107 7397 9121 7366 9190 7210 9161 7032 9122 6791 8923 6648 8789 6551 8634 6539 L 8622 6537 8598 6541 M 8600 6537 L 8567 6536 M 8600 6537 L 8622 6537 M 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424";
 	var scaleMode = "NORMAL";
@@ -66082,7 +66090,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -66093,7 +66101,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -66104,7 +66112,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -66115,7 +66123,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -66126,7 +66134,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -66137,7 +66145,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -66148,7 +66156,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8181 8960 L 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960";
 	drawPath(ctx,pathData,false);
@@ -66159,7 +66167,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8221 8937 L 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937";
 	drawPath(ctx,pathData,false);
@@ -66170,7 +66178,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -66181,7 +66189,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -66192,7 +66200,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -66203,7 +66211,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -66218,7 +66226,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -66229,7 +66237,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -66240,7 +66248,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -66251,7 +66259,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -66262,7 +66270,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656";
 	drawPath(ctx,pathData,false);
@@ -66273,7 +66281,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -66284,7 +66292,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8657 8656 L 8661 8656 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 M 8736 8725 L 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -66295,7 +66303,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -66306,7 +66314,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -66317,7 +66325,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -66328,7 +66336,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 M 8194 8927 L 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 M 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 L 8221 8937 M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8449 8758 Q 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 M 8353 8816 Q 8388 8815 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8729 8729 L 8732 8722 8736 8725 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725 M 9111 8733 L 9105 8762 9116 8764 M 8777 9021 L 8775 9024 8745 9048 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	var scaleMode = "NORMAL";
@@ -66355,7 +66363,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536";
 	drawPath(ctx,pathData,false);
@@ -66366,7 +66374,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -66384,7 +66392,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -66395,7 +66403,7 @@ function shape815(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 L 8483 6545 Q 8242 6584 8099 6783 7956 6982 7995 7223 8013 7333 8065 7424 L 8096 7434 M 9071 7448 Q 9107 7397 9121 7366 9190 7210 9161 7032 9122 6791 8923 6648 8789 6551 8634 6539 L 8622 6537 8598 6541 M 8600 6537 L 8567 6536 M 8600 6537 L 8622 6537 M 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424";
 	var scaleMode = "NORMAL";
@@ -66704,7 +66712,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -66715,7 +66723,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -66726,7 +66734,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -66737,7 +66745,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -66748,7 +66756,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -66759,7 +66767,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -66770,7 +66778,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8181 8960 L 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960";
 	drawPath(ctx,pathData,false);
@@ -66781,7 +66789,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8221 8937 L 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937";
 	drawPath(ctx,pathData,false);
@@ -66792,7 +66800,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -66803,7 +66811,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -66814,7 +66822,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -66825,7 +66833,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -66840,7 +66848,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -66851,7 +66859,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -66862,7 +66870,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -66873,7 +66881,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -66884,7 +66892,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656";
 	drawPath(ctx,pathData,false);
@@ -66895,7 +66903,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -66906,7 +66914,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8657 8656 L 8661 8656 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 M 8736 8725 L 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -66917,7 +66925,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -66928,7 +66936,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -66939,7 +66947,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -66950,7 +66958,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 M 8194 8927 L 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 M 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 L 8221 8937 M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8449 8758 Q 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 M 8353 8816 Q 8388 8815 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8729 8729 L 8732 8722 8736 8725 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725 M 9111 8733 L 9105 8762 9116 8764 M 8777 9021 L 8775 9024 8745 9048 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	var scaleMode = "NORMAL";
@@ -66977,7 +66985,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536";
 	drawPath(ctx,pathData,false);
@@ -66988,7 +66996,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -67006,7 +67014,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -67017,7 +67025,7 @@ function shape817(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 L 8483 6545 Q 8242 6584 8099 6783 7956 6982 7995 7223 8013 7333 8065 7424 L 8096 7434 M 9071 7448 Q 9107 7397 9121 7366 9190 7210 9161 7032 9122 6791 8923 6648 8789 6551 8634 6539 L 8622 6537 8598 6541 M 8600 6537 L 8567 6536 M 8600 6537 L 8622 6537 M 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424";
 	var scaleMode = "NORMAL";
@@ -67318,7 +67326,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7864 9090 L 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -67329,7 +67337,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -67340,7 +67348,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -67351,7 +67359,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -67362,7 +67370,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -67373,7 +67381,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -67384,7 +67392,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8181 8960 L 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960";
 	drawPath(ctx,pathData,false);
@@ -67395,7 +67403,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937 L 8225 8925";
 	drawPath(ctx,pathData,false);
@@ -67406,7 +67414,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -67417,7 +67425,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -67428,7 +67436,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -67439,7 +67447,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -67454,7 +67462,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -67465,7 +67473,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8353 8816 Q 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816";
 	drawPath(ctx,pathData,false);
@@ -67476,7 +67484,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -67487,7 +67495,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -67498,7 +67506,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656";
 	drawPath(ctx,pathData,false);
@@ -67509,7 +67517,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -67520,7 +67528,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8657 8656 L 8661 8656 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 M 8736 8725 L 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -67531,7 +67539,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -67542,7 +67550,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8729 8729 L 8736 8725 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729";
 	drawPath(ctx,pathData,false);
@@ -67553,7 +67561,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -67564,7 +67572,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8353 8816 Q 8388 8815 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8394 8595 L 8411 8574 8430 8555 M 8194 8927 L 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 M 8225 8925 L 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8729 8729 L 8736 8725 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725 M 9111 8733 L 9105 8762 9116 8764 M 8777 9021 L 8775 9024 8745 9048 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7864 9090 L 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	var scaleMode = "NORMAL";
@@ -67591,7 +67599,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424";
 	drawPath(ctx,pathData,false);
@@ -67602,7 +67610,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -67620,7 +67628,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9121 7366 Q 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -67631,7 +67639,7 @@ function shape819(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8600 6537 L 8622 6537 8634 6539 Q 8789 6551 8923 6648 9122 6791 9161 7032 9190 7210 9121 7366 9107 7397 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536 8600 6537 M 8598 6541 L 8622 6537 M 8065 7424 L 8096 7434";
 	var scaleMode = "NORMAL";
@@ -67940,7 +67948,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -67951,7 +67959,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -67962,7 +67970,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -67973,7 +67981,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -67984,7 +67992,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -67995,7 +68003,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -68006,7 +68014,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8181 8960 L 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960";
 	drawPath(ctx,pathData,false);
@@ -68017,7 +68025,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8221 8937 L 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937";
 	drawPath(ctx,pathData,false);
@@ -68028,7 +68036,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -68039,7 +68047,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -68050,7 +68058,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -68061,7 +68069,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -68076,7 +68084,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -68087,7 +68095,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -68098,7 +68106,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -68109,7 +68117,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -68120,7 +68128,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656";
 	drawPath(ctx,pathData,false);
@@ -68131,7 +68139,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -68142,7 +68150,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8657 8656 L 8661 8656 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 M 8736 8725 L 8732 8722 8729 8729 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -68153,7 +68161,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -68164,7 +68172,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -68175,7 +68183,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -68186,7 +68194,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 M 8194 8927 L 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 M 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 L 8221 8937 M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8449 8758 Q 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 M 8353 8816 Q 8388 8815 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 8657 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8729 8729 L 8732 8722 8736 8725 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725 M 9111 8733 L 9105 8762 9116 8764 M 8777 9021 L 8775 9024 8745 9048 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	var scaleMode = "NORMAL";
@@ -68213,7 +68221,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536";
 	drawPath(ctx,pathData,false);
@@ -68224,7 +68232,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -68242,7 +68250,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -68253,7 +68261,7 @@ function shape821(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8567 6536 L 8483 6545 Q 8242 6584 8099 6783 7956 6982 7995 7223 8013 7333 8065 7424 L 8096 7434 M 9071 7448 Q 9107 7397 9121 7366 9190 7210 9161 7032 9122 6791 8923 6648 8789 6551 8634 6539 L 8622 6537 8598 6541 M 8600 6537 L 8567 6536 M 8600 6537 L 8622 6537 M 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424";
 	var scaleMode = "NORMAL";
@@ -68562,7 +68570,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7973 9076 Q 7967 9120 7944 9159 L 7929 9146 Q 7911 9134 7887 9138 7864 9140 7849 9156 7833 9171 7836 9190 7839 9208 7857 9219 L 7885 9228 Q 7830 9273 7754 9281 7654 9289 7579 9224 7503 9159 7495 9059 7487 8960 7551 8885 7616 8809 7716 8801 7787 8795 7846 8827 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 7919 9086 Q 7910 9087 7906 9093 7901 9100 7902 9109 7903 9117 7910 9121 L 7924 9126 7936 9118 7940 9104 7933 9090 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7864 9076 Q 7861 9035 7830 9009 7799 8984 7759 8986 7719 8989 7693 9019 7668 9051 7671 9091 7674 9131 7704 9157 7734 9183 7776 9180 L 7819 9165 7831 9158 7833 9154 7841 9146 7854 9128 M 7823 9220 L 7827 9207 7819 9193 7802 9191 Q 7791 9192 7786 9198 7781 9205 7782 9213 L 7790 9224 7807 9228 Q 7816 9227 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -68573,7 +68581,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086";
 	drawPath(ctx,pathData,false);
@@ -68584,7 +68592,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7864 9090 L 7873 9095 7881 9108 7877 9123 Q 7872 9128 7865 9129 L 7854 9128 7851 9125 7845 9112 Q 7843 9104 7848 9098 7852 9091 7861 9090 L 7864 9090";
 	drawPath(ctx,pathData,false);
@@ -68595,7 +68603,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7833 9154 L 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154";
 	drawPath(ctx,pathData,false);
@@ -68606,7 +68614,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7944 9159 L 7950 9176 Q 7952 9194 7937 9210 7922 9225 7899 9227 L 7885 9228 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159";
 	drawPath(ctx,pathData,false);
@@ -68617,7 +68625,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	drawPath(ctx,pathData,false);
@@ -68628,7 +68636,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8194 8927 L 8196 8929 8200 8941 8197 8954 8183 8959 8181 8960 8172 8955 8166 8942 Q 8165 8934 8171 8929 8175 8923 8183 8923 L 8194 8927";
 	drawPath(ctx,pathData,false);
@@ -68639,7 +68647,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8221 8937 L 8225 8925 Q 8229 8918 8236 8918 L 8248 8923 8254 8936 8250 8949 8238 8955 Q 8230 8955 8227 8950 8221 8945 8221 8937";
 	drawPath(ctx,pathData,false);
@@ -68650,7 +68658,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8289 8943 L 8293 8947 8298 8961 8295 8973 8284 8980 Q 8279 8980 8274 8976 L 8272 8974 8267 8962 Q 8266 8955 8271 8948 8275 8942 8283 8942 L 8289 8943";
 	drawPath(ctx,pathData,false);
@@ -68661,7 +68669,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8283 9019 Q 8283 9011 8288 9006 8294 9001 8303 8999 L 8319 9004 8325 9017 8319 9029 8305 9035 8289 9030 Q 8283 9026 8283 9019";
 	drawPath(ctx,pathData,false);
@@ -68672,7 +68680,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8268 8987 L 8273 9004 Q 8273 9022 8259 9033 8242 9046 8222 9048 L 8216 9047 Q 8197 9046 8184 9037 8168 9026 8167 9008 8167 8990 8183 8979 8196 8966 8218 8965 8240 8964 8257 8976 L 8268 8987";
 	drawPath(ctx,pathData,false);
@@ -68683,7 +68691,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9215 8629 L 9214 8630 9201 8630 9199 8606 Q 9204 8602 9202 8577 9197 8534 9158 8535 L 9166 8532 Q 9212 8529 9215 8575 L 9213 8606 9215 8629 M 9081 8656 L 9071 8656 9065 8574 9068 8559 9037 8556 9022 8557 9021 8556 9046 8553 9077 8557 9074 8572 9081 8656 M 9015 8639 L 9012 8645 9008 8642 9007 8627 9011 8616 8984 8580 8983 8580 Q 8971 8571 8961 8572 8974 8566 8990 8578 L 8990 8579 Q 9001 8586 9018 8616 L 9014 8628 9015 8639 M 8904 8764 Q 8917 8777 8949 8776 8976 8772 8991 8728 L 9014 8716 9018 8720 8998 8731 Q 8982 8777 8955 8780 8917 8783 8904 8764 M 8960 8920 Q 8966 8926 8979 8925 8999 8923 9041 8904 L 9043 8916 8984 8934 Q 8963 8936 8960 8920 M 9039 9013 L 9054 9016 Q 9084 9013 9091 8912 L 9128 8907 Q 9127 8889 9132 8876 L 9130 8843 9140 8842 9143 8883 Q 9138 8897 9140 8916 L 9102 8922 Q 9094 9027 9063 9029 9043 9030 9039 9013 M 9105 8839 L 9094 8840 Q 9099 8813 9087 8759 L 9083 8734 9104 8727 9111 8727 9111 8733 9094 8737 9097 8764 Q 9107 8811 9105 8839 M 9116 8764 L 9155 8770 Q 9165 8769 9168 8764 L 9174 8711 9183 8708 9187 8715 9186 8715 9181 8756 9178 8771 9167 8775 9116 8767 9116 8764 M 9166 8998 L 9203 9001 Q 9211 8764 9244 8725 L 9256 8724 9257 8731 Q 9225 8775 9216 9013 L 9167 9011 9166 8998 M 9256 8978 L 9288 8983 9307 8981 9305 8948 9376 8941 9397 8940 9410 8937 9411 8936 9415 8930 Q 9411 8933 9418 8917 L 9410 8860 9396 8707 9396 8688 Q 9367 8663 9355 8660 L 9301 8642 9222 8630 9228 8631 9317 8643 9374 8661 Q 9387 8665 9416 8690 9414 8690 9415 8710 L 9431 8868 Q 9432 8902 9439 8926 9432 8944 9436 8940 L 9431 8947 9430 8946 9417 8952 9394 8951 9322 8959 9323 8994 9304 8994 9255 8990 9256 8978 M 9316 8882 L 9298 8881 Q 9318 8777 9315 8738 L 9313 8732 9319 8731 9330 8793 9316 8882";
 	ctx.fillStyle=tocolor(ctrans.apply([101,84,18,1]));
@@ -68698,7 +68706,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 Q 8383 8580 8349 8580 8315 8580 8285 8625 L 8245 8670 Q 8236 8672 8222 8663 8204 8652 8203 8639 8200 8610 8240 8571 8285 8526 8343 8522 L 8382 8525 8430 8555 8411 8574 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -68709,7 +68717,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 Q 8458 8530 8485 8522 L 8553 8504 Q 8559 8514 8559 8538 8566 8619 8525 8652 L 8515 8652 8479 8659 Q 8462 8660 8453 8698 8445 8726 8446 8741 L 8449 8758 Q 8388 8815 8353 8816 8345 8802 8345 8784 8337 8706 8364 8643 8370 8623 8394 8595";
 	drawPath(ctx,pathData,false);
@@ -68720,7 +68728,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([146,132,7,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([106,78,13,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8589 8652 8595 8721 8602 8815 8537 8820 8509 8822 8481 8802 8457 8783 8449 8758 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -68731,7 +68739,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8808 8807 L 8816 8804 8840 8823 Q 8840 8847 8800 8864 8819 8864 8821 8888 8824 8925 8785 8941 L 8690 8955 8649 8959 8644 8959 8642 8976 Q 8645 9016 8698 9011 8727 9009 8769 8958 8793 8956 8795 8977 8797 8995 8777 9021 L 8775 9024 8745 9048 8744 9049 Q 8722 9061 8692 9063 8650 9066 8618 9041 8582 9014 8578 8969 L 8531 8970 8527 9014 Q 8521 9031 8503 9033 8479 9034 8477 8991 L 8471 8889 Q 8396 8896 8395 8870 8394 8865 8399 8855 L 8403 8847 8407 8851 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8556 8893 L 8542 8897 8546 8930 8584 8927 8583 8893 8556 8893 M 8800 8864 Q 8783 8872 8758 8876 L 8676 8881 Q 8632 8883 8634 8899 L 8639 8918 8704 8914 8800 8864 M 8589 8968 L 8578 8969 8589 8968";
 	drawPath(ctx,pathData,false);
@@ -68742,7 +68750,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8553 8504 L 8559 8503 Q 8596 8495 8687 8520 L 8698 8523 8742 8555 8790 8593 Q 8831 8640 8837 8716 8842 8766 8808 8807 L 8808 8808 8800 8809 8765 8812 8643 8831 8476 8842 8477 8841 8407 8851 8403 8847 8399 8855 Q 8365 8842 8353 8816 8388 8815 8449 8758 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 8566 8619 8559 8538 8559 8514 8553 8504 M 8661 8656 L 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656";
 	drawPath(ctx,pathData,false);
@@ -68753,7 +68761,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8687 8520 Q 8692 8501 8719 8485 8745 8468 8772 8466 L 8853 8486 8880 8506 Q 8902 8529 8903 8548 8904 8571 8879 8574 8856 8575 8832 8547 8808 8515 8780 8517 8756 8520 8742 8555 L 8698 8523 8687 8520";
 	drawPath(ctx,pathData,false);
@@ -68764,7 +68772,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8661 8656 L 8691 8652 Q 8770 8646 8777 8725 8783 8806 8708 8812 8623 8815 8617 8745 8615 8727 8624 8701 8633 8667 8657 8656 L 8661 8656 M 8729 8729 L 8720 8761 Q 8722 8782 8739 8781 8767 8779 8764 8741 8761 8722 8746 8723 L 8736 8725 8732 8722 8729 8729";
 	drawPath(ctx,pathData,false);
@@ -68775,7 +68783,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([255,255,255,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([227,223,215,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8559 8709 L 8564 8708 8569 8706 8581 8717 8591 8742 Q 8593 8772 8569 8773 8548 8776 8547 8757 8544 8722 8559 8709";
 	drawPath(ctx,pathData,false);
@@ -68786,7 +68794,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8736 8725";
 	drawPath(ctx,pathData,false);
@@ -68797,7 +68805,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([119,119,119,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([0,0,0,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8777 9021 L 8817 9027 Q 8849 9025 8861 9003 8873 8980 8879 8981 8893 8979 8895 9000 8896 9013 8885 9034 L 8881 9035 Q 8850 9050 8797 9054 L 8745 9048 8775 9024 8777 9021";
 	drawPath(ctx,pathData,false);
@@ -68808,7 +68816,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8394 8595 L 8411 8574 8430 8555 M 8181 8960 L 8183 8959 8197 8954 8200 8941 8196 8929 8194 8927 8183 8923 Q 8175 8923 8171 8929 8165 8934 8166 8942 L 8172 8955 8181 8960 M 8221 8937 Q 8221 8945 8227 8950 8230 8955 8238 8955 L 8250 8949 8254 8936 8248 8923 8236 8918 Q 8229 8918 8225 8925 L 8221 8937 M 8449 8758 L 8446 8741 Q 8445 8726 8453 8698 8462 8660 8479 8659 L 8515 8652 8525 8652 Q 8566 8619 8559 8538 8559 8514 8553 8504 M 8407 8851 L 8477 8841 8476 8842 8643 8831 8765 8812 8800 8809 8808 8808 8808 8807 M 8449 8758 Q 8457 8783 8481 8802 8509 8822 8537 8820 8602 8815 8595 8721 8589 8652 8525 8652 M 8353 8816 Q 8388 8815 8449 8758 M 8274 8976 L 8268 8987 8257 8976 Q 8240 8964 8218 8965 8196 8966 8183 8979 8167 8990 8167 9008 8168 9026 8184 9037 8197 9046 8216 9047 M 7846 8827 Q 7869 8839 7890 8858 7967 8922 7974 9021 L 7973 9076 M 8742 8555 L 8698 8523 8687 8520 M 8661 8656 L 8657 8656 Q 8633 8667 8624 8701 8615 8727 8617 8745 8623 8815 8708 8812 8783 8806 8777 8725 8770 8646 8691 8652 L 8661 8656 M 8559 8709 Q 8544 8722 8547 8757 8548 8776 8569 8773 8593 8772 8591 8742 L 8581 8717 8569 8706 8564 8708 8559 8709 M 8736 8725 L 8746 8723 Q 8761 8722 8764 8741 8767 8779 8739 8781 8722 8782 8720 8761 L 8729 8729 8732 8722 8736 8725 8729 8729 M 9111 8733 L 9105 8762 9116 8764 M 8745 9048 L 8775 9024 8777 9021 M 8578 8969 L 8589 8968 M 8289 8943 L 8283 8942 Q 8275 8942 8271 8948 8266 8955 8267 8962 L 8272 8974 8274 8976 M 7919 9086 L 7933 9090 7940 9104 7936 9118 7924 9126 7910 9121 Q 7903 9117 7902 9109 7901 9100 7906 9093 7910 9087 7919 9086 M 7854 9128 L 7865 9129 Q 7872 9128 7877 9123 L 7881 9108 7873 9095 7864 9090 7861 9090 Q 7852 9091 7848 9098 7843 9104 7845 9112 L 7851 9125 7854 9128 7841 9146 7833 9154 7831 9158 7819 9165 7806 9160 7800 9147 7802 9132 Q 7807 9125 7815 9124 7822 9123 7827 9129 L 7834 9142 7833 9154 M 7885 9228 L 7857 9219 Q 7839 9208 7836 9190 7833 9171 7849 9156 7864 9140 7887 9138 7911 9134 7929 9146 L 7944 9159 M 7823 9220 Q 7816 9227 7807 9228 L 7790 9224 7782 9213 Q 7781 9205 7786 9198 7791 9192 7802 9191 L 7819 9193 7827 9207 7823 9220";
 	var scaleMode = "NORMAL";
@@ -68835,7 +68843,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8065 7424 Q 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536 Q 8470 6561 8309 6740 8149 6918 8249 7306 8255 7345 8235 7386 8210 7433 8168 7440 L 8096 7434 8065 7424";
 	drawPath(ctx,pathData,false);
@@ -68846,7 +68854,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8515 6880 Q 8635 6857 8698 6916 8758 6971 8760 7070 L 8764 7074 Q 8813 7116 8819 7154 8825 7191 8813 7193 8794 7196 8781 7180 L 8749 7185 8748 7235 Q 8759 7236 8778 7249 L 8795 7265 Q 8803 7315 8705 7331 8628 7344 8597 7309 8591 7342 8540 7351 8510 7356 8465 7352 8419 7348 8418 7338 8412 7305 8442 7299 L 8425 7216 Q 8416 7225 8394 7229 8368 7233 8364 7212 8355 7159 8399 7111 L 8402 7107 Q 8397 6904 8515 6880";
 	var grd=ctx.createLinearGradient(8353.75,7148.0,8806.25,7074.0);
@@ -68864,7 +68872,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([243,222,37,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([168,123,19,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 8598 6541 Q 8532 6572 8546 6656 8558 6729 8631 6760 L 8830 6813 Q 9022 6865 9077 7047 9133 7231 9121 7366 9107 7397 9071 7448 9090 7313 9009 7296 8928 7280 8780 7409 8631 7537 8451 7568 8270 7599 8096 7434 L 8168 7440 Q 8210 7433 8235 7386 8255 7345 8249 7306 8149 6918 8309 6740 8470 6561 8567 6536 L 8600 6537 8598 6541 M 8515 6880 Q 8397 6904 8402 7107 L 8399 7111 Q 8355 7159 8364 7212 8368 7233 8394 7229 8416 7225 8425 7216 L 8442 7299 Q 8412 7305 8418 7338 8419 7348 8465 7352 8510 7356 8540 7351 8591 7342 8597 7309 8628 7344 8705 7331 8803 7315 8795 7265 L 8778 7249 Q 8759 7236 8748 7235 L 8749 7185 8781 7180 Q 8794 7196 8813 7193 8825 7191 8819 7154 8813 7116 8764 7074 L 8760 7070 Q 8758 6971 8698 6916 8635 6857 8515 6880";
 	drawPath(ctx,pathData,false);
@@ -68875,7 +68883,7 @@ function shape823(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.0,tocolor(ctrans.apply([236,225,138,1])));
 	grd.addColorStop(0.7294117647058823,tocolor(ctrans.apply([183,116,72,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 9121 7366 Q 9190 7210 9161 7032 9122 6791 8923 6648 8789 6551 8634 6539 L 8622 6537 8598 6541 M 9121 7366 Q 9107 7397 9071 7448 L 9058 7472 Q 8915 7671 8674 7711 8433 7750 8234 7607 8126 7530 8065 7424 8013 7333 7995 7223 7956 6982 8099 6783 8242 6584 8483 6545 L 8567 6536 8600 6537 8622 6537 M 8065 7424 L 8096 7434";
 	var scaleMode = "NORMAL";
@@ -70604,7 +70612,7 @@ function shape835(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.8313725490196079,tocolor(ctrans.apply([200,107,38,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([153,137,77,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 13096 4298 L 13096 7866 11128 7866 Q 11140 7845 11155 7829 11225 7753 11380 7765 L 11512 7779 Q 11591 7788 11641 7782 11784 7765 11847 7620 11913 7468 12051 7259 L 12174 7077 Q 12144 6915 12022 6915 11923 6915 11873 6949 11847 6966 11810 7023 11775 7075 11733 7097 11669 7131 11546 7131 11421 7131 11291 7064 11161 6996 11020 6996 10946 6996 10639 7106 10332 7215 10274 7215 10175 7215 10113 7131 10058 7058 10058 6969 L 10058 6888 Q 10134 6888 10259 6861 10383 6834 10409 6834 10434 6834 10542 6888 10650 6942 10719 6942 10766 6942 10849 6872 10949 6787 11060 6753 L 11181 6743 11294 6753 Q 11411 6759 11411 6658 11384 6453 11384 6426 11327 6437 11259 6401 11228 6384 11194 6357 11089 6272 11006 6291 11026 6434 10998 6483 L 10908 6511 10871 6510 Q 10782 6510 10728 6309 L 10686 6161 Q 10660 6089 10625 6075 10373 5966 10157 6000 L 10077 5998 Q 10058 5980 10058 5886 10058 5719 10235 5651 10280 5634 10394 5605 10497 5580 10544 5558 10635 5516 10667 5453 10682 5425 10692 5348 10698 5306 10715 5283 L 10731 5267 Q 10776 5234 10898 5234 10993 5234 11067 5294 L 11076 5302 Q 11154 5369 11209 5369 L 11271 5366 Q 11283 5362 11303 5342 L 11298 5301 Q 11288 5257 11263 5223 L 11222 5180 Q 11276 5126 11276 5055 11276 4988 11249 4934 L 11168 4948 11087 4961 11069 4949 Q 11201 4763 11272 4559 11318 4424 11338 4281 11359 4131 11372 4101 11398 4039 11479 4039 11525 4039 11579 4080 11633 4120 11644 4120 11678 4120 11698 4093 11719 4066 11752 4066 L 11808 4072 Q 11826 4084 11847 4147 11893 4119 11946 4069 11993 4035 12063 4039 L 12087 4065 12090 4120 Q 12090 4174 11928 4336 L 11928 4394 12144 4394 Q 12178 4394 12227 4421 12276 4448 12309 4448 12420 4448 12439 4387 L 12444 4201 12741 4201 Q 12768 4315 12777 4383 12786 4395 12817 4396 L 12920 4394 Q 12993 4394 13022 4373 L 13056 4329 Q 13068 4310 13096 4298";
 	drawPath(ctx,pathData,false);
@@ -70617,7 +70625,7 @@ function shape835(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.8313725490196079,tocolor(ctrans.apply([200,107,38,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([153,137,77,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 13096 3034 L 13096 4298 Q 13068 4310 13056 4329 L 13022 4373 Q 12993 4394 12920 4394 L 12817 4396 Q 12786 4395 12777 4383 12768 4315 12741 4201 L 12444 4201 12439 4387 Q 12420 4448 12309 4448 12276 4448 12227 4421 12178 4394 12144 4394 L 11928 4394 11928 4336 Q 12090 4174 12090 4120 L 12087 4065 12063 4039 Q 11993 4035 11946 4069 11893 4119 11847 4147 11826 4084 11808 4072 L 11752 4066 Q 11719 4066 11698 4093 11678 4120 11644 4120 11633 4120 11579 4080 11525 4039 11479 4039 11398 4039 11372 4101 11359 4131 11338 4281 11318 4424 11272 4559 11201 4763 11069 4949 L 11087 4961 11168 4948 11249 4934 Q 11276 4988 11276 5055 11276 5126 11222 5180 L 11263 5223 Q 11288 5257 11298 5301 L 11303 5342 Q 11283 5362 11271 5366 L 11209 5369 Q 11154 5369 11076 5302 L 11076 5295 11067 5294 Q 10993 5234 10898 5234 10776 5234 10731 5267 L 10715 5283 Q 10698 5306 10692 5348 10682 5425 10667 5453 10635 5516 10544 5558 10497 5580 10394 5605 10280 5634 10235 5651 10058 5719 10058 5886 10058 5980 10077 5998 L 10157 6000 Q 10373 5966 10625 6075 10660 6089 10686 6161 L 10728 6309 Q 10782 6510 10871 6510 L 10875 6522 6903 7767 10875 6522 10908 6511 10934 6512 Q 10968 6512 10985 6498 L 10998 6483 11259 6401 10998 6483 Q 11026 6434 11006 6291 11089 6272 11194 6357 11228 6384 11259 6401 11327 6437 11384 6426 11384 6453 11411 6658 11411 6759 11294 6753 L 11181 6743 11060 6753 Q 10949 6787 10849 6872 10766 6942 10719 6942 10650 6942 10542 6888 10434 6834 10409 6834 10383 6834 10259 6861 10134 6888 10058 6888 L 10058 6969 Q 10058 7058 10113 7131 10175 7215 10274 7215 10332 7215 10639 7106 10946 6996 11020 6996 11161 6996 11291 7064 11421 7131 11546 7131 11669 7131 11733 7097 11775 7075 11810 7023 11847 6966 11873 6949 11923 6915 12022 6915 12144 6915 12174 7077 L 12051 7259 Q 11913 7468 11847 7620 11784 7765 11641 7782 11591 7788 11512 7779 L 11380 7765 Q 11225 7753 11155 7829 11140 7845 11128 7866 L 6933 7866 6903 7767 Q 6861 7635 6823 7565 6795 7515 6747 7458 6694 7395 6666 7350 6504 7431 6462 7583 6442 7651 6430 7668 6404 7701 6339 7701 5994 7673 5836 7695 5639 7724 5565 7866 L 4658 7866 4658 7863 Q 4658 7647 4565 7572 4499 7519 4360 7529 L 4154 7537 Q 4061 7520 4061 7404 4061 7285 4132 7212 4186 7156 4302 7114 L 4508 7045 Q 4626 7001 4685 6942 4672 6911 4631 6878 4604 6856 4604 6793 4631 6591 4631 6510 4515 6548 4364 6478 4199 6402 4199 6264 4199 6134 4368 6043 4475 5986 4741 5910 5017 5831 5113 5784 5282 5702 5282 5585 5282 5552 5255 5504 5228 5457 5228 5423 5228 5315 5313 5245 5371 5198 5500 5150 L 5571 5123 Q 5659 5088 5687 5072 5772 5021 5772 4947 5772 4909 5759 4885 5745 4862 5745 4853 L 5467 4853 Q 5342 4842 5201 4772 5162 4753 5129 4699 L 5069 4600 Q 4978 4475 4752 4475 4647 4475 4567 4521 4520 4548 4442 4624 4366 4697 4313 4726 4229 4772 4115 4772 3986 4772 3775 4640 3612 4539 3521 4448 2760 4281 2122 4595 L 2073 4485 Q 2641 4173 3180 4233 3719 4293 3781 4371 3845 4453 3885 4480 3957 4529 4074 4529 4379 4529 4589 4392 L 4727 4298 Q 4798 4255 4864 4255 4926 4255 5146 4419 5365 4583 5458 4583 6258 4363 6258 4161 6258 4036 5242 3742 5218 3742 5136 3796 5054 3850 5012 3850 4962 3850 4931 3797 4904 3750 4904 3688 4904 3604 4946 3569 4974 3546 5039 3537 5111 3527 5132 3515 5174 3492 5174 3429 L 5164 3350 5161 3336 Q 5147 3278 5147 3253 5255 3253 5363 3199 5363 3128 5323 3086 5282 3044 5282 2912 5282 2876 5321 2754 5372 2598 5451 2472 5953 2315 7097 1975 7226 2014 7343 2116 7390 2156 7461 2227 7516 2278 7547 2278 7579 2278 7643 2249 7707 2220 7749 2220 7776 2278 7776 2423 7776 2513 7749 2592 7722 2671 7722 2696 7722 2825 7804 2847 7849 2859 7925 2845 8025 2845 8061 2829 L 8097 2796 Q 8136 2751 8401 2764 L 8401 2629 8420 2616 Q 8430 2602 8468 2602 8540 2602 8595 2656 8650 2710 8688 2710 8700 2710 8752 2670 8803 2629 8904 2629 8944 2629 9010 2693 L 9143 2833 Q 9337 3037 9488 3037 9750 3037 9849 2901 9918 2805 9920 2602 9921 2459 9925 2383 9927 2319 9931 2302 9963 2166 10112 2166 10146 2166 10186 2193 10227 2220 10260 2220 10574 2112 10584 2112 10642 2112 10685 2173 10739 2250 10679 2359 10693 2373 10751 2386 10820 2401 10844 2413 L 10885 2341 Q 10925 2271 10925 2220 11099 2278 11168 2278 11168 2235 11195 2180 11222 2125 11222 2085 L 11384 2085 Q 11383 1965 11417 1903 11439 1863 11493 1828 11551 1790 11569 1763 11604 1712 11604 1613 11604 1520 11543 1398 11457 1226 11573 1137 L 11760 1469 Q 11820 1589 11820 1707 11820 1869 11766 2085 L 12022 2166 Q 12095 2166 12139 2085 12171 2026 12171 1977 L 12282 1977 Q 12334 2029 12380 2119 12422 2203 12444 2220 12484 2252 12577 2358 12687 2484 12687 2521 12687 2608 12606 2899 12606 3025 12687 3064 12742 3091 12890 3091 12920 3091 13096 3034 M 6522 3619 L 5164 3350 6522 3619 Q 6522 3654 6504 3688 L 6561 3702 6639 3715 6663 3697 6666 3648 6666 3647 Q 6585 3334 6585 3267 6585 3164 6449 3170 L 6423 3172 6450 3199 Q 6428 3199 6397 3269 6369 3332 6369 3348 6369 3378 6402 3419 L 6468 3494 Q 6521 3558 6522 3619 M 6894 3692 L 6666 3647 6894 3692 6865 3754 Q 6801 3898 6801 3945 L 6802 3986 Q 6806 3972 6813 3965 6819 3958 6828 3958 6870 3958 6867 4007 L 6855 4107 Q 6855 4232 6714 4433 6560 4634 6531 4691 L 6594 4754 Q 6632 4780 6693 4772 L 6693 4988 Q 6681 5012 6666 5081 6653 5139 6639 5153 L 6639 5315 Q 6647 5315 6671 5329 6695 5342 6734 5342 6740 5342 6806 5161 L 6936 4799 Q 6936 4708 6931 4701 L 6855 4664 Q 6907 4612 6930 4598 6955 4583 6990 4583 7087 4583 7115 4631 7134 4662 7130 4745 7124 4840 7135 4879 7156 4952 7236 4988 7301 4917 7289 4806 7263 4699 7263 4677 7263 4644 7290 4595 7317 4546 7317 4512 7317 4410 7223 4361 L 7158 4323 Q 7128 4297 7128 4255 7128 4217 7182 4140 7236 4063 7236 3931 7236 3823 7205 3787 7186 3764 7130 3757 7070 3749 7041 3725 L 7042 3721 7036 3720 Q 6990 3679 6966 3577 6938 3600 6894 3692 M 8378 3986 L 7042 3721 8378 3986 8389 3988 Q 8401 4014 8401 4053 8401 4146 8347 4219 L 8266 4313 Q 8236 4280 8145 4212 8059 4147 8050 4147 7976 4147 7938 4213 7896 4286 7912 4423 L 7912 4425 7942 4421 Q 8103 4493 8222 4578 8305 4637 8333 4637 8490 4637 8576 4544 8635 4480 8681 4338 8735 4171 8758 4132 8781 4094 8811 4072 8856 4039 8917 4039 8971 4039 9090 4127 9200 4208 9366 4367 9541 4367 9579 4297 9588 4280 9592 4226 L 9596 4093 Q 9623 4110 9677 4131 9725 4154 9758 4201 L 9845 4098 Q 9916 4039 10055 4039 10084 4039 10154 4065 10258 4104 10328 4174 10328 4134 10342 4053 L 10355 3931 10544 3931 Q 10584 3942 10804 4039 10923 4039 11040 3982 L 11195 3904 11222 3904 11222 3877 Q 11032 3814 10949 3733 10908 3692 10869 3603 10839 3533 10782 3508 10700 3472 10490 3472 10278 3472 10092 3580 L 9962 3654 Q 9892 3688 9825 3688 9785 3688 9623 3634 9598 3569 9645 3526 9709 3469 9729 3397 L 9729 3396 9730 3395 9731 3388 9704 3388 Q 9517 3355 9412 3546 9393 3580 9340 3704 9302 3793 9272 3823 9134 3823 9078 3756 L 9041 3709 Q 9020 3688 8985 3688 8946 3688 8922 3702 L 8890 3715 Q 8890 3607 8863 3580 8743 3580 8696 3648 L 8658 3694 Q 8631 3715 8580 3715 8555 3715 8545 3698 L 8530 3661 Q 8508 3607 8414 3607 8361 3607 8321 3635 8266 3674 8266 3756 8266 3886 8334 3935 L 8380 3973 8378 3986 M 11222 3931 L 11222 3904 11222 3931 M 11272 4559 L 9592 4226 11272 4559 M 11263 3472 L 11210 3469 11168 3445 11168 3540 Q 11168 3634 11290 3634 11577 3550 11577 3459 11577 3420 11564 3381 L 11550 3334 11411 3334 11303 3449 Q 11281 3472 11263 3472 M 7996 3472 L 8158 3472 8239 3415 Q 8207 3358 8131 3316 8066 3280 8023 3280 8023 3289 8010 3292 7996 3296 7996 3334 L 7996 3472 M 7915 4448 L 7912 4425 7915 4448 M 8143 4924 L 8104 4964 8104 5126 8129 5150 8185 5153 Q 8401 5153 8401 4974 8401 4917 8347 4881 8306 4853 8266 4853 8257 4853 8236 4880 L 8212 4907 Q 8168 4907 8143 4924 M 8688 5778 Q 8643 5778 8545 5850 8403 5954 8347 6129 8358 6212 8371 6221 8396 6237 8428 6237 L 8501 6233 Q 8512 6226 8539 6156 8614 6173 8635 6247 8663 6342 8701 6372 L 9025 6372 Q 8987 6259 8890 6183 L 8890 6102 9083 6102 Q 9092 6185 9134 6203 L 9245 6210 Q 9277 6210 9375 6183 9473 6156 9515 6156 L 9327 6071 Q 9298 6056 9164 5913 9123 5813 9074 5786 L 9025 5778 Q 8999 5778 8945 5819 8891 5859 8850 5859 8827 5859 8817 5846 L 8801 5819 Q 8776 5778 8688 5778 M 9461 5396 Q 9461 5477 9434 5477 L 9461 5531 9596 5531 9623 5477 Q 9569 5423 9569 5396 L 9461 5396 M 8811 4072 L 9090 4127 8811 4072 M 8216 6840 L 8229 6875 8266 6942 8431 6942 8431 6807 8347 6780 Q 8321 6780 8298 6790 L 8212 6807 8216 6840 M 11060 4961 L 11069 4949 11060 4961 M 5881 3199 L 5881 3226 5864 3246 Q 5852 3304 5961 3469 6004 3443 6036 3396 6069 3347 6069 3307 6069 3268 6052 3248 6022 3213 6015 3199 L 5881 3199 M 6057 5900 Q 6027 5886 5988 5886 5887 5886 5807 6035 L 5757 6137 Q 5733 6183 5718 6183 5602 6183 5579 6294 5567 6350 5579 6412 5579 6531 5676 6607 L 5742 6663 Q 5772 6696 5772 6739 5772 6773 5745 6800 5718 6827 5718 6861 5718 6908 5773 6942 5817 6969 5853 6969 5877 6969 5891 6955 L 5916 6921 Q 5958 6871 6069 6861 6069 6870 6083 6907 6096 6944 6096 6982 6096 7018 6069 7075 6042 7133 6042 7158 L 6123 7158 6137 7221 Q 6150 7276 6150 7323 6160 7323 6180 7337 6201 7350 6231 7350 6231 7101 6368 6902 6402 6851 6461 6785 6504 6737 6504 6726 6504 6615 6405 6560 6363 6537 6206 6497 6084 6466 6054 6419 6011 6352 6096 6210 L 6096 5913 6057 5900 M 5282 7296 L 5363 7296 Q 5363 7188 5336 7131 L 5174 7131 Q 5174 7163 5147 7184 5120 7205 5120 7215 5201 7296 5282 7296";
 	var grd=ctx.createLinearGradient(6374.25,7371.25,3045.75,-735.25);
@@ -70639,7 +70647,7 @@ function shape835(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5647058823529412,tocolor(ctrans.apply([222,183,92,1])));
 	grd.addColorStop(0.9921568627450981,tocolor(ctrans.apply([200,107,38,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 5451 2472 Q 5372 2598 5321 2754 5282 2876 5282 2912 5282 3044 5323 3086 5363 3128 5363 3199 5255 3253 5147 3253 5147 3278 5161 3336 L 5164 3350 5174 3429 Q 5174 3492 5132 3515 5111 3527 5039 3537 4974 3546 4946 3569 4904 3604 4904 3688 4904 3750 4931 3797 4962 3850 5012 3850 5054 3850 5136 3796 5218 3742 5242 3742 6258 4036 6258 4161 6258 4363 5458 4583 5365 4583 5146 4419 4926 4255 4864 4255 4798 4255 4727 4298 L 4589 4392 Q 4379 4529 4074 4529 3957 4529 3885 4480 3845 4453 3781 4371 3719 4293 3180 4233 2641 4173 2073 4485 L 1871 4018 1721 3653 1730 3649 Q 2998 3214 3590 3038 3781 2981 3901 2951 4395 2828 5141 2572 L 5451 2472 M 6666 3648 L 6666 3647 6666 3648 M 3786 7866 Q 2653 5756 2312 5021 L 2264 4916 2122 4595 Q 2760 4281 3521 4448 3612 4539 3775 4640 3986 4772 4115 4772 4229 4772 4313 4726 4366 4697 4442 4624 4520 4548 4567 4521 4647 4475 4752 4475 4978 4475 5069 4600 L 5129 4699 Q 5162 4753 5201 4772 5342 4842 5467 4853 L 5745 4853 Q 5745 4862 5759 4885 5772 4909 5772 4947 5772 5021 5687 5072 5659 5088 5571 5123 L 5500 5150 Q 5371 5198 5313 5245 5228 5315 5228 5423 5228 5457 5255 5504 5282 5552 5282 5585 5282 5702 5113 5784 5017 5831 4741 5910 4475 5986 4368 6043 4199 6134 4199 6264 4199 6402 4364 6478 4515 6548 4631 6510 4631 6591 4604 6793 4604 6856 4631 6878 4672 6911 4685 6942 4626 7001 4508 7045 L 4302 7114 Q 4186 7156 4132 7212 4061 7285 4061 7404 4061 7520 4154 7537 L 4360 7529 Q 4499 7519 4565 7572 4658 7647 4658 7863 L 4658 7866 3786 7866";
 	drawPath(ctx,pathData,false);
@@ -70652,7 +70660,7 @@ function shape835(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5647058823529412,tocolor(ctrans.apply([222,183,92,1])));
 	grd.addColorStop(0.9921568627450981,tocolor(ctrans.apply([200,107,38,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 3569 7866 L 2314 7866 453 3769 Q 422 3723 214 3344 107 3148 0 3094 101 2989 272 2879 523 2717 960 2602 L 1662 2417 Q 1775 2444 1890 2494 L 1959 2496 Q 1981 2495 1988 2485 L 2025 2332 Q 2057 2344 2244 2470 2400 2575 2488 2575 L 2572 2571 Q 2620 2557 2623 2494 2680 2511 2731 2575 L 2731 2332 3031 2332 2984 2209 Q 2950 2129 2950 2099 2950 2092 2970 2072 L 4423 1688 4452 1730 4550 1869 4604 1869 Q 4624 1789 4629 1634 L 4745 1603 4769 1626 Q 4894 1743 4931 1761 L 4985 1761 Q 5030 1634 4996 1610 L 5029 1528 5100 1509 Q 5159 1536 5242 1599 5319 1599 5379 1490 L 5414 1427 13065 -700 13096 0 8308 1452 Q 4942 2469 3810 2802 L 3238 2969 Q 1908 3354 1428 3468 1766 4205 2156 5016 2793 6343 3569 7866";
 	var grd=ctx.createLinearGradient(3756.0,8272.5,924.0,1631.5);
@@ -75549,7 +75557,7 @@ function shape883(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.611764705882353,tocolor(ctrans.apply([37,63,65,1])));
 	grd.addColorStop(0.803921568627451,tocolor(ctrans.apply([40,63,39,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 12998 8805 Q 13044 8848 13099 8912 13245 9035 13507 9036 13626 9036 13855 9139 14135 9267 14177 9278 14246 9296 14515 9385 14748 9462 14881 9493 14984 9518 15070 9600 L 15207 9755 Q 15288 9848 15363 9886 15467 9937 15613 9921 15965 9880 16508 10047 17052 10213 17199 10406 17260 10489 17561 10526 L 17899 10560 Q 17982 10584 18200 10666 18366 10727 18843 10873 L 2905 10873 2905 10869 Q 2978 10801 3004 10745 3012 10728 3051 10676 L 3123 10581 Q 3221 10452 3231 10423 3237 10405 3237 10336 3236 10282 3262 10256 L 3269 10250 Q 3376 10161 3414 10102 L 3542 9919 Q 3567 9880 3568 9775 3537 9629 3537 9576 3647 9154 3842 9020 3924 8963 3919 8782 L 4015 8703 Q 4035 8680 4079 8654 4122 8627 4173 8569 L 4191 8548 Q 4260 8478 4307 8282 4332 8175 4364 8105 4390 8046 4421 8013 4451 7982 4477 7918 L 4485 7898 4494 7875 4526 7800 Q 4574 7693 4657 7627 4695 7595 4740 7573 L 4714 7502 4694 7442 Q 4694 7402 4729 7369 L 4822 7266 4822 7265 4829 7249 4848 7209 4853 7210 Q 8201 8357 8667 7165 L 8668 7162 8919 7240 8932 7244 9059 7284 9254 7345 9374 7383 9485 7418 9562 7442 9767 7506 9922 7553 10184 7634 Q 10323 7666 10482 7787 L 10522 7819 Q 10566 7854 10611 7896 L 10631 7914 10789 8060 Q 10890 8144 10977 8181 11047 8210 11306 8239 11563 8269 11647 8304 11763 8355 11959 8413 L 12295 8512 Q 12645 8618 12775 8731 L 12899 8731 Q 12941 8752 12998 8805";
 	var grd=ctx.createLinearGradient(8508.0,6984.75,9708.0,13911.25);
@@ -79728,7 +79736,7 @@ function shape911(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 348 -169 Q 460 -57 460 100 460 257 348 368 237 480 80 480 -77 480 -189 368 -300 257 -300 100 -300 -57 -189 -169 -77 -280 80 -280 237 -280 348 -169 Z";
 	var scaleMode = "NORMAL";
@@ -90266,7 +90274,7 @@ function shape1028(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 331 -152 Q 440 -43 440 110 440 263 331 371 223 480 70 480 -83 480 -192 371 -300 263 -300 110 -300 -43 -192 -152 -83 -260 70 -260 223 -260 331 -152 Z";
 	var scaleMode = "NORMAL";
@@ -96478,7 +96486,7 @@ function shape1097(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -10 -220 Q 102 -220 181 -141 260 -62 260 50 260 162 181 241 102 320 -10 320 -122 320 -201 241 -280 162 -280 50 -280 -62 -201 -141 -122 -220 -10 -220 Z";
 	var scaleMode = "NORMAL";
@@ -103115,9 +103123,9 @@ function image1180(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0013850415512466,0,0,1.001834862385321,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1180);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103129,9 +103137,9 @@ function shape1181(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0013850415512466,0,0,1.001834862385321,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1180);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103318,9 +103326,9 @@ function image1185(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.001577287066246,0,0,1.0019646365422397,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1185);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103332,9 +103340,9 @@ function shape1186(ctx,ctrans,frame,ratio,time){
 	ctx.transform(53.829345703125,0,0,53.829345703125,0,0);
 	ctx.transform(1.001577287066246,0,0,1.0019646365422397,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1185);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103601,9 +103609,9 @@ function image1195(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0023529411764707,0,0,1.002710027100271,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1195);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103615,9 +103623,9 @@ function shape1196(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,-4250,-3690);
 	ctx.transform(1.0023529411764707,0,0,1.002710027100271,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1195);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103682,9 +103690,9 @@ function image1198(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0023529411764707,0,0,1.002710027100271,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1198);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103700,9 +103708,9 @@ function shape1199(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,-4239,-3680);
 	ctx.transform(1.0023529411764707,0,0,1.002710027100271,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1198);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103723,9 +103731,9 @@ function image1201(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,0,0);
 	ctx.transform(1.0023529411764707,0,0,1.002710027100271,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1201);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103737,9 +103745,9 @@ function shape1202(ctx,ctrans,frame,ratio,time){
 	ctx.transform(20,0,0,20,-4148,-3683);
 	ctx.transform(1.0023529411764707,0,0,1.002710027100271,-0.5,-0.5);
 	var fimg = ctrans.applyToImage(imageObj1201);
-	var pat=ctx.createPattern(fimg,"repeat");
+	var pat=bitmapColorCache.pattern(ctx,fimg);
 	ctx.fillStyle = pat;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 }
 
@@ -103753,7 +103761,7 @@ function shape1203(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.32941176470588235,tocolor(ctrans.apply([254,190,20,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([222,97,31,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 334 -215 Q 440 -109 440 40 440 189 334 294 229 400 80 400 -69 400 -175 294 -280 189 -280 40 -280 -109 -175 -215 -69 -320 80 -320 229 -320 334 -215 Z";
 	var scaleMode = "NORMAL";
@@ -103866,7 +103874,7 @@ function shape1209(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 228 3254 Q 247 3941 247 4913 247 5884 228 6572 207 7259 179 7259 151 7259 132 6572 112 5884 112 4913 112 3941 132 3254 151 2566 179 2566 207 2566 228 3254 Z";
 	var scaleMode = "NORMAL";
@@ -103907,7 +103915,7 @@ function shape1209(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1961 5187 Q 1961 5215 1461 5235 959 5255 252 5256 -456 5255 -957 5235 -1458 5215 -1457 5187 -1458 5159 -957 5139 -456 5119 252 5119 959 5119 1461 5139 1961 5159 1961 5187 Z";
 	var scaleMode = "NORMAL";
@@ -103972,7 +103980,7 @@ function shape1211(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -1041 5316 L -1036 5110 Q -1017 4422 -989 4422 -961 4422 -940 5110 L -935 5316 -931 5637 -921 6872 M -1056 6872 L -1046 5637 -1041 5316";
 	var scaleMode = "NORMAL";
@@ -103996,7 +104004,7 @@ function shape1211(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.3176470588235294,tocolor(ctrans.apply([242,240,225,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([225,210,157,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 414 6219 Q 378 6299 307 6644 224 7043 256 7187 288 7330 323 7568 357 7806 464 8054 L -2432 8230 Q -2208 7105 -2208 6958 -2208 6836 -2253 6581 -2304 6294 -2352 6246 M -2350 6241 L -2368 6230 M 432 6214 L 417 6218 414 6219 Q -581 6493 -1324 6454 -2052 6416 -2349 6241 L -2350 6241";
 	var scaleMode = "NORMAL";
@@ -104015,7 +104023,7 @@ function shape1211(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1191 6195 Q 1191 6232 559 6258 -74 6285 -968 6285 -1862 6285 -2495 6258 -3128 6232 -3127 6195 -3128 6157 -2495 6131 -1862 6105 -968 6105 -74 6105 559 6131 1191 6157 1191 6195 Z";
 	var scaleMode = "NORMAL";
@@ -104276,7 +104284,7 @@ function shape1225(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 228 -1208 Q 247 -521 247 451 247 1422 228 2110 207 2797 179 2797 151 2797 132 2110 112 1422 112 451 112 -521 132 -1208 151 -1896 179 -1896 207 -1896 228 -1208 Z";
 	var scaleMode = "NORMAL";
@@ -104317,7 +104325,7 @@ function shape1225(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1961 725 Q 1961 753 1461 773 959 793 252 794 -456 793 -957 773 -1458 753 -1457 725 -1458 697 -957 677 -456 657 252 657 959 657 1461 677 1961 697 1961 725 Z";
 	var scaleMode = "NORMAL";
@@ -104363,7 +104371,7 @@ function shape1226(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M -1041 854 L -1036 648 Q -1017 -40 -989 -40 -961 -40 -940 648 L -935 854 -931 1175 -921 2410 M -1056 2410 L -1046 1175 -1041 854";
 	var scaleMode = "NORMAL";
@@ -104387,7 +104395,7 @@ function shape1226(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.3176470588235294,tocolor(ctrans.apply([242,240,225,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([225,210,157,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 432 1752 L 417 1756 414 1757 Q 378 1837 307 2182 224 2581 256 2725 288 2868 323 3106 357 3344 464 3592 L -2432 3768 Q -2208 2643 -2208 2496 -2208 2374 -2253 2119 -2304 1832 -2352 1784 M -2350 1779 L -2368 1768 M -2349 1779 L -2350 1779 M -2349 1779 Q -2052 1954 -1324 1992 -581 2031 414 1757";
 	var scaleMode = "NORMAL";
@@ -104406,7 +104414,7 @@ function shape1226(ctx,ctrans,frame,ratio,time){
 	grd.addColorStop(0.5411764705882353,tocolor(ctrans.apply([174,130,64,1])));
 	grd.addColorStop(1.0,tocolor(ctrans.apply([131,81,48,1])));
 	ctx.fillStyle = grd;
-	ctx.fillRect(-16384,-16384,32768,32768);
+	fillVisiblePatternRect(ctx);
 	ctx.restore();
 	var pathData="M 1191 1733 Q 1191 1770 559 1796 -74 1823 -968 1823 -1862 1823 -2495 1796 -3128 1770 -3127 1733 -3128 1695 -2495 1669 -1862 1643 -968 1643 -74 1643 559 1669 1191 1695 1191 1733 Z";
 	var scaleMode = "NORMAL";
@@ -104435,5 +104443,5 @@ function shape1226(ctx,ctrans,frame,ratio,time){
 
 const symbols={font1,font14,image1180,image1185,image1195,image1198,image1201,image421,image43,image5,image693,morphshape1055,morphshape1057,morphshape1061,morphshape1067,morphshape1071,morphshape1072,morphshape1073,morphshape1074,morphshape1075,morphshape1076,morphshape1079,morphshape1080,morphshape1083,morphshape1084,morphshape1087,morphshape1088,shape10,shape100,shape1000,shape1001,shape1003,shape1004,shape1005,shape1006,shape1007,shape1009,shape1010,shape1011,shape1012,shape1013,shape1014,shape1015,shape1017,shape1018,shape1019,shape102,shape1020,shape1021,shape1022,shape1023,shape1024,shape1025,shape1026,shape1028,shape1031,shape1032,shape1033,shape1034,shape1035,shape1036,shape1037,shape1038,shape1039,shape104,shape1040,shape1041,shape1042,shape1043,shape1044,shape1045,shape1046,shape1047,shape1048,shape1049,shape1050,shape1051,shape1052,shape1053,shape1054,shape1056,shape1058,shape1059,shape106,shape1060,shape1062,shape1063,shape1064,shape1065,shape1066,shape1068,shape1069,shape1070,shape1077,shape1078,shape108,shape1081,shape1082,shape1085,shape1086,shape1089,shape1090,shape1091,shape1092,shape1093,shape1094,shape1095,shape1096,shape1097,shape110,shape1100,shape1101,shape1102,shape1103,shape1104,shape1105,shape1106,shape1107,shape1108,shape1109,shape111,shape1110,shape1111,shape1112,shape1113,shape1114,shape1115,shape1116,shape1117,shape1118,shape112,shape1121,shape1122,shape1123,shape1124,shape1125,shape1127,shape1128,shape1129,shape113,shape1131,shape1132,shape1133,shape1134,shape1135,shape1136,shape1137,shape1138,shape1139,shape1140,shape1141,shape1142,shape1143,shape1144,shape1145,shape1146,shape1147,shape1148,shape115,shape1150,shape1152,shape1153,shape1154,shape1155,shape1156,shape1157,shape1158,shape1159,shape116,shape1160,shape1161,shape1162,shape1163,shape1164,shape1165,shape1166,shape1167,shape1168,shape1169,shape1170,shape1171,shape1172,shape1173,shape1174,shape1175,shape1176,shape1177,shape1178,shape1179,shape118,shape1181,shape1182,shape1183,shape1184,shape1186,shape1187,shape1189,shape1190,shape1191,shape1192,shape1193,shape1194,shape1196,shape1197,shape1199,shape12,shape120,shape1200,shape1202,shape1203,shape1206,shape1207,shape1208,shape1209,shape1210,shape1211,shape1212,shape1213,shape1214,shape1215,shape1216,shape1218,shape122,shape1220,shape1221,shape1222,shape1223,shape1224,shape1225,shape1226,shape123,shape125,shape126,shape127,shape128,shape129,shape130,shape131,shape132,shape134,shape136,shape137,shape138,shape139,shape140,shape141,shape142,shape143,shape144,shape145,shape146,shape147,shape148,shape149,shape150,shape151,shape152,shape153,shape154,shape155,shape156,shape157,shape158,shape159,shape16,shape160,shape161,shape162,shape163,shape164,shape165,shape166,shape167,shape168,shape169,shape170,shape173,shape174,shape175,shape176,shape177,shape178,shape179,shape18,shape180,shape181,shape182,shape183,shape184,shape185,shape186,shape187,shape188,shape189,shape19,shape190,shape191,shape192,shape193,shape194,shape195,shape196,shape197,shape198,shape199,shape20,shape202,shape203,shape204,shape205,shape206,shape207,shape208,shape209,shape21,shape210,shape211,shape212,shape213,shape214,shape215,shape216,shape217,shape218,shape219,shape22,shape220,shape221,shape222,shape223,shape224,shape225,shape226,shape227,shape228,shape229,shape23,shape230,shape231,shape232,shape233,shape234,shape236,shape238,shape239,shape24,shape240,shape241,shape242,shape243,shape244,shape245,shape246,shape247,shape248,shape249,shape25,shape250,shape252,shape253,shape254,shape255,shape256,shape258,shape259,shape26,shape260,shape261,shape262,shape263,shape265,shape266,shape267,shape268,shape269,shape270,shape271,shape272,shape273,shape274,shape275,shape276,shape277,shape278,shape279,shape28,shape280,shape281,shape282,shape283,shape284,shape285,shape286,shape287,shape288,shape289,shape29,shape290,shape291,shape292,shape293,shape294,shape295,shape296,shape297,shape298,shape299,shape3,shape30,shape300,shape301,shape302,shape303,shape304,shape305,shape306,shape307,shape308,shape309,shape31,shape310,shape311,shape312,shape313,shape314,shape315,shape316,shape317,shape318,shape319,shape32,shape320,shape321,shape322,shape323,shape324,shape325,shape326,shape327,shape328,shape329,shape33,shape330,shape331,shape332,shape333,shape334,shape335,shape336,shape337,shape338,shape339,shape34,shape340,shape341,shape342,shape343,shape344,shape345,shape346,shape347,shape348,shape349,shape35,shape350,shape351,shape352,shape353,shape354,shape355,shape356,shape359,shape36,shape360,shape361,shape362,shape363,shape364,shape365,shape366,shape367,shape368,shape369,shape37,shape370,shape371,shape372,shape373,shape374,shape375,shape376,shape377,shape378,shape379,shape380,shape383,shape384,shape385,shape386,shape387,shape388,shape389,shape39,shape390,shape391,shape392,shape393,shape394,shape395,shape396,shape397,shape398,shape399,shape400,shape401,shape402,shape403,shape404,shape405,shape406,shape407,shape408,shape409,shape41,shape410,shape411,shape412,shape415,shape416,shape417,shape418,shape419,shape420,shape422,shape423,shape424,shape425,shape426,shape427,shape428,shape429,shape430,shape431,shape432,shape433,shape434,shape435,shape436,shape437,shape438,shape439,shape44,shape441,shape442,shape443,shape444,shape445,shape446,shape447,shape448,shape449,shape45,shape450,shape451,shape452,shape453,shape455,shape456,shape457,shape458,shape459,shape460,shape461,shape462,shape463,shape464,shape465,shape466,shape467,shape468,shape469,shape470,shape471,shape472,shape473,shape474,shape475,shape476,shape477,shape478,shape479,shape480,shape481,shape482,shape483,shape484,shape486,shape487,shape488,shape489,shape49,shape490,shape491,shape492,shape493,shape494,shape495,shape496,shape497,shape498,shape499,shape50,shape500,shape501,shape502,shape503,shape504,shape505,shape506,shape507,shape508,shape509,shape51,shape510,shape511,shape513,shape514,shape515,shape516,shape517,shape518,shape519,shape52,shape520,shape521,shape522,shape523,shape524,shape525,shape526,shape527,shape528,shape529,shape53,shape530,shape531,shape532,shape533,shape534,shape535,shape536,shape537,shape538,shape539,shape54,shape541,shape543,shape544,shape545,shape546,shape547,shape548,shape549,shape55,shape551,shape552,shape553,shape554,shape555,shape556,shape557,shape558,shape559,shape56,shape560,shape561,shape562,shape563,shape564,shape565,shape566,shape567,shape568,shape569,shape57,shape570,shape571,shape572,shape573,shape574,shape575,shape576,shape577,shape578,shape579,shape58,shape580,shape581,shape582,shape583,shape584,shape585,shape586,shape587,shape588,shape589,shape59,shape590,shape591,shape592,shape593,shape594,shape595,shape596,shape597,shape598,shape599,shape6,shape60,shape600,shape601,shape602,shape603,shape604,shape605,shape606,shape607,shape608,shape609,shape61,shape610,shape611,shape612,shape613,shape614,shape615,shape616,shape617,shape618,shape619,shape62,shape620,shape621,shape622,shape623,shape624,shape625,shape626,shape627,shape628,shape63,shape630,shape631,shape632,shape633,shape634,shape635,shape636,shape637,shape638,shape639,shape64,shape640,shape641,shape642,shape643,shape645,shape648,shape649,shape65,shape650,shape651,shape652,shape653,shape654,shape655,shape657,shape658,shape659,shape66,shape660,shape661,shape662,shape663,shape664,shape665,shape666,shape667,shape668,shape67,shape670,shape671,shape673,shape676,shape677,shape678,shape679,shape68,shape680,shape681,shape682,shape683,shape684,shape685,shape686,shape687,shape688,shape689,shape69,shape690,shape691,shape692,shape694,shape695,shape696,shape697,shape698,shape699,shape70,shape700,shape701,shape702,shape703,shape704,shape705,shape706,shape708,shape709,shape71,shape710,shape711,shape712,shape713,shape714,shape715,shape716,shape717,shape718,shape719,shape72,shape720,shape721,shape722,shape723,shape724,shape725,shape726,shape727,shape728,shape729,shape73,shape730,shape731,shape732,shape733,shape734,shape736,shape737,shape738,shape739,shape74,shape740,shape741,shape742,shape743,shape744,shape745,shape746,shape747,shape748,shape75,shape750,shape751,shape752,shape753,shape754,shape755,shape756,shape757,shape758,shape759,shape76,shape760,shape761,shape762,shape763,shape764,shape765,shape766,shape767,shape768,shape769,shape77,shape770,shape771,shape772,shape773,shape774,shape775,shape776,shape777,shape778,shape779,shape78,shape780,shape781,shape782,shape783,shape784,shape785,shape786,shape787,shape789,shape79,shape790,shape791,shape792,shape793,shape794,shape795,shape796,shape797,shape798,shape799,shape8,shape80,shape800,shape801,shape802,shape803,shape804,shape805,shape806,shape807,shape808,shape809,shape81,shape812,shape813,shape814,shape815,shape816,shape817,shape818,shape819,shape82,shape820,shape821,shape822,shape823,shape824,shape825,shape826,shape827,shape828,shape829,shape83,shape830,shape831,shape832,shape833,shape834,shape835,shape836,shape838,shape84,shape841,shape842,shape843,shape844,shape845,shape846,shape847,shape848,shape849,shape85,shape850,shape851,shape852,shape853,shape854,shape855,shape856,shape858,shape86,shape861,shape862,shape863,shape864,shape865,shape867,shape868,shape869,shape87,shape870,shape871,shape872,shape873,shape874,shape875,shape876,shape877,shape878,shape879,shape88,shape880,shape881,shape882,shape883,shape884,shape885,shape886,shape887,shape888,shape889,shape89,shape890,shape891,shape892,shape893,shape894,shape895,shape896,shape897,shape898,shape899,shape90,shape900,shape901,shape903,shape904,shape905,shape906,shape907,shape908,shape909,shape91,shape910,shape911,shape914,shape915,shape916,shape917,shape918,shape919,shape92,shape920,shape921,shape922,shape923,shape924,shape925,shape926,shape927,shape928,shape929,shape93,shape930,shape931,shape932,shape933,shape934,shape935,shape936,shape937,shape938,shape939,shape94,shape940,shape941,shape942,shape943,shape945,shape946,shape947,shape948,shape95,shape951,shape952,shape953,shape954,shape955,shape956,shape957,shape958,shape96,shape960,shape961,shape962,shape963,shape964,shape965,shape966,shape967,shape968,shape969,shape97,shape970,shape971,shape972,shape973,shape974,shape975,shape976,shape977,shape978,shape979,shape98,shape980,shape981,shape982,shape983,shape984,shape985,shape986,shape987,shape988,shape989,shape990,shape991,shape992,shape993,shape994,shape995,shape996,shape997,shape998,shape999,text1030,text1099,text1120,text1130,text1151,text1205,text15,text172,text2,text201,text27,text358,text38,text382,text414,text647,text811,text840,text860,text913,text950};
  const counts={"font1": 1, "text2": 1, "shape3": 1, "button4": 4, "image5": 1, "shape6": 1, "sprite7": 1, "shape8": 1, "sprite9": 1, "shape10": 1, "sprite11": 515, "shape12": 1, "sprite13": 455, "font14": 1, "text15": 1, "shape16": 1, "sprite17": 1, "shape18": 1, "shape19": 1, "shape20": 1, "shape21": 1, "shape22": 1, "shape23": 1, "shape24": 1, "shape25": 1, "shape26": 1, "text27": 1, "shape28": 1, "shape29": 1, "shape30": 1, "shape31": 1, "shape32": 1, "shape33": 1, "shape34": 1, "shape35": 1, "shape36": 1, "shape37": 1, "text38": 1, "shape39": 1, "sprite40": 115, "shape41": 1, "sprite42": 245, "image43": 1, "shape44": 1, "shape45": 1, "sprite46": 1, "sprite47": 120, "sprite48": 4, "shape49": 1, "shape50": 1, "shape51": 1, "shape52": 1, "shape53": 1, "shape54": 1, "shape55": 1, "shape56": 1, "shape57": 1, "shape58": 1, "shape59": 1, "shape60": 1, "shape61": 1, "shape62": 1, "shape63": 1, "shape64": 1, "shape65": 1, "shape66": 1, "shape67": 1, "shape68": 1, "shape69": 1, "shape70": 1, "shape71": 1, "shape72": 1, "shape73": 1, "shape74": 1, "shape75": 1, "shape76": 1, "shape77": 1, "shape78": 1, "shape79": 1, "shape80": 1, "shape81": 1, "shape82": 1, "shape83": 1, "shape84": 1, "shape85": 1, "shape86": 1, "shape87": 1, "shape88": 1, "shape89": 1, "shape90": 1, "shape91": 1, "shape92": 1, "shape93": 1, "shape94": 1, "shape95": 1, "shape96": 1, "shape97": 1, "shape98": 1, "sprite99": 1, "shape100": 1, "sprite101": 1, "shape102": 1, "sprite103": 1, "shape104": 1, "sprite105": 10, "shape106": 1, "sprite107": 10, "shape108": 1, "sprite109": 158, "shape110": 1, "shape111": 1, "shape112": 1, "shape113": 1, "sprite114": 20, "shape115": 1, "shape116": 1, "sprite117": 1, "shape118": 1, "sprite119": 1, "shape120": 1, "sprite121": 1, "shape122": 1, "shape123": 1, "sprite124": 13, "shape125": 1, "shape126": 1, "shape127": 1, "shape128": 1, "shape129": 1, "shape130": 1, "shape131": 1, "shape132": 1, "sprite133": 13, "shape134": 1, "sprite135": 1, "shape136": 1, "shape137": 1, "shape138": 1, "shape139": 1, "shape140": 1, "shape141": 1, "shape142": 1, "shape143": 1, "shape144": 1, "shape145": 1, "shape146": 1, "shape147": 1, "shape148": 1, "shape149": 1, "shape150": 1, "shape151": 1, "shape152": 1, "shape153": 1, "shape154": 1, "shape155": 1, "shape156": 1, "shape157": 1, "shape158": 1, "shape159": 1, "shape160": 1, "shape161": 1, "shape162": 1, "shape163": 1, "shape164": 1, "shape165": 1, "shape166": 1, "shape167": 1, "shape168": 1, "shape169": 1, "shape170": 1, "sprite171": 21, "text172": 1, "shape173": 1, "shape174": 1, "shape175": 1, "shape176": 1, "shape177": 1, "shape178": 1, "shape179": 1, "shape180": 1, "shape181": 1, "shape182": 1, "shape183": 1, "shape184": 1, "shape185": 1, "shape186": 1, "shape187": 1, "shape188": 1, "shape189": 1, "shape190": 1, "shape191": 1, "shape192": 1, "shape193": 1, "shape194": 1, "shape195": 1, "shape196": 1, "shape197": 1, "shape198": 1, "shape199": 1, "sprite200": 150, "text201": 1, "shape202": 1, "shape203": 1, "shape204": 1, "shape205": 1, "shape206": 1, "shape207": 1, "shape208": 1, "shape209": 1, "shape210": 1, "shape211": 1, "shape212": 1, "shape213": 1, "shape214": 1, "shape215": 1, "shape216": 1, "shape217": 1, "shape218": 1, "shape219": 1, "shape220": 1, "shape221": 1, "shape222": 1, "shape223": 1, "shape224": 1, "shape225": 1, "shape226": 1, "shape227": 1, "shape228": 1, "shape229": 1, "shape230": 1, "shape231": 1, "shape232": 1, "shape233": 1, "shape234": 1, "sprite235": 29, "shape236": 1, "sprite237": 293, "shape238": 1, "shape239": 1, "shape240": 1, "shape241": 1, "shape242": 1, "shape243": 1, "shape244": 1, "shape245": 1, "shape246": 1, "shape247": 1, "shape248": 1, "shape249": 1, "shape250": 1, "sprite251": 20, "shape252": 1, "shape253": 1, "shape254": 1, "shape255": 1, "shape256": 1, "sprite257": 19, "shape258": 1, "shape259": 1, "shape260": 1, "shape261": 1, "shape262": 1, "shape263": 1, "sprite264": 49, "shape265": 1, "shape266": 1, "shape267": 1, "shape268": 1, "shape269": 1, "shape270": 1, "shape271": 1, "shape272": 1, "shape273": 1, "shape274": 1, "shape275": 1, "shape276": 1, "shape277": 1, "shape278": 1, "shape279": 1, "shape280": 1, "shape281": 1, "shape282": 1, "shape283": 1, "shape284": 1, "shape285": 1, "shape286": 1, "shape287": 1, "shape288": 1, "shape289": 1, "shape290": 1, "shape291": 1, "shape292": 1, "shape293": 1, "shape294": 1, "shape295": 1, "shape296": 1, "shape297": 1, "shape298": 1, "shape299": 1, "shape300": 1, "shape301": 1, "shape302": 1, "shape303": 1, "shape304": 1, "shape305": 1, "shape306": 1, "shape307": 1, "shape308": 1, "shape309": 1, "shape310": 1, "shape311": 1, "shape312": 1, "shape313": 1, "shape314": 1, "shape315": 1, "shape316": 1, "shape317": 1, "shape318": 1, "shape319": 1, "shape320": 1, "shape321": 1, "shape322": 1, "shape323": 1, "shape324": 1, "shape325": 1, "shape326": 1, "shape327": 1, "shape328": 1, "shape329": 1, "shape330": 1, "shape331": 1, "shape332": 1, "shape333": 1, "shape334": 1, "shape335": 1, "shape336": 1, "shape337": 1, "shape338": 1, "shape339": 1, "shape340": 1, "shape341": 1, "shape342": 1, "shape343": 1, "shape344": 1, "shape345": 1, "shape346": 1, "shape347": 1, "shape348": 1, "shape349": 1, "shape350": 1, "shape351": 1, "shape352": 1, "shape353": 1, "shape354": 1, "shape355": 1, "shape356": 1, "sprite357": 73, "text358": 1, "shape359": 1, "shape360": 1, "shape361": 1, "shape362": 1, "shape363": 1, "shape364": 1, "shape365": 1, "shape366": 1, "shape367": 1, "shape368": 1, "shape369": 1, "shape370": 1, "shape371": 1, "shape372": 1, "shape373": 1, "shape374": 1, "shape375": 1, "shape376": 1, "shape377": 1, "shape378": 1, "shape379": 1, "shape380": 1, "sprite381": 111, "text382": 1, "shape383": 1, "shape384": 1, "shape385": 1, "shape386": 1, "shape387": 1, "shape388": 1, "shape389": 1, "shape390": 1, "shape391": 1, "shape392": 1, "shape393": 1, "shape394": 1, "shape395": 1, "shape396": 1, "shape397": 1, "shape398": 1, "shape399": 1, "shape400": 1, "shape401": 1, "shape402": 1, "shape403": 1, "shape404": 1, "shape405": 1, "shape406": 1, "shape407": 1, "shape408": 1, "shape409": 1, "shape410": 1, "shape411": 1, "shape412": 1, "sprite413": 129, "text414": 1, "shape415": 1, "shape416": 1, "shape417": 1, "shape418": 1, "shape419": 1, "shape420": 1, "image421": 1, "shape422": 1, "shape423": 1, "shape424": 1, "shape425": 1, "shape426": 1, "shape427": 1, "shape428": 1, "shape429": 1, "shape430": 1, "shape431": 1, "shape432": 1, "shape433": 1, "shape434": 1, "shape435": 1, "shape436": 1, "shape437": 1, "shape438": 1, "shape439": 1, "sprite440": 232, "shape441": 1, "shape442": 1, "shape443": 1, "shape444": 1, "shape445": 1, "shape446": 1, "shape447": 1, "shape448": 1, "shape449": 1, "shape450": 1, "shape451": 1, "shape452": 1, "shape453": 1, "sprite454": 31, "shape455": 1, "shape456": 1, "shape457": 1, "shape458": 1, "shape459": 1, "shape460": 1, "shape461": 1, "shape462": 1, "shape463": 1, "shape464": 1, "shape465": 1, "shape466": 1, "shape467": 1, "shape468": 1, "shape469": 1, "shape470": 1, "shape471": 1, "shape472": 1, "shape473": 1, "shape474": 1, "shape475": 1, "shape476": 1, "shape477": 1, "shape478": 1, "shape479": 1, "shape480": 1, "shape481": 1, "shape482": 1, "shape483": 1, "shape484": 1, "sprite485": 85, "shape486": 1, "shape487": 1, "shape488": 1, "shape489": 1, "shape490": 1, "shape491": 1, "shape492": 1, "shape493": 1, "shape494": 1, "shape495": 1, "shape496": 1, "shape497": 1, "shape498": 1, "shape499": 1, "shape500": 1, "shape501": 1, "shape502": 1, "shape503": 1, "shape504": 1, "shape505": 1, "shape506": 1, "shape507": 1, "shape508": 1, "shape509": 1, "shape510": 1, "shape511": 1, "sprite512": 6, "shape513": 1, "shape514": 1, "shape515": 1, "shape516": 1, "shape517": 1, "shape518": 1, "shape519": 1, "shape520": 1, "shape521": 1, "shape522": 1, "shape523": 1, "shape524": 1, "shape525": 1, "shape526": 1, "shape527": 1, "shape528": 1, "shape529": 1, "shape530": 1, "shape531": 1, "shape532": 1, "shape533": 1, "shape534": 1, "shape535": 1, "shape536": 1, "shape537": 1, "shape538": 1, "shape539": 1, "sprite540": 390, "shape541": 1, "sprite542": 898, "shape543": 1, "shape544": 1, "shape545": 1, "shape546": 1, "shape547": 1, "shape548": 1, "shape549": 1, "sprite550": 241, "shape551": 1, "shape552": 1, "shape553": 1, "shape554": 1, "shape555": 1, "shape556": 1, "shape557": 1, "shape558": 1, "shape559": 1, "shape560": 1, "shape561": 1, "shape562": 1, "shape563": 1, "shape564": 1, "shape565": 1, "shape566": 1, "shape567": 1, "shape568": 1, "shape569": 1, "shape570": 1, "shape571": 1, "shape572": 1, "shape573": 1, "shape574": 1, "shape575": 1, "shape576": 1, "shape577": 1, "shape578": 1, "shape579": 1, "shape580": 1, "shape581": 1, "shape582": 1, "shape583": 1, "shape584": 1, "shape585": 1, "shape586": 1, "shape587": 1, "shape588": 1, "shape589": 1, "shape590": 1, "shape591": 1, "shape592": 1, "shape593": 1, "shape594": 1, "shape595": 1, "shape596": 1, "shape597": 1, "shape598": 1, "shape599": 1, "shape600": 1, "shape601": 1, "shape602": 1, "shape603": 1, "shape604": 1, "shape605": 1, "shape606": 1, "shape607": 1, "shape608": 1, "shape609": 1, "shape610": 1, "shape611": 1, "shape612": 1, "shape613": 1, "shape614": 1, "shape615": 1, "shape616": 1, "shape617": 1, "shape618": 1, "shape619": 1, "shape620": 1, "shape621": 1, "shape622": 1, "shape623": 1, "shape624": 1, "shape625": 1, "shape626": 1, "shape627": 1, "shape628": 1, "sprite629": 42, "shape630": 1, "shape631": 1, "shape632": 1, "shape633": 1, "shape634": 1, "shape635": 1, "shape636": 1, "shape637": 1, "shape638": 1, "shape639": 1, "shape640": 1, "shape641": 1, "shape642": 1, "shape643": 1, "sprite644": 10, "shape645": 1, "sprite646": 144, "text647": 1, "shape648": 1, "shape649": 1, "shape650": 1, "shape651": 1, "shape652": 1, "shape653": 1, "shape654": 1, "shape655": 1, "sprite656": 6, "shape657": 1, "shape658": 1, "shape659": 1, "shape660": 1, "shape661": 1, "shape662": 1, "shape663": 1, "shape664": 1, "shape665": 1, "shape666": 1, "shape667": 1, "shape668": 1, "sprite669": 16, "shape670": 1, "shape671": 1, "sprite672": 16, "shape673": 1, "sprite674": 6, "sprite675": 8, "shape676": 1, "shape677": 1, "shape678": 1, "shape679": 1, "shape680": 1, "shape681": 1, "shape682": 1, "shape683": 1, "shape684": 1, "shape685": 1, "shape686": 1, "shape687": 1, "shape688": 1, "shape689": 1, "shape690": 1, "shape691": 1, "shape692": 1, "image693": 1, "shape694": 1, "shape695": 1, "shape696": 1, "shape697": 1, "shape698": 1, "shape699": 1, "shape700": 1, "shape701": 1, "shape702": 1, "shape703": 1, "shape704": 1, "shape705": 1, "shape706": 1, "sprite707": 72, "shape708": 1, "shape709": 1, "shape710": 1, "shape711": 1, "shape712": 1, "shape713": 1, "shape714": 1, "shape715": 1, "shape716": 1, "shape717": 1, "shape718": 1, "shape719": 1, "shape720": 1, "shape721": 1, "shape722": 1, "shape723": 1, "shape724": 1, "shape725": 1, "shape726": 1, "shape727": 1, "shape728": 1, "shape729": 1, "shape730": 1, "shape731": 1, "shape732": 1, "shape733": 1, "shape734": 1, "sprite735": 27, "shape736": 1, "shape737": 1, "shape738": 1, "shape739": 1, "shape740": 1, "shape741": 1, "shape742": 1, "shape743": 1, "shape744": 1, "shape745": 1, "shape746": 1, "shape747": 1, "shape748": 1, "sprite749": 103, "shape750": 1, "shape751": 1, "shape752": 1, "shape753": 1, "shape754": 1, "shape755": 1, "shape756": 1, "shape757": 1, "shape758": 1, "shape759": 1, "shape760": 1, "shape761": 1, "shape762": 1, "shape763": 1, "shape764": 1, "shape765": 1, "shape766": 1, "shape767": 1, "shape768": 1, "shape769": 1, "shape770": 1, "shape771": 1, "shape772": 1, "shape773": 1, "shape774": 1, "shape775": 1, "shape776": 1, "shape777": 1, "shape778": 1, "shape779": 1, "shape780": 1, "shape781": 1, "shape782": 1, "shape783": 1, "shape784": 1, "shape785": 1, "shape786": 1, "shape787": 1, "sprite788": 18, "shape789": 1, "shape790": 1, "shape791": 1, "shape792": 1, "shape793": 1, "shape794": 1, "shape795": 1, "shape796": 1, "shape797": 1, "shape798": 1, "shape799": 1, "shape800": 1, "shape801": 1, "shape802": 1, "shape803": 1, "shape804": 1, "shape805": 1, "shape806": 1, "shape807": 1, "shape808": 1, "shape809": 1, "sprite810": 19, "text811": 1, "shape812": 1, "shape813": 1, "shape814": 1, "shape815": 1, "shape816": 1, "shape817": 1, "shape818": 1, "shape819": 1, "shape820": 1, "shape821": 1, "shape822": 1, "shape823": 1, "shape824": 1, "shape825": 1, "shape826": 1, "shape827": 1, "shape828": 1, "shape829": 1, "shape830": 1, "shape831": 1, "shape832": 1, "shape833": 1, "shape834": 1, "shape835": 1, "shape836": 1, "sprite837": 283, "shape838": 1, "sprite839": 1153, "text840": 1, "shape841": 1, "shape842": 1, "shape843": 1, "shape844": 1, "shape845": 1, "shape846": 1, "shape847": 1, "shape848": 1, "shape849": 1, "shape850": 1, "shape851": 1, "shape852": 1, "shape853": 1, "shape854": 1, "shape855": 1, "shape856": 1, "sprite857": 6, "shape858": 1, "sprite859": 240, "text860": 1, "shape861": 1, "shape862": 1, "shape863": 1, "shape864": 1, "shape865": 1, "sprite866": 16, "shape867": 1, "shape868": 1, "shape869": 1, "shape870": 1, "shape871": 1, "shape872": 1, "shape873": 1, "shape874": 1, "shape875": 1, "shape876": 1, "shape877": 1, "shape878": 1, "shape879": 1, "shape880": 1, "shape881": 1, "shape882": 1, "shape883": 1, "shape884": 1, "shape885": 1, "shape886": 1, "shape887": 1, "shape888": 1, "shape889": 1, "shape890": 1, "shape891": 1, "shape892": 1, "shape893": 1, "shape894": 1, "shape895": 1, "shape896": 1, "shape897": 1, "shape898": 1, "shape899": 1, "shape900": 1, "shape901": 1, "sprite902": 54, "shape903": 1, "shape904": 1, "shape905": 1, "shape906": 1, "shape907": 1, "shape908": 1, "shape909": 1, "shape910": 1, "shape911": 1, "sprite912": 41, "text913": 1, "shape914": 1, "shape915": 1, "shape916": 1, "shape917": 1, "shape918": 1, "shape919": 1, "shape920": 1, "shape921": 1, "shape922": 1, "shape923": 1, "shape924": 1, "shape925": 1, "shape926": 1, "shape927": 1, "shape928": 1, "shape929": 1, "shape930": 1, "shape931": 1, "shape932": 1, "shape933": 1, "shape934": 1, "shape935": 1, "shape936": 1, "shape937": 1, "shape938": 1, "shape939": 1, "shape940": 1, "shape941": 1, "shape942": 1, "shape943": 1, "sprite944": 38, "shape945": 1, "shape946": 1, "shape947": 1, "shape948": 1, "sprite949": 26, "text950": 1, "shape951": 1, "shape952": 1, "shape953": 1, "shape954": 1, "shape955": 1, "shape956": 1, "shape957": 1, "shape958": 1, "sprite959": 48, "shape960": 1, "shape961": 1, "shape962": 1, "shape963": 1, "shape964": 1, "shape965": 1, "shape966": 1, "shape967": 1, "shape968": 1, "shape969": 1, "shape970": 1, "shape971": 1, "shape972": 1, "shape973": 1, "shape974": 1, "shape975": 1, "shape976": 1, "shape977": 1, "shape978": 1, "shape979": 1, "shape980": 1, "shape981": 1, "shape982": 1, "shape983": 1, "shape984": 1, "shape985": 1, "shape986": 1, "shape987": 1, "shape988": 1, "shape989": 1, "shape990": 1, "shape991": 1, "shape992": 1, "shape993": 1, "shape994": 1, "shape995": 1, "shape996": 1, "shape997": 1, "shape998": 1, "shape999": 1, "shape1000": 1, "shape1001": 1, "sprite1002": 12, "shape1003": 1, "shape1004": 1, "shape1005": 1, "shape1006": 1, "shape1007": 1, "sprite1008": 18, "shape1009": 1, "shape1010": 1, "shape1011": 1, "shape1012": 1, "shape1013": 1, "shape1014": 1, "shape1015": 1, "sprite1016": 14, "shape1017": 1, "shape1018": 1, "shape1019": 1, "shape1020": 1, "shape1021": 1, "shape1022": 1, "shape1023": 1, "shape1024": 1, "shape1025": 1, "shape1026": 1, "sprite1027": 6, "shape1028": 1, "sprite1029": 83, "text1030": 1, "shape1031": 1, "shape1032": 1, "shape1033": 1, "shape1034": 1, "shape1035": 1, "shape1036": 1, "shape1037": 1, "shape1038": 1, "shape1039": 1, "shape1040": 1, "shape1041": 1, "shape1042": 1, "shape1043": 1, "shape1044": 1, "shape1045": 1, "shape1046": 1, "shape1047": 1, "shape1048": 1, "shape1049": 1, "shape1050": 1, "shape1051": 1, "shape1052": 1, "shape1053": 1, "shape1054": 1, "morphshape1055": 1, "shape1056": 1, "morphshape1057": 1, "shape1058": 1, "shape1059": 1, "shape1060": 1, "morphshape1061": 1, "shape1062": 1, "shape1063": 1, "shape1064": 1, "shape1065": 1, "shape1066": 1, "morphshape1067": 1, "shape1068": 1, "shape1069": 1, "shape1070": 1, "morphshape1071": 1, "morphshape1072": 1, "morphshape1073": 1, "morphshape1074": 1, "morphshape1075": 1, "morphshape1076": 1, "shape1077": 1, "shape1078": 1, "morphshape1079": 1, "morphshape1080": 1, "shape1081": 1, "shape1082": 1, "morphshape1083": 1, "morphshape1084": 1, "shape1085": 1, "shape1086": 1, "morphshape1087": 1, "morphshape1088": 1, "shape1089": 1, "shape1090": 1, "shape1091": 1, "shape1092": 1, "shape1093": 1, "shape1094": 1, "shape1095": 1, "shape1096": 1, "shape1097": 1, "sprite1098": 226, "text1099": 1, "shape1100": 1, "shape1101": 1, "shape1102": 1, "shape1103": 1, "shape1104": 1, "shape1105": 1, "shape1106": 1, "shape1107": 1, "shape1108": 1, "shape1109": 1, "shape1110": 1, "shape1111": 1, "shape1112": 1, "shape1113": 1, "shape1114": 1, "shape1115": 1, "shape1116": 1, "shape1117": 1, "shape1118": 1, "sprite1119": 14, "text1120": 1, "shape1121": 1, "shape1122": 1, "shape1123": 1, "shape1124": 1, "shape1125": 1, "sprite1126": 73, "shape1127": 1, "shape1128": 1, "shape1129": 1, "text1130": 1, "shape1131": 1, "shape1132": 1, "shape1133": 1, "shape1134": 1, "shape1135": 1, "shape1136": 1, "shape1137": 1, "shape1138": 1, "shape1139": 1, "shape1140": 1, "shape1141": 1, "shape1142": 1, "shape1143": 1, "shape1144": 1, "shape1145": 1, "shape1146": 1, "shape1147": 1, "shape1148": 1, "sprite1149": 85, "shape1150": 1, "text1151": 1, "shape1152": 1, "shape1153": 1, "shape1154": 1, "shape1155": 1, "shape1156": 1, "shape1157": 1, "shape1158": 1, "shape1159": 1, "shape1160": 1, "shape1161": 1, "shape1162": 1, "shape1163": 1, "shape1164": 1, "shape1165": 1, "shape1166": 1, "shape1167": 1, "shape1168": 1, "shape1169": 1, "shape1170": 1, "shape1171": 1, "shape1172": 1, "shape1173": 1, "shape1174": 1, "shape1175": 1, "shape1176": 1, "shape1177": 1, "shape1178": 1, "shape1179": 1, "image1180": 1, "shape1181": 1, "shape1182": 1, "shape1183": 1, "shape1184": 1, "image1185": 1, "shape1186": 1, "shape1187": 1, "sprite1188": 37, "shape1189": 1, "shape1190": 1, "shape1191": 1, "shape1192": 1, "shape1193": 1, "shape1194": 1, "image1195": 1, "shape1196": 1, "shape1197": 1, "image1198": 1, "shape1199": 1, "shape1200": 1, "image1201": 1, "shape1202": 1, "shape1203": 1, "sprite1204": 114, "text1205": 1, "shape1206": 1, "shape1207": 1, "shape1208": 1, "shape1209": 1, "shape1210": 1, "shape1211": 1, "shape1212": 1, "shape1213": 1, "shape1214": 1, "shape1215": 1, "shape1216": 1, "sprite1217": 143, "shape1218": 1, "sprite1219": 143, "shape1220": 1, "shape1221": 1, "shape1222": 1, "shape1223": 1, "shape1224": 1, "shape1225": 1, "shape1226": 1, "main": 4254};const identity=new cxform(0,0,0,0,256,256,256,256);const images=[imageObj5,imageObj43,imageObj421,imageObj693,imageObj1180,imageObj1185,imageObj1195,imageObj1198,imageObj1201];
- return {prepare(ctx){if(!ctx._matrix)enhanceContext(ctx);},async ready(){await Promise.all(images.map(img=>img._bitmapReady||bitmapLoaded(img)));},color(values){return new cxform(...values);},has(name){return Object.hasOwn(symbols,name);},frameCount(name){return counts[name]||1;},draw(name,ctx,frame=0,time=0,color=identity,ratio=0){symbolStack.push({name,frame,slot:0});symbols[name](ctx,color,frame,ratio,time);symbolStack.pop();}};
+ return {cacheStats(){return bitmapColorCache.stats();},prepare(ctx){if(!ctx._matrix)enhanceContext(ctx);},async ready(){await Promise.all(images.map(img=>img._bitmapReady||bitmapLoaded(img)));},color(values){return new cxform(...values);},has(name){return Object.hasOwn(symbols,name);},frameCount(name){return counts[name]||1;},draw(name,ctx,frame=0,time=0,color=identity,ratio=0){symbolStack.push({name,frame,slot:0});symbols[name](ctx,color,frame,ratio,time);symbolStack.pop();}};
 }

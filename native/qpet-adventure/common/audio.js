@@ -146,7 +146,10 @@ export class AdventureAudio{
     async scheduleMpeg(record){
         if(record.pending||record.source||record.stopped||!this.enabled)return;record.pending=true;
         const buffer=await this.decode(record.id,record.slice);record.pending=false;
-        if(!buffer||record.stopped||!this.enabled||this.disposed)return;
+        // A failed cold stream must release its owner. Otherwise every later
+        // authored block sees a permanently occupied, silent stream handle.
+        if(!buffer){this.stopRecord(record);return;}
+        if(record.stopped||!this.enabled||this.disposed)return;
         const c=this.context,meta=this.metadata[record.id],options=record.options||{},elapsed=Math.max(0,(this.time-record.startMs)/1000);
         const seek=record.stream?0:Math.max(0,meta.seekSamples||0)/meta.rate;
         const start=seek+(options.inPoint||0)/44100;
