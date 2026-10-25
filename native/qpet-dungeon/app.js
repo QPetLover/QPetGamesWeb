@@ -74,7 +74,7 @@ export async function mountGame({canvas=document.querySelector('#game'), win=win
     if(action!==null)pendingAction=action;
     const token=++generation;
     if(resizeTimer!==undefined){clearTimer(resizeTimer);resizeTimer=undefined;scheduledResolve?.(false);scheduledResolve=null;}
-    pauseForPreparation();setLoading('正在准备原版素材…');
+    pauseForPreparation();setLoading('正在加载游戏…');
     return new Promise(resolve=>{
       const enqueue=()=>{
         resizeTimer=undefined;scheduledResolve=null;

@@ -4,6 +4,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {buildPortal,publishedCatalog} from './build-portal.mjs';
+import {buildOriginals} from './build-originals.mjs';
 
 export async function buildSite({repositoryRoot=fileURLToPath(new URL('../',import.meta.url)),run=execFileSync}={}){
 const root=path.resolve(repositoryRoot);
@@ -26,6 +27,7 @@ await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});
 for(const game of games) await cp(path.join(root,game.preview),path.join(dist,game.path),{recursive:true});
 await buildPortal({repositoryRoot:root,outputDirectory:dist,catalog});
+await buildOriginals({repositoryRoot:root,outputDirectory:dist});
 for(const file of ['player.html','maintenance.css']) await cp(path.join(root,'web',file),path.join(dist,file));
 await writeFile(path.join(dist,'.nojekyll'),'');
 for(const game of games){

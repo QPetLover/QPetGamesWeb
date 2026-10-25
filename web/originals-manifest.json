@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "modulePath": "originals",
+  "fileCount": 122,
+  "source": {
+    "repository": "https://github.com/QPetLover/QPetGames",
+    "baseCommit": "9bc6a6e5b9ec8f81d38a5aeece646a10f0616705",
+    "candidateReportSHA256": "5254e5d2cf8cd3032f0ccb17b9a08699fb9cb443fee3d3874f998d6d718c8176",
+    "migrationChanges": [
+      "index.html same-site hall links and matching app cache key",
+      "assets/js/app.js same-site native root and Adventure links"
+    ],
+    "originalGamePayloadsUnchanged": 19,
+    "rufflePayloadsUnchanged": 7
+  },
+  "externalDependencies": [],
+  "games": [
+    {
+      "id": "classic-001",
+      "path": "classical_games/swf/Q宠守护使.swf",
+      "bytes": 665215,
+      "sha256": "6ef3e55d86431714fe8d1da849a37fb5c08844a44accdc469296fe0118377654"
+    },
+    {
+      "id": "classic-002",
+      "path": "classical_games/swf/QQ抓喜鹊.swf",
+      "bytes": 797281,
+      "sha256": "94007c475f91fed70b35b848b7288faf8d7415cd9f0f0b04533bcba03d8fd3c6"
+    },
+    {
+      "id": "classic-003",
+      "path": "classical_games/swf/QQ飞车.swf",
+      "bytes": 849248,
+      "sha256": "c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f"
+    },
+    {
+      "id": "classic-004",
+      "path": "classical_games/swf/企鹅的挑战.swf",
+      "bytes": 1592613,
+      "sha256": "11380ec505e2edcc54e00646e487be91bea6fe627199923681b5cef96197aace"
+    },
+    {
+      "id": "classic-005",
+      "path": "classical_games/swf/Q宠邀你来找茬.swf",
+      "bytes": 1936532,
+      "sha256": "660a57fbfd080557147b980969c1904403bb9ec491e67d392644708b34b4c23f"
+    },
+    {
+      "id": "classic-006",
+      "path": "classical_games/swf/Q宠端盘子.swf",
+      "bytes": 855766,
+      "sha256": "88efe57892ef034a946571ddb794f738ed9e2b8ccffb9b5e50200ebb3c3b6131"
+    },
+    {
+      "id": "classic-007",
+      "path": "classical_games/swf/QQ跆拳道.swf",
+      "bytes": 3270599,
+      "sha256": "6df89818db38d2748b7185df470627f0cc013e0410c07e605b76148c4d77b9f8"
+    },
+    {
+      "id": "classic-008",
+      "path": "classical_games/swf/Q宠抓鱼.swf",
+      "bytes": 701876,
+      "sha256": "515b184d8e53ce556ee0c0f4c12b0f433762a9f0464b94f2c65342c3b5bda2e3"
+    },
+    {
+      "id": "classic-009",
+      "path": "classical_games/swf/Q宠保姆.swf",
+      "bytes": 784818,
+      "sha256": "5068d5488c397e5a6272c8c8e62ae28db6347780c9178fcfea3dae646fa076bc"
+    },
+    {
+      "id": "classic-010",
+      "path": "classical_games/swf/Q宠搭积木.swf",
+      "bytes": 924672,
+      "sha256": "56b57345d99360c4c0a1f41586f3b07cbe81475f07edf8751993d61a6d7d1539"
+    },
+    {
+      "id": "classic-011",
+      "path": "classical_games/swf/QQ宝宝守猎.swf",
+      "bytes": 1232553,
+      "sha256": "586642f95a64d87c30076988d600563a85a4643ffe5fad5211a462617e8fd23b"
+    },
+    {
+      "id": "classic-012",
+      "path": "classical_games/swf/QQ企鹅穿云.swf",
+      "bytes": 2789909,
+      "sha256": "1f02ce6d9affb433e95c09fd8bcd05653b1cfb9938afa1e04c0cdfe5eeb66da9"
+    },
+    {
+      "id": "classic-013",
+      "path": "classical_games/swf/Q宠挖矿.swf",
+      "bytes": 1806518,
+      "sha256": "66494abc71e425f8390fdcd9c3d40bbaa4236412be2a07e63c381ea6b3808291"
+    },
+    {
+      "id": "classic-014",
+      "path": "classical_games/swf/Q宠速配.swf",
+      "bytes": 141720,
+      "sha256": "654f01b4e6a48782ffe10be1750f321e7570d9a96133f1644094017d47b1ab94"
+    },
+    {
+      "id": "classic-015",
+      "path": "classical_games/swf/Q宠摘星星.swf",
+      "bytes": 598472,
+      "sha256": "87e573aad836d4ea3ff168f55c9ba9128edf8b1a651382bc875f6be3550c2fac"
+    },
+    {
+      "id": "classic-016",
+      "path": "classical_games/swf/满天星.swf",
+      "bytes": 1700168,
+      "sha256": "d0fad936906e8f52b70468948d454638f61c9f1de449ca2d5ba0ec6cca7af77f"
+    },
+    {
+      "id": "happy-forest",
+      "path": "community_games/swf/forest.swf",
+      "bytes": 1044839,
+      "sha256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b"
+    },
+    {
+      "id": "happy-qqtang",
+      "path": "community_games/swf/qqtang.swf",
+      "bytes": 981342,
+      "sha256": "c8b38507e58d1d0b9aedcdd356c91b5638333253654c6508ab505161e5c9630a"
+    },
+    {
+      "id": "happy-dungeon",
+      "path": "community_games/swf/dungeon.swf",
+      "bytes": 2689767,
+      "sha256": "b6f281f708ebf6342840141b6d3785dedfc26be80d59ef09fcfe0fea596cef48"
+    }
+  ],
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "QQPet13/assets/sound/1.mp3",
+      "bytes": 213475,
+      "sha256": "ae81a8584f85164bb210247945e5bbf581bbdeeff6f2dd7593888e9754bfb6cc"
+    },
+    {
+      "path": "QQPet13/assets/sound/2.mp3",
+      "bytes": 105255,
+      "sha256": "ab5782ea90a5dcb8ff3629ea6a0bcc3744290d72c1af8d458916ed081684b21b"
+    },
+    {
+      "path": "QQPet13/assets/sound/3.mp3",
+      "bytes": 276169,
+      "sha256": "9a8e3f6baa7d8e210989ce0cb77742f0d1d2231ddc6a7b7275a665137a286df2"
+    },
+    {
+      "path": "QQPet13/assets/sound/4.mp3",
+      "bytes": 290798,
+      "sha256": "cef73a7a31f20aa7301da446f48ddfef74f5c56e6c6b7ca38449dfaa91072c22"
+    },
+    {
+      "path": "QQPet13/assets/sound/5.mp3",
+      "bytes": 264466,
+      "sha256": "f9a0d5cbe1edef7198e897ad5f9b81f9881528f23ae7c1e2aee34c2dd21617ea"
+    },
+    {
+      "path": "QQPet13/assets/sound/6.mp3",
+      "bytes": 269064,
+      "sha256": "3e940892cadf34fd1e904f313954cbcd338502ad160b2308bf57f3a88270f663"
+    },
+    {
+      "path": "QQPet13/code.js",
+      "bytes": 35172,
+      "sha256": "991cd27a9d6645ded0da6df371d6db8ca7a7209de87614ea7899f43fd37abba2"
+    },
+    {
+      "path": "QQPet13/game.js",
+      "bytes": 74,
+      "sha256": "be33f204b8faef23b3e65f17fd1d9f18dc50a909e04e39e3e12561bafc4c564a"
+    },
+    {
+      "path": "QQPet13/game.json",
+      "bytes": 201,
+      "sha256": "6e77e08fba8e2a9f5babd1dd6a2be5998d42c9fc1f9b26103a4aa65ec7a4252c"
+    },
+    {
+      "path": "QQPet13/index.html",
+      "bytes": 2512,
+      "sha256": "cec4033970ca111e5a4aa92a72ab0c6565a1f9bc54bdc66f1faf5dfc3e3c8e32"
+    },
+    {
+      "path": "QQPet13/libs/laya.ani.js",
+      "bytes": 178067,
+      "sha256": "0a858733025a46795bc8a3367daba3ed45e69cea423f89d2b0207f2f1fc2297b"
+    },
+    {
+      "path": "QQPet13/libs/laya.core.js",
+      "bytes": 640427,
+      "sha256": "53b81f9fc07cc384e7681db083884b8ef4ae9334bc2b6f5835325030bf05631f"
+    },
+    {
+      "path": "QQPet13/libs/laya.filter.js",
+      "bytes": 9888,
+      "sha256": "f7953861751ba2471d22c6a1adb034351babc928052ce7e1a668bad81a88e91a"
+    },
+    {
+      "path": "QQPet13/libs/laya.html.js",
+      "bytes": 29498,
+      "sha256": "8a07c37305b48fcd7632edf9bc404f6e4b5171a2749f114d034ceb816b2c9132"
+    },
+    {
+      "path": "QQPet13/libs/laya.particle.js",
+      "bytes": 50219,
+      "sha256": "f252e91005499876adc81792dd4530c9eca8b0ed612e11b4c488ba2a58703238"
+    },
+    {
+      "path": "QQPet13/libs/laya.tiledmap.js",
+      "bytes": 66589,
+      "sha256": "e92b2de90cd63f609380eec49a36a742e1746f1efb8d7133a5015daa72b91310"
+    },
+    {
+      "path": "QQPet13/libs/laya.ui.js",
+      "bytes": 344621,
+      "sha256": "a7965bed93ebb44c2496fe316ca687afe0612400157283050a400cf831cbd34b"
+    },
+    {
+      "path": "QQPet13/libs/laya.webgl.js",
+      "bytes": 329625,
+      "sha256": "93e70ba9bbffdffb597e694720ced8f1b561f9d80a5c30e172aa15b17d5606fa"
+    },
+    {
+      "path": "QQPet13/libs/laya.wxmini.js",
+      "bytes": 59247,
+      "sha256": "f635eb418675d8feee4813e567d9361ab64af849255b1b16215e47a6dc4b97bc"
+    },
+    {
+      "path": "QQPet13/libs.js",
+      "bytes": 298,
+      "sha256": "fec2d8620d1bd4666e1bb85cfdb278fb9d64f0e241373982c0ee522a451cf6f3"
+    },
+    {
+      "path": "QQPet13/logo.png",
+      "bytes": 14583,
+      "sha256": "598c3f6465278e3e7f439a0fb4866236497ca815fa8261d682d1fd9fd5596cff"
+    },
+    {
+      "path": "QQPet13/main.min.js",
+      "bytes": 35172,
+      "sha256": "991cd27a9d6645ded0da6df371d6db8ca7a7209de87614ea7899f43fd37abba2"
+    },
+    {
+      "path": "QQPet13/project.config.json",
+      "bytes": 565,
+      "sha256": "b5f730397d19a3c528cbd6d31f5d773a4c456b08a7136ede95efea844ed9e797"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/chifan.json",
+      "bytes": 8421,
+      "sha256": "f006a631757300d3d5323d62a456aedef99a350e4ba866704d05124631cfb794"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/chifan.png",
+      "bytes": 138028,
+      "sha256": "58b2fd643b0e8f4a0c098d330f225861ba6cbbad7d26bada111176059cff6693"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/huaban.json",
+      "bytes": 7529,
+      "sha256": "a83f1332ce33a9677fd0a1e604a58e9f4cb3920dcca4cfe0f0d1eab5498dd958"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/huaban.png",
+      "bytes": 60737,
+      "sha256": "6204f11b5010b152decb722a032f063f27ad56ed53f45301758dd9442d72c265"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/xiuxian.json",
+      "bytes": 8805,
+      "sha256": "6ba9d7a8a8bca80aef19803148c89a10ad288b5cdb54dd3018a1bc0ae8be4ce6"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/xiuxian.png",
+      "bytes": 81119,
+      "sha256": "9489e1131065ef856baab8024f8622e1281ba48e8066a024a2d28568ba8e8763"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/xizao.json",
+      "bytes": 9311,
+      "sha256": "7c095f029cf4f6f5bc4cabc009d9ebe6159a2c1a944a3bf2693b421e5139a131"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/xizao.png",
+      "bytes": 110819,
+      "sha256": "69f18d278763153cefaf1bafcf528c1485a83f3a8f9518774217a39656a93d02"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/zayan.json",
+      "bytes": 3348,
+      "sha256": "801825e695acb3da2b3871cb94a6a77ec5ff209b80b897b99e6779fc244f1833"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/zayan.png",
+      "bytes": 12932,
+      "sha256": "6dc3c7585d3169b735caa757e12f2bd5dd15773db7f61cf5f697005f9e969d38"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/zhaoshou.json",
+      "bytes": 3606,
+      "sha256": "90d010f57a7f3a783d7a4049446f16e2463b0fcf49386a92190d6cb5c4c26e54"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/GG/zhaoshou.png",
+      "bytes": 40889,
+      "sha256": "e69b5a651c3cc2cbff4b3e0ca3862b5bfa6938321a0a9245c80345bdbccd5b3d"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/chifan.json",
+      "bytes": 8421,
+      "sha256": "19ddd653b1a330b73dccaf4ff899c674d0593a0845f41fe4e639ebda0beb92ae"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/chifan.png",
+      "bytes": 144444,
+      "sha256": "a8eec5ba3fa8e8032033c4dc01a917a0543627220fa981e6fed9390e578a1c62"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/huaban.json",
+      "bytes": 7529,
+      "sha256": "f087bb3b378cfafcb1507f05f774bbc8aa47416750d4309524232d7e87377103"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/huaban.png",
+      "bytes": 68890,
+      "sha256": "bb4136ea3e34c6f02b621bf10b4e43616723c7bfbb70881411aca5c0952a3b3b"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/xiuxian.json",
+      "bytes": 8805,
+      "sha256": "8e9309b19542b46d5c8d1e413c4dce4cffda9dd96ae0094d2d0d6e90ec9e76a1"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/xiuxian.png",
+      "bytes": 89563,
+      "sha256": "814014e3f33c56633ffa30c2c179ce54b60804467807677f9ed7f725c26cc4cf"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/xizao.json",
+      "bytes": 12764,
+      "sha256": "4a80c8bdfef5eb9f88489aa2b22bffbe94fbeff654c329aeac1ff373f1008cff"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/xizao.png",
+      "bytes": 185239,
+      "sha256": "af42faaa419c12ac44b6cccba8a41423c27dc722bd5f565fd0be3b885a871ad9"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/zayan.json",
+      "bytes": 3348,
+      "sha256": "8433ec628d0a892ca214af19c321ea092679a6bc92d72bc25cbafe3a4f2abe72"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/zayan.png",
+      "bytes": 13946,
+      "sha256": "62a4caa1eb78bca10969dfcc1bc0118865d0e564d66f4e1d5def77366ad80e28"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/zhaoshou.json",
+      "bytes": 3606,
+      "sha256": "58631f8075d125307c664b1a0e2e43d2dff32cb41c85718e9c4f771f1dfb8656"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/ani/MM/zhaoshou.png",
+      "bytes": 45314,
+      "sha256": "c12701f97ab04014fec3f1bf096e2ef900d5ffabd01b632a157ef00b7494f73a"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/main.json",
+      "bytes": 556,
+      "sha256": "932d3b6a327b308149436ae3fd4f7fc7d3a869c1ad94ffaf67df491abca8d249"
+    },
+    {
+      "path": "QQPet13/res/atlas/ui/main.png",
+      "bytes": 3397,
+      "sha256": "4e428ea2d8601860639d0376b23f7565a164a3208d059512f1ecb2459884d420"
+    },
+    {
+      "path": "QQPet13/ui/main/loginbg.jpg",
+      "bytes": 220308,
+      "sha256": "3382014d0a4b5426ac533bafa075c32e719715ad282c14d96addf78bdb5a31f0"
+    },
+    {
+      "path": "QQPet13/ui/main/wors_bg.png",
+      "bytes": 44843,
+      "sha256": "54d67c6590919972ce261dc97b041bf25949f6061c72b84b658f33e80100d67f"
+    },
+    {
+      "path": "QQPet13/ui/page/1.jpg",
+      "bytes": 649505,
+      "sha256": "906281f750dffe72e2e4a0487e461654610a2c112f8b850b2c8c4ccb27ee63d3"
+    },
+    {
+      "path": "QQPet13/ui/page/2.jpg",
+      "bytes": 488584,
+      "sha256": "ca58c5d8d7668a65e7aa9cce4c2bdbda210d57319bbab9913d32288365f116b7"
+    },
+    {
+      "path": "QQPet13/ui/page/3.jpg",
+      "bytes": 809381,
+      "sha256": "a186e13d8ca757f79444b0bca4044083a87b8624c863057604b6e977896084ea"
+    },
+    {
+      "path": "QQPet13/ui/page/4.jpg",
+      "bytes": 580513,
+      "sha256": "1cf2292979c46b73b27860d8d3ade9378ca2c00b510e89ddf89b593c64b14841"
+    },
+    {
+      "path": "QQPet13/ui/page/5.jpg",
+      "bytes": 721941,
+      "sha256": "ff22bd574d97c579e11d39b7e6f0022700b76c21e394c4234887afadf555441f"
+    },
+    {
+      "path": "QQPet13/ui/page/6.jpg",
+      "bytes": 619303,
+      "sha256": "b02500b800aca4bfa63c8fc691481c69305c705ba3d0ddb22f4df55dd9ed2c21"
+    },
+    {
+      "path": "QQPet13/ui/page/7.jpg",
+      "bytes": 856289,
+      "sha256": "22494ae15bab24e8716f6f408a22dbdc92065aa8184ed8371fa29adea8ef9b97"
+    },
+    {
+      "path": "QQPet13/ui/page/8.jpg",
+      "bytes": 720800,
+      "sha256": "e0a47acd1260f5c89c2c3d2d263a25734410e4ca6f47c9d80ed3230a2421a182"
+    },
+    {
+      "path": "QQPet13/ui/page/home.jpg",
+      "bytes": 280235,
+      "sha256": "6958f86f9f216f04ddd4b63c7038bc57415d3a541299cd16255e966062fab315"
+    },
+    {
+      "path": "QQPet13/version.json",
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "path": "QQPet13/weapp-adapter.js",
+      "bytes": 55203,
+      "sha256": "069911d3c95477cdba93f79d29a66a020d0e338240070ecfa2cb5e8b74266db8"
+    },
+    {
+      "path": "assets/css/site.css",
+      "bytes": 15924,
+      "sha256": "b83a8be34a966f7e2052794b0b9244ecfef8df372a4a9fc7921726f3e481bc25"
+    },
+    {
+      "path": "assets/data/games.json",
+      "bytes": 19807,
+      "sha256": "2ece49be3092d38cc8e8546b6fd23cbe190e957fa1f684ab65210aa579a995e7"
+    },
+    {
+      "path": "assets/fonts/OFL-ZCOOL-KuaiLe.txt",
+      "bytes": 4398,
+      "sha256": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d"
+    },
+    {
+      "path": "assets/fonts/original-comparison.swf",
+      "bytes": 2055402,
+      "sha256": "3e932db5fd6e3f814978b32c82c85a1a305cb7c349b2ba9d5b3eabfe3e7e837c"
+    },
+    {
+      "path": "assets/fonts/qpet-rounded.woff2",
+      "bytes": 45768,
+      "sha256": "1ba5e9021cc124df26be3b95c0b00e2a92b9fd464a511695e1c965a6f363c856"
+    },
+    {
+      "path": "assets/fonts/source.json",
+      "bytes": 6754,
+      "sha256": "d0ffb8d3ee1b3692eea1af61dd515b406d6808868a4b2ce93d1e84a34731f591"
+    },
+    {
+      "path": "assets/imgs/adventure.png",
+      "bytes": 2025447,
+      "sha256": "901f548587d7233ed14336c4aec1b8e85a8d3686715b703f0b0e5a225d793175"
+    },
+    {
+      "path": "assets/imgs/qqpet13.png",
+      "bytes": 1645069,
+      "sha256": "ffaaf23066c56aa6ea50b4ecb83c2c0ae5d883484f658422d9458a49c89559ad"
+    },
+    {
+      "path": "assets/js/app.js",
+      "bytes": 13322,
+      "sha256": "7b0113e8cbdf16413ecb0eee63f7a4f97c9b8356a7c515461f151d785c3d785a"
+    },
+    {
+      "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
+      "bytes": 14078104,
+      "sha256": "8bfd80fdf324ee23ecb0c2db724c815744c29efddc5cf62922ad06aa34eaf17e"
+    },
+    {
+      "path": "assets/vendor/ruffle/LICENSE_APACHE",
+      "bytes": 9723,
+      "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+    },
+    {
+      "path": "assets/vendor/ruffle/LICENSE_MIT",
+      "bytes": 1097,
+      "sha256": "4de9338a7879c68e911742a7d691f0797ff1ef8d8a6fb978b0c711e258fe959c"
+    },
+    {
+      "path": "assets/vendor/ruffle/a71cef02d58dcec6f55f.wasm",
+      "bytes": 14187581,
+      "sha256": "d5e88aa186b80651cb110d4609822cee491d562f3a6310a866dd4c639e58fe67"
+    },
+    {
+      "path": "assets/vendor/ruffle/core.ruffle.15317142e75ce021ac04.js",
+      "bytes": 104433,
+      "sha256": "a4592038591c6dde268e25b84febb1a11be753d7560ee9ff5ae7872b74cf67e8"
+    },
+    {
+      "path": "assets/vendor/ruffle/core.ruffle.5e30dc5777a75720eae2.js",
+      "bytes": 110337,
+      "sha256": "7b1950264b756723aee00a87460cea09e8d91ccd5545c6d1a04d35fc5fd74118"
+    },
+    {
+      "path": "assets/vendor/ruffle/ruffle.js",
+      "bytes": 461498,
+      "sha256": "cf068d5b4a42d0179f0a577ccee557e1b3b6419b17565743b220ca350bfc2a45"
+    },
+    {
+      "path": "classical_games/covers/Q宠保姆.jpg",
+      "bytes": 164092,
+      "sha256": "de7c4937d986b5f532f0093ee33eb37541018fb27a2777b549b0c44d72be6820"
+    },
+    {
+      "path": "classical_games/covers/Q宠守护使.jpg",
+      "bytes": 71412,
+      "sha256": "a9d91704b8087c1c5a498eb9991e9f4712ca4c6938e51a200a86a807a9de506b"
+    },
+    {
+      "path": "classical_games/covers/Q宠守猎.jpg",
+      "bytes": 224478,
+      "sha256": "f1502a6b6a989fa5acc23b8509a14a80198f00c4082ad4a5f57fe5fa338a7e2c"
+    },
+    {
+      "path": "classical_games/covers/Q宠抓鱼.jpg",
+      "bytes": 91396,
+      "sha256": "1a5463061ce973b39fab5ae5cf8a6cc70fe0a11237656049f389cd737e97c33b"
+    },
+    {
+      "path": "classical_games/covers/Q宠挖矿.jpg",
+      "bytes": 271021,
+      "sha256": "ea4ca668f5bf0535535d279e26907af76ead37b9f3e716d5463b266b1335b451"
+    },
+    {
+      "path": "classical_games/covers/Q宠搭积木.jpg",
+      "bytes": 122131,
+      "sha256": "9ea3c6a976499bafb653b55ac942ba78863c21f569fbe3873724d6d387c72539"
+    },
+    {
+      "path": "classical_games/covers/Q宠摘星星.jpg",
+      "bytes": 36967,
+      "sha256": "321c932c3aef7a83d3e0e2815a6058c20a59853dad02cd96e6e1c7b0396b8f34"
+    },
+    {
+      "path": "classical_games/covers/Q宠穿云.png",
+      "bytes": 76526,
+      "sha256": "9c44ea1969ca5438a9683083d2c835f5471e562a773758770481b4df6128ac35"
+    },
+    {
+      "path": "classical_games/covers/Q宠端盘子.jpg",
+      "bytes": 26066,
+      "sha256": "10e1e7fdea95329d01a16ddca5d34943135e7fe1b2e4c7e4f9535d8017b3d115"
+    },
+    {
+      "path": "classical_games/covers/Q宠跆拳道.png",
+      "bytes": 188983,
+      "sha256": "9d0ef2bdd9c6828034887fc5a9570cda6a7eeddcbe89bb78768ffdb55c075a5a"
+    },
+    {
+      "path": "classical_games/covers/Q宠速配.jpg",
+      "bytes": 68142,
+      "sha256": "ac760b38606f62833641b4d4a13eca2eedc2028b57bc38384982a770e694a2f2"
+    },
+    {
+      "path": "classical_games/covers/Q宠邀你来找茬.jpg",
+      "bytes": 166436,
+      "sha256": "90f7f139dbc5df0c00e69ae93ec1db65e608239624a4d9559def62ca03eed86a"
+    },
+    {
+      "path": "classical_games/covers/企鹅的挑战.jpg",
+      "bytes": 46529,
+      "sha256": "75032ba3280a42611c40bac2bbcf2c49defaf548942df4939f398b2f4ba85f83"
+    },
+    {
+      "path": "classical_games/covers/宠爱飞车.jpg",
+      "bytes": 111957,
+      "sha256": "4f86b7dcccfa015c713d88c30fa214055b2c75db03f6f9880da2f135339e6a95"
+    },
+    {
+      "path": "classical_games/covers/搭鹊桥.png",
+      "bytes": 140715,
+      "sha256": "f355918cec3a67c7496df283bd4b28e11172f9c83d64cd053c039b5b7f34aa8f"
+    },
+    {
+      "path": "classical_games/covers/满天星.jpg",
+      "bytes": 676822,
+      "sha256": "2b79f2362d03f686b1986c9f55cdc1b2a2e6c8e6bb03ad057bdd1976bc8a3707"
+    },
+    {
+      "path": "classical_games/games.json",
+      "bytes": 2991,
+      "sha256": "9e2b7918cfc6a78e98e46242dcdd1d3ca1ec0b7b036ff6707dc1c04e18b6a471"
+    },
+    {
+      "path": "classical_games/index.html",
+      "bytes": 421,
+      "sha256": "1f42ccfa6a66a45798af0e7306a4755dbf0b131fe818a295263b7edfad2ad587"
+    },
+    {
+      "path": "classical_games/pages.html",
+      "bytes": 1027,
+      "sha256": "f8a3df84999551dff125ef1a7dbebe5ad146bd5705d1a10e27641c45d3b5b41e"
+    },
+    {
+      "path": "classical_games/swf/QQ企鹅穿云.swf",
+      "bytes": 2789909,
+      "sha256": "1f02ce6d9affb433e95c09fd8bcd05653b1cfb9938afa1e04c0cdfe5eeb66da9"
+    },
+    {
+      "path": "classical_games/swf/QQ宝宝守猎.swf",
+      "bytes": 1232553,
+      "sha256": "586642f95a64d87c30076988d600563a85a4643ffe5fad5211a462617e8fd23b"
+    },
+    {
+      "path": "classical_games/swf/QQ抓喜鹊.swf",
+      "bytes": 797281,
+      "sha256": "94007c475f91fed70b35b848b7288faf8d7415cd9f0f0b04533bcba03d8fd3c6"
+    },
+    {
+      "path": "classical_games/swf/QQ跆拳道.swf",
+      "bytes": 3270599,
+      "sha256": "6df89818db38d2748b7185df470627f0cc013e0410c07e605b76148c4d77b9f8"
+    },
+    {
+      "path": "classical_games/swf/QQ飞车.swf",
+      "bytes": 849248,
+      "sha256": "c8ad6b998a57f343ddf9213ca61717bdf0ceb1061b794ca63632a9b4d9f8dd1f"
+    },
+    {
+      "path": "classical_games/swf/Q宠保姆.swf",
+      "bytes": 784818,
+      "sha256": "5068d5488c397e5a6272c8c8e62ae28db6347780c9178fcfea3dae646fa076bc"
+    },
+    {
+      "path": "classical_games/swf/Q宠守护使.swf",
+      "bytes": 665215,
+      "sha256": "6ef3e55d86431714fe8d1da849a37fb5c08844a44accdc469296fe0118377654"
+    },
+    {
+      "path": "classical_games/swf/Q宠抓鱼.swf",
+      "bytes": 701876,
+      "sha256": "515b184d8e53ce556ee0c0f4c12b0f433762a9f0464b94f2c65342c3b5bda2e3"
+    },
+    {
+      "path": "classical_games/swf/Q宠挖矿.swf",
+      "bytes": 1806518,
+      "sha256": "66494abc71e425f8390fdcd9c3d40bbaa4236412be2a07e63c381ea6b3808291"
+    },
+    {
+      "path": "classical_games/swf/Q宠搭积木.swf",
+      "bytes": 924672,
+      "sha256": "56b57345d99360c4c0a1f41586f3b07cbe81475f07edf8751993d61a6d7d1539"
+    },
+    {
+      "path": "classical_games/swf/Q宠摘星星.swf",
+      "bytes": 598472,
+      "sha256": "87e573aad836d4ea3ff168f55c9ba9128edf8b1a651382bc875f6be3550c2fac"
+    },
+    {
+      "path": "classical_games/swf/Q宠端盘子.swf",
+      "bytes": 855766,
+      "sha256": "88efe57892ef034a946571ddb794f738ed9e2b8ccffb9b5e50200ebb3c3b6131"
+    },
+    {
+      "path": "classical_games/swf/Q宠速配.swf",
+      "bytes": 141720,
+      "sha256": "654f01b4e6a48782ffe10be1750f321e7570d9a96133f1644094017d47b1ab94"
+    },
+    {
+      "path": "classical_games/swf/Q宠邀你来找茬.swf",
+      "bytes": 1936532,
+      "sha256": "660a57fbfd080557147b980969c1904403bb9ec491e67d392644708b34b4c23f"
+    },
+    {
+      "path": "classical_games/swf/企鹅的挑战.swf",
+      "bytes": 1592613,
+      "sha256": "11380ec505e2edcc54e00646e487be91bea6fe627199923681b5cef96197aace"
+    },
+    {
+      "path": "classical_games/swf/满天星.swf",
+      "bytes": 1700168,
+      "sha256": "d0fad936906e8f52b70468948d454638f61c9f1de449ca2d5ba0ec6cca7af77f"
+    },
+    {
+      "path": "community_games/covers/dungeon.png",
+      "bytes": 523450,
+      "sha256": "736a4bdd5c189e612cbceea8dd253d4b48fc1f232897aa84ef012ccdd37ec226"
+    },
+    {
+      "path": "community_games/covers/forest.png",
+      "bytes": 256281,
+      "sha256": "b5e6cdaff9e291075c8f0f17fb4800e237bdb443e774e5f6a55ddbe28571ecb1"
+    },
+    {
+      "path": "community_games/covers/qqtang.png",
+      "bytes": 661917,
+      "sha256": "b5ff46663d5573e374f07022d4223e10c04f0a112c7a0d62e8669f763a756c43"
+    },
+    {
+      "path": "community_games/swf/dungeon.swf",
+      "bytes": 2689767,
+      "sha256": "b6f281f708ebf6342840141b6d3785dedfc26be80d59ef09fcfe0fea596cef48"
+    },
+    {
+      "path": "community_games/swf/forest.swf",
+      "bytes": 1044839,
+      "sha256": "cfc82b0fda9e38bf48151af64422d89e904b32a772c7863fc048ca88c5fe1e1b"
+    },
+    {
+      "path": "community_games/swf/qqtang.swf",
+      "bytes": 981342,
+      "sha256": "c8b38507e58d1d0b9aedcdd356c91b5638333253654c6508ab505161e5c9630a"
+    },
+    {
+      "path": "index.html",
+      "bytes": 1221,
+      "sha256": "ea024ee6f53222aca57dea8736a9a9741595ae590850d2167340c73cc1aedb8e"
+    },
+    {
+      "path": "onegame.html",
+      "bytes": 392,
+      "sha256": "25f0bc518c6be06ea4878225f5811ad31757bd36d61b65504e26c1e40b01b069"
+    }
+  ]
+}

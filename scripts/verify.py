@@ -21,7 +21,7 @@ class HomeLinks(HTMLParser):
             assert attrs.get('id')==self.category,'Section anchor differs from category'
         if tag=='article' and 'data-game' in attrs:
             assert self.category is not None and self.row is None,'Game outside a category or nested card'
-            self.row={'id':attrs['data-game'],'category':self.category,'links':[],'images':[],'title':[],'summary':[],'note':[]}; self.rows.append(self.row)
+            self.row={'id':attrs['data-game'],'category':self.category,'links':[],'images':[],'title':[],'summary':[],'note':[],'badge':[]}; self.rows.append(self.row)
         if tag=='img' and self.row is not None:self.row['images'].append(attrs)
         if tag=='a':
             self.links.append(attrs)
@@ -29,6 +29,7 @@ class HomeLinks(HTMLParser):
                 self.anchor={'attrs':attrs,'text':[]}; self.row['links'].append(self.anchor)
         if self.row is not None:
             if tag=='h3':self.field='title'
+            if tag=='span' and 'badge' in attrs.get('class','').split():self.field='badge'
             if tag=='p' and 'game-summary' in attrs.get('class','').split():self.field='summary'
             if tag=='p' and 'source-note' in attrs.get('class','').split():self.field='note'
     def handle_data(self,data):
@@ -36,7 +37,7 @@ class HomeLinks(HTMLParser):
         if self.row is not None and self.field is not None:self.row[self.field].append(data)
     def handle_endtag(self,tag):
         if tag=='a':self.anchor=None
-        elif tag in ('h3','p'):self.field=None
+        elif tag in ('h3','p') or (tag=='span' and self.field=='badge'):self.field=None
         elif tag=='article':self.row=None
         elif tag=='section':self.category=None
 
@@ -55,8 +56,9 @@ def verify_home_links(html,catalog,cover_sizes=None):
     for row,game in zip(parsed.rows,ordered):
         assert row['category']==game['category'],f"{game['id']}: incorrect section"
         assert ''.join(row['title'])==game['title'],f"{game['id']}: incorrect title"
-        assert ''.join(row['summary'])==game['summary'],f"{game['id']}: incorrect summary"
-        assert ''.join(row['note'])==game.get('sourceNote',''),f"{game['id']}: incorrect source note"
+        assert not row['summary'],f"{game['id']}: summaries belong outside home cards"
+        assert not row['note'],f"{game['id']}: development notes must stay outside player cards"
+        assert not row['badge'],f"{game['id']}: home cards must not show version badges"
         if game.get('cover'):
             assert len(row['images'])==1,f"{game['id']}: one original opening cover required"
             cover=row['images'][0]
@@ -65,18 +67,57 @@ def verify_home_links(html,catalog,cover_sizes=None):
             assert cover.get('loading')=='lazy' and int(cover.get('width',0))>0 and int(cover.get('height',0))>0,f"{game['id']}: cover dimensions and loading required"
             if cover_sizes is not None:assert (int(cover['width']),int(cover['height']))==cover_sizes[game['cover']],f"{game['id']}: cover aspect ratio differs from original"
         else:assert not row['images'],f"{game['id']}: unexpected cover"
-        assert len(row['links'])==2,f"{game['id']}: native and comparison links must be adjacent in one card"
-        native,original=row['links']; native_attrs=native['attrs']; original_attrs=original['attrs']
-        assert native_attrs.get('href')==game['path']+'/',f"{game['id']}: incorrect native entry"
-        assert native_attrs.get('aria-label')=='开始游戏：'+game['title'],f"{game['id']}: incorrect accessible entry label"
-        assert original_attrs.get('href')==game['original'],f"{game['id']}: incorrect original comparison"
-        assert ''.join(original['text'])==game.get('comparisonLabel','原版对照')+' ↗',f"{game['id']}: incorrect comparison label"
-        assert original_attrs.get('target')=='_blank' and {'noopener','noreferrer'}<=set(original_attrs.get('rel','').split()),f"{game['id']}: comparison-link isolation"
+        detail_links=[link for link in row['links'] if link['attrs'].get('href')=='games/'+game['id']+'/']
+        assert len(detail_links)==1,f"{game['id']}: one details entry required"
+        native_links=[link for link in row['links'] if link not in detail_links]
+        assert len(native_links)==2+bool(game.get('cover')),f"{game['id']}: title, play and optional cover must open the remake"
+        assert all(link['attrs'].get('href')==game['path']+'/' and not link['attrs'].get('target') for link in native_links),f"{game['id']}: ordinary entry must open the remake"
+        play=[link for link in native_links if 'play-link' in link['attrs'].get('class','').split()]
+        assert len(play)==1 and play[0]['attrs'].get('aria-label')=='开始游戏：'+game['title'],f"{game['id']}: incorrect accessible entry label"
+        assert not any('comparison-link' in link['attrs'].get('class','').split() for link in row['links']),f"{game['id']}: comparison belongs on its details page"
     for game in catalog:
         if not game['published']:
             assert all(link.get('href') not in [game['path']+'/',game['original']] for link in parsed.links),f"{game['id']}: draft linked from public portal"
     assert not re.search(r'<(?:script|canvas|iframe|object|embed)\b|\bon\w+\s*=',html,re.I),'Portal must remain static HTML'
     return [game['id'] for game in ordered]
+
+ORIGINAL_IDS={'qpet-guardian':'classic-001','magpie-bridge':'classic-002','qpet-racing':'classic-003',
+              'qpet-match':'classic-014','qpet-stars':'classic-015','qpet-forest':'happy-forest',
+              'qpet-qqtang':'happy-qqtang','qpet-dungeon':'happy-dungeon'}
+
+class DetailLinks(HTMLParser):
+    def __init__(self):super().__init__();self.links=[];self.heading=[];self.in_heading=False;self.images=[];self.styles=[]
+    def handle_starttag(self,tag,attrs):
+        attrs=dict(attrs)
+        if tag=='a':self.links.append(attrs)
+        if tag=='h1':self.in_heading=True
+        if tag=='img':self.images.append(attrs)
+        if tag=='link' and attrs.get('rel')=='stylesheet':self.styles.append(attrs.get('href',''))
+    def handle_endtag(self,tag):
+        if tag=='h1':self.in_heading=False
+    def handle_data(self,data):
+        if self.in_heading:self.heading.append(data)
+
+def verify_details(html,game):
+    parsed=DetailLinks();parsed.feed(html);parsed.close()
+    assert ''.join(parsed.heading)==game['title'],f"{game['id']}: details title differs"
+    assert sum(link.get('href')=='../../'+game['path']+'/' for link in parsed.links)==1,f"{game['id']}: details must launch native game"
+    assert any(link.get('href')=='../../' for link in parsed.links),f"{game['id']}: details return to same-site hall"
+    assert len(parsed.styles)==1 and parsed.styles[0].split('?')[0]=='../../portal.css',f"{game['id']}: local shared details stylesheet"
+    comparisons=[link for link in parsed.links if 'comparison-link' in link.get('class','').split()]
+    if game['id'] in ORIGINAL_IDS:expected='../../originals/#/play/'+ORIGINAL_IDS[game['id']]
+    elif game['id']=='qpet-adventure':expected=game['original']
+    else:expected=None
+    assert len(comparisons)==int(expected is not None),f"{game['id']}: no invented original or extra external link"
+    if expected:
+        assert comparisons[0].get('href')==expected,f"{game['id']}: incorrect original comparison"
+        if comparisons[0].get('target'):
+            assert comparisons[0].get('target')=='_blank' and {'noopener','noreferrer'}<=set(comparisons[0].get('rel','').split()),f"{game['id']}: original-link isolation"
+    allowed=['../../','../../#'+game['category'],'../../'+game['path']+'/']+([expected] if expected else [])
+    assert all(link.get('href') in allowed for link in parsed.links),f"{game['id']}: unexpected details destination"
+    if game.get('cover'):assert len(parsed.images)==1 and parsed.images[0].get('src')=='../../'+game['cover'],f"{game['id']}: details cover differs"
+    assert not re.search(r'<(?:script|canvas|iframe|object|embed)\b|\bon\w+\s*=',html,re.I),'Details must remain static HTML'
+    return game['id']
 
 def chapter_expected(root,folder):
     """Use only the fixed portable manifest; JS verifier checks its closed schema."""
@@ -104,8 +145,13 @@ root=Path(__file__).resolve().parents[1]; dist=args.dist.resolve() if args.dist 
 catalog=json.loads((root/'native/games.json').read_text())
 games=[game for game in catalog if game['published']]
 expected={'index.html','portal.css','player.html','maintenance.css','.nojekyll'}
+for name in ['fonts/qpet-rounded.woff2','fonts/OFL-ZCOOL-KuaiLe.txt','fonts/source.json']:
+    assert (dist/name).read_bytes()==(root/'web'/name).read_bytes(),'Shared portal font differs: '+name
+    expected.add(name)
+assert (dist/'fonts/qpet-rounded.woff2').read_bytes()[:4]==b'wOF2','Invalid portal WOFF2'
 cover_sizes={}
 for game in games:
+    expected.add('games/'+game['id']+'/index.html')
     if not game.get('cover'):continue
     assert re.fullmatch(r'covers/[a-z0-9]+(?:-[a-z0-9]+)*\.png',game['cover']),'Unsafe cover path'
     source=root/'web'/game['cover']; output=dist/game['cover']; data=source.read_bytes()
@@ -125,6 +171,8 @@ for game in games:
     source=root/'native'/game['id']/'assets'
     if game.get('builder')!='embedded-python':
         expected.update(folder+path.relative_to(root/'native'/game['id']).as_posix() for path in source.rglob('*') if path.is_file() and path.suffix in media)
+originals=json.loads(subprocess.run(['node',str(root/'scripts/build-originals.mjs'),'--verify='+str(dist/'originals')],check=True,stdout=subprocess.PIPE,text=True).stdout)
+expected.update('originals/'+item['file'] for item in originals['files'])
 actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
 assert actual==expected, f'Unexpected release files: {actual ^ expected}'
 for game in games:
@@ -140,6 +188,7 @@ for game in games:
     assert not re.search(r'<(?:iframe|object|embed)\b|\bon\w+\s*=',html,re.I)
 assert '游戏已下架' in (dist/'player.html').read_text()
 home_links=verify_home_links((dist/'index.html').read_text(),catalog,cover_sizes)
+details=[verify_details((dist/'games'/game['id']/'index.html').read_text(),game) for game in games]
 checks=[]
 for name in sorted(expected):
     data=(dist/name).read_bytes()
@@ -159,5 +208,7 @@ if args.url:
         except HTTPError as error:
             assert error.code==404,f'{name}: expected404, got{error.code}'
         retired.append(name)
-print(json.dumps({'result':'passed','releaseMode':'native-javascript','games':[game['id'] for game in games],
-                  'homeLinksVerified':home_links,'noSWFRuntime':True,'httpVerified':bool(args.url),'files':checks,'retired404':retired},ensure_ascii=False,indent=2))
+print(json.dumps({'result':'passed','releaseMode':'native-games-with-independent-original-comparison','games':[game['id'] for game in games],
+                  'homeLinksVerified':home_links,'detailsVerified':details,
+                  'native':{'noSWFRuntime':True,'games':[game['id'] for game in games]},
+                  'originals':originals,'httpVerified':bool(args.url),'files':checks,'retired404':retired},ensure_ascii=False,indent=2))

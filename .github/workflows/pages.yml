@@ -25,6 +25,9 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm test
       - run: npm run build
+      - run: npm run test:site
+        env:
+          ADVENTURE_SAMPLE: dist/qpet-adventure
       - run: npm run verify
       - uses: actions/upload-pages-artifact@v4
         with:

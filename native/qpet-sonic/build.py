@@ -52,6 +52,7 @@ if args.web:
     print(json.dumps({'format':'web','files':['index.html','app.js','style.css']},ensure_ascii=False))
     raise SystemExit
 html = (ROOT / 'index.html').read_text()
+html = re.sub(r'<!-- web-only:start -->[\s\S]*?<!-- web-only:end -->', '', html)
 html = html.replace('<link rel="stylesheet" href="style.css">', '<style>' + (ROOT / 'style.css').read_text() + '</style>')
 html = html.replace('<script type="module" src="app.mjs"></script>', '<script type="module">\n' + script + '\n</script>')
 assert not re.search(r'<script[^>]+src=|<link[^>]+rel="stylesheet"', html)

@@ -105,7 +105,8 @@
     "original": "https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0",
     "category": "adventure",
     "summary": "序章与八集故事，双角色冒险，通关后逐集开放。",
-    "badge": "八集冒险"
+    "badge": "八集冒险",
+    "cover": "covers/qpet-adventure.png"
   },
   {
     "id": "qpet-guardian",
