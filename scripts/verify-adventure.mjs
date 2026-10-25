@@ -35,7 +35,8 @@ export function inspectAdventurePageModule(source,name){
  inspectAdventureApp(source,'web');
  assert(!/\bfetch\s*\(|\brequire\s*\(/.test(source),'Homepage modules only use local native state');
  const imports=[...source.matchAll(/\b(?:import|export)\s+(?:(?:[\w$*{},\s]+)\s+from\s*)?["']([^"']+)["']/g)].map(m=>m[1]);
- assert.deepEqual(imports,name==='catalog.js'?['./common/progress.js']:[],'Unexpected homepage module import');
+ if(name==='catalog.js')assert(imports.length===1&&/^\.\/common\/progress\.js(?:\?v=[a-f0-9]{16})?$/.test(imports[0]),'Unexpected homepage module import');
+ else assert.deepEqual(imports,[],'Unexpected homepage module import');
 }
 export async function verifyAdventure(directory,{checkInputs=false,writeReport=true}={}){
  const root=path.resolve(directory),manifest=JSON.parse(await readFile(path.join(root,'build-manifest.json'),'utf8'));
@@ -81,6 +82,7 @@ export async function verifyAdventure(directory,{checkInputs=false,writeReport=t
   const home=await readFile(path.join(root,'index.html'),'utf8');
   const modules=['catalog.js','common/progress.js'],hasModules=modules.some(name=>expected.has(name)),scripts=[...home.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
   if(hasModules){assert(modules.every(name=>expected.has(name)),'Homepage progress modules must be paired');assert(scripts.length===1&&/\btype=["']module["']/.test(scripts[0][1])&&/\bsrc=["'](?:\.\/)?catalog\.js(?:\?v=[a-f0-9]+)?["']/.test(scripts[0][1])&&!scripts[0][2].trim(),'Missing fixed catalog module entry');for(const name of modules)inspectAdventurePageModule(await readFile(path.join(root,name),'utf8'),name);}else assert(scripts.length===0,'Unmanifested homepage script');
+  if(hasModules){const catalog=await readFile(path.join(root,'catalog.js'),'utf8'),version=/\.\/common\/progress\.js\?v=([a-f0-9]{16})/.exec(catalog);if(version)assert.equal(version[1],expected.get('common/progress.js').sha256.slice(0,16),'Homepage progress cache version mismatch');}
   const links=[...home.matchAll(/data-entry="([0-8]):([01])"[^>]*href="\.\/([^"/]+)\/"/g)];
   assert(links.length===ids.size,'Homepage entries differ from built subset');for(const match of links)assert(ids.has(match[3])&&match[3]===`chapter${match[1]}-v${match[2]}`,'Homepage broken entry');
  }

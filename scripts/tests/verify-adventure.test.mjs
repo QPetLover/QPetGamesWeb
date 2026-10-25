@@ -21,3 +21,17 @@ test('partial build homepage cannot link an unbuilt chapter',async()=>{const f=a
 test('optional homepage modules have only their one fixed static dependency',()=>{assert.doesNotThrow(()=>inspectAdventurePageModule("import {load} from './common/progress.js';export const start=()=>load();",'catalog.js'));assert.doesNotThrow(()=>inspectAdventurePageModule("export const load=()=>({});",'common/progress.js'));assert.throws(()=>inspectAdventurePageModule("import {load} from './other.js';",'catalog.js'),/homepage module import/);assert.throws(()=>inspectAdventurePageModule("import {load} from './more.js';",'common/progress.js'),/homepage module import/);assert.throws(()=>inspectAdventurePageModule("fetch('https://example.com');",'common/progress.js'),/only use local/);});
 
 test('paired homepage modules and optional bundled progress are recognized without weakening old closures',async()=>{const f=await fixture();try{await f.put('catalog.js',"import {load} from './common/progress.js';load();",f.manifest.shared);await f.put('common/progress.js',"export const load=()=>({});",f.manifest.shared);const home=path.join(f.root,'index.html'),content=await readFile(home,'utf8')+'<script type="module" src="./catalog.js"></script>';await writeFile(home,content);const rec=f.manifest.shared.find(r=>r.path==='index.html');rec.bytes=Buffer.byteLength(content);rec.sha256=hash(content);f.manifest.entries[0].inputs.push({path:'native/qpet-adventure/common/progress.js'});await f.save();const report=await verifyAdventure(f.root);assert.equal(report.passed,true);assert.equal(report.rows[0].inputModules,21);f.manifest.shared=f.manifest.shared.filter(r=>r.path!=='common/progress.js');await f.save();await assert.rejects(verifyAdventure(f.root),/must be paired/);}finally{await f.cleanup();}});
+
+test('a versioned homepage dependency must identify the bundled progress module',async()=>{
+ const f=await fixture();try{
+  const progress="export const load=()=>({version:2,completed:[]});",version=hash(progress).slice(0,16);
+  const catalog=`import {load} from './common/progress.js?v=${version}';load();`;
+  await f.put('common/progress.js',progress,f.manifest.shared);await f.put('catalog.js',catalog,f.manifest.shared);
+  const home=path.join(f.root,'index.html'),content=await readFile(home,'utf8')+'<script type="module" src="./catalog.js"></script>';
+  await writeFile(home,content);const page=f.manifest.shared.find(r=>r.path==='index.html');page.bytes=Buffer.byteLength(content);page.sha256=hash(content);await f.save();
+  assert.equal((await verifyAdventure(f.root)).passed,true);
+  const stale=catalog.replace(version,'ffffffffffffffff');await writeFile(path.join(f.root,'catalog.js'),stale);
+  const module=f.manifest.shared.find(r=>r.path==='catalog.js');module.bytes=Buffer.byteLength(stale);module.sha256=hash(stale);await f.save();
+  await assert.rejects(verifyAdventure(f.root),/progress cache version mismatch/);
+ }finally{await f.cleanup();}
+});

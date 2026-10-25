@@ -17,10 +17,10 @@ export async function startAdventure({chapter,variant=0,createController,createA
  if(navigation.reference)reference.href=navigation.reference;else reference.hidden=true;
  if(chapter===0)document.querySelector('#touch-controls').hidden=true;
  const progress=navigation.home?createProgressStore():null;
- // Check before creating live game resources. Standalone packages have no
- // catalog home and intentionally remain independent of the Web story save.
- if(progress&&!progress.canPlay(chapter)){
-  loading.hidden=false;loading.textContent=Number.isInteger(chapter)&&chapter>1&&chapter<=8?`先完成第${chapter-1}集，再来继续冒险。请返回选关。`:'该章节暂不可用，请返回选关。';
+ // Every archived chapter is playable. Standalone packages remain independent
+ // of the Web completion record; only invalid chapter identities are rejected.
+ if(!Number.isInteger(chapter)||chapter<0||chapter>8){
+  loading.hidden=false;loading.textContent='该章节暂不可用，请返回选关。';
   document.querySelector('#touch-controls').hidden=true;
   return{destroy(){for(const cleanup of cleanups.splice(0))cleanup();}};
  }
@@ -36,7 +36,7 @@ export async function startAdventure({chapter,variant=0,createController,createA
  async function firstSound(){if(soundChoice!==null)return;soundChoice=true;try{await audio.enable(true);}catch(error){console.warn(error);}updateSound();}
  function render(){if(!renderer||!dirty)return;renderer.render();dirty=false;}
  function resize(){if(!renderer)return;const r=canvas.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1),scale=Math.min(1,760/Math.max(1,r.width*d),420/Math.max(1,r.height*d));renderer.resize(Math.max(1,Math.round(r.width*d*scale)),Math.max(1,Math.round(r.height*d*scale)));dirty=true;render();}
- function complete(event){if(finished||chapter<1||chapter>8||event?.chapter!==chapter||event?.variant!==variant)return;finished=true;releaseAll();audio.stopAll();progress?.complete(chapter);completionTitle.textContent=`第${chapter}集已完成`;const next=navigation.entries?.[`${chapter+1}:${variant}`];nextLink.hidden=!next||!!progress&&!progress.canPlay(chapter+1);if(!nextLink.hidden)nextLink.href=next;completion.hidden=false;try{onComplete(event);}catch(error){console.error(error);}}
+ function complete(event){if(finished||chapter<1||chapter>8||event?.chapter!==chapter||event?.variant!==variant)return;finished=true;releaseAll();audio.stopAll();progress?.complete(chapter);completionTitle.textContent=`第${chapter}集已完成`;const next=navigation.entries?.[`${chapter+1}:${variant}`];nextLink.hidden=!next;if(!nextLink.hidden)nextLink.href=next;completion.hidden=false;try{onComplete(event);}catch(error){console.error(error);}}
  function requestChapter(event){try{onChapterRequest(event);}catch(error){console.error(error);}if(chapter===0&&event.chapter===1&&event.variant===0){const url=navigation.entries?.['1:0'];if(url)navigate(url);else{finished=true;releaseAll();audio.stopAll();completionTitle.textContent='序章播放完毕';nextLink.hidden=true;completion.hidden=false;}}}
  function reset(){releaseAll();controller?.dispose();renderer?.dispose();audio.stopAll();audio.setTime(0);audio.setVolume(100);clock=0;lastRAF=0;accumulator=0;finished=false;completion.hidden=true;pressedButton=null;hoverButton=null;controller=createController({variant,assets,audio:null,now:0,pointHit:(...args)=>renderer?.pointHit(...args)??false,buttonHit(node,x,y){if(!renderer)return false;if(assets.symbolKinds[node.id]?.startsWith('button')){const p=controller.graph.globalToLocal(node,x,y);return renderer.hitSymbol(node.id,p.x*20,p.y*20,4);}return renderer.pointHit(node,x,y);},pointerTop:(x,y)=>renderer?.buttonAt(x,y)??null,onEvent:event=>audio.handle(event),onComplete:complete,onChapterRequest:requestChapter});renderer=new AdventureRenderer({canvas,graph:controller.graph,artwork,hooks,collisionPaths,textFor:(...args)=>controller.textFor(...args)});controller.drainEvents();if(beginButton){beginButton.hidden=false;beginButton.disabled=false;}dirty=true;resize();updateSound();}
  function releasePointer(event,cancel=false){if(!controller||canvasPointer!==event.pointerId)return;if(Number.isFinite(event.clientX))lastPoint=point(event);canvasPointer=null;const target=pressedButton;pressedButton=null;controller.release(lastPoint.x,lastPoint.y,{cancel});const hit=!cancel&&event.pointerType==='mouse'?renderer.buttonAt(lastPoint.x,lastPoint.y):null;setButtonState(target,hit===target?2:1);hoverButton=hit;if(canvas.hasPointerCapture?.(event.pointerId))canvas.releasePointerCapture(event.pointerId);dirty=true;render();}

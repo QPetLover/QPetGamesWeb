@@ -37,7 +37,7 @@ function fixture(){
   return group;
  });
  const images=Array.from({length:9},(_,chapter)=>new Element({'data-selector-image':String(chapter)}));
- const statuses=['watch','current','complete','locked'].map(status=>new Element({'data-selector-status':status}));
+ const statuses=['watch','current','complete','locked','unplayed'].map(status=>new Element({'data-selector-status':status}));
  const stage=new Element(),title=new Element(),message=new Element(),helpPanel=new Element();
  const controls=Object.fromEntries(['previous','next','confirm','help','close-help'].map(key=>[key,new Element()]));
  const selectors=new Map([
@@ -68,6 +68,9 @@ test('selector source cache key matches its sole module and all existing role ro
  const scripts=[...html.matchAll(/<script\b[^>]*src="(?:\.\/)?catalog\.js\?v=([a-f0-9]{16})"[^>]*>/g)];
  assert.equal(scripts.length,1,'entry must load one versioned catalog module');
  assert.equal(scripts[0][1],expected,'entry cannot serve an earlier cached selector');
+ const progress=readFileSync(new URL('../../native/qpet-adventure/common/progress.js',import.meta.url));
+ const progressHash=createHash('sha256').update(progress).digest('hex').slice(0,16);
+ assert(module.toString().includes(`from './common/progress.js?v=${progressHash}'`),'catalog cannot reuse the old cached progress format');
  const expectedEntries=['0:0',...Array.from({length:8},(_,index)=>[`${index+1}:0`,`${index+1}:1`]).flat()];
  assert.deepEqual(entries.map(entry=>entry.id),expectedEntries);
  for(const {id,href} of entries){const [chapter,variant]=id.split(':');assert.equal(href,`./chapter${chapter}-v${variant}/`);}
@@ -75,7 +78,7 @@ test('selector source cache key matches its sole module and all existing role ro
 
 test('first story is selected by default while arrows keep the optional prologue and chapter eight bounded',()=>{
  assert.equal(selectorState().chapter,1);
- assert.equal(selectorState().status,'current');
+ assert.equal(selectorState().status,'unplayed');
  assert.equal(selectorState().canPlay,true);
  assert.equal(moveSelection(1,-1),0);
  assert.equal(selectorState(0).status,'watch');
@@ -89,30 +92,32 @@ test('first story is selected by default while arrows keep the optional prologue
  for(let step=0;step<12;step++)chapter=moveSelection(chapter,-1);assert.equal(chapter,0);
 });
 
-test('browsing locked chapters reports their status without changing the contiguous progress frontier',()=>{
- const fresh=Object.freeze({version:1,completed:0,maxUnlocked:1});
+test('all chapters remain playable and completion badges identify only actual completed chapters',()=>{
+ const fresh=Object.freeze({version:2,completed:Object.freeze([])});
  for(let chapter=0;chapter<=8;chapter++){
   const state=selectorState(chapter,fresh);
-  assert.equal(state.canPlay,chapter<=1);
-  assert.equal(state.status,chapter===0?'watch':chapter===1?'current':'locked');
+  assert.equal(state.canPlay,true);
+  assert.equal(state.status,chapter===0?'watch':'unplayed');
   assert.deepEqual(state.entryIds,chapter===0?['0:0']:[`${chapter}:0`,`${chapter}:1`]);
  }
- assert.deepEqual(fresh,{version:1,completed:0,maxUnlocked:1});
- assert.equal(selectorState(1,{completed:1,maxUnlocked:2}).status,'complete');
- assert.equal(selectorState(2,{completed:1,maxUnlocked:2}).status,'current');
- assert.equal(selectorState(3,{completed:1,maxUnlocked:2}).canPlay,false);
- assert.equal(selectorState(8,{completed:8,maxUnlocked:8}).status,'complete');
+ assert.deepEqual(fresh,{version:2,completed:[]});
+ assert.equal(selectorState(8,{completed:[8]}).status,'complete');
+ for(let chapter=1;chapter<8;chapter++)assert.equal(selectorState(chapter,{completed:[8]}).status,'unplayed');
+ assert.equal(selectorState(8,{completed:8,maxUnlocked:8}).status,'unplayed','an old frontier must not be interpreted as a completed set');
 });
 
-test('locked confirm cannot focus or enter a role; browsing and valid confirm never complete a story',()=>{
+test('fresh chapter eight can be selected and entered without completing or writing earlier chapters',()=>{
  const f=fixture();try{
   const saved=f.store.read(),writes=f.writes();
   assert.equal(f.selector.getState().chapter,1);
   f.selector.next();assert.equal(f.selector.getState().chapter,2);
-  assert.equal(f.controls.confirm.getAttribute('aria-disabled'),'true');
-  assert(f.groups[2].links.every(link=>link.getAttribute('href')===null));
-  assert.equal(f.selector.confirm(),false);
-  assert.equal(f.context.focusCalls.length,0);assert.equal(f.context.scrollTargets.length,0);
+  assert.equal(f.controls.confirm.getAttribute('aria-disabled'),null);
+  assert(f.groups[2].links.every(link=>link.getAttribute('href')));
+  assert.equal(f.selector.confirm(),true);
+  f.selector.select(8);assert.equal(f.selector.confirm(),true);
+  assert.equal(f.context.focused.getAttribute('data-entry'),'8:0');
+  assert(f.groups[8].links.every(link=>link.getAttribute('aria-disabled')===null));
+  assert(f.groups[8].links.every(link=>link.hint.textContent==='未通关'));
   f.selector.select(0);assert.equal(f.selector.confirm(),true);
   assert.equal(f.context.focused.getAttribute('data-entry'),'0:0');
   f.selector.select(1);assert.equal(f.selector.confirm(),true);
@@ -122,18 +127,28 @@ test('locked confirm cannot focus or enter a role; browsing and valid confirm ne
  }finally{f.cleanup();}
 });
 
-test('normal external completion refreshes both role links but replay does not unlock an extra chapter',()=>{
+test('out-of-order completion refreshes shared role badges without marking unplayed chapters complete',()=>{
  const f=fixture();try{
   f.selector.select(2);
-  assert.equal(f.store.complete(2).reason,'locked');
-  assert.equal(f.store.complete(1).reason,'completed');
+  assert.equal(f.store.complete(2).reason,'completed');
   f.window.dispatch('storage',{key:f.store.key});
-  assert.equal(f.selector.getState().status,'current');
-  assert.equal(f.controls.confirm.getAttribute('aria-disabled'),'false');
+  assert.equal(f.selector.getState().status,'complete');
+  assert.equal(f.controls.confirm.getAttribute('aria-disabled'),null);
   assert.deepEqual(f.groups[2].links.map(link=>link.getAttribute('href')),['./chapter2-v0/','./chapter2-v1/']);
   assert.equal(f.selector.confirm(),true);assert.equal(f.context.focused.getAttribute('data-entry'),'2:0');
-  assert.equal(f.store.complete(1).reason,'already-completed');
-  assert.deepEqual(f.store.read(),{version:1,completed:1,maxUnlocked:2});
-  f.selector.select(3);assert.equal(f.selector.confirm(),false);
+  assert(f.groups[2].links.every(link=>link.hint.textContent==='已通关'));
+  assert.equal(f.store.complete(2).reason,'already-completed');
+  assert.equal(f.store.complete(8).reason,'completed');
+  assert.deepEqual(f.store.read(),{version:2,completed:[2,8]});
+  f.selector.select(1);assert.equal(f.selector.getState().status,'unplayed');
+  f.selector.select(3);assert.equal(f.selector.confirm(),true);assert.equal(f.selector.getState().status,'unplayed');
+  f.selector.select(8);assert.equal(f.selector.getState().status,'complete');
  }finally{f.cleanup();}
+});
+
+test('the two original gender variants have explicit labels and the entry explains free chapter choice',()=>{
+ assert.equal((html.match(/>Q哥版<\/a>/g)||[]).length,8);
+ assert.equal((html.match(/>Q妹版<\/a>/g)||[]).length,8);
+ assert(html.includes('所有章节均可直接游玩'));
+ assert(!html.includes('通关后再开启下一集'));
 });

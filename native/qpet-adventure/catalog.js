@@ -1,14 +1,14 @@
-import {createProgressStore} from './common/progress.js';
+import {createProgressStore} from './common/progress.js?v=087fbd4442bad3b3';
 
 const entryOf=value=>{
  const match=/^([0-8]):([01])$/.exec(value??'');
  if(!match||match[1]==='0'&&match[2]!=='0')return null;
  return{chapter:Number(match[1]),variant:Number(match[2])};
 };
-/** Fixed catalog anchors only. The native host also checks direct entries. */
+/** Completion badges describe progress without restricting valid entries. */
 export function mountCatalog({document=globalThis.document,window=globalThis.window,store=createProgressStore()}={}){
  const rows=[...document.querySelectorAll('a[data-entry]')].map(link=>{
-  const hint=document.createElement('span');hint.className='progress-lock-hint';hint.hidden=true;
+  const hint=document.createElement('span');hint.className='progress-state';hint.hidden=true;
   link.insertAdjacentElement('afterend',hint);
   return{link,hint,entry:entryOf(link.getAttribute('data-entry')),href:link.getAttribute('href'),
    title:link.getAttribute('title'),tabindex:link.getAttribute('tabindex')};
@@ -17,14 +17,15 @@ export function mountCatalog({document=globalThis.document,window=globalThis.win
  function refresh(){
   const progress=store.read();
   for(const row of rows){
-   const {link,hint,entry}=row,locked=!entry||entry.chapter>0&&entry.chapter>progress.maxUnlocked;
+   const {link,hint,entry}=row,locked=!entry;
    if(locked){
-    const message=entry?`先完成第${entry.chapter-1}集`:'该入口不可用';
+    const message='该入口不可用';
     link.removeAttribute('href');link.setAttribute('aria-disabled','true');link.setAttribute('tabindex','-1');
     link.setAttribute('title',message);hint.textContent=message;hint.hidden=false;
    }else{
     restore(link,'href',row.href);restore(link,'title',row.title);restore(link,'tabindex',row.tabindex);
-    link.removeAttribute('aria-disabled');hint.hidden=true;
+    link.removeAttribute('aria-disabled');
+    hint.textContent=entry.chapter===0?'可随时观看':progress.completed.includes(entry.chapter)?'已通关':'未通关';hint.hidden=false;
    }
   }
   return progress;
@@ -46,13 +47,12 @@ export function mountCatalog({document=globalThis.document,window=globalThis.win
 
 export const CHAPTER_TITLES=Object.freeze(['预告片','第1集 · 启航','第2集 · 爱情之爆发力','第3集 · 贼窝','第4集 · 密室','第5集 · 黑暗之眼','第6集 · 巨树','第7集 · 巨树之颠','第8集 · 大结局—宝藏']);
 const chapterNumber=value=>Number.isInteger(value)?Math.max(0,Math.min(8,value)):1;
-/** The selection is separate from story progress; browsing never unlocks a chapter. */
-export function selectorState(chapter=1,progress={completed:0,maxUnlocked:1}){
- const selected=chapterNumber(chapter),valid=Number.isInteger(progress?.completed)&&progress.completed>=0&&progress.completed<=8&&progress.maxUnlocked===Math.min(8,progress.completed+1);
- const completed=valid?progress.completed:0,maxUnlocked=valid?progress.maxUnlocked:1;
- const canPlay=selected===0||selected<=maxUnlocked;
- return{chapter:selected,title:CHAPTER_TITLES[selected],status:selected===0?'watch':selected<=completed?'complete':canPlay?'current':'locked',
-  canGoLeft:selected>0,canGoRight:selected<8,canPlay,entryIds:selected===0?['0:0']:[selected+':0',selected+':1']};
+/** Browsing and entry never mark a chapter complete. */
+export function selectorState(chapter=1,progress={completed:[]}){
+ const selected=chapterNumber(chapter),valid=Array.isArray(progress?.completed)&&progress.completed.every(n=>Number.isInteger(n)&&n>=1&&n<=8);
+ const completed=valid?progress.completed:[];
+ return{chapter:selected,title:CHAPTER_TITLES[selected],status:selected===0?'watch':completed.includes(selected)?'complete':'unplayed',
+  canGoLeft:selected>0,canGoRight:selected<8,canPlay:true,entryIds:selected===0?['0:0']:[selected+':0',selected+':1']};
 }
 export function moveSelection(chapter,delta){return chapterNumber(chapterNumber(chapter)+(Number.isInteger(delta)?delta:0));}
 /** Original stopped selection artwork, normal controls, and existing native save. */
@@ -63,7 +63,7 @@ export function mountSelector({document=globalThis.document,window=globalThis.wi
  const groups=[...document.querySelectorAll('[data-chapter]')],previous=host.querySelector('[data-selector-action="previous"]'),next=host.querySelector('[data-selector-action="next"]');
  const confirm=host.querySelector('[data-selector-action="confirm"]'),help=host.querySelector('[data-selector-action="help"]'),helpPanel=host.querySelector('[data-selector-help]'),closeHelp=host.querySelector('[data-selector-close-help]');
  let selected=1;
- const statusText={watch:'可随时观看',current:'当前关',complete:'已通关',locked:'请先通关上一集'};
+ const statusText={watch:'可随时观看',unplayed:'未通关',complete:'已通关'};
  function refresh(){
   catalog?.refresh();
   const state=selectorState(selected,store.read());
@@ -71,12 +71,12 @@ export function mountSelector({document=globalThis.document,window=globalThis.wi
   for(const image of statuses)image.hidden=image.getAttribute('data-selector-status')!==state.status;
   for(const group of groups){
    const active=Number(group.getAttribute('data-chapter'))===state.chapter;
-   group.hidden=!active;group.setAttribute('data-selector-locked',String(active&&!state.canPlay));
+   group.hidden=!active;
   }
   previous.disabled=!state.canGoLeft;next.disabled=!state.canGoRight;
-  confirm.setAttribute('aria-disabled',String(!state.canPlay));
+  confirm.removeAttribute('aria-disabled');
   title.textContent=state.title+' · '+statusText[state.status];
-  message.textContent=state.canPlay?(state.chapter===0?'点击确定，再选择观看预告片。':'点击确定，选择角色开始冒险。'):`先完成第${state.chapter-1}集，再来继续这段冒险。`;
+  message.textContent=state.chapter===0?'点击确定，再选择观看预告片。':'选择Q哥版或Q妹版，即可开始这一集。';
   stage.setAttribute('aria-label',state.title+'，'+statusText[state.status]);
   host.setAttribute('data-selected-chapter',String(state.chapter));
   return state;
@@ -85,7 +85,6 @@ export function mountSelector({document=globalThis.document,window=globalThis.wi
  function move(delta){return select(moveSelection(selected,delta));}
  function enter(){
   const state=refresh();
-  if(!store.canPlay(state.chapter)){message.textContent=`先完成第${state.chapter-1}集，再来继续这段冒险。`;return false;}
   const group=groups.find(node=>Number(node.getAttribute('data-chapter'))===state.chapter);
   const link=group?.querySelector('a[data-entry][href]');
   group?.scrollIntoView?.({block:'nearest',behavior:'auto'});link?.focus?.({preventScroll:true});

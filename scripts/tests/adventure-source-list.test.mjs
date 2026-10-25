@@ -36,6 +36,8 @@ test('source-list CLI keeps the actual portable cache regressions and its own gu
             'native/qpet-adventure/tests/path-cache.test.mjs',
             'native/qpet-adventure/tests/bitmap-cache.test.mjs',
             'native/qpet-adventure/tests/visible-fill.test.mjs',
+            'native/qpet-adventure/tests/progress.test.mjs',
+            'scripts/tests/adventure-selector.test.mjs',
             'scripts/tests/adventure-source-list.test.mjs',
         ];
         for (const name of required) {
