@@ -11,6 +11,7 @@ export const CATEGORIES=[
 ];
 export const PORTAL_FONTS=['qpet-rounded.woff2','OFL-ZCOOL-KuaiLe.txt','source.json'];
 const CONTROLS={
+ 'qpet-taekwondo':'D左腿、F左拳、J右拳、K右腿，空格使用道具；手机使用下方五键。原版任意松键会清空当前动作。结束后可点原图按钮再来一次。',
  'qpet-clouds':'按空格起跳，撞墙后看准轮盘角度再次跳跃；能量满后连续按空格向上冲。手机按下方跳跃按钮。原积分服务不可用，本局分数在游戏中显示。',
  'qpet-hunting':'移动鼠标瞄准，点击射击；悬停左右边缘切换场景。手机按住左右按钮，用另一根手指点按射击。选择Q哥或Q妹开始本地练习，不扣费、不兑换元宝。',
  'qpet-match':'点击管道改变方向，连接两侧带着爱心的 Q宠。',

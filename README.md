@@ -19,6 +19,8 @@
 
 | QQ企鹅穿云 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-clouds/) | [classic-012](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-012) | [迁移说明](native/qpet-clouds/README.md)：原六角色/轮盘/果实/原声；积分上传服务不恢复 |
 
+| QQ跆拳道 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-taekwondo/) | [classic-007](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-007) | [迁移说明](native/qpet-taekwondo/README.md)：原角色/十关规则/原声；真实命中、换关、失败重玩与手机离线已测，未称十关连续通关 |
+
 `native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页。首页卡片只显示封面、名称、开始与详情，封面、标题和开始按钮均进入复刻版；有原件时在详情内提供「原版对照」按钮。音速原件尚缺，不伪造原版入口；来源说明留在本仓库文档，不展示在玩家大厅。候选可以单独构建预览，仍不会进入公开首页。`originals/` 是独立的原件校对模块，其固定清单与原生游戏闭包分开验证；可独立导出的原生游戏包不包含播放器。旧 `player.html?game=...` 地址显示下架通知。
 
 ## 本地运行

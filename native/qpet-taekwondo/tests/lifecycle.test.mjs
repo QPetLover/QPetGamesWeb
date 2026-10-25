@@ -41,3 +41,18 @@ test('unexpected handler errors, including a different null access, still propag
 test('detached Ball guard occurs after original movement and does not depend on engine error text',()=>{
  const g=new TaekwondoGame({random:()=>.3});g.click(g.root.lx);for(let i=0;i<65;i++)g.advance(1000/24);const ball=g.root.ball,player=g.root.ply;g.click(g.root.btn);assert.equal(ball.parent,null);assert.equal(player.parent,null);ball.y=100;ball.vy=1;ball.pendi=false;const n=g.scriptAborts.length;ball.onEnterFrame({});player.key({});assert.equal(ball.vy,1.5);assert.equal(ball.y,101.5);assert.deepEqual(g.scriptAborts.slice(n).map(e=>e.owner),['55','3262']);
 });
+
+// Finite branch fixture: deliberately enters level10 end state, not a played ten-level run.
+// Raw AS methods are independently transcribed by oracle-host; display scheduler is shared.
+test('six total-victory branches match raw AS at frame100, source result text and original replay',async()=>{
+ const {createOracle,snapshot}=await import('./oracle-host.mjs');const {Game:OracleGame}=createOracle();
+ for(const sex of[102,103])for(const level of[1,2,3]){
+  const pair=[new TaekwondoGame({random:()=>.3}),new OracleGame({random:()=>.3})];
+  for(const g of pair){const r=g.root;r.sex=sex;r.level=level;r.gk=10;r.init();g.flushInitial();r.chushi();g.flushInitial();r.i=0;r.life=5;r.score=26;r.guoguan();g.flushInitial();r.ply.mc.gotoAndPlay(99);}
+  for(let frame=0;frame<4;frame++){for(const g of pair)g.frameTick();assert.deepEqual(snapshot(pair[0]),snapshot(pair[1]),[sex,level,frame].join(':'));}
+  for(const g of pair){const r=g.root;assert.equal(r.sl.visible,true);assert.equal(r.ply.visible,false);assert.match(r.sl._txt2.htmlText,/1000分/);assert.equal(r.score,26);assert.equal(g.hasListener(g.stage,'enterFrame',r.xialuo),false);g.click(r.sl.cx_btn);assert.equal(r.sl.visible,false);assert.equal(r.gk,1);assert.equal(r.life,5);assert.equal(r.sex,sex);assert.equal(r.level,level);}
+  assert.deepEqual(snapshot(pair[0]),snapshot(pair[1]),'replay');
+  for(let frame=0;frame<85;frame++){for(const g of pair)g.advance(1000/24);assert.deepEqual(snapshot(pair[0]),snapshot(pair[1]),'post replay '+frame);}
+  assert(pair[0].root.i<10);
+ }
+});

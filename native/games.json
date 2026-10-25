@@ -253,5 +253,17 @@
     "category": "classic",
     "summary": "看准角度起跳，穿过森林，收集果实补充能量。",
     "cover": "covers/qpet-clouds.png"
+  },
+  {
+    "id": "qpet-taekwondo",
+    "title": "QQ跆拳道",
+    "path": "qpet-taekwondo",
+    "preview": "preview-taekwondo",
+    "candidate": "minitool-taekwondo-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-007",
+    "category": "classic",
+    "summary": "看准落球，交替出拳踢腿，挑战十关训练。",
+    "cover": "covers/qpet-taekwondo.png"
   }
 ]

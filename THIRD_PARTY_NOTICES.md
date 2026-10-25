@@ -71,3 +71,7 @@ Noto 字形采用 **SIL Open Font License 1.1**，Copyright 2022 The Noto Projec
 ## QQ企鹅穿云
 
 原件来自QPetLover/QPetGames保存的 `classical_games/swf/QQ企鹅穿云.swf`，SHA-256 `1f02ce6d9affb433e95c09fd8bcd05653b1cfb9938afa1e04c0cdfe5eeb66da9`。原画、10段MPEG声音、游戏作品与商标归腾讯或各原作者；素材权利不因社区归档或迁移而改为开源。JPEXS FFDec派生的静态Canvas helper按GPL-3.0，原设备字采用固定校对字体的包内字形，来源见 [迁移说明](native/qpet-clouds/README.md) 及该目录assets的provenance文件。原积分服务不恢复，不伪造上传、排名或账号成功。
+
+## QQ跆拳道
+
+原件来自QPetLover/QPetGames保存的 `classical_games/swf/QQ跆拳道.swf`，SHA-256 `6df89818db38d2748b7185df470627f0cc013e0410c07e605b76148c4d77b9f8`。原画、5段MPEG、字体与商标归腾讯或各原作者；迁移不追加素材授权。JPEXS FFDec派生静态Canvas helper按GPL-3.0，可读源码、字体来源和验证边界见 [迁移说明](native/qpet-taekwondo/README.md)。旧账号和官网跳转由宿主提示处理，不伪造积分上传。
