@@ -21,6 +21,7 @@ const CONTROLS={
  'qpet-adventure':'方向键移动，空格与人物对话。跟随各关画面中的提示探索和解谜。',
  'qpet-guardian':'在 QGG 所在区域调整角度，点按投出雪球。',
  'qpet-stars':'← → 移动 QGG 托住 QMM；↑ ↓ 微调弹跳角度。手机使用屏幕上的方向按钮。',
+ 'qpet-trays':'← → 控制移动，保持平衡，把盘子送到右侧。手机使用画面下方的方向按钮。',
  'qpet-fishing':'移动鼠标或拖动手指抓鱼，避开障碍。',
  'qpet-differences':'对照左右两图，点击右图不同之处。手机直接点按右图。',
 };
@@ -54,7 +55,7 @@ export function renderSections(catalog,{coverSizes={}}={}){
   const entries=games.filter(game=>game.category===category.id);
   if(!entries.length)return '';
   const cards=entries.map(game=>`<article class="game-card${game.cover?' has-cover':''}" data-game="${escape(game.id)}">
-${game.cover?`<a class="game-cover" href="${escape(game.path)}/" aria-label="${escape(game.title)}"><img src="${escape(game.cover)}" alt="${escape(game.title)}游戏开始画面" loading="lazy" decoding="async"${coverSizes[game.cover]?` width="${coverSizes[game.cover].width}" height="${coverSizes[game.cover].height}"`:''}></a>`:''}
+${game.cover?`<a class="game-cover" href="${escape(game.path)}/" aria-label="${escape(game.title)}"><img src="${escape(game.cover)}" alt="${escape(game.title)}游戏画面" loading="lazy" decoding="async"${coverSizes[game.cover]?` width="${coverSizes[game.cover].width}" height="${coverSizes[game.cover].height}"`:''}></a>`:''}
 <div class="card-body"><h3><a class="native-title" href="${escape(game.path)}/">${escape(game.title)}</a></h3>
 <div class="game-actions"><a class="play-link" href="${escape(game.path)}/" aria-label="开始游戏：${escape(game.title)}">开始游戏 <span aria-hidden="true">→</span></a><a class="details-link" href="games/${escape(game.id)}/" aria-label="游戏详情：${escape(game.title)}">详情</a></div></div>
 </article>`).join('\n');
@@ -63,9 +64,9 @@ ${game.cover?`<a class="game-cover" href="${escape(game.path)}/" aria-label="${e
 }
 export function renderDetail(game,{cssVersion=''}={}){
  const start='../../'+game.path+'/',original=comparisonHref(game,{prefix:'../../'});
- const cover=game.cover?`<div class="detail-cover"><img src="../../${escape(game.cover)}" alt="${escape(game.title)}游戏开始画面"></div>`:'';
+ const cover=game.cover?`<div class="detail-cover"><img src="../../${escape(game.cover)}" alt="${escape(game.title)}游戏画面"></div>`:'';
  return `<!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="${escape(game.summary)}"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'; object-src 'none'; frame-src 'none'"><title>${escape(game.title)} · Q宠游戏</title><link rel="icon" href="data:,"><link rel="preload" href="../../fonts/qpet-rounded.woff2?v=ced54c19452bc9c2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../../portal.css${cssVersion?'?v='+cssVersion:''}"></head>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="${escape(game.summary)}"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'; object-src 'none'; frame-src 'none'"><title>${escape(game.title)} · Q宠游戏</title><link rel="icon" href="data:,"><link rel="preload" href="../../fonts/qpet-rounded.woff2?v=6a0c699ecde74356" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../../portal.css${cssVersion?'?v='+cssVersion:''}"></head>
 <body><div class="site-shell"><header class="site-header"><a class="brand" href="../../" aria-label="Q宠游戏大厅"><span class="brand-mark" aria-hidden="true">Q</span><span>Q宠游戏</span></a><nav aria-label="主导航"><a href="../../">返回游戏大厅</a></nav></header><main class="detail-main"><a class="breadcrumb" href="../../#${escape(game.category)}">← ${CATEGORIES.find(category=>category.id===game.category).title}</a><article class="detail-panel" data-game="${escape(game.id)}">${cover}<div class="detail-copy"><h1>${escape(game.title)}</h1><p class="detail-summary">${escape(game.summary)}</p>${CONTROLS[game.id]?`<section class="detail-controls"><h2>怎么玩</h2><p>${escape(CONTROLS[game.id])}</p></section>`:''}<div class="detail-actions"><a class="play-link" href="${escape(start)}">开始游戏 →</a>${original?`<a class="comparison-link" href="${escape(original)}">原版对照 ↗</a>`:''}</div></div></article></main><footer class="detail-footer"><a class="footer-brand" href="../../">Q宠游戏</a><p>旧时光，慢慢玩。</p><a href="../../">返回游戏大厅 ↑</a></footer></div></body></html>\n`;
 }
 export async function buildPortal({repositoryRoot=fileURLToPath(new URL('../',import.meta.url)),outputDirectory,catalog}={}){

@@ -1,0 +1,83 @@
+{
+  "1071": {
+    "text": "",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      6605,
+      1911
+    ],
+    "color": [
+      135,
+      83,
+      8,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "1070",
+    "fontData": {
+      "advance": {},
+      "ascent": 894,
+      "descent": 156,
+      "leading": 170
+    },
+    "outlines": false,
+    "variable": ""
+  },
+  "1158": {
+    "text": "",
+    "size": 320,
+    "box": [
+      1338,
+      -40,
+      2178,
+      405
+    ],
+    "color": [
+      255,
+      255,
+      204,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "1092",
+    "fontData": {
+      "advance": {},
+      "ascent": 894,
+      "descent": 156,
+      "leading": 170
+    },
+    "outlines": false,
+    "variable": ""
+  },
+  "1159": {
+    "text": "",
+    "size": 320,
+    "box": [
+      1338,
+      -40,
+      2347,
+      405
+    ],
+    "color": [
+      255,
+      255,
+      204,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "1092",
+    "fontData": {
+      "advance": {},
+      "ascent": 894,
+      "descent": 156,
+      "leading": 170
+    },
+    "outlines": false,
+    "variable": ""
+  }
+}

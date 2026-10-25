@@ -1,0 +1,132 @@
+{
+  "sourceSWF": "QPetLover/QPetGames classical_games/swf/Q宠端盘子.swf",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourceSHA256": "88efe57892ef034a946571ddb794f738ed9e2b8ccffb9b5e50200ebb3c3b6131",
+  "sourceBytes": 855766,
+  "stage": {
+    "width": 800,
+    "height": 600,
+    "fps": 25
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 1178,
+  "embeddedImages": {
+    "imageObj1172": {
+      "mime": "image/JPEG",
+      "bytes": 46910,
+      "sha256": "beba0c46ccff0cd05409d86fef3e5e401a0487b48aee3830a4298b2d4aefe129"
+    },
+    "imageObj1190": {
+      "mime": "image/PNG",
+      "bytes": 3956,
+      "sha256": "54448e6abe0d8bd71e1baaf0f9574f0d66a92a8b0bc89bd33e1cd13f7f403287"
+    },
+    "imageObj1196": {
+      "mime": "image/PNG",
+      "bytes": 3945,
+      "sha256": "5e18e07b471875e09157ba225f08102bde06bd16d413f3412ca14761f238c48d"
+    },
+    "imageObj1198": {
+      "mime": "image/PNG",
+      "bytes": 3886,
+      "sha256": "d349dbee228eee57dd553feaaf420d28f312a9d0e44b92a7163e8bca75d87bf1"
+    },
+    "imageObj1201": {
+      "mime": "image/PNG",
+      "bytes": 3951,
+      "sha256": "db16865d742c26e1591c208c17cb34f94b3e1489b29f6053c0272eda3f7523af"
+    },
+    "imageObj1203": {
+      "mime": "image/PNG",
+      "bytes": 3902,
+      "sha256": "92e7c688ddaf6b144f1e3f4ed39ee4735d6d3fc85fa2ce5b6bf7e8dbfdc9d382"
+    },
+    "imageObj1148": {
+      "mime": "image/PNG",
+      "bytes": 102702,
+      "sha256": "781244d7f6cf4ee27a307462c01e0ef52d0abc22385909a2ac525a9ba2a0d357"
+    },
+    "imageObj1149": {
+      "mime": "image/PNG",
+      "bytes": 5144,
+      "sha256": "37c30ec14815662452b7f72f6fbf84ff66308d356b1bd675bebed8b879be4808"
+    },
+    "imageObj1062": {
+      "mime": "image/PNG",
+      "bytes": 187226,
+      "sha256": "f6c51badc297c8e612019b5e9675201b5dfe93864f01ad5ca685ee702c700726"
+    },
+    "imageObj1064": {
+      "mime": "image/PNG",
+      "bytes": 10743,
+      "sha256": "46b6e3ba0fc0a0fba43bc7c7c7f941ed9ab856e8343f29d12f6726940732ae3a"
+    },
+    "imageObj1067": {
+      "mime": "image/PNG",
+      "bytes": 11248,
+      "sha256": "d39368275c582889506858d9ccd607d40e92b601a40a4b991c156458ee8cd4c0"
+    },
+    "imageObj1118": {
+      "mime": "image/PNG",
+      "bytes": 94173,
+      "sha256": "7fed48cc54cdf81f146f9817ec46165ee244d9792c8713328d9ce044c301d1ac"
+    },
+    "imageObj1122": {
+      "mime": "image/PNG",
+      "bytes": 10671,
+      "sha256": "2ba70b4a8c41b10d639792bde30757d5506a5837a7034e54912420446153a0e5"
+    },
+    "imageObj1134": {
+      "mime": "image/PNG",
+      "bytes": 25349,
+      "sha256": "15562b84b20a2dbc8018ad5764ac077c55758fda28cd8b8d23074fcdb2cf0ae9"
+    },
+    "imageObj1136": {
+      "mime": "image/PNG",
+      "bytes": 59576,
+      "sha256": "d65bc8de31d306f9b0df5a9f44d276f61e9eb43eb51b25a1ca119bc0afe7f4d3"
+    },
+    "imageObj1138": {
+      "mime": "image/PNG",
+      "bytes": 63882,
+      "sha256": "af4f4b9f6307202efb71fe2a5d62525da407cfe8daf0f2d9dfedd3aae98bdd1f"
+    }
+  },
+  "inputs": {
+    "source.xml": "793d4a419ddd4208e3f2eb90a5c9dfe80ad1009c000f076d5727a7ec84060611",
+    "canvas/frames.html": "e333616e3a966ae7929fb5ba623d48316093a3a1578d4d12ab9129e36be2e407",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked/DefineSprite_1055_GG3/frames.html": "3b67b9896a14eafe87d1c46328ac0f416fb97a4d09e30a3b8c73e1cbe6a28f32",
+    "linked/DefineSprite_1072_frame.Over/frames.html": "e0761abef26d0b22b117c89a10050e808d1f0667512846ae55ecd5395bb1deca",
+    "linked/DefineSprite_1120_frame.Help/frames.html": "0782a0cbfaffecdb9d9587200c6f3d495a20fb2252ea086d9f1b73955ed37cda",
+    "linked/DefineSprite_1140_frame.Bullet/frames.html": "08e7ebbbe521fac558c864e4c6b50072acdf89afd8f0d6c97290e44b87909393",
+    "linked/DefineSprite_1144_Dish/frames.html": "1e16875c2aa4189ba5e76618d0872525ac361d5303de4fddce39622936c10990",
+    "linked/DefineSprite_201_MM1/frames.html": "7498567207523a6dc3a17dfe11ff3952a21ed6f71c00364e630431cd90ec32ab",
+    "linked/DefineSprite_392_GG1/frames.html": "ce03cbbc8ff7d2b5b80f8a87aa9c9bca041a4e3c51fe76230a4985afb67ef14a",
+    "linked/DefineSprite_640_MM2/frames.html": "817909a0ee4adc423011e7fb30464fd64e5b7c64429fd41ac303151966da446a",
+    "linked/DefineSprite_760_MM3/frames.html": "4fb4956b1b4626e800abe8f43df5df1add18745715cee7cd78af9af3e71e9581",
+    "linked/DefineSprite_980_GG2/frames.html": "fc35ce8c502ddca130eda5d9a156da1abe1ae2824493cb405ac673920f871e87"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "0 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "621 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "4820af209c624fc2e65aa54cda22ae8553e354fd18c6b600b8bdbba04f8a470b",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/cac5e2d7636da081a178a2300865eb5090649969/classical_games/swf/Q宠端盘子.swf",
+  "sourceVersionCaution": "Fixed archived classic SWF; no claim of historical Flash Player equivalence.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 637264,
+  "previousFFDecBitmapBytes": 637264,
+  "runtimeCaches": {
+    "paths": "immutable Path2D source paths; strokes and morphs retain native paths",
+    "bitmap": "immutable input plus complete CXFORM;16MiB admission",
+    "helpGlow": "XML-proven fixed1103 input;single full backing cache;complete matrix/CXFORM/frame/ratio/time key;64MiB cap;source place slot preserved",
+    "rootLayers": "disabled by default to avoid extra AA rounding"
+  }
+}

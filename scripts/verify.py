@@ -63,7 +63,7 @@ def verify_home_links(html,catalog,cover_sizes=None):
             assert len(row['images'])==1,f"{game['id']}: one original opening cover required"
             cover=row['images'][0]
             assert cover.get('src')==game['cover'],f"{game['id']}: incorrect cover"
-            assert cover.get('alt')==game['title']+'游戏开始画面',f"{game['id']}: incorrect cover label"
+            assert cover.get('alt')==game['title']+'游戏画面',f"{game['id']}: incorrect cover label"
             assert cover.get('loading')=='lazy' and int(cover.get('width',0))>0 and int(cover.get('height',0))>0,f"{game['id']}: cover dimensions and loading required"
             if cover_sizes is not None:assert (int(cover['width']),int(cover['height']))==cover_sizes[game['cover']],f"{game['id']}: cover aspect ratio differs from original"
         else:assert not row['images'],f"{game['id']}: unexpected cover"
@@ -82,7 +82,7 @@ def verify_home_links(html,catalog,cover_sizes=None):
     return [game['id'] for game in ordered]
 
 ORIGINAL_IDS={'qpet-guardian':'classic-001','magpie-bridge':'classic-002','qpet-racing':'classic-003',
-              'qpet-differences':'classic-005','qpet-fishing':'classic-008',
+              'qpet-differences':'classic-005','qpet-fishing':'classic-008','qpet-trays':'classic-006',
               'qpet-match':'classic-014','qpet-stars':'classic-015','qpet-forest':'happy-forest',
               'qpet-qqtang':'happy-qqtang','qpet-dungeon':'happy-dungeon'}
 

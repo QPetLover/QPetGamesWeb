@@ -1,0 +1,157 @@
+{
+  "identity": {
+    "sourceRepository": "QPetLover/QPetGames",
+    "commit": "cac5e2d7636da081a178a2300865eb5090649969",
+    "path": "classical_games/swf/Q宠端盘子.swf",
+    "sha256": "88efe57892ef034a946571ddb794f738ed9e2b8ccffb9b5e50200ebb3c3b6131",
+    "bytes": 855766,
+    "signature": "CWS",
+    "swfVersion": 9,
+    "declaredUncompressedBytes": 1148832,
+    "actualUncompressedBytes": 1148832,
+    "stageTwips": [
+      0,
+      16000,
+      0,
+      12000
+    ],
+    "stagePixels": [
+      800.0,
+      600.0
+    ],
+    "fps": 25.0,
+    "rootFrames": 2
+  },
+  "sounds": {
+    "1": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 5760,
+      "durationDeclared": 0.5224489795918368,
+      "dataBytes": 1049,
+      "dataSHA256": "e80c38fb96affe38f6cb29e46a6f433f24369465c65337debc0d75819c2dd5d5",
+      "seekSamples": 0,
+      "mpegBytes": 1047,
+      "mpegSHA256": "08228463ba0d57f480059067f086b1eb7dabc55355ac65d78af08d1d3aea226d"
+    },
+    "2": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 29952,
+      "durationDeclared": 2.716734693877551,
+      "dataBytes": 5417,
+      "dataSHA256": "b541c3ff48fa828225d6864cce7cf6b849c24ea654ae8095acc4cb11d74572e1",
+      "seekSamples": 0,
+      "mpegBytes": 5415,
+      "mpegSHA256": "5bb194416fa8c26aea3ea2a9d8d634d864287a4871b35fe08112ebe1508340e7"
+    },
+    "3": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 6912,
+      "durationDeclared": 0.626938775510204,
+      "dataBytes": 1257,
+      "dataSHA256": "a85c521dd2fbfc51be6b3c9471ac4d2e46afccd4900649974f152899a0a927a2",
+      "seekSamples": 0,
+      "mpegBytes": 1255,
+      "mpegSHA256": "632db61b44b49d07e3b1cb2d3808b8c92d135df7241d05d14896b05170a54dc1"
+    },
+    "4": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 4032,
+      "durationDeclared": 0.3657142857142857,
+      "dataBytes": 737,
+      "dataSHA256": "cccae7976935a38d2d673b775a06a875ccfc55dc33c7f0e5e22214d9bccd6008",
+      "seekSamples": 0,
+      "mpegBytes": 735,
+      "mpegSHA256": "4b9c1b7018b2a925dfe2608882616bbc6cbb3d93de6e7a0716f4ef9f67f76dd1"
+    },
+    "5": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 8640,
+      "durationDeclared": 0.7836734693877551,
+      "dataBytes": 1569,
+      "dataSHA256": "f4cc78a4877590931af85d10ad19b98029997ce042ab6328895fab7a564f15b0",
+      "seekSamples": 0,
+      "mpegBytes": 1567,
+      "mpegSHA256": "251dd83907a8b812b9202b285026c58db01027d3806e47356b38fc146541f4c0"
+    },
+    "80": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 24192,
+      "durationDeclared": 2.1942857142857144,
+      "dataBytes": 4377,
+      "dataSHA256": "36b7ec77c98ccb0c48a9fa2aaf96d85012d444b546b7604fc5a7eb26024cacba",
+      "seekSamples": 0,
+      "mpegBytes": 4375,
+      "mpegSHA256": "89c3dfcee117fb3039e1206df54397c15596ee25f2a808746e4cd1f8ebfd872b"
+    },
+    "147": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 4608,
+      "durationDeclared": 0.4179591836734694,
+      "dataBytes": 841,
+      "dataSHA256": "805d7e8866fb8cbeb87c4127da23f055356d6fcf64c0ee8abbff3ac4039220bd",
+      "seekSamples": 0,
+      "mpegBytes": 839,
+      "mpegSHA256": "d755fa413de6830bc3f68541e623458ba289f06c4e5e33981abce2a2416da147"
+    },
+    "177": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 5184,
+      "durationDeclared": 0.47020408163265304,
+      "dataBytes": 945,
+      "dataSHA256": "27c34d3a1ef5aab83248a90a04a1fb06d6e0872ddda70e83a19610c033f770aa",
+      "seekSamples": 0,
+      "mpegBytes": 943,
+      "mpegSHA256": "73355df30e632f5d94a3778085f8e254d2dbd7ba5c332abec94f076e39a0f74e"
+    },
+    "720": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 6336,
+      "durationDeclared": 0.5746938775510204,
+      "dataBytes": 1153,
+      "dataSHA256": "68bb844a93c470cca44485493a93844ca1262a038234fe93d5abb79ea0b277cf",
+      "seekSamples": 0,
+      "mpegBytes": 1151,
+      "mpegSHA256": "863f516cd6cd40b1a479759549bc98f15e48672139ffcdb8faf36bd62e82e7c7"
+    },
+    "1058": {
+      "format": 2,
+      "rate": 11025,
+      "bits": 16,
+      "channels": 1,
+      "samples": 6336,
+      "durationDeclared": 0.5746938775510204,
+      "dataBytes": 1153,
+      "dataSHA256": "e322ee3fb691e8a0e85a9cca5e72b60808edb53a0e60be3a69b18b12256392a6",
+      "seekSamples": 0,
+      "mpegBytes": 1151,
+      "mpegSHA256": "df3a984a1ee121b0edd4ea0f23258fc13e1f41c0a321ced974fb250f27c0c3f3"
+    }
+  }
+}

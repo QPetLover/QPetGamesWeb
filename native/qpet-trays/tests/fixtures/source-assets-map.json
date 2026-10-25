@@ -1,0 +1,30 @@
+{
+  "source": {
+    "sourceRepository": "QPetLover/QPetGames",
+    "commit": "cac5e2d7636da081a178a2300865eb5090649969",
+    "path": "classical_games/swf/Q宠端盘子.swf",
+    "sha256": "88efe57892ef034a946571ddb794f738ed9e2b8ccffb9b5e50200ebb3c3b6131",
+    "bytes": 855766,
+    "signature": "CWS",
+    "swfVersion": 9,
+    "declaredUncompressedBytes": 1148832,
+    "actualUncompressedBytes": 1148832,
+    "stageTwips": [
+      0,
+      16000,
+      0,
+      12000
+    ],
+    "stagePixels": [
+      800.0,
+      600.0
+    ],
+    "fps": 25.0,
+    "rootFrames": 2
+  },
+  "scripts": {
+    "frame/Main.as": {
+      "sha256": "5f7316f063fc8f74940e177ad6fd68cdbeb60e429b6cef1e9f73a204b2864b83"
+    }
+  }
+}

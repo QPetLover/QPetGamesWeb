@@ -1,0 +1,90 @@
+{
+  "sourceSHA256": "88efe57892ef034a946571ddb794f738ed9e2b8ccffb9b5e50200ebb3c3b6131",
+  "process": "MPEG payload copied byte for byte after the original signed two-byte MP3 seek field; no re-encoding.",
+  "assets": {
+    "1": {
+      "path": "assets/audio/1.mp3",
+      "bytes": 1047,
+      "sha256": "08228463ba0d57f480059067f086b1eb7dabc55355ac65d78af08d1d3aea226d",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 5760,
+      "channels": 1
+    },
+    "2": {
+      "path": "assets/audio/2.mp3",
+      "bytes": 5415,
+      "sha256": "5bb194416fa8c26aea3ea2a9d8d634d864287a4871b35fe08112ebe1508340e7",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 29952,
+      "channels": 1
+    },
+    "3": {
+      "path": "assets/audio/3.mp3",
+      "bytes": 1255,
+      "sha256": "632db61b44b49d07e3b1cb2d3808b8c92d135df7241d05d14896b05170a54dc1",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 6912,
+      "channels": 1
+    },
+    "4": {
+      "path": "assets/audio/4.mp3",
+      "bytes": 735,
+      "sha256": "4b9c1b7018b2a925dfe2608882616bbc6cbb3d93de6e7a0716f4ef9f67f76dd1",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 4032,
+      "channels": 1
+    },
+    "5": {
+      "path": "assets/audio/5.mp3",
+      "bytes": 1567,
+      "sha256": "251dd83907a8b812b9202b285026c58db01027d3806e47356b38fc146541f4c0",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 8640,
+      "channels": 1
+    },
+    "80": {
+      "path": "assets/audio/80.mp3",
+      "bytes": 4375,
+      "sha256": "89c3dfcee117fb3039e1206df54397c15596ee25f2a808746e4cd1f8ebfd872b",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 24192,
+      "channels": 1
+    },
+    "147": {
+      "path": "assets/audio/147.mp3",
+      "bytes": 839,
+      "sha256": "d755fa413de6830bc3f68541e623458ba289f06c4e5e33981abce2a2416da147",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 4608,
+      "channels": 1
+    },
+    "177": {
+      "path": "assets/audio/177.mp3",
+      "bytes": 943,
+      "sha256": "73355df30e632f5d94a3778085f8e254d2dbd7ba5c332abec94f076e39a0f74e",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 5184,
+      "channels": 1
+    },
+    "720": {
+      "path": "assets/audio/720.mp3",
+      "bytes": 1151,
+      "sha256": "863f516cd6cd40b1a479759549bc98f15e48672139ffcdb8faf36bd62e82e7c7",
+      "seekSamples": 0,
+      "rate": 11025,
+      "samples": 6336,
+      "channels": 1
+    }
+  },
+  "excluded": {
+    "1058": "Only dormant BMM StartSound events reference this definition."
+  }
+}
