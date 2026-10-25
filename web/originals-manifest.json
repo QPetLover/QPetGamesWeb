@@ -11,7 +11,8 @@
       "assets/js/app.js same-site native root and Adventure links",
       "classic-005 now launches the verified native differences game; original player remains explicit",
       "classic-008 now launches the verified native fishing game; original player remains explicit",
-      "classic-006 now launches the verified native trays game; original player remains explicit"
+      "classic-006 now launches the verified native trays game; original player remains explicit",
+      "classic-010 now launches the verified native blocks game; original player remains explicit"
     ],
     "originalGamePayloadsUnchanged": 19,
     "rufflePayloadsUnchanged": 7
@@ -491,8 +492,8 @@
     },
     {
       "path": "assets/js/app.js",
-      "bytes": 13674,
-      "sha256": "05a3e9938af1db3feb6851f82785e87d2b3f57f368036765cb9654fc739957ae"
+      "bytes": 13787,
+      "sha256": "11c862efb0ef3d539b4bb160aa815956659e4bd32ae48b96cb01b116a2853e45"
     },
     {
       "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
@@ -737,7 +738,7 @@
     {
       "path": "index.html",
       "bytes": 1221,
-      "sha256": "d2c6ede5fb67a3e18bd317ebcd24cb7acffee5f4ae8b618a2785cd637b3daf3f"
+      "sha256": "6edb10b4ae22f0330e666f0f693c2c895a6da0f4d892a2b233711cbe95ed6aa8"
     },
     {
       "path": "onegame.html",

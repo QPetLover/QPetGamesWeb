@@ -169,5 +169,17 @@
     "category": "classic",
     "summary": "稳稳端好盘子，避开飞来的物品，把盘子送到另一边。",
     "cover": "covers/qpet-trays.png"
+  },
+  {
+    "id": "qpet-blocks",
+    "title": "Q宠搭积木",
+    "path": "qpet-blocks",
+    "preview": "preview-blocks",
+    "candidate": "minitool-blocks-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-010",
+    "category": "classic",
+    "summary": "看准位置，放下积木，搭起越来越高的积木塔。",
+    "cover": "covers/qpet-blocks.png"
   }
 ]

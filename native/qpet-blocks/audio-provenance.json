@@ -1,0 +1,222 @@
+{
+  "sourceSHA256": "56b57345d99360c4c0a1f41586f3b07cbe81475f07edf8751993d61a6d7d1539",
+  "sourceBytes": 924672,
+  "sounds": {
+    "1": {
+      "rate": 11025,
+      "samples": 3168,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 1040,
+      "sha256": "c6374d1c56d619949ef0888524a941ce38742588ffc805f14e8c03d50aa3b0b5"
+    },
+    "2": {
+      "rate": 11025,
+      "samples": 402048,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 73112,
+      "sha256": "98a9b03952585b50ad0691c538413de3294270f660cd4bb8155a3415a03d6e58"
+    },
+    "48": {
+      "rate": 11025,
+      "samples": 52128,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 9880,
+      "sha256": "b40f163c5040c1a62768f80fbdcd1b177c1609047c13b9b95d2d1c9672544fce"
+    },
+    "53": {
+      "rate": 11025,
+      "samples": 5568,
+      "seekSamples": 1633,
+      "channels": 1,
+      "bytes": 1456,
+      "sha256": "603d34670612eba2792b6f939f09d086bc7fc8401681c55a44439fb4d7dfc11b"
+    },
+    "788": {
+      "rate": 11025,
+      "samples": 864,
+      "seekSamples": 1661,
+      "channels": 1,
+      "bytes": 624,
+      "sha256": "846e8f73ad180fef99c095dac1b51870179f3e4f7ec8559663f5284d17b3395e"
+    },
+    "911": {
+      "rate": 11025,
+      "samples": 19584,
+      "seekSamples": 1633,
+      "channels": 1,
+      "bytes": 4056,
+      "sha256": "cab20ed273b293c5755c728c9316a69dd1370f7e580a5b5446ff81477236675a"
+    }
+  },
+  "timelineSounds": [
+    {
+      "owner": "49",
+      "frame": 2,
+      "id": "48",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "55",
+      "frame": 2,
+      "id": "53",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "789",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "795",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "801",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "807",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "809",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "810",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "813",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "816",
+      "frame": 2,
+      "id": "788",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    },
+    {
+      "owner": "912",
+      "frame": 2,
+      "id": "911",
+      "info": {
+        "type": "SOUNDINFO",
+        "hasEnvelope": "false",
+        "hasInPoint": "false",
+        "hasLoops": "false",
+        "hasOutPoint": "false",
+        "reserved": "0",
+        "syncNoMultiple": "false",
+        "syncStop": "false"
+      }
+    }
+  ],
+  "streamBlocks": []
+}

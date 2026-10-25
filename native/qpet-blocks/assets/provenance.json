@@ -1,0 +1,50 @@
+{
+  "sourceSHA256": "56b57345d99360c4c0a1f41586f3b07cbe81475f07edf8751993d61a6d7d1539",
+  "tool": "FFDec 26.4.0 sprite:canvas",
+  "inputs": {
+    "reference/canvas/DefineSprite_45_RightQuit/frames.html": "3ac0b2491cabe48b7266713d957f9464934f9a8e5bb833af3b1ed0d0af96d2af",
+    "reference/canvas/DefineSprite_45_RightQuit/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "reference/canvas/DefineSprite_49_COM.Speed/frames.html": "fcb74a7c90f13d87646ee36944041d540c4d97ee52c8fe929220df2dc294a8d9",
+    "reference/canvas/DefineSprite_55_COM.Timer_over/frames.html": "a8d67fab40d3c6da45762cf269c5c46e09b9be6fc7f3e99ebc325fc6f77981c5",
+    "reference/canvas/DefineSprite_767_COM.player/frames.html": "95c1d1c4ee2bbd11b1bc4d181c69ec69a375c342aa7ec7685e0c53d22c68863c",
+    "reference/canvas/DefineSprite_782_SoundAndExit/frames.html": "f93e57e85dad044a6bfffb4d6a59120a258c520fc5d39ef81e403e95f2eba211",
+    "reference/canvas/DefineSprite_817_COM.Real_obj/frames.html": "42412962035900e8103c62286e84b7057c05a939db64216d11521d9590ce580f",
+    "reference/canvas/DefineSprite_835_COM.MoveHand/frames.html": "cdbf2a3743ccb4b2c7ca1c48c9014b285dc22cd2c36ffecec2f579e46b0028da",
+    "reference/canvas/DefineSprite_857_COM.Background/frames.html": "3217ff57fbe89c2e4f97b10b2ad7cd652eb922ae509c054628d7656c1e26a320",
+    "reference/canvas/DefineSprite_861_COM.back1/frames.html": "ae452250558ef4419f0e5da54aa51ef6924244ef14d0aee99b5438b3727ef18a",
+    "reference/canvas/DefineSprite_938_COM.Score/frames.html": "acaa41e1647d9975ea3c489f40a683ced832f5409c6fd49d2e8c36e66f030102",
+    "reference/canvas/DefineSprite_944_COM.Cover/frames.html": "e6814533ee0a2c7922798170f00f88ec41912cea7cc3ec5345bb28c7a1ee71ad",
+    "reference/canvas/DefineSprite_947_COM.kuang/frames.html": "971462492fba1b85cc06fb5ec4ee94e868455b83c20bc87fb5b20509ca3fa828",
+    "reference/canvas/DefineSprite_949/frames.html": "fae1d4e8f8a8ee12318c20ae4a395886c70693ab2877d69efa08ca340138ff86"
+  },
+  "symbols": 915,
+  "embeddedImages": 9,
+  "linkedRoots": [
+    "sprite45",
+    "sprite49",
+    "sprite55",
+    "sprite767",
+    "sprite782",
+    "sprite817",
+    "sprite835",
+    "sprite857",
+    "sprite861",
+    "sprite938",
+    "sprite944",
+    "sprite947",
+    "sprite949"
+  ],
+  "maskCorrections": 0,
+  "radialCorrections": 0,
+  "outputBytes": 11294260,
+  "outputSHA256": "4836b625840c319c2622b13313691beb2809e42cbce496eb4ebd319d2eee4ad3",
+  "notes": [
+    "Only static symbol drawing functions retained. No exported player, FPS timer, SWF or AS code in output.",
+    "Original matrix registration restored for each selected root.",
+    "Authored alpha0 collision line remains data and is not rendered.",
+    "Original bitmap payloads embedded exactly as FFDec export; actual browser decoding and Canvas rendering verified in Chrome.",
+    "Original four button states restored from XML BUTTONRECORD.",
+    "Fixed original chair and hand glows use finite pixel ROI only after painting with the original full-stage CTM; blur kernel and color remain unchanged.",
+    "Glow LRU is limited to24MiB RGBA. Keys retain complete ROI transform, backing dimensions, source static subtree identity, full color and filter settings; integer output placement is retained separately. Fractional output coordinates key at1e-8 pixels only, never gameplay variables."
+  ]
+}

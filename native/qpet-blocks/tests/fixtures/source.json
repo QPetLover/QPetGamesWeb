@@ -1,0 +1,61 @@
+{
+  "original": {
+    "title": "Q宠搭积木",
+    "originalId": "classic-010",
+    "sourceRepository": "QPetLover/awesome-qpet-games",
+    "sourceCommit": "b82b791a053c51d385b18d98f2d9951929240c50",
+    "sourcePath": "archive/games/classic/swf/Q宠搭积木.swf",
+    "bytes": 924672,
+    "sha256": "56b57345d99360c4c0a1f41586f3b07cbe81475f07edf8751993d61a6d7d1539",
+    "stage": {
+      "width": 800.0,
+      "height": 600.0,
+      "fps": 24.0,
+      "rootFrames": 1,
+      "version": 9
+    },
+    "actionScript": "AS3",
+    "tagCountsRecursive": {
+      "0": 175,
+      "1": 3618,
+      "2": 61,
+      "9": 1,
+      "11": 1,
+      "14": 6,
+      "15": 11,
+      "21": 1,
+      "22": 4,
+      "26": 26158,
+      "28": 1099,
+      "32": 209,
+      "34": 7,
+      "35": 8,
+      "36": 1,
+      "37": 2,
+      "39": 174,
+      "43": 26,
+      "45": 175,
+      "46": 1,
+      "69": 1,
+      "70": 6,
+      "73": 3,
+      "74": 1,
+      "75": 3,
+      "76": 1,
+      "82": 1,
+      "83": 471,
+      "86": 1,
+      "88": 2
+    }
+  },
+  "files": {
+    "Main.as": {
+      "bytes": 33240,
+      "sha256": "be8733259509524e910c9ae43cf335e2068c4726cc9fee89eda9575a270ca1a2"
+    },
+    "MoveHand.as": {
+      "bytes": 1303,
+      "sha256": "c3f00c5d9a0ceba707a4d11243874870a6b2166d8b3b1b64ce29054343bcd4f4"
+    }
+  }
+}
