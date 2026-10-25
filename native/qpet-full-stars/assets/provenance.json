@@ -1,0 +1,69 @@
+{
+  "sourceSWF": "QPetLover/QPetGames classical_games/swf/满天星.swf",
+  "sourceCommit": "cac5e2d7636da081a178a2300865eb5090649969",
+  "sourceSHA256": "d0fad936906e8f52b70468948d454638f61c9f1de449ca2d5ba0ec6cca7af77f",
+  "sourceBytes": 1700168,
+  "stage": {
+    "width": 500,
+    "height": 400,
+    "fps": 25
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 172,
+  "embeddedImages": {
+    "imageObj90": {
+      "mime": "image/PNG",
+      "bytes": 404723,
+      "sha256": "f8e4712c1e2028eb18e68e14d211b8b590f448f0ec3722f177c9aa97eed16ff3"
+    },
+    "imageObj104": {
+      "mime": "image/PNG",
+      "bytes": 876997,
+      "sha256": "a988fd5fbe8fa353feb54b71263d36bebeae79d06ee54aabfac3eccfc352e54f"
+    },
+    "imageObj113": {
+      "mime": "image/JPEG",
+      "bytes": 5103,
+      "sha256": "d8d79544e61c161b3cdfb88204ffdcad282ab9538e46ca8c778224753e2d6d74"
+    },
+    "imageObj116": {
+      "mime": "image/JPEG",
+      "bytes": 58958,
+      "sha256": "cd62a32defcddc1b587251941a339a31a0dac2e73e26501677f1552bb8f8b9dc"
+    },
+    "imageObj153": {
+      "mime": "image/PNG",
+      "bytes": 151546,
+      "sha256": "0da72dab7f065aaef7d00678a541c506e4ce7f6651f22009e6c121caaaad94ec"
+    }
+  },
+  "inputs": {
+    "payload.xml": "a7a1b925419526eaa3b6d37a41ae63f0a25eb051a019d9f428e19a9d0763da28",
+    "canvas/frames.html": "5fb92a4903b4646d6975e1a35b7abd8955482b9a43b8bced296cbfacea9d156a",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked/DefineSprite_62_allwz/frames.html": "6f1f8cd86de56bb255c01b849d25f417e586ad31f984c5a0bc4fc051ad78d213"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "15 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "10 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "c10bd4eeeca232cac6ec8479fd1671ebbef51f3bbddbe8e2dc8877b9acc0b06b",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/cac5e2d7636da081a178a2300865eb5090649969/classical_games/swf/满天星.swf",
+  "sourceVersionCaution": "Fixed archived classic SWF; no claim of historical Flash Player equivalence.",
+  "runtimeCaches": {
+    "paths": "immutable Path2D source paths; strokes and morphs retain native paths",
+    "bitmap": "immutable input plus complete CXFORM;16MiB admission",
+    "filters": "no authored filters in this source"
+  },
+  "payloadSHA256": "088f51772fa6a107855bb3c0a07db7be51f2949a18227cc243b62e84b0a852f5",
+  "bitmapEncoding": "FFDec lossless PNG for Lossless2; original opaque JPEG payloads",
+  "linkedExportUnpack": "Static packer decoded as base-radix word substitution only; no dynamic execution",
+  "bitmapPayloadBytes": 1497327,
+  "previousFFDecBitmapBytes": 1497327
+}

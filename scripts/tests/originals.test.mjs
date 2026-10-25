@@ -8,8 +8,8 @@ import {buildOriginals,verifyOriginals,safeOriginalPath} from '../build-original
 import {copyOriginalFixture} from './originals-fixture.mjs';
 const REPO=fileURLToPath(new URL('../../',import.meta.url));
 function fixture(){const root=fs.mkdtempSync(path.join(os.tmpdir(),'qpet-originals-'));copyOriginalFixture({repositoryRoot:REPO,destination:root});return root;}
-test('original comparison stays isolated with19 load contracts and14 native/5 detail destinations',async()=>{
- const root=fixture();try{const report=await buildOriginals({repositoryRoot:root});assert.equal(report.engine,'Ruffle');assert.equal(report.gameCount,19);assert.equal(report.fontSWFs,1);assert.equal(report.runtimeFiles,7);assert.equal(report.routes.nativeCardRoutes,14);assert.equal(report.routes.originalOnlyCards,5);assert.equal(report.routes.originalPlayerRoutes,19);assert.equal(report.routes.gameplayRun,false);assert(fs.existsSync(path.join(root,'dist/originals/index.html')));assert(!fs.existsSync(path.join(root,'dist/index.html')));}finally{fs.rmSync(root,{recursive:true,force:true});}
+test('original comparison stays isolated with19 load contracts and15 native/4 detail destinations',async()=>{
+ const root=fixture();try{const report=await buildOriginals({repositoryRoot:root});assert.equal(report.engine,'Ruffle');assert.equal(report.gameCount,19);assert.equal(report.fontSWFs,1);assert.equal(report.runtimeFiles,7);assert.equal(report.routes.nativeCardRoutes,15);assert.equal(report.routes.originalOnlyCards,4);assert.equal(report.routes.originalPlayerRoutes,19);assert.equal(report.routes.gameplayRun,false);assert(fs.existsSync(path.join(root,'dist/originals/index.html')));assert(!fs.existsSync(path.join(root,'dist/index.html')));}finally{fs.rmSync(root,{recursive:true,force:true});}
 });
 test('fixed originals closure rejects a modified runtime, extra source and traversal',async()=>{
  const root=fixture();try{

@@ -1,0 +1,17 @@
+{
+  "sourceSWF": "d0fad936906e8f52b70468948d454638f61c9f1de449ca2d5ba0ec6cca7af77f",
+  "ASFiles": {
+    "frame_2/DoAction.as": {
+      "bytes": 2614,
+      "sha256": "8d2dfbfa3645d037916f525c2dc3a42b71c1011673066292406a05383cd846f0"
+    },
+    "DefineSprite_99_darkstar/frame_2/DoAction.as": {
+      "bytes": 658,
+      "sha256": "88b47b3d8d81a5e7a40d19aec496c9b575e10e26bf95ccd218c46be057374b64"
+    },
+    "DefineSprite_122/frame_2/DoAction.as": {
+      "bytes": 972,
+      "sha256": "df8143038c8ea73ebd9f298dff96de32852b3604b35ffd76b4481cfef03f095d"
+    }
+  }
+}

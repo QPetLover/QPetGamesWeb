@@ -11,10 +11,10 @@
   "upstreamLicenseSha256": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
   "modifications": "Local UI WOFF2 subset, renamed QPet Rounded; original outlines and copyright/license retained. No remote font dependency.",
   "file": "qpet-rounded.woff2",
-  "bytes": 49728,
-  "sha256": "9cfe05a19fe6ecce7bf726e6f896cadc800d3720c764b8c50138cf0acacfdf83",
-  "chineseCharacters": 425,
-  "totalCodepoints": 532,
+  "bytes": 49720,
+  "sha256": "84d9957904eedeaccbfa7a6cc9cf4e7fa64be60407416b0b4a2b5367f379b6fd",
+  "chineseCharacters": 426,
+  "totalCodepoints": 533,
   "chineseCoverageComplete": true,
   "chineseCodepoints": [
     "U+4E00",
@@ -39,6 +39,7 @@
     "U+4E8E",
     "U+4E91",
     "U+4E9B",
+    "U+4EAE",
     "U+4EBA",
     "U+4ED3",
     "U+4EE5",
@@ -452,12 +453,12 @@
     "core/QPetGamesWeb/native/games.json"
   ],
   "subsetExtension": {
-    "text": "左右助跑，向更高的平台跳跃。左右方向键助跑，空格跳跃。手机可同时按方向和跳跃按钮。",
+    "text": "满天星托起星星，点亮夜空。移动鼠标或在画面上拖动，托起小球，点亮星星。",
     "addedCodepoints": [
-      "U+52A9"
+      "U+4EAE"
     ],
-    "preservedCodepoints": 531,
-    "previousSha256": "ccb6015bc0ce878568aee0497cf6ba81c8b938dd6f308ae789944d9068f6833b",
+    "preservedCodepoints": 532,
+    "previousSha256": "9cfe05a19fe6ecce7bf726e6f896cadc800d3720c764b8c50138cf0acacfdf83",
     "method": "Union of previous cmap and new game UI; all previous outlines and hmtx exactly compared using RecordingPen; upstream source/name/license options retained."
   }
 }

@@ -14,7 +14,8 @@
       "classic-006 now launches the verified native trays game; original player remains explicit",
       "classic-010 now launches the verified native blocks game; original player remains explicit",
       "classic-009 now launches the verified native nanny game; original player remains explicit",
-      "classic-004 now launches verified native penguin challenge; original player remains explicit"
+      "classic-004 now launches verified native penguin challenge; original player remains explicit",
+      "classic-016 now launches verified native full stars; original player remains explicit"
     ],
     "originalGamePayloadsUnchanged": 19,
     "rufflePayloadsUnchanged": 7
@@ -494,8 +495,8 @@
     },
     {
       "path": "assets/js/app.js",
-      "bytes": 14035,
-      "sha256": "fef0cd88b5ad2da1b94acaed07bc901ad8afcac8166f621a0eb61ce8a2eb7694"
+      "bytes": 14134,
+      "sha256": "dc846838603a03482335f446e53e1f8345641da8ee99e6b44b6eb1b4ec4f6fda"
     },
     {
       "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
@@ -740,7 +741,7 @@
     {
       "path": "index.html",
       "bytes": 1221,
-      "sha256": "60217ae7f3b93456912d79a32d68c1a93e4a72c8b0a3bf3c50efd0361cc6bb50"
+      "sha256": "70ca010e6b56c14a0e0a0e7244a0bff0b78a103b4d703e306a56d716f747bd51"
     },
     {
       "path": "onegame.html",

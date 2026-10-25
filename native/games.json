@@ -205,5 +205,17 @@
     "category": "classic",
     "summary": "左右助跑，向更高的平台跳跃。",
     "cover": "covers/qpet-penguin-challenge.png"
+  },
+  {
+    "id": "qpet-full-stars",
+    "title": "满天星",
+    "path": "qpet-full-stars",
+    "preview": "preview-full-stars",
+    "candidate": "minitool-full-stars-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-016",
+    "category": "classic",
+    "summary": "托起星星，点亮夜空。",
+    "cover": "covers/qpet-full-stars.png"
   }
 ]
