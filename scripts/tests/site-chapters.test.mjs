@@ -11,10 +11,11 @@ import {copyOriginalFixture} from './originals-fixture.mjs';
 const REPO=fileURLToPath(new URL('../../',import.meta.url)),BUILD=path.join(REPO,'.build');
 function setup({chapterPublished=false,sample}={}){
  fs.mkdirSync(BUILD,{recursive:true});const root=fs.mkdtempSync(path.join(BUILD,'site-test-')),calls=[];
- const registry=JSON.parse(fs.readFileSync(path.join(REPO,'native/games.json'))),ordinary=registry.filter(g=>g.published&&g.kind!=='chapters');
+ const registry=JSON.parse(fs.readFileSync(path.join(REPO,'native/games.json'))),ordinary=registry.filter(g=>g.published&&!g.kind);
  const adventure={...registry.find(g=>g.id==='qpet-adventure'),published:chapterPublished};
  const draft={id:'unverified-draft',title:'未验候选',path:'unverified-draft',published:false,category:'classic',summary:'不应公开',original:'https://qpetlover.cn/QPetGames/#/play/unverified',cover:'covers/unverified-draft.png'};
- const catalog=[...ordinary,adventure,draft];
+ const external=registry.filter(g=>g.published&&g.kind==='external');
+ const catalog=[...ordinary,...external,adventure,draft];
  function put(name,data){const file=path.join(root,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,data);}
  put('package.json','{"dependencies":{}}');put('native/games.json',JSON.stringify(catalog));
  for(const f of['player.html','maintenance.css','portal.html','portal.css'])put('web/'+f,fs.readFileSync(path.join(REPO,'web',f)));
@@ -31,9 +32,9 @@ function setup({chapterPublished=false,sample}={}){
 const grouped=catalog=>CATEGORIES.flatMap(category=>catalog.filter(g=>g.published&&g.category===category.id).map(g=>g.id));
 test('static portal groups published games, separates every route and hides draft chapters',async()=>{
  const f=setup();try{
-  const result=await buildSite({repositoryRoot:f.root,run:f.run});assert.equal(result.games.length,f.ordinary.length);assert.equal(f.calls.length,f.ordinary.length);assert(f.calls.every(a=>path.basename(a[0])==='build-native.mjs'));
+  const result=await buildSite({repositoryRoot:f.root,run:f.run});assert.equal(result.games.length,f.catalog.filter(g=>g.published).length);assert.equal(f.calls.length,f.ordinary.length);assert(f.calls.every(a=>path.basename(a[0])==='build-native.mjs'));
   const check=f.verify();assert.equal(check.status,0,check.stderr);const report=JSON.parse(check.stdout);assert.deepEqual(report.homeLinksVerified,grouped(f.catalog));
-  const html=fs.readFileSync(path.join(f.root,'dist/index.html'),'utf8');assert(!html.includes('<canvas'));assert(html.includes('href="qpet-match/"'));assert(!html.includes('href="#adventure"'));assert(!html.includes('unverified-draft'));assert(!fs.existsSync(path.join(f.root,'dist/app.js')));assert(fs.existsSync(path.join(f.root,'dist/qpet-match/app.js')));assert(!fs.existsSync(path.join(f.root,'dist/qpet-adventure')));
+  const html=fs.readFileSync(path.join(f.root,'dist/index.html'),'utf8');assert(!fs.existsSync(path.join(f.root,'dist/battlechess')));assert(html.includes('href="https://raylic.github.io/battlechess-web/"'));assert(!html.includes('<canvas'));assert(html.includes('href="qpet-match/"'));assert(!html.includes('href="#adventure"'));assert(!html.includes('unverified-draft'));assert(!fs.existsSync(path.join(f.root,'dist/app.js')));assert(fs.existsSync(path.join(f.root,'dist/qpet-match/app.js')));assert(!fs.existsSync(path.join(f.root,'dist/qpet-adventure')));
   assert(!fs.existsSync(path.join(f.root,'dist',f.catalog.at(-1).cover)));for(const g of f.ordinary)if(g.cover)assert(fs.readFileSync(path.join(f.root,'web',g.cover)).equals(fs.readFileSync(path.join(f.root,'dist',g.cover))));
   assert(!html.includes('source-note'));assert(!html.includes('版本与来源'));assert(!html.includes('企鹅素材按历史截图补制'));assert(!html.includes('欢乐谷归属尚未证实'));assert(!html.includes('>已复刻<'));assert(!html.includes('game-summary'));assert(!html.includes('comparison-link'));assert.equal(report.originals.gameCount,19);assert.equal(report.native.noSWFRuntime,true);
   for(const g of f.ordinary){assert(html.includes(`class="native-title" href="${g.path}/"`));if(g.id==='qpet-sonic')assert(!html.includes('href="qpet-sonic/#version-notes"'));}
@@ -44,6 +45,8 @@ test('portal rejects root-game collisions and verification catches swapped compa
   const rootGame=f.catalog.map(g=>g.id==='qpet-match'?{...g,path:''}:g);assert.throws(()=>publishedCatalog(rootGame),/separate safe path/);
   assert.throws(()=>renderSections(f.catalog.map(g=>g.id==='qpet-match'?{...g,category:'unknown'}:g)),/Unknown game category/);
   assert.throws(()=>renderSections(f.catalog.map(g=>g.id==='qpet-match'?{...g,cover:'../escape.png'}:g)),/Unsafe cover path/);
+  assert.throws(()=>renderSections(f.catalog.map(g=>g.id==='battlechess'?{...g,externalURL:'https://unexpected.example/'}:g)));
+  assert.throws(()=>renderSections(f.catalog.map(g=>g.id==='battlechess'?{...g,id:'unknown-external'}:g)));
   await buildSite({repositoryRoot:f.root,run:f.run});const file=path.join(f.root,'dist/index.html'),good=fs.readFileSync(file,'utf8');
   const game=f.catalog.find(g=>g.id==='qpet-match'),detailFile=path.join(f.root,'dist/games/qpet-match/index.html'),goodDetail=fs.readFileSync(detailFile,'utf8');fs.writeFileSync(detailFile,goodDetail.replace('../../originals/#/play/classic-014','../../originals/#/play/wrong'));let check=f.verify();assert.notEqual(check.status,0);assert.match(check.stderr,/incorrect original comparison/);fs.writeFileSync(detailFile,goodDetail);
   fs.writeFileSync(file,good.replace('data-category="classic"','data-category="adventure"'));check=f.verify();assert.notEqual(check.status,0);assert.match(check.stderr,/Section anchor|categories/);

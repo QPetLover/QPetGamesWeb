@@ -45,7 +45,7 @@ export function publishedCatalog(catalog){
   assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(game.id||''),'Every detail needs a safe ID');
   assert(CATEGORIES.some(category=>category.id===game.category),'Unknown game category: '+game.id);
   assert(typeof game.summary==='string'&&game.summary.trim(),'Game summary required: '+game.id);
-  assert(/^https:\/\/qpetlover\.cn\//.test(game.original)||game.original===game.path+'/#version-notes','Unsupported comparison URL: '+game.id);
+  if(game.kind==='external'){assert.equal(game.id,'battlechess');assert.equal(game.externalURL,'https://raylic.github.io/battlechess-web/');assert.equal(game.original,null);}else assert(/^https:\/\/qpetlover\.cn\//.test(game.original)||game.original===game.path+'/#version-notes','Unsupported comparison URL: '+game.id);
   assert(game.cover===undefined||/^covers\/[a-z0-9]+(?:-[a-z0-9]+)*\.png$/.test(game.cover),'Unsafe cover path: '+game.id);
  }
  return games;
@@ -57,25 +57,27 @@ export function comparisonHref(game,{prefix=''}={}){
  if(url.pathname==='/QPetGames/'&&/^#\/play\/[a-z0-9-]+$/.test(url.hash))return prefix+'originals/'+url.hash;
  return game.original;
 }
+export const playHref=(game,prefix='')=>game.kind==='external'?game.externalURL:prefix+game.path+'/';
 export function renderSections(catalog,{coverSizes={}}={}){
  const games=publishedCatalog(catalog);
  return CATEGORIES.map(category=>{
   const entries=games.filter(game=>game.category===category.id);
   if(!entries.length)return '';
   const cards=entries.map(game=>`<article class="game-card${game.cover?' has-cover':''}" data-game="${escape(game.id)}">
-${game.cover?`<a class="game-cover" href="${escape(game.path)}/" aria-label="${escape(game.title)}"><img src="${escape(game.cover)}" alt="${escape(game.title)}游戏画面" loading="lazy" decoding="async"${coverSizes[game.cover]?` width="${coverSizes[game.cover].width}" height="${coverSizes[game.cover].height}"`:''}></a>`:''}
-<div class="card-body"><h3><a class="native-title" href="${escape(game.path)}/">${escape(game.title)}</a></h3>
-<div class="game-actions"><a class="play-link" href="${escape(game.path)}/" aria-label="开始游戏：${escape(game.title)}">开始游戏 <span aria-hidden="true">→</span></a><a class="details-link" href="games/${escape(game.id)}/" aria-label="游戏详情：${escape(game.title)}">详情</a></div></div>
+${game.cover?`<a class="game-cover" href="${escape(playHref(game))}" aria-label="${escape(game.title)}"><img src="${escape(game.cover)}" alt="${escape(game.title)}游戏画面" loading="lazy" decoding="async"${coverSizes[game.cover]?` width="${coverSizes[game.cover].width}" height="${coverSizes[game.cover].height}"`:''}></a>`:''}
+<div class="card-body"><h3><a class="native-title" href="${escape(playHref(game))}">${escape(game.title)}</a></h3>
+<div class="game-actions"><a class="play-link" href="${escape(playHref(game))}" aria-label="开始游戏：${escape(game.title)}">开始游戏 <span aria-hidden="true">→</span></a><a class="details-link" href="games/${escape(game.id)}/" aria-label="游戏详情：${escape(game.title)}">详情</a></div></div>
 </article>`).join('\n');
   return `<section id="${category.id}" class="game-section" data-category="${category.id}" aria-labelledby="${category.id}-title"><div class="section-heading"><h2 id="${category.id}-title">${category.title}</h2></div><div class="game-grid">${cards}</div></section>`;
  }).filter(Boolean).join('\n');
 }
 export function renderDetail(game,{cssVersion=''}={}){
- const start='../../'+game.path+'/',original=comparisonHref(game,{prefix:'../../'});
+ const start=playHref(game,'../../'),original=comparisonHref(game,{prefix:'../../'});
+ const sources=game.kind==='external'?`<section class="detail-sources"><h2>来源与致谢</h2><p>感谢 raylic 制作并公开皇家战棋 Web。此处收录作者站点，游玩由作者提供。</p><p>作者代码采用 MIT；美术来自 MemoryD/BattleChess，版权归原作者与相应权利人，MIT 不覆盖素材。感谢上游 glink25/Parti。</p><p><a href="https://github.com/raylic/battlechess-web">raylic / battlechess-web</a> · <a href="https://github.com/MemoryD/BattleChess">MemoryD / BattleChess</a> · <a href="https://github.com/raylic/battlechess-web/blob/0ee2adaaf436a1ba85a1d52eb6f0156b3262f115/LICENSE">代码许可</a> · <a href="https://github.com/raylic/battlechess-web/blob/0ee2adaaf436a1ba85a1d52eb6f0156b3262f115/NOTICE">素材声明</a></p></section>`:`<section class="detail-sources"><h2>来源与致谢</h2><p>原画、声音、字体与商标归腾讯或各原作者。感谢社区保存原件。</p><p><a href="https://github.com/QPetLover/QPetGamesWeb/blob/main/native/${escape(game.id)}/README.md">迁移说明、原件来源与验证范围</a> · <a href="https://github.com/QPetLover/QPetGamesWeb/blob/main/THIRD_PARTY_NOTICES.md">素材与许可声明</a></p></section>`;
  const cover=game.cover?`<div class="detail-cover"><img src="../../${escape(game.cover)}" alt="${escape(game.title)}游戏画面"></div>`:'';
  return `<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="${escape(game.summary)}"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self' data:; base-uri 'none'; object-src 'none'; frame-src 'none'"><title>${escape(game.title)} · Q宠游戏</title><link rel="icon" href="data:,"><link rel="preload" href="../../fonts/qpet-rounded.woff2?v=79d9c7d4272ac633" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../../portal.css${cssVersion?'?v='+cssVersion:''}"></head>
-<body><div class="site-shell"><header class="site-header"><a class="brand" href="../../" aria-label="Q宠游戏大厅"><span class="brand-mark" aria-hidden="true">Q</span><span>Q宠游戏</span></a><nav aria-label="主导航"><a href="../../">返回游戏大厅</a></nav></header><main class="detail-main"><a class="breadcrumb" href="../../#${escape(game.category)}">← ${CATEGORIES.find(category=>category.id===game.category).title}</a><article class="detail-panel" data-game="${escape(game.id)}">${cover}<div class="detail-copy"><h1>${escape(game.title)}</h1><p class="detail-summary">${escape(game.summary)}</p>${CONTROLS[game.id]?`<section class="detail-controls"><h2>怎么玩</h2><p>${escape(CONTROLS[game.id])}</p></section>`:''}<div class="detail-actions"><a class="play-link" href="${escape(start)}">开始游戏 →</a>${original?`<a class="comparison-link" href="${escape(original)}">原版对照 ↗</a>`:''}</div></div></article></main><footer class="detail-footer"><a class="footer-brand" href="../../">Q宠游戏</a><p>旧时光，慢慢玩。</p><a href="../../">返回游戏大厅 ↑</a></footer></div></body></html>\n`;
+<body><div class="site-shell"><header class="site-header"><a class="brand" href="../../" aria-label="Q宠游戏大厅"><span class="brand-mark" aria-hidden="true">Q</span><span>Q宠游戏</span></a><nav aria-label="主导航"><a href="../../">返回游戏大厅</a></nav></header><main class="detail-main"><a class="breadcrumb" href="../../#${escape(game.category)}">← ${CATEGORIES.find(category=>category.id===game.category).title}</a><article class="detail-panel" data-game="${escape(game.id)}">${cover}<div class="detail-copy"><h1>${escape(game.title)}</h1><p class="detail-summary">${escape(game.summary)}</p>${CONTROLS[game.id]?`<section class="detail-controls"><h2>怎么玩</h2><p>${escape(CONTROLS[game.id])}</p></section>`:''}${sources}<div class="detail-actions"><a class="play-link" href="${escape(start)}">开始游戏 →</a>${original?`<a class="comparison-link" href="${escape(original)}">原版对照 ↗</a>`:''}</div></div></article></main><footer class="detail-footer"><a class="footer-brand" href="../../">Q宠游戏</a><p>旧时光，慢慢玩。</p><a href="../../">返回游戏大厅 ↑</a></footer></div></body></html>\n`;
 }
 export async function buildPortal({repositoryRoot=fileURLToPath(new URL('../',import.meta.url)),outputDirectory,catalog}={}){
  const root=path.resolve(repositoryRoot),output=outputDirectory||path.join(root,'dist');

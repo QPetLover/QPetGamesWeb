@@ -71,7 +71,7 @@ def verify_home_links(html,catalog,cover_sizes=None):
         assert len(detail_links)==1,f"{game['id']}: one details entry required"
         native_links=[link for link in row['links'] if link not in detail_links]
         assert len(native_links)==2+bool(game.get('cover')),f"{game['id']}: title, play and optional cover must open the remake"
-        assert all(link['attrs'].get('href')==game['path']+'/' and not link['attrs'].get('target') for link in native_links),f"{game['id']}: ordinary entry must open the remake"
+        assert all(link['attrs'].get('href')==(game['externalURL'] if game.get('kind')=='external' else game['path']+'/') and not link['attrs'].get('target') for link in native_links),f"{game['id']}: ordinary entry must open the remake"
         play=[link for link in native_links if 'play-link' in link['attrs'].get('class','').split()]
         assert len(play)==1 and play[0]['attrs'].get('aria-label')=='开始游戏：'+game['title'],f"{game['id']}: incorrect accessible entry label"
         assert not any('comparison-link' in link['attrs'].get('class','').split() for link in row['links']),f"{game['id']}: comparison belongs on its details page"
@@ -102,7 +102,7 @@ class DetailLinks(HTMLParser):
 def verify_details(html,game):
     parsed=DetailLinks();parsed.feed(html);parsed.close()
     assert ''.join(parsed.heading)==game['title'],f"{game['id']}: details title differs"
-    assert sum(link.get('href')=='../../'+game['path']+'/' for link in parsed.links)==1,f"{game['id']}: details must launch native game"
+    assert sum(link.get('href')==(game['externalURL'] if game.get('kind')=='external' else '../../'+game['path']+'/') for link in parsed.links)==1,f"{game['id']}: details must launch native game"
     assert any(link.get('href')=='../../' for link in parsed.links),f"{game['id']}: details return to same-site hall"
     assert len(parsed.styles)==1 and parsed.styles[0].split('?')[0]=='../../portal.css',f"{game['id']}: local shared details stylesheet"
     comparisons=[link for link in parsed.links if 'comparison-link' in link.get('class','').split()]
@@ -114,7 +114,12 @@ def verify_details(html,game):
         assert comparisons[0].get('href')==expected,f"{game['id']}: incorrect original comparison"
         if comparisons[0].get('target'):
             assert comparisons[0].get('target')=='_blank' and {'noopener','noreferrer'}<=set(comparisons[0].get('rel','').split()),f"{game['id']}: original-link isolation"
-    allowed=['../../','../../#'+game['category'],'../../'+game['path']+'/']+([expected] if expected else [])
+    allowed=['../../','../../#'+game['category'],game['externalURL'] if game.get('kind')=='external' else '../../'+game['path']+'/']+([expected] if expected else [])
+    if game.get('kind')=='external':
+        assert game['id']=='battlechess' and game['externalURL']=='https://raylic.github.io/battlechess-web/'
+        allowed += ['https://github.com/raylic/battlechess-web','https://github.com/MemoryD/BattleChess']+['https://github.com/raylic/battlechess-web/blob/0ee2adaaf436a1ba85a1d52eb6f0156b3262f115/'+f for f in ['LICENSE','NOTICE']]
+        assert all(any(link.get('href')==url for link in parsed.links) for url in allowed[3:]),'External entry sources missing'
+    if game.get('kind')!='external':allowed += ['https://github.com/QPetLover/QPetGamesWeb/blob/main/native/'+game['id']+'/README.md','https://github.com/QPetLover/QPetGamesWeb/blob/main/THIRD_PARTY_NOTICES.md']
     assert all(link.get('href') in allowed for link in parsed.links),f"{game['id']}: unexpected details destination"
     if game.get('cover'):assert len(parsed.images)==1 and parsed.images[0].get('src')=='../../'+game['cover'],f"{game['id']}: details cover differs"
     assert not re.search(r'<(?:script|canvas|iframe|object|embed)\b|\bon\w+\s*=',html,re.I),'Details must remain static HTML'
@@ -163,6 +168,7 @@ for game in games:
 media={'.png','.jpg','.jpeg','.gif','.webp','.svg','.woff','.woff2'}
 for game in games:
     folder=game['path']+'/'
+    if game.get('kind')=='external':continue
     if game.get('kind')=='chapters':
         assert game['id']=='qpet-adventure' and game['path'],'Unsupported chapter package'
         expected.update(folder+name for name in chapter_expected(root,dist/game['path']))
@@ -177,7 +183,7 @@ expected.update('originals/'+item['file'] for item in originals['files'])
 actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
 assert actual==expected, f'Unexpected release files: {actual ^ expected}'
 for game in games:
-    if game.get('kind')=='chapters':continue  # verified above, including only fixed Web PCM requests
+    if game.get('kind') in ('chapters','external'):continue  # verified above, including only fixed Web PCM requests
     folder=game['path']+'/'
     js=(dist/(folder+'app.js')).read_text(); html=(dist/(folder+'index.html')).read_text()
     for pattern in [r'\beval\s*\(',r'\bnew\s+Function\s*\(',r'\bWebAssembly\b',r'\bfetch\s*\(',r'\bXMLHttpRequest\b',r'\bWebSocket\b',r'\bimport\s*\(']:

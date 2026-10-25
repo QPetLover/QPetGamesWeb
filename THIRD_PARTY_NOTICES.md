@@ -75,3 +75,7 @@ Noto 字形采用 **SIL Open Font License 1.1**，Copyright 2022 The Noto Projec
 ## QQ跆拳道
 
 原件来自QPetLover/QPetGames保存的 `classical_games/swf/QQ跆拳道.swf`，SHA-256 `6df89818db38d2748b7185df470627f0cc013e0410c07e605b76148c4d77b9f8`。原画、5段MPEG、字体与商标归腾讯或各原作者；迁移不追加素材授权。JPEXS FFDec派生静态Canvas helper按GPL-3.0，可读源码、字体来源和验证边界见 [迁移说明](native/qpet-taekwondo/README.md)。旧账号和官网跳转由宿主提示处理，不伪造积分上传。
+
+## 皇家战棋外链收录
+
+作者 [raylic/battlechess-web](https://github.com/raylic/battlechess-web)，来源固定提交 `0ee2adaaf436a1ba85a1d52eb6f0156b3262f115`。仅链接作者站点，未复制运行包。封面转换自该提交README的 `docs/gameplay.webp`（作者对局截图）。代码MIT仅覆盖作者源码，美术素材来自MemoryD/BattleChess并涉及QQ宠物IP，权利归原作者与相应权利人，不以MIT追加授权；见作者LICENSE/NOTICE。感谢 raylic、MemoryD/BattleChess 及作者鸣谢的 glink25/Parti。

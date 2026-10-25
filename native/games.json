@@ -265,5 +265,17 @@
     "category": "classic",
     "summary": "看准落球，交替出拳踢腿，挑战十关训练。",
     "cover": "covers/qpet-taekwondo.png"
+  },
+  {
+    "id": "battlechess",
+    "title": "皇家战棋",
+    "path": "battlechess",
+    "kind": "external",
+    "externalURL": "https://raylic.github.io/battlechess-web/",
+    "published": true,
+    "original": null,
+    "category": "classic",
+    "summary": "翻开暗棋，挑战电脑或邀请朋友对战。由 raylic 提供网页游戏。",
+    "cover": "covers/battlechess.png"
   }
 ]

@@ -2,26 +2,32 @@
 
 游戏大厅统一收录欢乐谷、冒险岛与经典小游戏。**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版、Q宠爱音速、Q宠冒险岛、Q宠守护使、Q宠摘星星**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。上述复刻游戏不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。站内 `originals/` 单独保存原始 SWF 与 Ruffle，只用于详情页进入的原版校对，不作为复刻运行时。
 
-| 游戏 | 原生网页 | 原版对照 | 实现与验证范围 |
+| 游戏 | 开始游戏 | 原版或来源 | 实现与验证范围 |
 | --- | --- | --- | --- |
-| Q宠速配 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-match/) | [classic-014](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-014) | [迁移说明](native/qpet-match/README.md) |
-| 搭鹊桥 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/magpie-bridge/) | [classic-002](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-002) | [迁移说明](native/magpie-bridge/README.md) |
-| QQ飞车（宠爱飞车） | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-racing/) | [classic-003](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-003) | [迁移说明](native/qpet-racing/README.md) |
-| 宠爱森林 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-forest/) | [happy-forest](https://qpetlover.cn/QPetGamesWeb/originals/#/play/happy-forest) | [迁移说明](native/qpet-forest/README.md)：五张原关卡；公开输入首关过关，未声称五关自然连胜 |
-| 宠爱QQ堂 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-qqtang/) | [happy-qqtang](https://qpetlover.cn/QPetGamesWeb/originals/#/play/happy-qqtang) | [迁移说明](native/qpet-qqtang/README.md)：五张原地图、单／双人及原道具；未声称自然串通全部五关 |
-| 地下城与勇士 · Q宠版 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-dungeon/) | [happy-dungeon](https://qpetlover.cn/QPetGamesWeb/originals/#/play/happy-dungeon) | [迁移说明](native/qpet-dungeon/README.md)：两角色、三关；“宠爱地下城”正式名称及欢乐谷归属尚未证实 |
-| Q宠爱音速 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-sonic/) | [版本与来源](native/qpet-sonic/provenance.json) | [迁移说明](native/qpet-sonic/README.md)：同源人类版三关、规则与原声迁移，企鹅素材按历史截图补制；企鹅原始SWF仍缺 |
-| Q宠守护使 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-guardian/) | [classic-001](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-001) | [迁移说明](native/qpet-guardian/README.md) |
-| Q宠摘星星 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-stars/) | [classic-015](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-015) | [迁移说明](native/qpet-stars/README.md) |
-| Q宠冒险岛 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-adventure/) | [逐集原版](https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0) | [迁移说明](native/qpet-adventure/README.md)：序章及八集双角色、逐集存档；规则端点夹具通过，Chrome局部检查，未声称整集人工通关 |
+| Q宠速配 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-match/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-014) | [迁移与验证说明](native/qpet-match/README.md) |
+| 搭鹊桥 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/magpie-bridge/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-002) | [迁移与验证说明](native/magpie-bridge/README.md) |
+| QQ飞车（宠爱飞车） | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-racing/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-003) | [迁移与验证说明](native/qpet-racing/README.md) |
+| 宠爱森林 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-forest/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/happy-forest) | [迁移与验证说明](native/qpet-forest/README.md) |
+| 宠爱QQ堂 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-qqtang/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/happy-qqtang) | [迁移与验证说明](native/qpet-qqtang/README.md) |
+| 地下城与勇士 · Q宠版 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-dungeon/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/happy-dungeon) | [迁移与验证说明](native/qpet-dungeon/README.md) |
+| Q宠爱音速 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-sonic/) | [原版与来源](native/qpet-sonic/provenance.json) | [迁移与验证说明](native/qpet-sonic/README.md)：企鹅原SWF仍缺，现同源人类版规则及补制企鹅素材 |
+| Q宠冒险岛 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-adventure/) | [逐集原版](https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0) | [迁移与验证说明](native/qpet-adventure/README.md)：序章和八集双角色；各集直接进入，不恢复历史付费解锁；未称整集人工通关 |
+| Q宠守护使 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-guardian/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-001) | [迁移与验证说明](native/qpet-guardian/README.md) |
+| Q宠摘星星 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-stars/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-015) | [迁移与验证说明](native/qpet-stars/README.md) |
+| Q宠邀你来找茬 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-differences/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-005) | [迁移与验证说明](native/qpet-differences/README.md) |
+| Q宠抓鱼 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-fishing/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-008) | [迁移与验证说明](native/qpet-fishing/README.md) |
+| Q宠端盘子 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-trays/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-006) | [迁移与验证说明](native/qpet-trays/README.md) |
+| Q宠搭积木 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-blocks/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-010) | [迁移与验证说明](native/qpet-blocks/README.md) |
+| Q宠保姆 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-nanny/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-009) | [迁移与验证说明](native/qpet-nanny/README.md) |
+| 企鹅的挑战 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-penguin-challenge/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-004) | [迁移与验证说明](native/qpet-penguin-challenge/README.md) |
+| 满天星 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-full-stars/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-016) | [迁移与验证说明](native/qpet-full-stars/README.md) |
+| Q宠挖矿 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-mining/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-013) | [迁移与验证说明](native/qpet-mining/README.md) |
+| QQ宝宝守猎 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-hunting/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-011) | [迁移与验证说明](native/qpet-hunting/README.md)：本地55发练习；旧账号收费与兑换不恢复 |
+| QQ企鹅穿云 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-clouds/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-012) | [迁移与验证说明](native/qpet-clouds/README.md)：原六角色/轮盘/果实/原声；积分上传不恢复 |
+| QQ跆拳道 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-taekwondo/) | [原版与来源](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-007) | [迁移与验证说明](native/qpet-taekwondo/README.md)：真实命中/换关/失败重玩和手机离线通过，未称十关连续通关 |
+| 皇家战棋 | [作者站点](https://raylic.github.io/battlechess-web/) | [raylic/battlechess-web](https://github.com/raylic/battlechess-web) · [MemoryD/BattleChess](https://github.com/MemoryD/BattleChess) | 外链收录，非本站迁移；代码MIT，素材不属MIT，见[作者声明](https://github.com/raylic/battlechess-web/blob/0ee2adaaf436a1ba85a1d52eb6f0156b3262f115/NOTICE)；感谢作者及上游 glink25/Parti |
 
-| QQ宝宝守猎 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-hunting/) | [classic-011](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-011) | [迁移说明](native/qpet-hunting/README.md)：55发、Q哥/Q妹、本地分数；旧账号收费与兑换服务不恢复 |
-
-| QQ企鹅穿云 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-clouds/) | [classic-012](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-012) | [迁移说明](native/qpet-clouds/README.md)：原六角色/轮盘/果实/原声；积分上传服务不恢复 |
-
-| QQ跆拳道 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-taekwondo/) | [classic-007](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-007) | [迁移说明](native/qpet-taekwondo/README.md)：原角色/十关规则/原声；真实命中、换关、失败重玩与手机离线已测，未称十关连续通关 |
-
-`native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页。首页卡片只显示封面、名称、开始与详情，封面、标题和开始按钮均进入复刻版；有原件时在详情内提供「原版对照」按钮。音速原件尚缺，不伪造原版入口；来源说明留在本仓库文档，不展示在玩家大厅。候选可以单独构建预览，仍不会进入公开首页。`originals/` 是独立的原件校对模块，其固定清单与原生游戏闭包分开验证；可独立导出的原生游戏包不包含播放器。旧 `player.html?game=...` 地址显示下架通知。
+`native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入首页；原生条目构建本地运行包，显式 `external` 条目直接链接作者站点。首页卡片只显示封面、名称、开始与详情，封面、标题和开始按钮均进入复刻版；有原件时在详情内提供「原版对照」按钮。音速原件尚缺，不伪造原版入口；来源说明留在本仓库文档，不展示在玩家大厅。候选可以单独构建预览，仍不会进入公开首页。`originals/` 是独立的原件校对模块，其固定清单与原生游戏闭包分开验证；可独立导出的原生游戏包不包含播放器。旧 `player.html?game=...` 地址显示下架通知。
 
 ## 本地运行
 
