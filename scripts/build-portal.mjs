@@ -21,6 +21,7 @@ const CONTROLS={
  'qpet-adventure':'方向键移动，空格与人物对话。跟随各关画面中的提示探索和解谜。',
  'qpet-guardian':'在 QGG 所在区域调整角度，点按投出雪球。',
  'qpet-stars':'← → 移动 QGG 托住 QMM；↑ ↓ 微调弹跳角度。手机使用屏幕上的方向按钮。',
+ 'qpet-fishing':'移动鼠标或拖动手指抓鱼，避开障碍。',
  'qpet-differences':'对照左右两图，点击右图不同之处。手机直接点按右图。',
 };
 const escape=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));

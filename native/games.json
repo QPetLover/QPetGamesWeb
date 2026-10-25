@@ -145,5 +145,17 @@
     "category": "classic",
     "summary": "和 Q宠一起找出两图的不同之处。",
     "cover": "covers/qpet-differences.png"
+  },
+  {
+    "id": "qpet-fishing",
+    "title": "Q宠抓鱼",
+    "path": "qpet-fishing",
+    "preview": "preview-fishing",
+    "candidate": "minitool-fishing-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-008",
+    "category": "classic",
+    "summary": "带着 Q宠抓住游过的鱼，避开障碍。",
+    "cover": "covers/qpet-fishing.png"
   }
 ]

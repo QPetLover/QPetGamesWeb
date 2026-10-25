@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {installPointer} from '../app.js';
+const handlers={},moves=[],actions=[];const canvas={addEventListener(n,f){handlers[n]=f;},getBoundingClientRect(){return{left:11.25,top:7.5,width:250.5,height:187.875};},setPointerCapture(){},focus(){}};
+let pointer={x:0,y:0,down:false};const game={pointer(x,y,down){pointer={x,y,down};moves.push(pointer);},view(){return{pointer};}};
+const input=installPointer(canvas,{game,hitTest:(x,y)=>x===200&&y===150?'continue-intro':null,action:n=>actions.push(n)});
+const at=(x,y,pointerId=1)=>({clientX:11.25+x*250.5/400,clientY:7.5+y*187.875/300,pointerId,button:0,isPrimary:true,preventDefault(){}});
+handlers.pointerdown(at(200,150));assert.deepEqual(actions,['continue-intro'],'original onPress acts on down');assert.deepEqual(pointer,{x:200,y:150,down:true});
+handlers.pointerdown(at(40,40,2));handlers.pointermove(at(50,50,2));assert.equal(pointer.x,200,'second pointer is ignored');
+handlers.pointermove(at(320,220));assert.equal(pointer.x,320);assert.equal(pointer.y,220);assert.equal(pointer.down,true);
+handlers.pointerup(at(320,220,2));assert.equal(pointer.down,true);handlers.pointercancel({pointerId:1});assert.equal(pointer.down,false);assert.equal(pointer.x,320);
+handlers.pointerdown(at(150,175));handlers.lostpointercapture({pointerId:1});assert.equal(pointer.down,false);
+handlers.pointerdown(at(150,175));input.cancel();assert.equal(pointer.down,false);handlers.pointermove(at(250,90));assert.equal(pointer.x,250,'desktop hover drives original mouse-follow without a held button');
+console.log('production pointer handlers: fractional CSS coordinate mapping, onPress, active pointer, release/cancel/lost capture/blur and mouse hover passed; no browser touch claim');

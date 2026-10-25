@@ -1,0 +1,39 @@
+{
+  "sourceSWF": "QPetGames/classical_games/swf/Q宠抓鱼.swf",
+  "sourceCommit": "a28b5d3928141955b01ba06cdd739974cf5b7ecc",
+  "sourceSHA256": "515b184d8e53ce556ee0c0f4c12b0f433762a9f0464b94f2c65342c3b5bda2e3",
+  "sourceBytes": 701876,
+  "stage": {
+    "width": 400,
+    "height": 300,
+    "fps": 17
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 659,
+  "embeddedImages": {},
+  "inputs": {
+    "source.xml": "7661704fbf52b6394e12ba51547f8ff9bf5ce2614366776e34ce8517f33bdfb2",
+    "canvas/frames.html": "7595af1f3587638e2fbbffc9f3293acf443c63dd03b1b0ccb19b44b6c3368f79",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked/DefineSprite_102_礼物/frames.html": "fc6fe2c07f9a826c663f856865886396006c32088f92c7ea9026fdad96555e94",
+    "linked/DefineSprite_126_一条鱼/frames.html": "e92d817af19ebcf95cf49e17a1ab69b9c46eb45676298ece76c6c47cc41a10a0",
+    "linked/DefineSprite_52_水雷/frames.html": "d0e3a7544847c890e741e3609e2b924bb28479fd5f2ccda952aeddcabc06a8e5",
+    "linked/DefineSprite_61_鱼雷/frames.html": "9d117775766ebbd9a91cbd538fe9cb63c282371894f0a2f301eb31b01c1d1f3a"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "148 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "50 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "23fa4e10176c7cd54b892924a5071c15769be1aec9df923024313c10cbb99b39",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/a28b5d3928141955b01ba06cdd739974cf5b7ecc/classical_games/swf/Q宠抓鱼.swf",
+  "sourceVersionCaution": "Fixed archived original category; source SHA identifies the baseline, not proof of historical server byte identity.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 0,
+  "previousFFDecBitmapBytes": 0
+}

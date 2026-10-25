@@ -9,7 +9,8 @@
     "migrationChanges": [
       "index.html same-site hall links and matching app cache key",
       "assets/js/app.js same-site native root and Adventure links",
-      "classic-005 now launches the verified native differences game; original player remains explicit"
+      "classic-005 now launches the verified native differences game; original player remains explicit",
+      "classic-008 now launches the verified native fishing game; original player remains explicit"
     ],
     "originalGamePayloadsUnchanged": 19,
     "rufflePayloadsUnchanged": 7
@@ -489,8 +490,8 @@
     },
     {
       "path": "assets/js/app.js",
-      "bytes": 13455,
-      "sha256": "95173156201e1905e9ba440bec0751b642010dba1bf304d8816e88aa46a1dc9a"
+      "bytes": 13560,
+      "sha256": "f63ba158335b27aa43bca14d7cd64ce6c50375f06c7d30690e7dbc363735fff7"
     },
     {
       "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
@@ -735,7 +736,7 @@
     {
       "path": "index.html",
       "bytes": 1221,
-      "sha256": "80e7a115557f0a2498fbac3b4881f985d1a3155f329191b83dcf0865a6d432e2"
+      "sha256": "e866db597540e95cbec19a2e02c5a84bc74dfbf2c4cd9279193fe4c02409041e"
     },
     {
       "path": "onegame.html",

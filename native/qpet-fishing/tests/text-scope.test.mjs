@@ -1,0 +1,8 @@
+import assert from'node:assert/strict';import fs from'node:fs';
+import{originalTextValue}from'../renderer.js';import{deviceLineMetrics}from'../device-text.js';import{deviceGlyphs,deviceFontMetrics}from'../assets/device-font.js';import{instances}from'../assets/instances.js';
+const text=JSON.parse(fs.readFileSync(new URL('../assets/text-metadata.json',import.meta.url)));assert.equal(Object.keys(text).length,12);assert.ok(Object.values(text).every(t=>!t.outlines));const view={scoreText:12,score:{fish:12,kingBag:1,speedBag:2,bloodBag:3,mined:4,torpedoed:5,total:9}};
+for(const id of['510','511','512','513','514','515']){assert.ok(instances['544'].frames[0].some(e=>e.id===id));assert.equal(originalTextValue(id,text[id].variable,view),view.score[text[id].variable.split('.').at(-1)]);}
+for(const id of['538','539','540','541']){assert.ok(instances['542'].frames.some(es=>es.some(e=>e.id===id)));assert.equal(originalTextValue(id,text[id].variable,view),'','original nested total has no score on its parent543');}
+assert.ok(instances['544'].frames[0].some(e=>e.id==='543'));assert.ok(instances['543'].frames.some(es=>es.some(e=>e.id==='542')));assert.equal(originalTextValue('468','',view),12);assert.equal(originalTextValue('506',text['506'].variable,view),'');
+for(const ch of'0123456789-'){assert.ok(deviceGlyphs[ch]?.commands.length);const size=500,line=deviceLineMetrics(ch,size);assert.equal(line.width,Math.trunc(deviceGlyphs[ch].advance*Math.fround(size/deviceFontMetrics.unitsPerEm)));}assert.equal(deviceLineMetrics('0123456789-',500).chars.length,11);
+console.log('12 exact original dynamic fields, nested blank total scope, 11 fixed-comparison static glyphs and fractional twip advances passed');

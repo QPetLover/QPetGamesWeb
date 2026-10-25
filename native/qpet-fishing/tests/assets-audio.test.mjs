@@ -1,0 +1,29 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {audioAssets,audioMetadata,audioTimelineEvents,audioStreams} from '../audio-assets.js';
+import {OriginalAudio,envelopeLevel} from '../audio.js';
+import {FishingGame} from '../game-logic.js';
+for(const[id,data]of Object.entries(audioAssets)){const bytes=Buffer.from(data.split(',')[1],'base64'),m=audioMetadata[id];assert.equal(bytes.length,m.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),m.sha256);}
+assert.equal(Object.keys(audioAssets).length,32);assert.equal(audioTimelineEvents.length,38);assert.equal(audioStreams['323'].blocks.length,188);assert.ok(!Object.keys(audioAssets).some(id=>id==='undefined'));
+const events=[],game=new FishingGame({onEvent:e=>events.push(e)});game.start();const initial=events.filter(e=>e.type==='sound');assert.equal(initial.filter(e=>e.id==='495').length,2,'original invisible alert starts the same source sound twice');assert.ok(initial.some(e=>e.id==='325'),'original background timeline starts at frame 1');assert.ok(initial.some(e=>e.id==='460'),'original intro-to-player animation sound');
+const context={currentTime:10,destination:{},createBufferSource(){return{connect(){},disconnect(){},start(...a){this.started=a;},stop(...a){this.stopped=a;}};},createChannelSplitter(){return{connect(){},disconnect(){}};},createChannelMerger(){return{connect(){},disconnect(){}};},createGain(){return{gain:{setValueAtTime(){},linearRampToValueAtTime(){}},connect(){},disconnect(){}};}};
+const audio=new OriginalAudio();audio.context=context;audio.enabled=true;for(const[id,m]of Object.entries(audioMetadata))audio.decoded[id]={duration:m.samples/m.rate+Math.max(0,m.seekSamples/m.rate)+.5};
+for(const event of audioTimelineEvents){const before=audio.sources.size,source=audio.play(event.id,0,event.options);assert.ok(source,event.id+' decodes to a nonempty source event');assert.equal(source.originalSoundId,event.id);assert.equal(audio.sources.size,before+1);}
+const stream=audioStreams['323'];assert.deepEqual(stream.segments.map(s=>[s.startFrame,s.readerEndFrame]),[[5,119],[149,224],[205,224]]);assert.equal(stream.blocks.find(b=>b.frame===117).samples,0);for(const segment of stream.segments){assert.equal(audioMetadata[segment.id].seekSamples,0);const source=audio.playStream({id:segment.id,owner:'intro',offset:0,end:segment.samples});assert.ok(source);assert.ok(source.started[2]>0);}
+audio.stopStream('intro');assert.equal([...audio.sources].filter(s=>s.streamOwner==='intro').length,0);const retained=audio.sources.size;audio.disable();assert.equal(audio.sources.size,retained,'mute preserves authored source clocks');audio.stop();assert.equal(audio.sources.size,0);
+
+// Resume the authored intro stream only while its owner is still alive. The
+// clock is the game's 17-fps clock, which excludes hidden/paused page time.
+let clock=0;const gains=[],streams=[];
+const tracked={...context,state:'running',createGain(){const calls=[];const node={gain:{setValueAtTime(...v){calls.push(['set',...v]);},linearRampToValueAtTime(...v){calls.push(['ramp',...v]);}},connect(){},disconnect(){},calls};gains.push(node);return node;},createBufferSource(){const source=context.createBufferSource();streams.push(source);return source;},async decodeAudioData(bytes){const hash=createHash('sha256').update(Buffer.from(bytes)).digest('hex'),m=Object.values(audioMetadata).find(m=>m.sha256===hash);return {duration:m.samples/m.rate+Math.max(0,m.seekSamples/m.rate)+.5};}};
+const restored=new OriginalAudio({audioContextFactory:()=>tracked,clock:()=>clock});
+const first=stream.segments[0];restored.handle({type:'stream',id:first.id,owner:'intro',offset:0,end:first.samples});clock=2;
+assert.equal(streams.length,0);await restored.enable();assert.equal(streams.length,1);assert.equal(streams[0].started[1],2);const active=streams[0];restored.disable();assert.equal(active.stopped,undefined);clock=3;await restored.enable();assert.equal(streams.length,1,'unmute must not duplicate or restart the existing intro stream');
+restored.handle({type:'stream-stop',owner:'intro'});assert.ok(active.stopped);clock=4;restored.disable();await restored.enable();assert.equal(streams.length,1,'authored help pause may not revive an old segment');
+const next=stream.segments.find(s=>s.startFrame===205);restored.handle({type:'stream',id:next.id,owner:'intro',offset:0,end:next.samples});assert.equal(streams.length,2);assert.equal(streams[1].started[1],0,'authored continue starts a fresh MPEG slice');restored.stop();assert.equal(restored.streamStates.size,0);
+const stoppedBeforeUnlock=new OriginalAudio({audioContextFactory:()=>tracked,clock:()=>clock});stoppedBeforeUnlock.handle({type:'stream',id:first.id,owner:'intro',offset:0,end:first.samples});stoppedBeforeUnlock.stopStream('intro');const count=streams.length;await stoppedBeforeUnlock.enable();assert.equal(streams.length,count);
+const env=[{pos44:0,leftLevel:1000,rightLevel:3000},{pos44:44100,leftLevel:3000,rightLevel:7000},{pos44:88200,leftLevel:0,rightLevel:0}];
+assert.equal(envelopeLevel(env,'leftLevel',22050),2000);assert.equal(envelopeLevel(env,'rightLevel',22050),5000);assert.equal(envelopeLevel(env,'rightLevel',100000),0);
+const before=gains.length;restored.play('326',.5,{envelope:env});const [left,right]=gains.slice(before);assert.deepEqual(left.calls[0],['set',2000/32768,10]);assert.deepEqual(right.calls[0],['set',5000/32768,10]);assert.equal(left.calls[1][2],10.5);assert.equal(left.calls[2][2],11.5);assert.ok(gains.slice(before).every(g=>g.calls.every(c=>c[2]>=10)));
+restored.stop();stoppedBeforeUnlock.stop();
+console.log('32 exact MPEG hashes, 38 SOUNDINFO events, stream reader groups, mute/first-enable/stop lifecycle and stereo envelope resume passed; fake context does not prove browser listening');
