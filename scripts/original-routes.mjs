@@ -10,7 +10,7 @@ const app=readFileSync(path.join(directory,'assets/js/app.js'),'utf8');
 const index=readFileSync(path.join(directory,'index.html'),'utf8');
 const nativeSite = '../';
 const nativeGames = {
-  'classic-001': 'qpet-guardian', 'classic-002': 'magpie-bridge', 'classic-003': 'qpet-racing', 'classic-005': 'qpet-differences', 'classic-008': 'qpet-fishing', 'classic-006': 'qpet-trays', 'classic-010': 'qpet-blocks', 'classic-009': 'qpet-nanny', 'classic-004': 'qpet-penguin-challenge', 'classic-016': 'qpet-full-stars',
+  'classic-001': 'qpet-guardian', 'classic-002': 'magpie-bridge', 'classic-003': 'qpet-racing', 'classic-005': 'qpet-differences', 'classic-008': 'qpet-fishing', 'classic-006': 'qpet-trays', 'classic-010': 'qpet-blocks', 'classic-009': 'qpet-nanny', 'classic-004': 'qpet-penguin-challenge', 'classic-016': 'qpet-full-stars', 'classic-013': 'qpet-mining',
   'classic-014': 'qpet-match', 'classic-015': 'qpet-stars', 'happy-forest': 'qpet-forest',
   'happy-qqtang': 'qpet-qqtang', 'happy-dungeon': 'qpet-dungeon',
 };
@@ -67,7 +67,7 @@ for (const game of catalog.games) {
   if(native)assert(detail.includes('href="'+main+'">开始游戏</a>'));
   else assert(!detail.includes(nativeSite),'unported games cannot invent a native game link');
 }
-for (const [filter,count] of [['native',15],['ruffle',4]]) {
+for (const [filter,count] of [['native',16],['ruffle',3]]) {
   h.run(`state.filter=${JSON.stringify(filter)};paintCatalogGrid();`);
   assert.equal((h.node('catalog-grid').innerHTML.match(/class="catalog-card"/g)||[]).length,count);
 }
@@ -102,5 +102,5 @@ for(const file of ['assets/js/app.js','assets/css/site.css']){
   const hash=createHash('sha256').update(readFileSync(path.join(directory,file))).digest('hex').slice(0,16);
   assert(index.includes(file+'?v='+hash),file+' cache version must match this UI release');
 }
-return {passed:true,nativeHomeRedirects:4,nativeCardRoutes:15,originalOnlyCards:4,originalPlayerRoutes:19,retiredIds:retiredIds.length,deniedDetailAndPlayerRoutes:36,cachedCatalogOriginalsOnly:true,visibleDevelopmentNotes:false,visibleRuffleBranding:false,nativeAdventureNavigation:true,gameplayRun:false};
+return {passed:true,nativeHomeRedirects:4,nativeCardRoutes:16,originalOnlyCards:3,originalPlayerRoutes:19,retiredIds:retiredIds.length,deniedDetailAndPlayerRoutes:36,cachedCatalogOriginalsOnly:true,visibleDevelopmentNotes:false,visibleRuffleBranding:false,nativeAdventureNavigation:true,gameplayRun:false};
 }

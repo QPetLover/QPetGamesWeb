@@ -1,0 +1,73 @@
+{
+  "sourceSWF": "awesome-qpet-games/archive/games/classic/swf/Q宠挖矿.swf",
+  "sourceCommit": "b82b791a053c51d385b18d98f2d9951929240c50",
+  "sourceSHA256": "66494abc71e425f8390fdcd9c3d40bbaa4236412be2a07e63c381ea6b3808291",
+  "sourceBytes": 1806518,
+  "stage": {
+    "width": 760,
+    "height": 420,
+    "fps": 25,
+    "version": 6
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 363,
+  "embeddedImages": {
+    "imageObj19": {
+      "mime": "image/JPEG",
+      "bytes": 72855,
+      "sha256": "56c77cf7ac89f5c81858b8c12838907d0cb67ae3861622e7bcb415c44dc02711"
+    },
+    "imageObj56": {
+      "mime": "image/JPEG",
+      "bytes": 934,
+      "sha256": "005dd8baebd1f01427baa85bb91638b8262f753e55c70cd33f61bfc4c1cb1be4"
+    },
+    "imageObj57": {
+      "mime": "image/JPEG",
+      "bytes": 900,
+      "sha256": "de0b177734c839bbf04aca18b287fc556ea70bcf0e29c9ca4ec0f98244075f11"
+    },
+    "imageObj58": {
+      "mime": "image/JPEG",
+      "bytes": 1287,
+      "sha256": "f13be935e3f54483f8ab9a0e71e12e754672865d96c09e25578eff147c6e8491"
+    },
+    "imageObj59": {
+      "mime": "image/JPEG",
+      "bytes": 1129,
+      "sha256": "4b767f1641dd2150a77caea0530baca0bd8e2e1e338b7691486f4fc6dc64f0ea"
+    },
+    "imageObj84": {
+      "mime": "image/PNG",
+      "bytes": 334808,
+      "sha256": "027c854bb1bab187248c9784244e9587b2a1b750ed0ae62ec7f651f8f2743501"
+    },
+    "imageObj87": {
+      "mime": "image/PNG",
+      "bytes": 1254552,
+      "sha256": "a69c2d1b3194b1e63439b8f0561686371497d359ec2aea7aa3e8b4cc69b07d06"
+    }
+  },
+  "inputs": {
+    "source.xml": "1f6506024d20737873295f2a0fabc86485222b9452b2cc45d4ceaecaf1dff8e3",
+    "canvas/frames.html": "44f86784a53594f2911f687db5080677be9e12098078bd647c39f8cd9775c4e2",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93"
+  },
+  "corrections": [
+    "Native translate/scale/rotate/reset keep the original drawing helper stroke matrix synchronized",
+    "334 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "8 transparent radial centre export pre-fills removed",
+    "Root export already includes all linked stone/role symbols;0 supplementary linked exports used",
+    "All13 EditText fields useOutlines=false; fixed comparison-fallback static glyph paths, clipping and source word wrapping retained",
+    "Seven embedded bitmap declarations/references form a complete closure"
+  ],
+  "artworkSHA256": "d6e488d431f798f3eebdb06b90cc4cd0b0a86c2f14e7e52fee0b7056b2e1b3af",
+  "sourceURL": "https://github.com/QPetLover/awesome-qpet-games/blob/b82b791a053c51d385b18d98f2d9951929240c50/archive/games/classic/swf/Q宠挖矿.swf",
+  "sourceVersionCaution": "Fixed archived original category; source SHA identifies the baseline, not proof of historical server byte identity.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 1666465,
+  "previousFFDecBitmapBytes": 1666465
+}

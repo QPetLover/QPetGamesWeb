@@ -15,7 +15,8 @@
       "classic-010 now launches the verified native blocks game; original player remains explicit",
       "classic-009 now launches the verified native nanny game; original player remains explicit",
       "classic-004 now launches verified native penguin challenge; original player remains explicit",
-      "classic-016 now launches verified native full stars; original player remains explicit"
+      "classic-016 now launches verified native full stars; original player remains explicit",
+      "classic-013 now launches verified native mining with explicit local no-charge modes; original player remains separate"
     ],
     "originalGamePayloadsUnchanged": 19,
     "rufflePayloadsUnchanged": 7
@@ -495,8 +496,8 @@
     },
     {
       "path": "assets/js/app.js",
-      "bytes": 14134,
-      "sha256": "dc846838603a03482335f446e53e1f8345641da8ee99e6b44b6eb1b4ec4f6fda"
+      "bytes": 14239,
+      "sha256": "40ab520e5570cb7777de6a519363c86d368a13780fd499784767af755d5e5623"
     },
     {
       "path": "assets/vendor/ruffle/6ce4f603a1fe7cc88438.wasm",
@@ -741,7 +742,7 @@
     {
       "path": "index.html",
       "bytes": 1221,
-      "sha256": "70ca010e6b56c14a0e0a0e7244a0bff0b78a103b4d703e306a56d716f747bd51"
+      "sha256": "51dc131548be5b69575dab0a0ef48893b25f11846988df9634b9e2cdabfed95a"
     },
     {
       "path": "onegame.html",

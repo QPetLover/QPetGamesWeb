@@ -1,0 +1,19 @@
+import{instances,localBounds}from'./assets/instances.js';
+// The source's static display lists and independent MovieClip clocks. No bytecode.
+export class Clip{
+ constructor(id,game,parent=null,entry=null){this.id=String(id);this.game=game;this.createdFrame=game.frame;this.forcedAt=game.frame;this.parent=parent;this.entry=entry;this.frame=0;this.playing=true;this.visible=true;this.children=new Map();this.extra=[];this.matrix=entry?[...entry.matrix]:[1,0,0,1,0,0];this.go(1,true);}
+ get list(){return instances[this.id]?.frames[this.frame-1]||[];}
+ get(name){return[...this.children.values()].find(c=>c.entry?.name===name);}
+ go(frame,playing=false,fromTick=false){if(!fromTick)this.forcedAt=this.game.frame;const data=instances[this.id];if(!data)return;frame=typeof frame==='string'?data.labels[frame]:frame;if(!frame)return;frame=Math.max(1,Math.min(data.frames.length,frame));this.playing=playing;if(this.frame===frame)return;this.frame=frame;const next=new Map();for(const entry of this.list){if(!instances[entry.id])continue;const old=this.children.get(entry.depth),same=old&&old.id===entry.id&&old.entry.born===entry.born,child=same?old:new Clip(entry.id,this.game,this,entry);child.entry=entry;next.set(entry.depth,child);}this.children=next;this.game.enter(this);}
+ tick(){if(this.createdFrame===this.game.frame)return;const children=[...this.children.values(),...this.extra];if(this.playing&&this.forcedAt!==this.game.frame)this.go(this.frame%instances[this.id].frames.length+1,true,true);for(const child of children)if(child.parent===this&&([...this.children.values()].includes(child)||this.extra.includes(child)))child.tick();}
+}
+const f=Math.fround;
+export const identity=[1,0,0,1,0,0];
+export function roundTwips(v){v=f(v);const n=Math.floor(v),d=v-n;return d<.5?n:d>.5?n+1:n%2===0?n:n+1;}
+const sum=(a,b,c,d)=>f(f(f(a)*f(b))+f(f(c)*f(d)));
+export function multiply(a,b){return[sum(a[0],b[0],a[2],b[1]),sum(a[1],b[0],a[3],b[1]),sum(a[0],b[2],a[2],b[3]),sum(a[1],b[2],a[3],b[3]),roundTwips(sum(a[0],b[4],a[2],b[5]))+a[4],roundTwips(sum(a[1],b[4],a[3],b[5]))+a[5]];}
+export function transformBounds(b,m){const ps=[];for(const x of[b[0]*20,b[2]*20])for(const y of[b[1]*20,b[3]*20])ps.push([roundTwips(sum(m[0],x,m[2],y))+m[4],roundTwips(sum(m[1],x,m[3],y))+m[5]]);return[Math.min(...ps.map(p=>p[0])),Math.min(...ps.map(p=>p[1])),Math.max(...ps.map(p=>p[0])),Math.max(...ps.map(p=>p[1]))];}
+export function matrixFor(c,entry=c.entry){let m=[...(entry?.matrix||identity)];if(c.x!==undefined)m[4]=Math.trunc(c.x*20);if(c.y!==undefined)m[5]=Math.trunc(c.y*20);if(c.rotation!==undefined||c.scale!==undefined){const originalX=Math.atan2(m[1],m[0]),skew=Math.atan2(-m[2],m[3])-originalX,r=c.rotation!==undefined?c.rotation*Math.PI/180:originalX,sx=c.scale??Math.hypot(m[0],m[1]),sy=c.scale??Math.hypot(m[2],m[3]);m[0]=f(Math.cos(r)*sx);m[1]=f(Math.sin(r)*sx);m[2]=f(-Math.sin(r+skew)*sy);m[3]=f(Math.cos(r+skew)*sy);}if(c.scaleX!==undefined){m[0]*=c.scaleX;m[1]*=c.scaleX;}if(c.scaleY!==undefined){m[2]*=c.scaleY;m[3]*=c.scaleY;}return m.map((v,i)=>i<4?f(v):v);}
+export function worldMatrix(c){return c.parent?multiply(worldMatrix(c.parent),matrixFor(c)):matrixFor(c);}
+export function bounds(c,m=worldMatrix(c)){const boxes=[];for(const e of c.list){const child=c.children.get(e.depth),mm=multiply(m,child?matrixFor(child,e):e.matrix);if(child)boxes.push(bounds(child,mm));else if(localBounds[e.id])boxes.push(transformBounds(localBounds[e.id],mm));}for(const child of c.extra)boxes.push(bounds(child,multiply(m,matrixFor(child))));const bs=boxes.filter(Boolean);return bs.length?[Math.min(...bs.map(b=>b[0])),Math.min(...bs.map(b=>b[1])),Math.max(...bs.map(b=>b[2])),Math.max(...bs.map(b=>b[3]))]:null;}
+export function intersects(a,b){return!!a&&!!b&&a[0]<=b[2]&&a[2]>=b[0]&&a[1]<=b[3]&&a[3]>=b[1];}

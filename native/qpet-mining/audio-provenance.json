@@ -1,0 +1,90 @@
+{
+  "sourceSHA256": "66494abc71e425f8390fdcd9c3d40bbaa4236412be2a07e63c381ea6b3808291",
+  "sounds": {
+    "1": {
+      "rate": 11025,
+      "samples": 10944,
+      "seekSamples": 1633,
+      "channels": 1,
+      "rawMP3Bytes": 2496,
+      "sha256": "f820cc29a5e00acdb59a6594703705c9e717b6c0cd462daafc0874b739c2aac0"
+    },
+    "2": {
+      "rate": 11025,
+      "samples": 2592,
+      "seekSamples": 1661,
+      "channels": 1,
+      "rawMP3Bytes": 936,
+      "sha256": "84bb7017dd2e99c844a4a56957c170a57c27e45fca261893a08d0304369f1e4a"
+    },
+    "28": {
+      "rate": 11025,
+      "samples": 4896,
+      "seekSamples": 1661,
+      "channels": 1,
+      "rawMP3Bytes": 1352,
+      "sha256": "fb4c32b49609b7bd33a0418ed02ca43da6737b3612943a4fe978b5e5a68fbec1"
+    },
+    "365": {
+      "rate": 11025,
+      "samples": 9504,
+      "seekSamples": 1661,
+      "channels": 1,
+      "rawMP3Bytes": 2184,
+      "sha256": "1915da7d3ad45cba8b2948f17626da9ca74e77848151d872def9bbf7a4e45251"
+    },
+    "367": {
+      "rate": 11025,
+      "samples": 91008,
+      "seekSamples": 1633,
+      "channels": 1,
+      "rawMP3Bytes": 16952,
+      "sha256": "cea715429ef685f330aba08fccfb9a5d7c0a2effd7fb9d6f18cb1aa46e04f02a"
+    }
+  },
+  "buttons": {
+    "29": {
+      "id": "28",
+      "loops": 0
+    },
+    "32": {
+      "id": "28",
+      "loops": 0
+    },
+    "35": {
+      "id": "28",
+      "loops": 0
+    },
+    "38": {
+      "id": "28",
+      "loops": 0
+    },
+    "64": {
+      "id": "28",
+      "loops": 0
+    },
+    "74": {
+      "id": "28",
+      "loops": 0
+    },
+    "82": {
+      "id": "28",
+      "loops": 0
+    },
+    "356": {
+      "id": "28",
+      "loops": 0
+    },
+    "359": {
+      "id": "28",
+      "loops": 0
+    }
+  },
+  "events": {
+    "os1": "1",
+    "os2": "2",
+    "root4": "367",
+    "result2": "365"
+  },
+  "streams": "65 empty stream heads; no stream blocks"
+}

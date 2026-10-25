@@ -217,5 +217,17 @@
     "category": "classic",
     "summary": "托起星星，点亮夜空。",
     "cover": "covers/qpet-full-stars.png"
+  },
+  {
+    "id": "qpet-mining",
+    "title": "Q宠挖矿",
+    "path": "qpet-mining",
+    "preview": "preview-mining",
+    "candidate": "minitool-mining-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-013",
+    "category": "classic",
+    "summary": "调整方向，放下抓钩，把矿石带回来。",
+    "cover": "covers/qpet-mining.png"
   }
 ]

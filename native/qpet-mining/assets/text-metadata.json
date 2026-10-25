@@ -1,0 +1,338 @@
+{
+  "40": {
+    "text": "帮助",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      1484,
+      883
+    ],
+    "color": [
+      255,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "70": {
+    "text": "您的宠物现在不舒服，赶快去医院治好病再来吧！",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      14984,
+      883
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "71": {
+    "text": "您的宠物正在上课，要专心听讲哦，下课再来吧！",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      14984,
+      883
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "72": {
+    "text": "您的宠物正在打工，下了班再来吧！",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      10934,
+      883
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "79": {
+    "text": "欢迎您进入普通金矿区，系统将从您的个人帐户中扣除2Q币，点击[确定]将确认扣费开始挖矿。",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      11609,
+      2481
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "80": {
+    "text": "欢迎您进入钻石星矿区，系统将从您的个人帐户中扣除5Q币，点击[确定]将确认扣费开始挖矿。",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      11609,
+      2481
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "347": {
+    "text": "100",
+    "size": 360,
+    "box": [
+      -120,
+      -120,
+      1160,
+      480
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "346",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": false,
+    "outlines": false,
+    "variable": "getStones"
+  },
+  "348": {
+    "text": "100",
+    "size": 360,
+    "box": [
+      -120,
+      -120,
+      1581,
+      480
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "346",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": false,
+    "outlines": false,
+    "variable": "timer"
+  },
+  "351": {
+    "text": "结果",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      1484,
+      883
+    ],
+    "color": [
+      255,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "353": {
+    "text": "恭喜您挖到了　　块金矿！如果您对本次成绩不满意可以重来一次。",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      8234,
+      2481
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "360": {
+    "text": "82",
+    "size": 720,
+    "box": [
+      -120,
+      -120,
+      1226,
+      1020
+    ],
+    "color": [
+      255,
+      0,
+      0,
+      1.0
+    ],
+    "align": 3,
+    "leading": 0,
+    "font": "51",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": false,
+    "outlines": false,
+    "variable": "_parent._parent.getStones"
+  },
+  "363": {
+    "text": "恭喜您挖到了　　块钻石！如果您对本次成绩不满意可以重来一次。",
+    "size": 600,
+    "box": [
+      -120,
+      -120,
+      8234,
+      2481
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 0,
+    "font": "39",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  }
+}
