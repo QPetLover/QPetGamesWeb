@@ -7,52 +7,67 @@ from urllib.error import HTTPError
 from urllib.parse import urljoin
 from html.parser import HTMLParser
 
+CATEGORIES=('happy-valley','adventure','classic')
+
 class HomeLinks(HTMLParser):
-    """Read the generated list as HTML, including entity-decoded link values."""
+    """Read static portal sections, cards and their two adjacent actions."""
     def __init__(self):
-        super().__init__(); self.sections=0; self.inside=False; self.rows=[]; self.row=None; self.anchor=None; self.links=[]
+        super().__init__(); self.category=None; self.categories=[]; self.rows=[]; self.row=None; self.anchor=None; self.field=None; self.links=[]
     def handle_starttag(self,tag,attrs):
         attrs=dict(attrs)
-        if tag=='section' and 'game-list' in attrs.get('class','').split():
-            assert not self.inside,'Nested game-list'; self.sections+=1; self.inside=True
-        elif tag=='div' and self.inside:
-            assert self.row is None,'Nested game row'
-            self.row={'id':attrs.get('data-game'),'links':[]}; self.rows.append(self.row)
+        if tag=='section' and 'data-category' in attrs:
+            assert self.category is None,'Nested game section'
+            self.category=attrs['data-category']; self.categories.append(self.category)
+            assert attrs.get('id')==self.category,'Section anchor differs from category'
+        if tag=='article' and 'data-game' in attrs:
+            assert self.category is not None and self.row is None,'Game outside a category or nested card'
+            self.row={'id':attrs['data-game'],'category':self.category,'links':[],'title':[],'summary':[],'note':[]}; self.rows.append(self.row)
         if tag=='a':
             self.links.append(attrs)
-            if self.inside:
-                assert self.row is not None,'Game link outside a row'
+            if self.row is not None:
                 self.anchor={'attrs':attrs,'text':[]}; self.row['links'].append(self.anchor)
+        if self.row is not None:
+            if tag=='h3':self.field='title'
+            if tag=='p' and 'game-summary' in attrs.get('class','').split():self.field='summary'
+            if tag=='p' and 'source-note' in attrs.get('class','').split():self.field='note'
     def handle_data(self,data):
         if self.anchor is not None:self.anchor['text'].append(data)
+        if self.row is not None and self.field is not None:self.row[self.field].append(data)
     def handle_endtag(self,tag):
         if tag=='a':self.anchor=None
-        elif tag=='div' and self.inside:self.row=None
-        elif tag=='section' and self.inside:self.inside=False
+        elif tag in ('h3','p'):self.field=None
+        elif tag=='article':self.row=None
+        elif tag=='section':self.category=None
 
 def verify_home_links(html,catalog):
     published=[game for game in catalog if game['published']]
-    home=[game for game in published if game['path']=='']
-    assert len(home)==1,'One published home game'
+    assert len({game['path'] for game in published})==len(published),'Unique published paths'
+    for game in published:
+        assert re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',game['path']),'Every game must have its own safe path'
+        assert game.get('category') in CATEGORIES,'Unknown game category'
     parsed=HomeLinks(); parsed.feed(html); parsed.close()
-    assert parsed.sections==1,'One generated home game-list'
-    assert [row['id'] for row in parsed.rows]==[game['id'] for game in published],'Home list must contain only published games in catalog order'
-    assert '<!-- published-game-links -->' not in html,'Unresolved home game-list placeholder'
-    for row,game in zip(parsed.rows,published):
-        assert len(row['links'])==2,f"{game['id']}: native and original links must be adjacent in one row"
+    categories=[category for category in CATEGORIES if any(game['category']==category for game in published)]
+    ordered=[game for category in categories for game in published if game['category']==category]
+    assert parsed.categories==categories,'Portal categories must match published groups'
+    assert [row['id'] for row in parsed.rows]==[game['id'] for game in ordered],'Portal must contain only published games in category and catalog order'
+    assert '<!-- game-sections -->' not in html,'Unresolved portal placeholder'
+    for row,game in zip(parsed.rows,ordered):
+        assert row['category']==game['category'],f"{game['id']}: incorrect section"
+        assert ''.join(row['title'])==game['title'],f"{game['id']}: incorrect title"
+        assert ''.join(row['summary'])==game['summary'],f"{game['id']}: incorrect summary"
+        assert ''.join(row['note'])==game.get('sourceNote',''),f"{game['id']}: incorrect source note"
+        assert len(row['links'])==2,f"{game['id']}: native and comparison links must be adjacent in one card"
         native,original=row['links']; native_attrs=native['attrs']; original_attrs=original['attrs']
-        expected_href=(game['path']+'/') if game['path'] else './'
-        assert native_attrs.get('href')==expected_href,f"{game['id']}: incorrect native entry"
-        assert ''.join(native['text'])==game['title'],f"{game['id']}: incorrect title"
-        assert native_attrs.get('aria-current')==('page' if game['id']==home[0]['id'] else None),f"{game['id']}: incorrect current-page label"
+        assert native_attrs.get('href')==game['path']+'/',f"{game['id']}: incorrect native entry"
+        assert native_attrs.get('aria-label')=='开始游戏：'+game['title'],f"{game['id']}: incorrect accessible entry label"
         assert original_attrs.get('href')==game['original'],f"{game['id']}: incorrect original comparison"
         assert ''.join(original['text'])==game.get('comparisonLabel','原版对照')+' ↗',f"{game['id']}: incorrect comparison label"
-        assert original_attrs.get('target')=='_blank' and {'noopener','noreferrer'}<=set(original_attrs.get('rel','').split()),f"{game['id']}: original-link isolation"
+        assert original_attrs.get('target')=='_blank' and {'noopener','noreferrer'}<=set(original_attrs.get('rel','').split()),f"{game['id']}: comparison-link isolation"
     for game in catalog:
         if not game['published']:
-            draft_href=(game['path']+'/') if game['path'] else './'
-            assert all(link.get('href') not in [draft_href,game['original']] for link in parsed.links),f"{game['id']}: draft linked from public home"
-    return [game['id'] for game in published]
+            assert all(link.get('href') not in [game['path']+'/',game['original']] for link in parsed.links),f"{game['id']}: draft linked from public portal"
+    assert not re.search(r'<(?:script|canvas|iframe|object|embed)\b|\bon\w+\s*=',html,re.I),'Portal must remain static HTML'
+    return [game['id'] for game in ordered]
 
 def chapter_expected(root,folder):
     """Use only the fixed portable manifest; JS verifier checks its closed schema."""
@@ -74,14 +89,15 @@ def chapter_expected(root,folder):
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--url')
+parser.add_argument('--dist',type=Path,help='Verify an assembled preview instead of the default dist directory')
 args=parser.parse_args()
-root=Path(__file__).resolve().parents[1]; dist=root/'dist'
+root=Path(__file__).resolve().parents[1]; dist=args.dist.resolve() if args.dist else root/'dist'
 catalog=json.loads((root/'native/games.json').read_text())
 games=[game for game in catalog if game['published']]
-expected={'player.html','maintenance.css','.nojekyll'}
+expected={'index.html','portal.css','player.html','maintenance.css','.nojekyll'}
 media={'.png','.jpg','.jpeg','.gif','.webp','.svg','.woff','.woff2'}
 for game in games:
-    folder=(game['path']+'/') if game['path'] else ''
+    folder=game['path']+'/'
     if game.get('kind')=='chapters':
         assert game['id']=='qpet-adventure' and game['path'],'Unsupported chapter package'
         expected.update(folder+name for name in chapter_expected(root,dist/game['path']))
@@ -95,7 +111,7 @@ actual={p.relative_to(dist).as_posix() for p in dist.rglob('*') if p.is_file()}
 assert actual==expected, f'Unexpected release files: {actual ^ expected}'
 for game in games:
     if game.get('kind')=='chapters':continue  # verified above, including only fixed Web PCM requests
-    folder=(game['path']+'/') if game['path'] else ''
+    folder=game['path']+'/'
     js=(dist/(folder+'app.js')).read_text(); html=(dist/(folder+'index.html')).read_text()
     for pattern in [r'\beval\s*\(',r'\bnew\s+Function\s*\(',r'\bWebAssembly\b',r'\bfetch\s*\(',r'\bXMLHttpRequest\b',r'\bWebSocket\b',r'\bimport\s*\(']:
         assert not re.search(pattern,js),f'{folder}: Forbidden runtime feature: {pattern}'
@@ -118,7 +134,7 @@ for name in sorted(expected):
     checks.append({'file':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
 retired=[]
 if args.url:
-    for name in ['catalog.json','player.js','vendor/ruffle/ruffle.js','games/qpet-match/game.swf','games/classic-002/game.swf','fonts/original-site-font.swf']:
+    for name in ['app.js','style.css','catalog.json','player.js','vendor/ruffle/ruffle.js','games/qpet-match/game.swf','games/classic-002/game.swf','fonts/original-site-font.swf']:
         try:
             with urlopen(urljoin(args.url.rstrip('/')+'/',name),timeout=20) as response:
                 raise AssertionError(f'Retired resource still published: {name}')

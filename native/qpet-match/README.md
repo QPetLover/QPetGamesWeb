@@ -1,5 +1,7 @@
 # Q宠速配原生迁移
 
+网页入口为 `https://qpetlover.cn/QPetGamesWeb/qpet-match/`，站点根目录是所有游戏共用的游戏大厅。独立 HTML/ZIP 候选不包含站点导航。
+
 源文件为 QPetLover/QPetGames 提交 `cac5e2d7636da081a178a2300865eb5090649969` 的 `classical_games/swf/Q宠速配.swf`。SHA-256：`654f01b4e6a48782ffe10be1750f321e7570d9a96133f1644094017d47b1ab94`。原舞台 500×400，30 FPS。
 
 `game-logic.js` 将原 ActionScript 的连通检查、心形运动、按下/释放行为、计分、五关目标、计时、干扰、重试和结局迁移为 JavaScript。保留源规则中的非直觉行为，包括六种管道按编号循环、左边缘重复扫描、清除逐帧传播及末关失败后的原跳转。

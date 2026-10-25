@@ -28,16 +28,6 @@ await build({entryPoints:[path.join(source,'app.js')],bundle:true,format:'iife',
   outfile:path.join(output,'app.js'),minify:false,legalComments:'inline',charset:'utf8',banner:{js:notice}});
 let html = await readFile(path.join(source,'index.html'),'utf8');
 html = html.replace('type="module" src="app.js"','defer src="app.js"');
-if(entry.path==='') {
-  const marker='<!-- published-game-links -->';
-  assert.equal(html.split(marker).length,2,'One published game-list placeholder on the home page');
-  const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-  const links=catalog.filter(item=>item.published).map(item=>{
-    const href=item.path?item.path+'/':'./';
-    return `<div data-game="${escapeHtml(item.id)}"><a href="${escapeHtml(href)}"${item.id===game?' aria-current="page"':''}>${escapeHtml(item.title)}</a><a href="${escapeHtml(item.original)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.comparisonLabel||'原版对照')} ↗</a></div>`;
-  }).join('');
-  html=html.replace(marker,links);
-}
 if (xhs) html = html.replace(/<!-- web-only:start -->[\s\S]*?<!-- web-only:end -->/g, '');
 else {
   // A new deploy must not silently keep executing an older cached bundle.

@@ -2,11 +2,14 @@
   {
     "id": "qpet-match",
     "title": "Q宠速配",
-    "path": "",
+    "path": "qpet-match",
     "preview": "preview-native",
     "candidate": "minitool-candidate",
     "published": true,
-    "original": "https://qpetlover.cn/QPetGames/#/play/classic-014"
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-014",
+    "category": "classic",
+    "summary": "转动管道，连接两侧带着爱心的 Q宠。",
+    "badge": "轻松益智"
   },
   {
     "id": "magpie-bridge",
@@ -15,7 +18,10 @@
     "preview": "preview-magpie",
     "candidate": "minitool-magpie-candidate",
     "published": true,
-    "original": "https://qpetlover.cn/QPetGames/#/play/classic-002"
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-002",
+    "category": "classic",
+    "summary": "抓住飞过的喜鹊，帮牛郎织女搭起一座桥。",
+    "badge": "手眼配合"
   },
   {
     "id": "qpet-racing",
@@ -24,7 +30,10 @@
     "preview": "preview-racing",
     "candidate": "minitool-racing-candidate",
     "published": true,
-    "original": "https://qpetlover.cn/QPetGames/#/play/classic-003"
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-003",
+    "category": "classic",
+    "summary": "加速、转弯、用道具，和 Q宠一起冲过终点。",
+    "badge": "动作竞速"
   },
   {
     "id": "qpet-forest",
@@ -33,7 +42,10 @@
     "preview": "preview-forest",
     "candidate": "minitool-forest-candidate",
     "published": true,
-    "original": "https://qpetlover.cn/QPetGames/#/play/happy-forest"
+    "original": "https://qpetlover.cn/QPetGames/#/play/happy-forest",
+    "category": "happy-valley",
+    "summary": "种下种子，沿着长成的植物探索森林。",
+    "badge": "宠爱森林"
   },
   {
     "id": "qpet-qqtang",
@@ -42,7 +54,10 @@
     "preview": "preview-qqtang",
     "candidate": "minitool-qqtang-candidate",
     "published": true,
-    "original": "https://qpetlover.cn/QPetGames/#/play/happy-qqtang"
+    "original": "https://qpetlover.cn/QPetGames/#/play/happy-qqtang",
+    "category": "happy-valley",
+    "summary": "放下泡泡，躲开爆炸，一个人或两个人都能玩。",
+    "badge": "支持双人"
   },
   {
     "id": "qpet-dungeon",
@@ -51,7 +66,11 @@
     "preview": "preview-dungeon",
     "candidate": "minitool-dungeon-candidate",
     "published": true,
-    "original": "https://qpetlover.cn/QPetGames/#/play/happy-dungeon"
+    "original": "https://qpetlover.cn/QPetGames/#/play/happy-dungeon",
+    "category": "happy-valley",
+    "summary": "选择角色，在熟悉的场景里闯关、战斗。",
+    "badge": "社区版",
+    "sourceNote": "社区保存版本，欢乐谷归属尚未证实。"
   },
   {
     "id": "qpet-sonic",
@@ -62,7 +81,11 @@
     "published": true,
     "builder": "embedded-python",
     "original": "qpet-sonic/#version-notes",
-    "comparisonLabel": "版本与来源"
+    "comparisonLabel": "版本与来源",
+    "category": "happy-valley",
+    "summary": "跟着音乐穿过糖果王国、万圣之夜与圣诞星空。",
+    "badge": "三关节奏挑战",
+    "sourceNote": "同源版本规则与原声迁移；企鹅素材按历史截图补制。"
   },
   {
     "id": "qpet-adventure",
@@ -72,6 +95,9 @@
     "candidate": "minitool-adventure-candidate",
     "published": true,
     "kind": "chapters",
-    "original": "https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0"
+    "original": "https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0",
+    "category": "adventure",
+    "summary": "序章与八集故事，双角色冒险，通关后逐集开放。",
+    "badge": "八集冒险"
   }
 ]

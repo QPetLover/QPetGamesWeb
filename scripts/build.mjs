@@ -3,15 +3,15 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+import {buildPortal,publishedCatalog} from './build-portal.mjs';
 
 export async function buildSite({repositoryRoot=fileURLToPath(new URL('../',import.meta.url)),run=execFileSync}={}){
 const root=path.resolve(repositoryRoot);
 const dist=path.join(root,'dist');
 const pkg=JSON.parse(await readFile(path.join(root,'package.json'),'utf8'));
 assert.equal(Object.keys(pkg.dependencies||{}).length,0,'No runtime packages are required');
-const games=JSON.parse(await readFile(path.join(root,'native/games.json'),'utf8')).filter(game=>game.published);
-assert.equal(games.filter(game=>game.path==='').length,1,'One home game');
-assert.equal(new Set(games.map(game=>game.path)).size,games.length,'Unique published paths');
+const catalog=JSON.parse(await readFile(path.join(root,'native/games.json'),'utf8'));
+const games=publishedCatalog(catalog);
 // Draft games can be built for comparison, but only audited entries are published.
 for(const game of games){
   if(game.kind==='chapters'){
@@ -25,6 +25,7 @@ for(const game of games){
 await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});
 for(const game of games) await cp(path.join(root,game.preview),path.join(dist,game.path),{recursive:true});
+await buildPortal({repositoryRoot:root,outputDirectory:dist,catalog});
 for(const file of ['player.html','maintenance.css']) await cp(path.join(root,'web',file),path.join(dist,file));
 await writeFile(path.join(dist,'.nojekyll'),'');
 for(const game of games){
