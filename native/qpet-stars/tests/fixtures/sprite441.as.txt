@@ -1,0 +1,557 @@
+king = {};
+mx.events.EventDispatcher.initialize(king);
+nupu = new Object();
+nupu.type = "onzhu";
+gb = function()
+{
+   king.dispatchEvent(nupu);
+};
+var ng = new Object();
+var v = ggv = hudu = vx = vy = zxc = xs5 = xx5 = csj = bgf = xsq = xs10 = xx10 = xx2 = xs2 = xs = xx1 = w = jiao = 0;
+var h = caoji = false;
+var hkk = true;
+var gg_Obj = new Object();
+var z = 30;
+var pl = 0;
+gg_Obj.onKeyDown = function()
+{
+   if(Key.getCode() == 39)
+   {
+      v = z;
+   }
+   if(Key.getCode() == 37)
+   {
+      v = - z;
+   }
+   if(Key.getCode() == 38)
+   {
+      hudu += 0.03;
+      qmm_mc.jiantou1_mc.gotoAndStop(2);
+   }
+   if(Key.getCode() == 40)
+   {
+      hudu -= 0.03;
+      qmm_mc.jiantou2_mc.gotoAndStop(2);
+   }
+};
+gg_Obj.onKeyUp = function()
+{
+   v = 0;
+   if(Key.getCode() == 39)
+   {
+   }
+   if(Key.getCode() == 37)
+   {
+   }
+   if(Key.getCode() == 38)
+   {
+      qmm_mc.jiantou1_mc.gotoAndStop(1);
+   }
+   if(Key.getCode() == 40)
+   {
+      qmm_mc.jiantou2_mc.gotoAndStop(1);
+   }
+};
+Key.addListener(gg_Obj);
+king.addEventListener("onzhu",qgg_mc);
+qgg_mc.onzhu = function()
+{
+   qggyz._x += v;
+   if(qggyz._x < -140)
+   {
+      qggyz._x = -140;
+   }
+   if(qggyz._x > 260)
+   {
+      qggyz._x = 260;
+   }
+   qgg_mc._x = ggv = qgg_mc._x + (qggyz._x - qgg_mc._x) * 0.2;
+   if(qggyz._x - qgg_mc._x > 40)
+   {
+      qgg_mc.qi.gotoAndStop(2);
+   }
+   if(qggyz._x - qgg_mc._x < -40)
+   {
+      qgg_mc.qi.gotoAndStop(3);
+   }
+   if(qggyz._x - qgg_mc._x > -30 && qggyz._x - qgg_mc._x < 40)
+   {
+      qgg_mc.qi.gotoAndStop(1);
+   }
+};
+var fx = fy = iuy = 1;
+var shudu = 10;
+qmmyd = function()
+{
+   while(jiao == 0)
+   {
+      jiao = random(400);
+      hudu = jiao * 0.017;
+      if(jiao < 200)
+      {
+         jiao = 0;
+      }
+      if(jiao > 245 && jiao < 295)
+      {
+         jiao = 0;
+      }
+      if(jiao > 340)
+      {
+         jiao = 0;
+      }
+   }
+   vx = Math.cos(hudu) * shudu;
+   vy = Math.sin(hudu) * shudu;
+   qmm_mc._x += iuy * fx * vx;
+   qmm_mc._y += fy * vy;
+};
+var ljk = Object();
+var ljjk = Object();
+penzhuang = function()
+{
+   ljk.x = qmm_mc._x;
+   ljk.y = qmm_mc._y;
+   ljjk.x = qgg_mc._x;
+   ljjk.y = qgg_mc._y;
+   this.localToGlobal(ljjk);
+   this.localToGlobal(ljk);
+   if(hkk && qmm_mc._currentframe < 3)
+   {
+      if((zuopt1_mc.hitTest(ljk.x,ljk.y,true) || zuopt2_mc.hitTest(ljk.x,ljk.y,true)) && hkk)
+      {
+         shudu = 15;
+         pl = 0;
+         if(fx > 0)
+         {
+            fx = -1;
+         }
+         else
+         {
+            fx = 1;
+         }
+         hkk = false;
+         if(zuopt1_mc.hitTest(ljk.x,ljk.y,true))
+         {
+            zuopt1_mc.zuox1.qfg.gotoAndPlay(2);
+         }
+         if(zuopt2_mc.hitTest(ljk.x,ljk.y,true))
+         {
+            zuopt2_mc.zuox2.qfg.gotoAndPlay(2);
+         }
+      }
+      if(youpt_mc.hitTest(ljk.x,ljk.y,true) && hkk)
+      {
+         shudu = 15;
+         pl = 0;
+         if(fx > 0)
+         {
+            fx = -1;
+         }
+         else
+         {
+            fx = 1;
+         }
+         hkk = false;
+         youpt_mc.you1.qfg.gotoAndPlay(2);
+      }
+      if(shangpt_mc.hitTest(ljk.x,ljk.y,true) && hkk)
+      {
+         shudu = 15;
+         if(fy > 0)
+         {
+            fy = -1;
+         }
+         else
+         {
+            fy = 1;
+         }
+         hkk = false;
+         shangpt_mc.gotoAndPlay(2);
+      }
+      if((qgg_mc.pb.hitTest(ljk.x,ljk.y,true) || qgg_mc.pb1.hitTest(ljk.x,ljk.y,true) || qgg_mc.pb2.hitTest(ljk.x,ljk.y,true)) && hkk && qmm_mc._currentframe < 3)
+      {
+         shudu = 15;
+         pl = 0;
+         if(qgg_mc.pb1.hitTest(ljk.x,ljk.y,true) && hkk)
+         {
+            hkk = false;
+            if(qmm_mc._x < 0 && vx < 0)
+            {
+               fx = -1;
+               iuy = -1;
+            }
+            else
+            {
+               fx = 1;
+            }
+         }
+         if(qgg_mc.pb2.hitTest(ljk.x,ljk.y,true) && hkk)
+         {
+            hkk = false;
+            if(jiao < 270 && vx < 0)
+            {
+               fx = -1;
+            }
+            else
+            {
+               fx = 1;
+            }
+         }
+         if(qgg_mc.pb.hitTest(ljk.x,ljk.y,true) && hkk)
+         {
+            if(fy > 0)
+            {
+               fy = -1;
+            }
+            else
+            {
+               fy = 1;
+            }
+            if(fx * vx < 0 && qggyz._x < qgg_mc._x && hkk && qgg_mc.qi._currentframe == 3)
+            {
+               hkk = false;
+               hudu -= ggv * 0.0002;
+            }
+            if(fx * vx > 0 && qggyz._x > qgg_mc._x && hkk && qgg_mc.qi._currentframe == 2)
+            {
+               hkk = false;
+               hudu += ggv * 0.005;
+            }
+            if(fx * vx < 0 && qgg_mc.qi._currentframe == 2 && hkk)
+            {
+               hkk = false;
+               if(fx > 0)
+               {
+                  fx = -1;
+               }
+               else
+               {
+                  fx = 1;
+               }
+            }
+            if(fx * vx > 0 && qgg_mc.qi._currentframe == 3 && hkk)
+            {
+               hkk = false;
+               if(fx > 0)
+               {
+                  fx = -1;
+               }
+               else
+               {
+                  fx = 1;
+               }
+            }
+            qgg_mc.gotoAndStop(2);
+         }
+      }
+   }
+   if(hkk == false && (!zuopt1_mc.hitTest(ljk.x,ljk.y,true) && !zuopt2_mc.hitTest(ljk.x,ljk.y,true) && !youpt_mc.hitTest(ljk.x,ljk.y,true) && !shangpt_mc.hitTest(ljk.x,ljk.y,true)))
+   {
+      hkk = true;
+   }
+   if(hkk == false && zuopt2_mc.hitTest(ljk.x,ljk.y,true) && shangpt_mc.hitTest(ljk.x,ljk.y,true))
+   {
+      hkk = true;
+      trace("2zuo");
+   }
+   if(hkk == false && zuopt1_mc.hitTest(ljk.x,ljk.y,true) && shangpt_mc.hitTest(ljk.x,ljk.y,true))
+   {
+      hkk = true;
+      trace("1zuo");
+   }
+   if(hkk == false && youpt_mc.hitTest(ljk.x,ljk.y,true) && shangpt_mc.hitTest(ljk.x,ljk.y,true))
+   {
+      hkk = true;
+   }
+   if(hkk == false && zuopt1_mc.hitTest(ljk.x,ljk.y,true) && (qgg_mc.pb.hitTest(ljk.x,ljk.y,true) || qgg_mc.pb1.hitTest(ljk.x,ljk.y,true)))
+   {
+      hkk = true;
+      trace("fsd");
+   }
+   if(hkk == false && zuopt2_mc.hitTest(ljk.x,ljk.y,true) && (qgg_mc.pb.hitTest(ljk.x,ljk.y,true) || qgg_mc.pb1.hitTest(ljk.x,ljk.y,true)))
+   {
+      hkk = true;
+      trace("fsd");
+   }
+   if(hkk == false && youpt_mc.hitTest(ljk.x,ljk.y,true) && (qgg_mc.pb.hitTest(ljk.x,ljk.y,true) || qgg_mc.pb2.hitTest(ljk.x,ljk.y,true)))
+   {
+      hkk = true;
+   }
+};
+xingxing = function()
+{
+   var _loc1_ = this;
+   if(w == 1)
+   {
+      w--;
+   }
+   else
+   {
+      w++;
+   }
+   xxx++;
+   xx1 = _loc1_.attachMovie("x" + w,"xx" + xxx,xxx);
+   xx1._x = -100 + random(80) * 5;
+   xx1._y = -120 + random(200);
+   xx1.swapDepths(qmm_mc);
+   king.addEventListener("onzhu",xx1);
+   xx1.onzhu = function()
+   {
+      if(this.di1.pb.hitTest(qmm_mc.pb))
+      {
+         this.di1.gotoAndStop(2);
+      }
+   };
+};
+var xxx2 = 100;
+xingxing2 = function()
+{
+   var _loc1_ = this;
+   if(xs2 == 1)
+   {
+      xs2--;
+   }
+   else
+   {
+      xs2++;
+   }
+   xxx2++;
+   xx2 = _loc1_.attachMovie("2x" + xs2,"2x" + xxx2,xxx2);
+   xx2._x = -100 + random(80) * 5;
+   xx2._y = -120 + random(200);
+   xx2.swapDepths(qmm_mc);
+   king.addEventListener("onzhu",xx2);
+   xx2.onzhu = function()
+   {
+      if(this.di1.pb.hitTest(qmm_mc.pb))
+      {
+         this.di1.gotoAndStop(2);
+      }
+   };
+};
+var xxx5 = 200;
+xingxing5 = function()
+{
+   var _loc1_ = this;
+   if(xs5 == 1)
+   {
+      xs5--;
+   }
+   else
+   {
+      xs5++;
+   }
+   xxx5++;
+   xx5 = _loc1_.attachMovie("5x" + xs5,"5x" + xxx5,- xxx5);
+   xx5._x = -100 + random(400);
+   xx5._y = -120 + random(200);
+   xx5.swapDepths(qmm_mc);
+   king.addEventListener("onzhu",xx5);
+   xx5.onzhu = function()
+   {
+      if(this.di1.pb.hitTest(qmm_mc.pb))
+      {
+         this.di1.gotoAndStop(2);
+      }
+   };
+};
+var xxx10 = 300;
+xingxing10 = function()
+{
+   var _loc1_ = this;
+   if(xs10 == 1)
+   {
+      xs10--;
+   }
+   else
+   {
+      xs10++;
+   }
+   xxx10++;
+   xx10 = _loc1_.attachMovie("10x" + xs10,"10xx" + xxx10,- xxx10);
+   xx10._x = -100 + random(400);
+   xx10._y = -120 + random(200);
+   xx10.swapDepths(qmm_mc);
+   king.addEventListener("onzhu",xx10);
+   xx10.onzhu = function()
+   {
+      if(this.di1.pb.hitTest(qmm_mc.pb))
+      {
+         this.di1.gotoAndStop(2);
+      }
+   };
+};
+var gb1 = 0;
+gbxx = function()
+{
+   var _loc1_ = this;
+   gb1 = _loc1_.attachMovie("guoban","guobann",10000);
+   gb1._x = -100 + random(400);
+   gb1._y = -120 + random(150);
+   king.addEventListener("onzhu",gb1);
+   gb1.onzhu = function()
+   {
+      if(this.pb.hitTest(qmm_mc.pb))
+      {
+         shudu = 0;
+         if(wmm_mc._currentframe != 4)
+         {
+            qmm_mc.gotoAndStop(4);
+         }
+         removeMovieClip(this);
+      }
+   };
+};
+qgg_mc.cjwk._visible = false;
+xsj = function()
+{
+   var _loc1_ = _parent;
+   var zcsj = getTimer();
+   var jz = 900;
+   var bz = 6000;
+   var gbx = 180000;
+   var _loc2_ = Object();
+   king.addEventListener("onzhu",_loc2_);
+   _loc2_.onzhu = function()
+   {
+      var _loc1_ = _parent;
+      if(zcsj + jz - getTimer() < 0)
+      {
+         jsxing();
+         jz += 30000;
+      }
+      if(zcsj + bz - getTimer() < 0)
+      {
+         bzxing();
+         bz += 60000;
+      }
+      _loc1_.zs = _loc1_.fs1 + _loc1_.fs2 + _loc1_.fs5 + _loc1_.fs10;
+      if(caoji && qmm_mc._currentframe <= 2)
+      {
+         shudu = 15;
+         z = 50;
+         qmm_mc.gotoAndStop(2);
+         qgg_mc.cjwk._visible = true;
+      }
+      if(caoji)
+      {
+         if(csj + 6000 - getTimer() < 0)
+         {
+            if(qmm_mc._currentframe <= 2)
+            {
+               caoji = false;
+               shudu = 10;
+               z = 30;
+               qmm_mc.gotoAndStop(1);
+               qgg_mc.cjwk._visible = false;
+            }
+         }
+      }
+      if(!qmm_mc.pb.hitTest(bg))
+      {
+         if(qmm_mc._currentframe < 3)
+         {
+            qmm_mc.gotoAndStop(3);
+            shudu = 0;
+         }
+      }
+   };
+};
+xsj();
+var js = 400;
+jsxing = function()
+{
+   var _loc2_ = this;
+   var _loc1_ = 0;
+   js++;
+   _loc1_ = _loc2_.attachMovie("js","jss" + js,js);
+   _loc1_._x = -100 + random(300);
+   _loc1_._y = -120 + random(150);
+   _loc1_.swapDepths(qmm_mc);
+   king.addEventListener("onzhu",_loc1_);
+   _loc1_.onzhu = function()
+   {
+      if(this.j.jss.jsss.pb.hitTest(qmm_mc.pb) && !caoji)
+      {
+         caoji = true;
+         csj = getTimer();
+         removeMovieClip(this);
+      }
+   };
+};
+var b = 500;
+bzxing = function()
+{
+   var _loc2_ = this;
+   var _loc1_ = 0;
+   b++;
+   _loc1_ = _loc2_.attachMovie("zdx","zdxx" + b,b);
+   _loc1_._x = 50;
+   _loc1_._y = -120 + random(150);
+   king.addEventListener("onzhu",_loc1_);
+   _loc1_.onzhu = function()
+   {
+      if(this.bzz.bzzz.pb.hitTest(qmm_mc.pb))
+      {
+         qmm_mc.gotoAndStop(5);
+         shudu = 0;
+         removeMovieClip(this);
+      }
+   };
+};
+var ghj = getTimer();
+var mlj = 1000;
+this.onEnterFrame = function()
+{
+   var _loc1_ = _parent;
+   if(getTimer() - bgf > 0 && xs < 4)
+   {
+      bgf += 600;
+      xingxing();
+      if(xs <= 2)
+      {
+         xingxing2();
+      }
+      if(xs <= 2)
+      {
+         xingxing5();
+      }
+      if(xs < 1)
+      {
+         xingxing10();
+      }
+      xs++;
+   }
+   if(shijiantiao_mc._currentframe == 99)
+   {
+      if(_loc1_.zs > _loc1_.wcfs)
+      {
+         mlj -= 200;
+         _loc1_.wcfs += 200;
+         djj++;
+      }
+      else
+      {
+         _loc1_.gotoAndStop(6);
+      }
+      if(djj == 4)
+      {
+         gbxx();
+      }
+      shijiantiao_mc.nextFrame();
+   }
+   if(getTimer() - ghj > 0)
+   {
+      ghj += mlj;
+      shijiantiao_mc.nextFrame();
+   }
+   if(shudu > 10 && qmm_mc._currentframe == 1)
+   {
+      trace("j");
+      shudu -= 1;
+   }
+   gb();
+   penzhuang();
+   qmmyd();
+   trace(shudu);
+};

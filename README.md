@@ -1,6 +1,6 @@
 # Q宠游戏 · QPetGamesWeb
 
-游戏大厅统一收录欢乐谷、冒险岛与经典小游戏。**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版、Q宠爱音速、Q宠冒险岛、Q宠守护使**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
+游戏大厅统一收录欢乐谷、冒险岛与经典小游戏。**Q宠速配、搭鹊桥、宠爱飞车、宠爱森林、宠爱QQ堂、地下城与勇士 · Q宠版、Q宠爱音速、Q宠冒险岛、Q宠守护使、Q宠摘星星**：从原 SWF 提取矢量、位图、字形、原声、时间轴与 ActionScript 规则，迁移为独立的 HTML / Canvas / JavaScript 网页游戏。网页不加载 SWF，不依赖 Ruffle、Flash 虚拟机或 WASM。
 
 | 游戏 | 原生网页 | 原版对照 | 实现与验证范围 |
 | --- | --- | --- | --- |
@@ -12,6 +12,7 @@
 | 地下城与勇士 · Q宠版 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-dungeon/) | [happy-dungeon](https://qpetlover.cn/QPetGames/#/play/happy-dungeon) | [迁移说明](native/qpet-dungeon/README.md)：两角色、三关；“宠爱地下城”正式名称及欢乐谷归属尚未证实 |
 | Q宠爱音速 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-sonic/) | [版本与来源](native/qpet-sonic/provenance.json) | [迁移说明](native/qpet-sonic/README.md)：同源人类版三关、规则与原声迁移，企鹅素材按历史截图补制；企鹅原始SWF仍缺 |
 | Q宠守护使 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-guardian/) | [classic-001](https://qpetlover.cn/QPetGames/#/play/classic-001) | [迁移说明](native/qpet-guardian/README.md) |
+| Q宠摘星星 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-stars/) | [classic-015](https://qpetlover.cn/QPetGames/#/play/classic-015) | [迁移说明](native/qpet-stars/README.md) |
 | Q宠冒险岛 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-adventure/) | [逐集原版](https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0) | [迁移说明](native/qpet-adventure/README.md)：序章及八集双角色、逐集存档；规则端点夹具通过，Chrome局部检查，未声称整集人工通关 |
 
 `native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页。各游戏入口旁保留独立原版链接；音速旁标明「版本与来源」，不将同源人类文件标为企鹅原件。候选可以单独构建预览，仍不会进入公开首页。此前的 SWF / Ruffle 集合不进入原生发布包，旧 `player.html?game=...` 地址显示下架通知。
@@ -38,6 +39,7 @@ npm start
 - 地下城：方向键移动，连续两次同方向可跑，X 攻击、C 跳跃、Z 蓄力技能、回车对话。手机横屏提供两侧操作键。
 - 音速：方向键左右移动、上跳、下蹲；斜向障碍同时按两个方向。保留糖果王国、万圣之夜、圣诞星空三关；手机提供多指方向按钮。
 - 守护使：在QGG所在区域移动指针调整角度，点按抛出雪球；手机在同一区域点按。
+- 摘星星：← → 移动QGG托住QMM，↑ ↓ 微调弹跳角度；手机使用对应方向键。
 - 冒险岛：方向键移动、空格互动或攻击；手机使用方向及互动键。各集原说明与改键设置仍适用；从第1集逐集解锁，两角色共用本机进度。
 
 GitHub Pages 工作流先执行测试、构建和校验，再部署 `dist/`。构建从注册表选择已发布游戏，复制其 HTML / JS / CSS 与允许的静态媒体，再生成独立静态游戏大厅 `index.html` / `portal.css`，并加入旧链接通知 `player.html` / `maintenance.css` 和 `.nojekyll`；不会复制历史游戏或模拟器。校验同时核对分区、独立路径、原版链接、版本说明与候选不可见，并拒绝 SWF / WASM、动态执行和联网 API；部署后可核对线上字节及旧资源 404：

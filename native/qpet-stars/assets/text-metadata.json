@@ -1,0 +1,434 @@
+{
+  "443": {
+    "text": "",
+    "size": 220,
+    "box": [
+      -40,
+      -40,
+      1940,
+      480
+    ],
+    "color": [
+      183,
+      132,
+      61,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs1"
+  },
+  "444": {
+    "text": "",
+    "size": 220,
+    "box": [
+      -40,
+      -40,
+      1940,
+      463
+    ],
+    "color": [
+      60,
+      122,
+      173,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs2"
+  },
+  "445": {
+    "text": "",
+    "size": 220,
+    "box": [
+      -40,
+      -40,
+      2000,
+      480
+    ],
+    "color": [
+      229,
+      152,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs5"
+  },
+  "446": {
+    "text": "",
+    "size": 220,
+    "box": [
+      -40,
+      -40,
+      1840,
+      380
+    ],
+    "color": [
+      32,
+      169,
+      171,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs10"
+  },
+  "447": {
+    "text": "",
+    "size": 300,
+    "box": [
+      -40,
+      -40,
+      1860,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      204,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "zs"
+  },
+  "448": {
+    "text": "",
+    "size": 300,
+    "box": [
+      -40,
+      -40,
+      1700,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      204,
+      1.0
+    ],
+    "align": 2,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "wcfs"
+  },
+  "531": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1940,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs1"
+  },
+  "532": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1940,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs2"
+  },
+  "533": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      2000,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs5"
+  },
+  "534": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1840,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs10"
+  },
+  "535": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1860,
+      604
+    ],
+    "color": [
+      255,
+      255,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "zs"
+  },
+  "594": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1940,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs1"
+  },
+  "595": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1940,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs2"
+  },
+  "596": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      2000,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs5"
+  },
+  "597": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1840,
+      604
+    ],
+    "color": [
+      102,
+      255,
+      255,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "fs10"
+  },
+  "598": {
+    "text": "",
+    "size": 400,
+    "box": [
+      -40,
+      -40,
+      1860,
+      604
+    ],
+    "color": [
+      255,
+      255,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 40,
+    "font": "442",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "outlines": false,
+    "variable": "zs"
+  }
+}

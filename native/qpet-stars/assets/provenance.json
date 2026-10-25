@@ -1,0 +1,47 @@
+{
+  "sourceSWF": "QPetLover/QPetGames/classical_games/swf/Q宠摘星星.swf",
+  "sourceCommit": "a28b5d3928141955b01ba06cdd739974cf5b7ecc",
+  "sourceSHA256": "87e573aad836d4ea3ff168f55c9ba9128edf8b1a651382bc875f6be3550c2fac",
+  "sourceBytes": 598472,
+  "stage": {
+    "width": 650,
+    "height": 450,
+    "fps": 12,
+    "version": 6
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 600,
+  "embeddedImages": {},
+  "inputs": {
+    "stars.xml": "9eae7d5141587598495218722211cd32bf0185ecbe9f00494083cd06b4be6b89",
+    "frame-unpacked/frames.html": "8955ce89b840689151515d23ea4168b6a653376d6037fc3ad6aa96b7e39f84e7",
+    "frame-unpacked/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked-unpacked/DefineSprite_13_zdx/frames.html": "cb16ccdf7afb5b134adde1c62eaff5998f54f5dd7b27ed8027b5000e403825e8",
+    "linked-unpacked/DefineSprite_26_guoban/frames.html": "ed5093484e69b949f1bf64a58780afc980601b04948c5e96b806e142a7134688",
+    "linked-unpacked/DefineSprite_38_x0/frames.html": "d8a0dffe7a8735fc7a7c8dd13af2c51268976395d8b08e3ca02e7f1a23b92340",
+    "linked-unpacked/DefineSprite_39_x1/frames.html": "1678ac30f906ae033dc7ed1a22fa9f92a0ec04257b2ae64001d07a3e901f7209",
+    "linked-unpacked/DefineSprite_46_2x0/frames.html": "edca1c07e74e52a4e32896846e006a33c93caa78c7d440ce4409fc5ba59d5249",
+    "linked-unpacked/DefineSprite_47_2x1/frames.html": "c38f673ed6d0705d948029d3d35d98b38084e2c309e0f5756c05ea2ce0e0b63d",
+    "linked-unpacked/DefineSprite_54_5x0/frames.html": "dc009ff2c8c4a868a9f7d5cb3ef68d4b120c45bb3573c805b9fc5487dd8a0dc3",
+    "linked-unpacked/DefineSprite_55_5x1/frames.html": "5ea9a3ab07f51c9a0e94dae102be33979bb88d1bc7261a1444ababf71e15b44e",
+    "linked-unpacked/DefineSprite_62_10x0/frames.html": "3e5e805e607c68d5aedc2c25212d0407e53d499dcb3b987d4dce0236b8697849",
+    "linked-unpacked/DefineSprite_63_10x1/frames.html": "1fccff59163f2451b8b821dddf54c30b627e70eedcbd51f106201d7413d33ee2",
+    "linked-unpacked/DefineSprite_8_js/frames.html": "fec838b7590c4f703e7578357ecf3ac0537ef89bb908bf7caf094b1e1081a966"
+  },
+  "corrections": [
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "484 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "207 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "e2e3972f7f891c08b03a8be3f4c5bbe52ae65afffc1cd6d2aaea5daa6151491e",
+  "sourceURL": "https://github.com/QPetLover/QPetGames/blob/master/classical_games/swf/Q%E5%AE%A0%E6%91%98%E6%98%9F%E6%98%9F.swf",
+  "sourceVersionCaution": "Fixed community snapshot; no claim that the community file is byte-identical to a historical Tencent server copy.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 0,
+  "previousFFDecBitmapBytes": 0
+}

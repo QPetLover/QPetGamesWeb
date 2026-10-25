@@ -119,5 +119,18 @@
     "summary": "瞄准抛出雪球，挡住海豹、海鸥和雪怪，守护 QMM。",
     "badge": "雪球守护",
     "cover": "covers/qpet-guardian.png"
+  },
+  {
+    "id": "qpet-stars",
+    "title": "Q宠摘星星",
+    "path": "qpet-stars",
+    "preview": "preview-stars",
+    "candidate": "minitool-stars-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-015",
+    "category": "classic",
+    "summary": "移动 QGG 接住 QMM，调整弹跳角度，收集星星。",
+    "badge": "弹跳收集",
+    "cover": "covers/qpet-stars.png"
   }
 ]
