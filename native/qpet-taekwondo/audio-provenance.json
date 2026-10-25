@@ -1,0 +1,239 @@
+{
+  "sourceSHA256": "6df89818db38d2748b7185df470627f0cc013e0410c07e605b76148c4d77b9f8",
+  "sounds": {
+    "1": {
+      "rate": 44100,
+      "samples": 677376,
+      "seekSamples": 0,
+      "channels": 1,
+      "rawMP3Bytes": 123924,
+      "sha256": "b25de0a94897b7856357bd7638865953dba1db38955348c98603d3a809c2f1eb"
+    },
+    "16": {
+      "rate": 11025,
+      "samples": 40651,
+      "seekSamples": 1669,
+      "channels": 1,
+      "rawMP3Bytes": 7800,
+      "sha256": "8468eceabd963420135ff05b8ed32b2a3f5e4e7b775dfeb13a1d9e7784362c41"
+    },
+    "32": {
+      "rate": 22050,
+      "samples": 65974,
+      "seekSamples": 1673,
+      "channels": 1,
+      "rawMP3Bytes": 15470,
+      "sha256": "9c12d8e1553648653802ca8feb2599ff2f5e3482c3e78267364e65bb5d6494db"
+    },
+    "46": {
+      "rate": 11025,
+      "samples": 6010,
+      "seekSamples": 1669,
+      "channels": 1,
+      "rawMP3Bytes": 1560,
+      "sha256": "3f4b307265a42ed860f3737c173073171bf0bdbef972ec4e7764a507ba7ba838"
+    },
+    "stream29": {
+      "rate": 11025,
+      "samples": 8640,
+      "seekSamples": 1633,
+      "channels": 1,
+      "rawMP3Bytes": 1560,
+      "sha256": "29d201733ffd207dada82e7bfdad27da1c2b64e5c251f428a4a3973b40fdff6f",
+      "owner": "29",
+      "firstFrame": 40,
+      "lastFrame": 55
+    }
+  },
+  "frameEvents": {
+    "17": {
+      "55": [
+        {
+          "id": "16",
+          "info": {
+            "type": "SOUNDINFO",
+            "hasEnvelope": "false",
+            "hasInPoint": "false",
+            "hasLoops": "false",
+            "hasOutPoint": "false",
+            "reserved": "0",
+            "syncNoMultiple": "false",
+            "syncStop": "false"
+          }
+        }
+      ]
+    },
+    "33": {
+      "2": [
+        {
+          "id": "32",
+          "info": {
+            "type": "SOUNDINFO",
+            "hasEnvelope": "false",
+            "hasInPoint": "false",
+            "hasLoops": "false",
+            "hasOutPoint": "false",
+            "reserved": "0",
+            "syncNoMultiple": "false",
+            "syncStop": "false"
+          }
+        }
+      ]
+    },
+    "47": {
+      "2": [
+        {
+          "id": "46",
+          "info": {
+            "type": "SOUNDINFO",
+            "hasEnvelope": "false",
+            "hasInPoint": "false",
+            "hasLoops": "false",
+            "hasOutPoint": "false",
+            "reserved": "0",
+            "syncNoMultiple": "false",
+            "syncStop": "false"
+          }
+        }
+      ]
+    }
+  },
+  "streams": {
+    "29": {
+      "id": "stream29",
+      "head": {
+        "type": "SoundStreamHeadTag",
+        "forceWriteAsLong": "false",
+        "latencySeek": "1633",
+        "playBackSoundRate": "3",
+        "playBackSoundSize": "true",
+        "playBackSoundType": "false",
+        "reserved": "2",
+        "streamSoundCompression": "2",
+        "streamSoundRate": "1",
+        "streamSoundSampleCount": "459",
+        "streamSoundSize": "true",
+        "streamSoundType": "false"
+      },
+      "blocks": [
+        {
+          "frame": 40,
+          "samples": 2304,
+          "seek": 1633,
+          "bytes": 416,
+          "sha256": "cd5c4b7f9bdf2c3ef1071bf1cc532b792dafe1268ca5b26fee754def37deed14"
+        },
+        {
+          "frame": 41,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 42,
+          "samples": 1152,
+          "seek": 247,
+          "bytes": 208,
+          "sha256": "213c55160f29324747241e3da48e792a05a867c1565aaa59ecff8f65617cece3"
+        },
+        {
+          "frame": 43,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 44,
+          "samples": 576,
+          "seek": 13,
+          "bytes": 104,
+          "sha256": "e12592b16f71d0799e5280e340eb9b8e29beffc7c1004fc20f76dca5e4c49e82"
+        },
+        {
+          "frame": 45,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 46,
+          "samples": 1152,
+          "seek": 355,
+          "bytes": 208,
+          "sha256": "165a1253c0dccf8b96ccc8b78afb22368b3929699cd914eec2d244f3f5127521"
+        },
+        {
+          "frame": 47,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 48,
+          "samples": 576,
+          "seek": 121,
+          "bytes": 104,
+          "sha256": "087f308c8420e943c0dea8a7dcd5c20d176d8cc5ac5c5fc589a50ef67cc6538d"
+        },
+        {
+          "frame": 49,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 50,
+          "samples": 1152,
+          "seek": 463,
+          "bytes": 208,
+          "sha256": "de2725de375dcc062cffb25a85ff7fcebe43c008717f8e6cc5fc72ec1b8843a1"
+        },
+        {
+          "frame": 51,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 52,
+          "samples": 576,
+          "seek": 229,
+          "bytes": 104,
+          "sha256": "66077918a47e8b56720377b39659ff08678a8c4a5cab752e677a5a278647815c"
+        },
+        {
+          "frame": 53,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "frame": 54,
+          "samples": 1152,
+          "seek": 571,
+          "bytes": 208,
+          "sha256": "953ae85717c2216acb970a2128d458ed50e2ad86a4ba80ab341524a964d6b816"
+        },
+        {
+          "frame": 55,
+          "samples": 0,
+          "seek": 0,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  },
+  "asCalls": {
+    "LinkID": "GameMenu.constructor s.play(0,1000,null); sound button stops/restarts channel at zero",
+    "a1": "No new a1() reachable, but original sound46 is reachable through Ball_go47 frame2 StartSound"
+  },
+  "emptyStreamHeads": "277 empty SoundStreamHead2 without stream blocks; only Start29 has actual blocks"
+}

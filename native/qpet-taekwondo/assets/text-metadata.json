@@ -1,0 +1,198 @@
+{
+  "3268": {
+    "text": "",
+    "size": 540,
+    "box": [
+      -40,
+      -40,
+      1400,
+      801
+    ],
+    "color": [
+      255,
+      255,
+      255,
+      1.0
+    ],
+    "align": 2,
+    "leading": 0,
+    "font": "3267",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "3269": {
+    "text": "5",
+    "size": 540,
+    "box": [
+      -40,
+      -40,
+      840,
+      801
+    ],
+    "color": [
+      102,
+      0,
+      0,
+      1.0
+    ],
+    "align": 2,
+    "leading": 0,
+    "font": "3267",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "3270": {
+    "text": "0",
+    "size": 540,
+    "box": [
+      -40,
+      -40,
+      2120,
+      801
+    ],
+    "color": [
+      102,
+      0,
+      0,
+      1.0
+    ],
+    "align": 2,
+    "leading": 0,
+    "font": "3267",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "3273": {
+    "text": "0",
+    "size": 540,
+    "box": [
+      -40,
+      -40,
+      840,
+      801
+    ],
+    "color": [
+      102,
+      0,
+      0,
+      1.0
+    ],
+    "align": 2,
+    "leading": 0,
+    "font": "3267",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "3319": {
+    "text": "",
+    "size": 240,
+    "box": [
+      -162,
+      -40,
+      6636,
+      1449
+    ],
+    "color": [
+      135,
+      83,
+      8,
+      1.0
+    ],
+    "align": 0,
+    "leading": 200,
+    "font": "3318",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "3322": {
+    "text": "如果您退出游戏，只能获得最低游戏分数。",
+    "size": 240,
+    "box": [
+      -40,
+      -40,
+      2681,
+      580
+    ],
+    "color": [
+      0,
+      0,
+      0,
+      1.0
+    ],
+    "align": 0,
+    "leading": 60,
+    "font": "3318",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  },
+  "3327": {
+    "text": "",
+    "size": 240,
+    "box": [
+      -162,
+      -40,
+      6636,
+      1421
+    ],
+    "color": [
+      135,
+      83,
+      8,
+      1.0
+    ],
+    "align": 0,
+    "leading": 200,
+    "font": "3318",
+    "fontData": {
+      "advance": {},
+      "ascent": 880,
+      "descent": 144,
+      "leading": 0
+    },
+    "wrap": true,
+    "outlines": false,
+    "variable": ""
+  }
+}

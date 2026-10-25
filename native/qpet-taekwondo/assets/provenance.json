@@ -1,0 +1,140 @@
+{
+  "sourceSWF": "awesome-qpet-games/archive/games/classic/swf/QQ跆拳道.swf",
+  "sourceCommit": "b82b791a053c51d385b18d98f2d9951929240c50",
+  "sourceSHA256": "6df89818db38d2748b7185df470627f0cc013e0410c07e605b76148c4d77b9f8",
+  "sourceBytes": 3270599,
+  "stage": {
+    "width": 800,
+    "height": 600,
+    "fps": 24,
+    "version": 9
+  },
+  "tool": "JPEXS FFDec 26.4.0",
+  "symbols": 3363,
+  "embeddedImages": {
+    "imageObj3340": {
+      "mime": "image/JPEG",
+      "bytes": 18754,
+      "sha256": "9c9415efa768c2135da11e319ba13abb4d153e6c969beb8665ddb62e259d723e"
+    },
+    "imageObj13": {
+      "mime": "image/PNG",
+      "bytes": 94173,
+      "sha256": "7fed48cc54cdf81f146f9817ec46165ee244d9792c8713328d9ce044c301d1ac"
+    },
+    "imageObj3343": {
+      "mime": "image/JPEG",
+      "bytes": 25342,
+      "sha256": "4e606dd15babe615fff2fd2e4d8e3565fb1870515e2b357e25f989d90bc5c3ae"
+    },
+    "imageObj3346": {
+      "mime": "image/JPEG",
+      "bytes": 29775,
+      "sha256": "5683aa144965fcd0173f5e9624ee43d0288d861d4f6fc896ec72c3c114e578cd"
+    },
+    "imageObj3349": {
+      "mime": "image/JPEG",
+      "bytes": 26769,
+      "sha256": "070b04dff95a3bd2f731b74ce926fa14242a9a0c32acc387e49ad52a8ac80b79"
+    },
+    "imageObj3352": {
+      "mime": "image/JPEG",
+      "bytes": 29966,
+      "sha256": "7307411e29d5392cf4fffe3a35a4577ad229cea446239fee8d49b316830c53e0"
+    },
+    "imageObj3355": {
+      "mime": "image/JPEG",
+      "bytes": 30708,
+      "sha256": "2a46309ae3b7320c67b1545bd313a8574f874a3efd507d563a5302848c01f42c"
+    },
+    "imageObj3358": {
+      "mime": "image/JPEG",
+      "bytes": 37086,
+      "sha256": "60aeb3f8cc474cef2a8ff496933a104c2b8841024cbfcb5e95963a02b6db8e30"
+    },
+    "imageObj3361": {
+      "mime": "image/JPEG",
+      "bytes": 36696,
+      "sha256": "7eefe88836dc2f1da0c45230870b5cec482a70475bde0e16a1b27de08350a8a1"
+    },
+    "imageObj3364": {
+      "mime": "image/JPEG",
+      "bytes": 36977,
+      "sha256": "14b891cc99bed4f9c64d5f721ea1f368ea50fb26bdfb2bcf884c978c89b83e9b"
+    },
+    "imageObj3263": {
+      "mime": "image/JPEG",
+      "bytes": 15326,
+      "sha256": "8610f2a302d40152a3de393304bb4842d69ad5645a22a0ddc4d3cf2d1723158c"
+    },
+    "imageObj3265": {
+      "mime": "image/PNG",
+      "bytes": 293817,
+      "sha256": "0d016c88374de931cf3aa7e5eb9f63058858f7a5784ce334c75fc8be87749349"
+    },
+    "imageObj3300": {
+      "mime": "image/PNG",
+      "bytes": 3952,
+      "sha256": "7be4feb3f733faeadf865221c0e9b0a6f99c6d55df6252cc2b9956598ee67524"
+    },
+    "imageObj3303": {
+      "mime": "image/PNG",
+      "bytes": 4279,
+      "sha256": "b14a7c67597013e20b0631def4cc6ef83de5d6f8025dd9bd4e3c0cf43aaeb163"
+    },
+    "imageObj3305": {
+      "mime": "image/PNG",
+      "bytes": 4035,
+      "sha256": "ca87db832b93f2bb09069ee58aa65acb2f643a687b6169d0e0e065296d031835"
+    },
+    "imageObj3310": {
+      "mime": "image/PNG",
+      "bytes": 87973,
+      "sha256": "81fe2018fc135c0d43f8c69ea6e5ee36f4841ac157327ac6dbd80cac7ff47bac"
+    },
+    "imageObj3312": {
+      "mime": "image/PNG",
+      "bytes": 10743,
+      "sha256": "46b6e3ba0fc0a0fba43bc7c7c7f941ed9ab856e8343f29d12f6726940732ae3a"
+    },
+    "imageObj3315": {
+      "mime": "image/PNG",
+      "bytes": 11248,
+      "sha256": "d39368275c582889506858d9ccd607d40e92b601a40a4b991c156458ee8cd4c0"
+    },
+    "imageObj7": {
+      "mime": "image/PNG",
+      "bytes": 1119,
+      "sha256": "b5377d949717e1c777e9a82d39ab6ad944acad1450d76708d182218c9cc549ba"
+    }
+  },
+  "inputs": {
+    "source.xml": "3a61521b8d5e24022a21a87f99f2876cc85583f48852534f4bde89951f01ed01",
+    "canvas/frames.html": "c96a39cccee839fb824e62e8c45e007ff2f29b7bcf1de809948cdf98316691b1",
+    "canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93",
+    "linked/DefineSprite_15_loading/frames.html": "1e6948eab22e6665b8123b323b736a5d23f37b5becff9f9cadea90552174a850",
+    "linked/DefineSprite_17_End/frames.html": "bd8ac1150107e3c97a0288da57c8a9449578704c8bf75097a85e6e62e5a189bd",
+    "linked/DefineSprite_29_Start/frames.html": "b7a5419dd9c10e09d24dc1327ff5546266d8f21867e242a7b0d7b7cbc193d530",
+    "linked/DefineSprite_3262_player/frames.html": "36769e56ee68487fb2fb666db053fceeb546edca35aa4efc8fd2a18b9c17ca1e",
+    "linked/DefineSprite_33_win_move/frames.html": "9bec262d85d7d4f36321cef00bd447cb2552d14c1c118f8d3e6e2d1d1f9b19a1",
+    "linked/DefineSprite_47_Ball_go/frames.html": "e1597af51ba62bae031d3e629d40ec626eec09aa647f0e2ff5b6cf5b29edd706",
+    "linked/DefineSprite_55_Ball/frames.html": "a552a15ac14a1d3af6ca4f4c42f6ba27ad021dc24f806d9c5313bfa36afc2e43"
+  },
+  "corrections": [
+    "Native translate/scale/rotate/reset keep the original drawing helper stroke matrix synchronized",
+    "All linked-export bitmap declarations merged; complete imageObj reference/declaration closure asserted",
+    "0 mask drawing calls use opaque vector coverage; clipped content alpha remains unchanged",
+    "Selected linked-symbol crop translation removed; original twip registration restored",
+    "Static explicit dispatch replaces eval",
+    "CXFORM 256 identity and composed additive correction",
+    "All authored button states restored",
+    "Dynamic text uses original embedded font outlines/advances where available",
+    "2022 transparent radial centre export pre-fills removed"
+  ],
+  "artworkSHA256": "81cda28ad94f2f44fe732bcf24b8b589fd6b62081569b9669dd1d3382d6fad7e",
+  "sourceURL": "https://github.com/QPetLover/awesome-qpet-games/blob/b82b791a053c51d385b18d98f2d9951929240c50/archive/games/classic/swf/QQ跆拳道.swf",
+  "sourceVersionCaution": "Fixed archived original category; source SHA identifies the baseline, not proof of historical server byte identity.",
+  "bitmapEncoding": "FFDec lossless PNG for JPEG3/Lossless2; original exported opaque JPEG payloads",
+  "bitmapPayloadBytes": 798738,
+  "previousFFDecBitmapBytes": 798738
+}
