@@ -1,0 +1,3 @@
+import test from'node:test';import assert from'node:assert/strict';import{SourceFrameClock}from'../clock.js';
+test('60Hz/120Hz refresh retains25 original steps and25 paint commits, without20fps throttle loss',()=>{for(const hz of[60,120]){const clock=new SourceFrameClock(25,0);let steps=0,paints=0;for(let i=1;i<=hz;i++){const count=clock.advance(i*1000/hz);steps+=count;if(count)paints++;}assert.equal(steps,25);assert.equal(paints,25);}});
+test('hidden time is discarded and original clock restarts without burst catch-up',()=>{const c=new SourceFrameClock(25,0);assert.equal(c.advance(40),1);assert.equal(c.advance(5000,false),0);c.reset(5100);assert.equal(c.advance(5140),1);});

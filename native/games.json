@@ -229,5 +229,17 @@
     "category": "classic",
     "summary": "调整方向，放下抓钩，把矿石带回来。",
     "cover": "covers/qpet-mining.png"
+  },
+  {
+    "id": "qpet-hunting",
+    "title": "QQ宝宝守猎",
+    "path": "qpet-hunting",
+    "preview": "preview-hunting",
+    "candidate": "minitool-hunting-candidate",
+    "published": true,
+    "original": "https://qpetlover.cn/QPetGames/#/play/classic-011",
+    "category": "classic",
+    "summary": "移动瞄准，切换猎场，使用55发子弹挑战本局得分。",
+    "cover": "covers/qpet-hunting.png"
   }
 ]

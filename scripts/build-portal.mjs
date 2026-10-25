@@ -11,6 +11,7 @@ export const CATEGORIES=[
 ];
 export const PORTAL_FONTS=['qpet-rounded.woff2','OFL-ZCOOL-KuaiLe.txt','source.json'];
 const CONTROLS={
+ 'qpet-hunting':'移动鼠标瞄准，点击射击；悬停左右边缘切换场景。手机按住左右按钮，用另一根手指点按射击。选择Q哥或Q妹开始本地练习，不扣费、不兑换元宝。',
  'qpet-match':'点击管道改变方向，连接两侧带着爱心的 Q宠。',
  'magpie-bridge':'移动鼠标或拖动手指抓住喜鹊，避开乌鸦。',
  'qpet-racing':'方向键控制驾驶，Ctrl 使用道具。手机使用画面下方的触控按钮。',

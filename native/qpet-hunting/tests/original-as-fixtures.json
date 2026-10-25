@@ -1,0 +1,41 @@
+{
+  "sourceSHA256": "586642f95a64d87c30076988d600563a85a4643ffe5fad5211a462617e8fd23b",
+  "fixtures": {
+    "DefineButton2_226/BUTTONCONDACTION on(press).as": {
+      "code": "on(press){\r\n   if(_parent._parent.reload == 0)\r\n   {\r\n      gotoAndPlay(2);\r\n      _parent._parent.fenshu -= 100;\r\n   }\r\n}\r\n",
+      "sha256": "3edf90c6c39e21f136d84318de607971b0efbde5541dc10a72680861757d5f47"
+    },
+    "DefineButton2_283/BUTTONCONDACTION on(press).as": {
+      "code": "on(press){\r\n   if(_parent._parent.reload == 0)\r\n   {\r\n      if(hp <= 0)\r\n      {\r\n         gotoAndPlay(21);\r\n      }\r\n      play();\r\n   }\r\n}\r\n",
+      "sha256": "3427b8ee86a93db41b3971f7b010762ab8f52641a8c4287575789c45fbd02012"
+    },
+    "DefineSprite_219/frame_2/PlaceObject2_218_1/CLIPACTIONRECORD onClipEvent(enterFrame).as": {
+      "code": "onClipEvent(enterFrame){\r\n   tmp_x = getProperty(_parent._parent.beijing1, _X);\r\n   tmp_x2 = getProperty(_parent._parent.beijing2, _X);\r\n   tmp_x3 = getProperty(_parent._parent.beijing3, _X);\r\n   if(tmp_x > -752)\r\n   {\r\n      setProperty(_parent._parent.beijing1, _X, tmp_x - 8);\r\n      setProperty(_parent._parent.beijing2, _X, tmp_x2 - 4);\r\n      setProperty(_parent._parent.beijing3, _X, tmp_x3 - 2);\r\n   }\r\n}\r\n",
+      "sha256": "995df9c68a28736d9769904239b8fb539338e5ec969c23434891db9043cd3524"
+    },
+    "DefineSprite_219/frame_3/PlaceObject2_218_1/CLIPACTIONRECORD onClipEvent(enterFrame).as": {
+      "code": "onClipEvent(enterFrame){\r\n   tmp_x = getProperty(_parent._parent.beijing1, _X);\r\n   tmp_x2 = getProperty(_parent._parent.beijing2, _X);\r\n   tmp_x3 = getProperty(_parent._parent.beijing3, _X);\r\n   if(tmp_x < -8)\r\n   {\r\n      setProperty(_parent._parent.beijing1, _X, tmp_x + 8);\r\n      setProperty(_parent._parent.beijing2, _X, tmp_x2 + 4);\r\n      setProperty(_parent._parent.beijing3, _X, tmp_x3 + 2);\r\n   }\r\n}\r\n",
+      "sha256": "21f04b94e49047d775c4a411592ca7bf016787a3dfa1c1e66a5929813493fef5"
+    },
+    "DefineSprite_241/frame_2/DoAction.as": {
+      "code": "with(_parent)\r\n{\r\n   stop();\r\n}\r\n_parent._parent._parent.fenshu += 100;\r\n",
+      "sha256": "c1a142e1b57594ebbc10b90d84471d642fc1568b5a120bfeba0952a8b4f6d27c"
+    },
+    "DefineSprite_290/frame_2/DoAction.as": {
+      "code": "_parent._parent._parent.zidanshu -= 1;\r\nwith(_parent.upanddown)\r\n{\r\n   gotoAndPlay(2);\r\n}\r\n",
+      "sha256": "8d992e943cac7dc8d9ffed10ed45893ba10f726084fedb29b13d6d77ec2a84a8"
+    },
+    "DefineSprite_310/frame_1/DoAction.as": {
+      "code": "stop();\r\nwith(_parent.zidan)\r\n{\r\n   gotoAndStop(1);\r\n}\r\n_parent.reload = 0;\r\n",
+      "sha256": "fa3576778af52cc4bd88ba8778bb4de3af638bb873b999cb8336f948551128f1"
+    },
+    "DefineSprite_318/frame_2/DoAction.as": {
+      "code": "if(_parent.fenshu > 5500)\r\n{\r\n   _parent.fenshu = 5500;\r\n}\r\n",
+      "sha256": "b01cb7423333cb4d785f77698b612d24187eb33ae33bb65774fcbc19acd81d72"
+    },
+    "DefineButton2_253/BUTTONCONDACTION on(press).as": {
+      "code": "on(press){\r\n   if(_parent._parent.reload == 0)\r\n   {\r\n      play();\r\n   }\r\n}\r\n",
+      "sha256": "61c6e452252b05a83f208b497ec732671c1f7dba374b97f6682599c55b3badd9"
+    }
+  }
+}

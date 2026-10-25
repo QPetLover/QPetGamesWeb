@@ -15,6 +15,8 @@
 | Q宠摘星星 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-stars/) | [classic-015](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-015) | [迁移说明](native/qpet-stars/README.md) |
 | Q宠冒险岛 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-adventure/) | [逐集原版](https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0) | [迁移说明](native/qpet-adventure/README.md)：序章及八集双角色、逐集存档；规则端点夹具通过，Chrome局部检查，未声称整集人工通关 |
 
+| QQ宝宝守猎 | [开始游戏](https://qpetlover.cn/QPetGamesWeb/qpet-hunting/) | [classic-011](https://qpetlover.cn/QPetGamesWeb/originals/#/play/classic-011) | [迁移说明](native/qpet-hunting/README.md)：55发、Q哥/Q妹、本地分数；旧账号收费与兑换服务不恢复 |
+
 `native/games.json` 是公开构建的唯一名单：只有 `published: true` 的条目进入发布目录与首页。首页卡片只显示封面、名称、开始与详情，封面、标题和开始按钮均进入复刻版；有原件时在详情内提供「原版对照」按钮。音速原件尚缺，不伪造原版入口；来源说明留在本仓库文档，不展示在玩家大厅。候选可以单独构建预览，仍不会进入公开首页。`originals/` 是独立的原件校对模块，其固定清单与原生游戏闭包分开验证；可独立导出的原生游戏包不包含播放器。旧 `player.html?game=...` 地址显示下架通知。
 
 ## 本地运行

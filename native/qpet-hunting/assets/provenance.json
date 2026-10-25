@@ -1,0 +1,24 @@
+{
+  "sourceSHA256": "586642f95a64d87c30076988d600563a85a4643ffe5fad5211a462617e8fd23b",
+  "tool": "FFDec 26.4.0 sprite:canvas",
+  "inputs": {
+    "reference/canvas/frames.html": "8cde85dd3ab145dc419be9223364d234022aca7f37827801611a3a51e2fc02cb",
+    "reference/canvas/canvas.js": "78256220d01fba044341283703c3923a1ff8ff29499c51f65ab4e6ac825ccb93"
+  },
+  "symbols": 240,
+  "embeddedImages": 13,
+  "linkedRoots": [
+    "main"
+  ],
+  "maskCorrections": 0,
+  "radialCorrections": 0,
+  "outputBytes": 3499321,
+  "outputSHA256": "a2c64f34a2381b3e7d1075e7ef09340f41250579b9934450db3da1a8d050c783",
+  "notes": [
+    "Only static symbol drawing functions retained. No exported player, FPS timer, SWF or AS code in output.",
+    "Original matrix registration restored for each selected root.",
+    "Original bitmap payloads embedded exactly as FFDec export; actual browser decoding still pending.",
+    "Original four button states restored from XML BUTTONRECORD.",
+    "Device text fields use an explicit native binding/paragraph renderer; empty original device fonts are not treated as embedded glyphs."
+  ]
+}
