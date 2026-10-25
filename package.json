@@ -14,7 +14,7 @@
     "build:magpie": "node scripts/build-native.mjs --game=magpie-bridge",
     "build:racing": "node scripts/build-native.mjs --game=qpet-racing",
     "test": "node --test native/*/tests/*.test.mjs",
-    "test:site": "node --test scripts/tests/site-chapters.test.mjs scripts/tests/originals.test.mjs"
+    "test:site": "node --test scripts/tests/site-chapters.test.mjs scripts/tests/originals.test.mjs scripts/tests/adventure-selector.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.28.2"

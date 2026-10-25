@@ -33,7 +33,7 @@
     "candidate": "minitool-racing-candidate",
     "published": true,
     "original": "https://qpetlover.cn/QPetGames/#/play/classic-003",
-    "category": "classic",
+    "category": "happy-valley",
     "summary": "加速、转弯、用道具，和 Q宠一起冲过终点。",
     "badge": "动作竞速",
     "cover": "covers/qpet-racing.png"
@@ -102,7 +102,7 @@
     "candidate": "minitool-adventure-candidate",
     "published": true,
     "kind": "chapters",
-    "original": "https://qpetlover.cn/qpet-adventure/reference.html?chapter=1&variant=0",
+    "original": "https://qpetlover.cn/qpet-adventure/",
     "category": "adventure",
     "summary": "序章与八集故事，双角色冒险，通关后逐集开放。",
     "badge": "八集冒险",

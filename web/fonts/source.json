@@ -11,10 +11,10 @@
   "upstreamLicenseSha256": "538078469839b4a2e7ad22bef4ebe41681a4e53749bb2a072144024f1d6d703d",
   "modifications": "Local UI WOFF2 subset, renamed QPet Rounded; original outlines and copyright/license retained. No remote font dependency.",
   "file": "qpet-rounded.woff2",
-  "bytes": 45768,
-  "sha256": "1ba5e9021cc124df26be3b95c0b00e2a92b9fd464a511695e1c965a6f363c856",
-  "chineseCharacters": 390,
-  "totalCodepoints": 497,
+  "bytes": 46012,
+  "sha256": "ced54c19452bc9c261e74608930f738e7224ed4728a8c1924a3d1f4d4e502e5a",
+  "chineseCharacters": 391,
+  "totalCodepoints": 498,
   "chineseCoverageComplete": true,
   "chineseCodepoints": [
     "U+4E00",
@@ -360,6 +360,7 @@
     "U+8F7D",
     "U+8FC1",
     "U+8FC7",
+    "U+8FCE",
     "U+8FD0",
     "U+8FD4",
     "U+8FD9",
@@ -415,5 +416,14 @@
     "core/QPetGamesWeb/web/portal.html",
     "core/QPetGamesWeb/scripts/build-portal.mjs",
     "core/QPetGamesWeb/native/games.json"
-  ]
+  ],
+  "subsetExtension": {
+    "text": "主人，欢迎回来！",
+    "addedCodepoints": [
+      "U+8FCE"
+    ],
+    "preservedCodepoints": 497,
+    "previousSha256": "1ba5e9021cc124df26be3b95c0b00e2a92b9fd464a511695e1c965a6f363c856",
+    "method": "Existing official TTF and subset/name options; previous cmap union requested text; original outlines, advances and OFL/name records retained."
+  }
 }

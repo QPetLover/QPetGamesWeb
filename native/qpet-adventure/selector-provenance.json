@@ -1,0 +1,591 @@
+{
+  "purpose": "Native external chapter selector only. No chapter engine changes. Original stopped-menu raster assets, current native progress remains authoritative.",
+  "source": {
+    "repository": "https://github.com/QPetLover/qpet-adventure",
+    "file": "site/xmxd.swf",
+    "path": "/Users/wangzhihong/Playground/core/qpet-adventure/site/xmxd.swf",
+    "bytes": 495212,
+    "sha256": "6489f6ee44bc643d7bcc54e06c9ceff1a07c35ca8f1b19a966eda9ef144c0c37",
+    "stage": {
+      "width": 760,
+      "height": 420
+    },
+    "fps": 25,
+    "rootFrames": 2
+  },
+  "method": "Offline JPEXS26.4 original Canvas artwork and original parent/child transforms. Static root frame1; source movieArr, stationary picShow frame1 and AS-assigned per-instance frames, titleShow.titleShow frame, source success checkPane._visible=0. Original embedded font220 glyph paths draw progress labels. No retouch, replacement art, screenshot reconstruction, Ruffle runtime or game engine edit.",
+  "defaultChapter": 1,
+  "preludeChapter": 0,
+  "sourceState": {
+    "movieArr": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      10,
+      10,
+      10
+    ],
+    "thumbnailFrame": "movieArr[movieNow - 2 + picNumber]",
+    "titleFrame": "movieArr[movieNow]",
+    "leftDisabled": "movieNow < 1",
+    "rightDisabled": "movieNow > maxShow - 2; maxShow=9"
+  },
+  "assets": [
+    {
+      "path": "assets/selection-0.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 443283,
+      "sha256": "3376ada7a04c9de298df311d794de0c5a1bc69da802a5f3c1ab000da86c65255",
+      "chapter": 0,
+      "title": "冒险岛预告片",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 0,
+          "sourceFrame": 1
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 1,
+          "sourceFrame": 2
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 2,
+          "sourceFrame": 3
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 3,
+          "sourceFrame": 4
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 4,
+          "sourceFrame": 5
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-1.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 445308,
+      "sha256": "088bd072793012cdd4d5dc6d56d906f48a6f9dbff36f7d4ffd95a1ddb75d4559",
+      "chapter": 1,
+      "title": "启航",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 0,
+          "sourceFrame": 1
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 1,
+          "sourceFrame": 2
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 2,
+          "sourceFrame": 3
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 3,
+          "sourceFrame": 4
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 4,
+          "sourceFrame": 5
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-2.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 468219,
+      "sha256": "df2b96972fa4dcc5f7adbb150644d903057f58145419d31ed6eb9812eefd32fb",
+      "chapter": 2,
+      "title": "爱情之爆发力",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 1,
+          "sourceFrame": 2
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 2,
+          "sourceFrame": 3
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 3,
+          "sourceFrame": 4
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 4,
+          "sourceFrame": 5
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-3.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 464037,
+      "sha256": "1e74314565b0bf1e368b8e1a9b6fb44e7536a458549594d44d038ffa8f7eec89",
+      "chapter": 3,
+      "title": "贼窝",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 2,
+          "sourceFrame": 3
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 3,
+          "sourceFrame": 4
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 4,
+          "sourceFrame": 5
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 8,
+          "sourceFrame": 9
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-4.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 468094,
+      "sha256": "f072b21a00031a28031008509a80bdea98daf25fc1615787d77bec45705fcb84",
+      "chapter": 4,
+      "title": "密室",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 3,
+          "sourceFrame": 4
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 4,
+          "sourceFrame": 5
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 8,
+          "sourceFrame": 9
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 9,
+          "sourceFrame": 10
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-5.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 449667,
+      "sha256": "482f95342ef23d2e13800dba340c14652bf123d48222643985931e9a4af7a308",
+      "chapter": 5,
+      "title": "黑暗之眼",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 4,
+          "sourceFrame": 5
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 8,
+          "sourceFrame": 9
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 9,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 10,
+          "sourceFrame": 10
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-6.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 444091,
+      "sha256": "e6eac7ab53e4b6aaabe0280011a59635c71d5e250f35f9778801bf807ad3fa09",
+      "chapter": 6,
+      "title": "巨树",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 5,
+          "sourceFrame": 6
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 8,
+          "sourceFrame": 9
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 9,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 10,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 11,
+          "sourceFrame": 10
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-7.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 438423,
+      "sha256": "14afbd5a2b90eb364df054d7b88b2f108bdcb07cab719908c899bec462337641",
+      "chapter": 7,
+      "title": "巨树之颠",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 6,
+          "sourceFrame": 7
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 8,
+          "sourceFrame": 9
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 9,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 10,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 11,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic7",
+          "sourceArrayIndex": 12,
+          "sourceFrame": 10
+        }
+      ]
+    },
+    {
+      "path": "assets/selection-8.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 446685,
+      "sha256": "dec95c948ef94e94dcaf033e6233eb3b269e5d321044adfb1442dee48c0de043",
+      "chapter": 8,
+      "title": "大结局—宝藏",
+      "statusLabelOmitted": true,
+      "visiblePictures": [
+        {
+          "instance": "pic1",
+          "sourceArrayIndex": 7,
+          "sourceFrame": 8
+        },
+        {
+          "instance": "pic2",
+          "sourceArrayIndex": 8,
+          "sourceFrame": 9
+        },
+        {
+          "instance": "pic3",
+          "sourceArrayIndex": 9,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic4",
+          "sourceArrayIndex": 10,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic5",
+          "sourceArrayIndex": 11,
+          "sourceFrame": 10
+        },
+        {
+          "instance": "pic6",
+          "sourceArrayIndex": 12,
+          "sourceFrame": 10
+        }
+      ]
+    },
+    {
+      "path": "assets/status-watch.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 2345,
+      "sha256": "156fde08d3b2181d4a0889d04230d3987fe0198317a35b81deafc9d411313047",
+      "status": "观看",
+      "transparentOverlay": true
+    },
+    {
+      "path": "assets/status-current.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 2515,
+      "sha256": "37030b8b5e5daa90a148377b83e650663092a1f85f49fab0691fab77bbf47d3b",
+      "status": "当前关",
+      "transparentOverlay": true
+    },
+    {
+      "path": "assets/status-complete.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 2553,
+      "sha256": "26e1965c435bba8f926aaca33622164b9a253a2622fbb329d016f01f7276f01e",
+      "status": "已通关",
+      "transparentOverlay": true
+    },
+    {
+      "path": "assets/status-locked.png",
+      "width": 760,
+      "height": 420,
+      "bytes": 2622,
+      "sha256": "3b3b61e8fb314f918a58664df2bc5e76b7636f2bd01ca246fc0571c6e233bbd6",
+      "status": "未通关",
+      "transparentOverlay": true
+    }
+  ],
+  "cover": {
+    "path": "assets/cover-selection-1.png",
+    "width": 760,
+    "height": 420,
+    "bytes": 446872,
+    "sha256": "8a9cf110e083bdaa357bd599ad95d27cc34c2424ed3badbb1649cc9ccd4f0d7d",
+    "chapter": 1,
+    "title": "启航",
+    "status": "当前关"
+  },
+  "hotspots": [
+    {
+      "name": "left",
+      "symbolId": 219,
+      "originalHitShapeBoundingBox": [
+        162.7,
+        361.15,
+        225.65,
+        420.2
+      ],
+      "rect": {
+        "x": 162.7,
+        "y": 361.15,
+        "width": 62.95,
+        "height": 59.05
+      },
+      "sourceInstance": "ctrlPane.btnLeft",
+      "action": "movieNow--; stopped state after picShow.toLeft",
+      "disabled": "chapter == 0"
+    },
+    {
+      "name": "right",
+      "symbolId": 219,
+      "originalHitShapeBoundingBox": [
+        396.65,
+        361.15,
+        459.6,
+        420.2
+      ],
+      "rect": {
+        "x": 396.65,
+        "y": 361.15,
+        "width": 62.95,
+        "height": 59.05
+      },
+      "sourceInstance": "ctrlPane.btnRight",
+      "action": "movieNow++; stopped state after picShow.toRight",
+      "disabled": "chapter == 8"
+    },
+    {
+      "name": "help",
+      "symbolId": 257,
+      "originalHitShapeBoundingBox": [
+        29.1,
+        370.5,
+        136.55,
+        414.15
+      ],
+      "rect": {
+        "x": 29.1,
+        "y": 370.5,
+        "width": 107.45,
+        "height": 43.65
+      },
+      "sourceInstance": "btnHelp",
+      "action": "helper.gotoAndPlay(fadeIn)"
+    },
+    {
+      "name": "confirm",
+      "symbolId": 259,
+      "originalHitShapeBoundingBox": [
+        495.35,
+        370.5,
+        602.8,
+        414.15
+      ],
+      "rect": {
+        "x": 495.35,
+        "y": 370.5,
+        "width": 107.45,
+        "height": 43.65
+      },
+      "sourceInstance": "btnSure",
+      "action": "intoGame(movieNow)",
+      "defaultChapter": 1
+    }
+  ],
+  "progress": "Mount existing catalog gates, read()/canPlay(); never call complete(), never unlock during browsing. Full 17 data-entry anchors and original chapter href values retained.",
+  "audioAudit": {
+    "source": "Complete loader.xml root and all sub-tags plus all 73 exported AS files",
+    "defineSound": 0,
+    "startSound": 0,
+    "startSound2": 0,
+    "defineButtonSound": 0,
+    "soundStreamHeadOrBlock": 0,
+    "attachSoundOrLoadSoundOrNewSoundReferences": 0,
+    "menuHasSoundAssets": false,
+    "exportedASFiles": 73
+  },
+  "runtimePackaging": "13 image/png data URIs are embedded in index.html; only catalog.js module and its existing common/progress.js import. Raw export code and this developer record do not enter runtime output."
+}
